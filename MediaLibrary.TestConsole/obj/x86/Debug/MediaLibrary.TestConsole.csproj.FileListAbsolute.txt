@@ -1,0 +1,11 @@
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Debug\MediaLibrary.TestConsole.exe
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Debug\MediaLibrary.TestConsole.pdb
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Debug\MediaLibrary.Core.dll
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Debug\DesktopCore.Resources.dll
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Debug\MediaLibrary.Core.pdb
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Debug\DesktopCore.Resources.pdb
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\obj\x86\Debug\MediaLibrary.TestConsole.exe
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\obj\x86\Debug\MediaLibrary.TestConsole.pdb
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Debug\DesktopCore.dll
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Debug\DesktopCore.pdb

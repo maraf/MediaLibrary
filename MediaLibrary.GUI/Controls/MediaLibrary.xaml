@@ -1,0 +1,245 @@
+﻿<UserControl x:Class="MediaLibrary.Controls.MediaLibrary"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:c="clr-namespace:DesktopCore;assembly=DesktopCore.Resources"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:input="clr-namespace:System.Windows.Input;assembly=WindowsBase"
+             mc:Ignorable="d"
+             d:DesignHeight="725" d:DesignWidth="525">
+    <!--<UserControl.CommandBindings>
+        <CommandBinding Command="Copy" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed" />
+        <CommandBinding Command="Paste" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed" />
+    </UserControl.CommandBindings>-->
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="movies" Source="{Binding Movies}">
+            <CollectionViewSource.SortDescriptions>
+                <cm:SortDescription PropertyName="Name" Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+        <ObjectDataProvider x:Key="keysProvider" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="input:Key" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <CollectionViewSource x:Key="keys" Source="{StaticResource keysProvider}" Filter="keys_Filter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid Width="510">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <DockPanel x:Name="dplControls" Grid.Row="0">
+                <Border Style="{StaticResource border}" Margin="5,0,5,0">
+                    <Grid Margin="5,2,0,2">
+
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="btnSaveLibrary" Style="{StaticResource imageButton}" Click="btnSaveLibrary_Click" ToolTip="{c:Resource SaveLibrary}">
+                                <Image Source="/MediaLibrary.GUI;component/Images/FileSave.png" />
+                            </Button>
+                            <Button x:Name="btnRenameLibrary" Style="{StaticResource imageButton}" Click="btnRenameLibrary_Click" ToolTip="{c:Resource DatabaseConfiguration}">
+                                <Image Source="/MediaLibrary.GUI;component/Images/FileConfig.png" />
+                            </Button>
+                            <Button x:Name="btnCloseLibrary" Style="{StaticResource imageButton}" Click="btnCloseLibrary_Click" ToolTip="{c:Resource CloseLibrary}">
+                                <Image Source="/MediaLibrary.GUI;component/Images/FileClose.png" />
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding Name}" Foreground="Gray" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button x:Name="btnPasteLibrary" Style="{StaticResource imageButton}" Click="btnPasteLibrary_Click" ToolTip="{c:Resource PasteLibrary}">
+                                <Image Source="/MediaLibrary.GUI;component/Images/FilePaste.png" />
+                            </Button>
+                            <Button x:Name="btnCopyLibrary" Style="{StaticResource imageButton}" Click="btnCopyLibrary_Click" ToolTip="{c:Resource CopyLibrary}">
+                                <Image Source="/MediaLibrary.GUI;component/Images/FileCopy.png" />
+                            </Button>
+                            <Button x:Name="btnExportLibrary" Style="{StaticResource imageButton}" Click="btnExportLibrary_Click" ToolTip="{c:Resource ExportLibrary}">
+                                <Image Source="/MediaLibrary.GUI;component/Images/FileExport.png" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </DockPanel>
+            <Expander x:Name="expFilter" Expanded="expFilter_Expanded" PreviewKeyDown="expFilter_PreviewKeyDown" Grid.Row="1">
+                <Expander.Header>
+                    <DockPanel Width="460">
+                        <!--
+                    <ComboBox x:Name="coxFirstLetterFilter" Height="18" FontSize="11" 
+                      SelectionChanged="coxFirstLetterFilter_SelectionChanged" 
+                      ItemsSource="{Binding Source={StaticResource keys}}" Margin="5,0,0,0" DockPanel.Dock="Right" />
+                    -->
+
+                        <ToggleButton x:Name="btnToggleStarredFilter" Style="{StaticResource toggleStarButton}" ToolTip="{c:Resource ToggleStarred}" 
+                      IsChecked="{Binding Filter.Starred}" Margin="0" Checked="btnToggleStarredFilter_Checked" Unchecked="btnToggleStarredFilter_Checked" 
+                      DockPanel.Dock="Right" />
+                        <TextBlock Text="{c:Resource Filter}" />
+                    </DockPanel>
+                </Expander.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="70" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Label Content="{c:Resource Name}" Grid.Column="0" Grid.Row="0" />
+                    <Label Content="{c:Resource Category}" Grid.Column="0" Grid.Row="1" />
+                    <Label Content="{c:Resource Storage}" Grid.Column="0" Grid.Row="2" />
+                    <Label Content="{c:Resource Actor}" Grid.Column="0" Grid.Row="3" />
+
+                    <Label Content="{c:Resource Country}" Grid.Column="2" Grid.Row="0" />
+                    <Label Content="{c:Resource Year}" Grid.Column="2" Grid.Row="1" />
+                    <Label Content="{c:Resource Added}" Grid.Column="2" Grid.Row="2" />
+
+                    <TextBox x:Name="tbxNameFilter" Text="{Binding Filter.Name}" Margin="5" Grid.Column="1" Grid.Row="0" />
+                    <ComboBox Text="{Binding Filter.Category}" ItemsSource="{Binding Movies.Categories}" IsEditable="True" Margin="5" Grid.Column="1" Grid.Row="1" />
+                    <TextBox Text="{Binding Filter.Storage}" Margin="5" Grid.Column="1" Grid.Row="2" />
+                    <ComboBox Text="{Binding Filter.Actors}" ItemsSource="{Binding Movies.Actors}" IsEditable="True" Margin="5" Grid.Column="1" Grid.Row="3" />
+
+                    <ComboBox Text="{Binding Filter.Country}" ItemsSource="{Binding Movies.Countries}" IsEditable="True" Margin="5" Grid.Column="3" Grid.Row="0" />
+                    <TextBox Text="{Binding Filter.Year}" Margin="5" Grid.Column="3" Grid.Row="1" />
+                    <DatePicker Text="{Binding Filter.Added}" Margin="5" Grid.Column="3" Grid.Row="2" />
+                    <CheckBox IsChecked="{Binding Filter.Starred}" Content="{c:Resource Starred}" Margin="5" Grid.Column="3" Grid.Row="3" />
+
+                    <Grid Margin="5" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4">
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="btnFilter" Content="{c:Resource DoFilter}" Click="btnFilter_Click" Margin="0,0,5,0" />
+                            <ComboBox x:Name="cbxFilterPosition">
+                                <ComboBoxItem Content="{c:Resource Position.Start}" Selector.IsSelected="True" />
+                                <ComboBoxItem Content="{c:Resource Position.End}" />
+                                <ComboBoxItem Content="{c:Resource Position.In}" />
+                                <ComboBoxItem Content="{c:Resource Position.Match}" />
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button x:Name="btnClearFilter" Content="{c:Resource ClearFilter}" Click="btnClearFilter_Click" Margin="5,0,0,0" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Expander>
+            <Border Style="{StaticResource border}" Margin="5,0" Grid.Row="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="grdMovieControls" Height="23" Margin="0,5,0,0" Grid.Row="0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Button x:Name="btnCreateMovie" Click="btnCreateMovie_Click" Tag="{Binding Movies}" Margin="5,0,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/MediaLibrary.GUI;component/Images/FilmAdd.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+                                    <TextBlock Text="{c:Resource CreateMovie}" Margin="4,0" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button x:Name="btnEditMovie" Content="{c:Resource EditMovie}" Click="btnEditMovie_Click" Tag="{Binding Movies}" Margin="0,0,4,0" />
+                            <Button x:Name="btnDeleteMovie" Content="{c:Resource DeleteMovie}" Click="btnDeleteMovie_Click" Tag="{Binding Movies}" Margin="0,0,4,0" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="btnCreateCategory" Content="{c:Resource CategoryList}" Click="btnCreateCategory_Click" Tag="{Binding Movies}" Margin="5,0,0,0" Visibility="Collapsed" />
+                        </StackPanel>
+                    </Grid>
+                    <ListView x:Name="lvwMovies" ItemsSource="{Binding Source={StaticResource movies}}" Margin="0,5" BorderThickness="0" MouseDoubleClick="lvwMovies_MouseDoubleClick" PreviewKeyDown="lvwMovies_PreviewKeyDown" Grid.Row="1">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem x:Name="mniCopyMovie" Header="{c:Resource Copy}" Click="mniCopyMovie_Click" />
+                                <MenuItem x:Name="mniPasteMovie" Header="{c:Resource Paste}" Click="mniPasteMovie_Click" />
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="450" Margin="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                        <TextBlock Text="{Binding Name}" FontSize="20" />
+                                        <Image Margin="5,0,0,0" Width="16" Source="/MediaLibrary.GUI;component/Images/Star.png" Visibility="{Binding Starred, Converter={StaticResource boolToVisibility}}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
+                                        <TextBlock Text="{Binding Storage, TargetNullValue={c:Resource Empty}}" FontSize="20" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                        <TextBlock Text="{Binding OriginalName}" />
+                                        <TextBlock Text=" " Visibility="{Binding OriginalName, Converter={StaticResource nullToVisibility}}" />
+
+                                        <TextBlock Text="(" Visibility="{Binding Actors, Converter={StaticResource nullToVisibility}}" />
+                                        <TextBlock Text="{Binding Actors, Converter={StaticResource stringToArray}}" Visibility="{Binding Actors, Converter={StaticResource nullToVisibility}}" />
+                                        <TextBlock Text=")" Visibility="{Binding Actors, Converter={StaticResource nullToVisibility}}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
+                                        <TextBlock Text="(" Visibility="{Binding Language, Converter={StaticResource nullToVisibility}}" />
+                                        <TextBlock Text="{Binding Language}" Visibility="{Binding Language, Converter={StaticResource nullToVisibility}}" />
+                                        <TextBlock Text="), " Visibility="{Binding Language, Converter={StaticResource nullToVisibility}}" />
+
+                                        <TextBlock Text="{Binding Category, TargetNullValue={c:Resource Empty}}" />
+                                        <TextBlock Text=", " Visibility="{Binding Year, Converter={StaticResource nullToVisibility}}" />
+                                        <TextBlock Text="{Binding Year, TargetNullValue={c:Resource Empty}}" Visibility="{Binding Year, Converter={StaticResource nullToVisibility}}" />
+                                        <TextBlock Text=", " />
+                                        <TextBlock Text="{Binding Country, TargetNullValue={c:Resource Empty}}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource border}" Margin="5" Grid.Row="3">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock Text="{c:Resource SortBy}" />
+                        <Button x:Name="btnSortName" Content="{c:Resource Name}" Click="btnSortName_Click" Style="{StaticResource link}" Margin="5,0,0,0" />
+                        <Button x:Name="btnSortCategory" Content="{c:Resource Category}" Click="btnSortCategory_Click"  Style="{StaticResource link}" Margin="5,0,0,0" />
+                        <Button x:Name="btnSortStorage" Content="{c:Resource Storage}" Click="btnSortStorage_Click" Style="{StaticResource link}" Margin="5,0,0,0" />
+                        <Button x:Name="btnSortYear" Content="{c:Resource Year}" Click="btnSortYear_Click" Style="{StaticResource link}" Margin="5,0,0,0" />
+                        <Button x:Name="btnSortCountry" Content="{c:Resource Country}" Click="btnSortCountry_Click" Style="{StaticResource link}" Margin="5,0,0,0" />
+                        <Button x:Name="btnSortAdded" Content="{c:Resource Added}" Click="btnSortAdded_Click" Style="{StaticResource link}" Margin="5,0,0,0" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="{Binding ElementName=lvwMovies, Path=Items.Count, StringFormat={c:Resource ItemsCount}}" Margin="0,5,5,0" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Border x:Name="brdSelect" Style="{StaticResource border}" Margin="5,0" Grid.Row="4" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Button x:Name="btnSelect" Content="{c:Resource SelectMovie}" Click="btnSelect_Click" Padding="4,2" />
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid Background="#20cccccc" Visibility="{Binding RequiresPassword, Converter={StaticResource boolToVisibility}}">
+            <Canvas>
+                <Button x:Name="btnCloseLibrary2" Width="16" Height="18" Style="{StaticResource imageButton}" Click="btnCloseLibrary_Click" ToolTip="{c:Resource CloseLibrary}"
+                  Canvas.Left="53" Canvas.Top="2">
+                    <Image Source="/MediaLibrary.GUI;component/Images/FileClose.png" />
+                </Button>
+            </Canvas>
+            <StackPanel Width="200" VerticalAlignment="Center">
+                <!--<Border Style="{StaticResource border}" Margin="5">
+                    <StackPanel>-->
+                <Label Content="{c:Resource PasswordRequired}" FontWeight="Bold" HorizontalAlignment="Center" Target="{Binding ElementName=tbxPasswordRequired}" />
+                        <PasswordBox x:Name="tbxPasswordRequired" Height="22" Margin="5" PreviewKeyDown="tbxPasswordRequired_PreviewKeyDown" />
+                    <!--</StackPanel>
+                </Border>-->
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

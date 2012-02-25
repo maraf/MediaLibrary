@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Configuration WindowHeight="754" ExitMode="Autosave" Culture="en-US">
+  <Database Location="D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.GUI\bin\Debug\MediaLibrary.xml" />
+  <Database Location="D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Debug\MediaLibrary2.xml" />
+  <Database Location="D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Debug\MediaLibrary3.xml" />
+</Configuration>

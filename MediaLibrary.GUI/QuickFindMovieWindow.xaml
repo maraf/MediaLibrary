@@ -1,0 +1,8 @@
+﻿<Window x:Class="MediaLibrary.GUI.QuickFindMovieWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:c="clr-namespace:DesktopCore;assembly=DesktopCore.Resources"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:MediaLibrary.Controls"
+        Title="{c:Resource SearchTitle}" Height="750" Width="525" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Icon="/MediaLibrary.GUI;component/Images/MediaLibrary.png">
+    <local:MediaLibrary x:Name="mlbSelector" Database="{Binding}" Mode="Selector" SelectClick="mlbSelector_SelectClick" />
+</Window>

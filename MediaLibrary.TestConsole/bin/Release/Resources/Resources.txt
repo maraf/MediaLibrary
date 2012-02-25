@@ -1,0 +1,91 @@
+﻿Title=MediaLibrary
+Filter=Vyhledávání
+Name=Název
+OriginalName=Originální název
+Category=Kategorie
+Storage=Uložiště
+Actor=Herec
+Actors=Herci
+OnlineIdentifier=Online
+Country=Země
+Year=Rok
+Language=Jazyk
+Added=Přidáno
+Starred=Oblíbený
+ToggleStarred=Přepnout 'oblíbenost'
+Description=Popis
+DoFilter=Hledej
+Position.Start=Od začátku pole
+Position.End=Od konce pole
+Position.In=Uvnitř pole
+Position.Match=Přesnou shodu
+ClearFilter=Vymaž filter
+
+CreateMovie=Vytvořit film
+EditMovie=Editovat
+DeleteMovie=Smazat
+CategoryList=Seznam kategorií
+Empty=Nezadáno
+Copy=Kopírovat
+Paste=Vložit
+
+SortBy=Řadit podle:
+
+CreateCategory=Vytvoř
+DetailTitle=Detail filmu - {0}
+RelatedMovies=Příbuzné filmy
+AddMovie=Přidat
+RemoveMovie=Odebrat
+ItemsCount=Zobrazeno {0} filmu
+GoWeb=Otevřit na webu
+
+SearchTitle=Najdi film
+SelectMovie=Vyber
+DeleteMovieConfirm=Opravdu si prejete smazat film '{0}'
+DeleteMovieTitle=Smazat film
+DeleteMoviesConfirm=Opravdu si prejete smazat všechny vybrané filmy
+DeleteMoviesTitle=Smazat vybrané filmy
+Cancel=Zrušit
+
+LibraryName=Jméno knihovny
+LibraryLocation=Cesta ke knihovně
+LibraryRename=Zadejte název knihovny
+Rename=Přejmenovat
+
+OpenLibrary=Otevřít knihovnu
+SaveLibrary=Uložit knihovnu
+SaveLibraries=Uložit všechny knihovny
+ExportLibrary=Exportovat knihovnu do excelu
+ExportLibraries=Exportovat všechny knihovny do excelu
+PasteLibrary=Vložit knihovnu ze schránky
+PasteLibraries=Otevřít knihovny ze schránky
+CopyLibrary=Kopírovat knihovnu do schránky
+CopyLibraries=Kopírovat všechny knihovny do schránky
+CompareLibraries=Porovnat knihovny
+Compare=Porovnat
+SelectLibraryError=Vyberte knihovny!
+CloseLibrary=Zavřít knihovnu
+CreateLibrary=Vytvořit knihovnu
+RenameLibrary=Přejmenovat knihovnu
+ExportTitle=Vyberte soubor pro export
+DatabaseConfiguration=Nastavení knihovny
+Configuration=Nastavení aplikace
+
+ErrorLoadingLibrary=Nepodařilo se načíst knihovnu, pravděpodobně se nejedná o soubor s knihovnou aplikace MediaLibrary
+ErrorLoadingLibraryTitle=Chyba při načítání knihovny
+
+ConfCommon=Obecné
+ConfWindowHeight=Výška okna
+ExitMode=Před ukončením
+ApplyLanguage=Vyber
+
+ConfOnlineName=Jméno online databáze
+ConfOnlineFormat=Formátovací řetězec pro www odkaz
+
+AskForSaveTitle=Uložit před zavřením
+ManagerAskForSave=Přejete si uložit nastavení aplikace?
+DatabaseAskForSave=Přejete si uložit knihovnu '{0}'?
+
+ExportFile=Do souboru
+ExportColumnsCount=Filmů v řádku
+ExportColumns=Sloupce z filmu

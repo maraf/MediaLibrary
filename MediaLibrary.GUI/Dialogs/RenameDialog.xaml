@@ -1,0 +1,24 @@
+﻿<Window x:Class="MediaLibrary.GUI.RenameDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:c="clr-namespace:DesktopCore;assembly=DesktopCore.Resources"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{Binding Title}" Height="150" Width="400" Icon="/MediaLibrary.GUI;component/Images/MediaLibrary.png"
+        ShowInTaskbar="False" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Border Style="{StaticResource border}">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="23" />
+                <RowDefinition Height="33" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            
+            <Label Content="{Binding Label}" Grid.Row="0" />
+
+            <TextBox x:Name="tbxValue" Text="{Binding Value}" PreviewKeyDown="tbxValue_PreviewKeyDown" Margin="0,5" Grid.Row="1" />
+
+            <StackPanel Height="25" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
+                <Button x:Name="btnRemane" Content="{Binding Rename}" Click="btnRemane_Click" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,100 @@
+﻿Title=MediaLibrary
+Filter=Search
+ID=ID
+Name=Name
+OriginalName=Original name
+Category=Category
+Storage=Storage
+Actor=Actor
+Actors=Actors
+OnlineIdentifier=Online ID
+Country=Country
+Year=Year
+Language=Language
+Added=Added
+Starred=Starred
+ToggleStarred=Toggle star
+Description=Description
+DoFilter=Find
+Position.Start=Starting with
+Position.End=Ending with
+Position.In=Inside
+Position.Match=Exact match
+ClearFilter=Clear
+
+CreateMovie=Create movie
+EditMovie=Edit
+DeleteMovie=Delete
+CategoryList=Category list
+Empty=Empty
+Copy=Copy
+Paste=Paste
+
+SortBy=Sort by:
+
+CreateCategory=Create
+DetailTitle=Movie - {0}
+RelatedMovies=Related movies
+AddMovie=Add
+RemoveMovie=Remove
+ItemsCount={0} movies
+GoWeb=Open web page
+
+SearchTitle=Find movie
+SelectMovie=Select
+DeleteMovieConfirm=Do you really want to delete '{0}' movie?
+DeleteMovieTitle=Delete movie
+DeleteMoviesConfirm=Do you really want to delete all selected movies?
+DeleteMoviesTitle=Delete selected movies
+Cancel=Cancel
+
+LibraryName=Library _name
+LibraryLocation=Library location
+LibraryRename=Set new library name
+Rename=Rename
+
+OpenLibrary=Open library
+SaveLibrary=Save library
+SaveLibraries=Save all libraries
+ExportLibrary=Export library to Excel
+ExportLibraries=Export all libraries to Excel
+PasteLibrary=Paste library from clipboard
+PasteLibraries=Open libraries from clipboard
+CopyLibrary=Copy library file to clipboard
+CopyLibraries=Copy all libraries to clipboard
+CompareLibraries=Compare libraries
+Compare=Compare
+SelectLibraryError=You must first select libraries!
+CloseLibrary=Close library
+CreateLibrary=Create library
+RenameLibrary=Rename library
+ExportTitle=Select filename for export
+DatabaseConfiguration=Library configuration
+Configuration=Application configuration
+
+ErrorLoadingLibrary=Unable to load library
+ErrorLoadingLibraryTitle=Error loading library
+
+ConfCommon=Common
+ConfWindowHeight=Main window height
+ExitMode=Before exit
+ApplyLanguage=Select
+RestartTitle=Application restart
+RestartMessage=Application needs to be restarted!
+
+ConfOnlineName=Online database name
+ConfOnlineFormat=Formating string for online link
+
+AskForSaveTitle=Save beforing closing
+ManagerAskForSave=Would you like to save application configuration?
+DatabaseAskForSave=Would you like to save '{0}' library?
+
+ExportFile=To file
+ExportColumnsCount=Movies in row
+ExportColumns=Movie fields
+OpenAfterExport=Open after export
+
+ConfPassword=Password setup
+EncryptByPassword=Encrypt using password
+PasswordRequired=_Password needed:
+SavePassword=Save password in application
