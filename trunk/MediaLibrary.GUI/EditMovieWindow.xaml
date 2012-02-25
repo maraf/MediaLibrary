@@ -1,0 +1,120 @@
+﻿<Window x:Class="MediaLibrary.GUI.EditMovieWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:DesktopCore;assembly=DesktopCore.Resources"
+        Title="{Binding Name, StringFormat={c:Resource DetailTitle}}" Icon="/MediaLibrary.GUI;component/Images/MediaLibrary.png" SizeToContent="WidthAndHeight"
+        ShowInTaskbar="False" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" PreviewKeyDown="Window_PreviewKeyDown" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Border Style="{StaticResource border}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <DockPanel Margin="10" Grid.Column="0" Grid.Row="0">
+                        <ToggleButton x:Name="btnToggleStarred" Style="{StaticResource toggleStarButton}" ToolTip="{c:Resource ToggleStarred}" IsChecked="{Binding Starred}" Margin="0,5,0,0" DockPanel.Dock="Left" />
+                        <Label Content="{c:Resource Name}" Grid.Column="0" Grid.Row="0" />
+                    </DockPanel>
+                    <Label Content="{c:Resource OriginalName}" Margin="10"  Grid.Column="0" Grid.Row="1" />
+                    <Label Content="{c:Resource Storage}" Margin="10"  Grid.Column="0" Grid.Row="2" />
+                    <Label Content="{c:Resource Actors}" Margin="10"  Grid.Column="0" Grid.Row="3" />
+                    <Label Content="{c:Resource Year}" Margin="10"  Grid.Column="0" Grid.Row="4" />
+                    <Label Content="{c:Resource Country}" Margin="10"  Grid.Column="0" Grid.Row="5" />
+                    <!--<Label Content="Žánr" Margin="10"  Grid.Column="0" Grid.Row="5" />-->
+                    <Label Content="{c:Resource Category}" Margin="10"  Grid.Column="0" Grid.Row="6" />
+
+                    <DockPanel Margin="10" Grid.Column="1" Grid.Row="0">
+                        <Button x:Name="btnBrowseWeb" Style="{StaticResource imageButton}" ToolTip="{c:Resource GoWeb}" Click="btnBrowseWeb_Click" Margin="5,0,0,0" IsEnabled="{Binding OnlineIdentifier, Converter={StaticResource nullToBool}}" DockPanel.Dock="Right">
+                            <Image Width="16" Source="/MediaLibrary.GUI;component/Images/WorldGo.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+                        </Button>
+                        <TextBox x:Name="tbxName" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                    </DockPanel>
+                    <TextBox Text="{Binding OriginalName, UpdateSourceTrigger=PropertyChanged}" Margin="10" Grid.Column="1" Grid.Row="1" />
+                    <Grid Margin="10" Grid.Column="1" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="120" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Text="{Binding Storage, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="0" />
+                        <Label Content="{c:Resource OnlineIdentifier}" HorizontalAlignment="Right" Margin="0,0,5,0" Grid.Column="1" />
+                        <TextBox Text="{Binding OnlineIdentifier, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
+                    </Grid>
+                    <TextBox Text="{Binding Actors, Converter={StaticResource stringToArray}, UpdateSourceTrigger=PropertyChanged}" Margin="10" Grid.Column="1" Grid.Row="3" />
+                    <Grid Margin="10" Grid.Column="1" Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="120" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Text="{Binding Year, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" />
+                        <Label Content="{c:Resource Language}" HorizontalAlignment="Right" Margin="0,0,5,0" Grid.Column="1" />
+                        <TextBox Text="{Binding Language, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
+                    </Grid>
+                    <Grid Margin="10" Grid.Column="1" Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="120" />
+                        </Grid.ColumnDefinitions>
+                        <ComboBox x:Name="cbxCountry" Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" IsEditable="True" Grid.Column="0" />
+                        <Label Content="{c:Resource Added}" HorizontalAlignment="Right" Margin="0,0,5,0" Grid.Column="1" />
+                        <TextBox Text="{Binding Added, Converter={StaticResource dateTimeFormat}}" IsReadOnly="True" IsTabStop="False" Grid.Column="2" />
+                    </Grid>
+
+                    <!--<ComboBox Text="{Binding Genre}" Margin="10" Grid.Column="1" Grid.Row="5" />-->
+                    <ComboBox x:Name="cbxCategory" Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}" Margin="10" IsEditable="True" Grid.Column="1" Grid.Row="6" />
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource border}" Width="300" Margin="10,0,0,0">
+                <Grid Margin="5,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                        <RowDefinition />
+                        <RowDefinition Height="25" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="{c:Resource RelatedMovies}" Margin="5,0" Grid.Row="0" />
+
+                    <ListView x:Name="lvwRelated" ItemsSource="{Binding Related}" MouseDoubleClick="lvwRelated_MouseDoubleClick" Grid.Row="1">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}" />
+                                    <TextBlock Text="{Binding Year, StringFormat= ({0})}" Visibility="{Binding Year, Converter={StaticResource nullToVisibility}}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Grid Grid.Row="2" Margin="5,2">
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="btnRelatedAdd" Content="{c:Resource AddMovie}" Click="btnRelatedAdd_Click" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button x:Name="btnRelatedRemove" Content="{c:Resource RemoveMovie}" Click="btnRelatedRemove_Click" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </StackPanel>
+        <Expander Header="{c:Resource Description}" Margin="0,5" Grid.Row="1">
+            <TextBox x:Name="tbxDescription" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Height="250" AcceptsReturn="True" TextWrapping="Wrap" Width="780" VerticalContentAlignment="Stretch" />
+        </Expander>
+    </Grid>
+</Window>

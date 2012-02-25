@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<MediaLibrary Name="MediaLibrary" Encrypted="False">
+  <Movies>
+    <Movie Name="Test" ID="1" Year="2011" Added="20.7.2011 19:44:22" />
+    <Movie Name="Test3" ID="2" Year="2011" Added="20.7.2011 19:51:05">asdadad</Movie>
+    <Movie Name="Test4" ID="3" Year="2011" Added="20.7.2011 19:51:09" />
+    <Movie Name="Test2" ID="4" Year="2011" Added="20.7.2011 19:51:19" Starred="True" />
+    <Movie Name="Test5" OriginalName="Test56" ID="5" Storage="M" Year="2010" Country="USA" Category="Dobrodužný" Added="20.7.2011 19:52:50" Language="cs" Actors="M.Testovic,A.Antonovic" OnlineIdentifier="23424" />
+    <Movie Name="Test from Test2" ID="6" Year="2011" Added="21.7.2011 19:43:40" />
+  </Movies>
+  <RelatedMovies>
+    <Related SourceID="1" TargetID="4" />
+    <Related SourceID="1" TargetID="3" />
+    <Related SourceID="3" TargetID="4" />
+  </RelatedMovies>
+</MediaLibrary>
