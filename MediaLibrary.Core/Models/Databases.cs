@@ -10,7 +10,7 @@ using MediaLibrary.Export;
 
 namespace MediaLibrary.Core
 {
-    public class Databases : ObservableCollection<Database>
+    public class Databases : DesktopCore.ObservableCollection<Database>
     { }
 
     public class Database : NotifyPropertyChanged

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<MediaLibrary.Web.Models.Domain.Database>
+
+@{
+    ViewBag.Section = "Your databases";
+}
+
+@section ActionPanel {
+    @Html.ActionLink("Create database", "create", "database", null, new { @class = "tiny-button orange" })
+}
+
+<div class="editor-folder">
+    <div class="w600">
+
+        @{ 
+            UI.Grid(Model)
+                .SetEmptyText("No databases")
+                .AddColumn("ID", d => d.ID)
+                .AddColumn("Name", d => d.Name, "w400")
+                .AddColumn("Revision", d => d.Revision)
+                .AddColumn("", d => Html.ActionLink("[Edit]", "edit", new { id = d.ID }) + " " + UI.DeleteLink("[Delete]", "delete", new { id = d.ID }))
+                .Render(); 
+        }
+
+    </div>
+</div>
+
+

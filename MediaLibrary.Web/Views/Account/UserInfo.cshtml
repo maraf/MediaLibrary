@@ -1,0 +1,13 @@
+﻿@model MediaLibrary.Web.Models.Domain.UserAccount
+
+<div class="user-info">
+    
+    <strong>@Model.Username</strong>
+
+    -
+    
+    @using (Html.BeginForm("logout", "account", FormMethod.Post, new { @class = "inline-form" }))
+    {
+        <input type="submit" name="logout" value="Odhlásit" class="link-button" />
+    }
+</div>

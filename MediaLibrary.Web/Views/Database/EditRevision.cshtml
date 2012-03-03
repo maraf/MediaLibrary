@@ -1,0 +1,31 @@
+﻿@model MediaLibrary.Web.Models.ViewModel.EditRevisionModel
+
+@{
+    ViewBag.Section = Model.RevisionID == 0 ? "Creating database revision" : "Editing database revision";
+}
+
+@using (Html.BeginForm("editrevision", "database", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    @Html.EditorFor(m => m.DatabaseID)
+    @Html.EditorFor(m => m.RevisionID)
+    
+    <div class="editor-folder">
+
+        <div class="editor-item wmax h500">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Content)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.Content)
+                @Html.ValidationMessageFor(m => m.Content)
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    </div>
+
+    <div class="buttons">
+        <input type="submit" name="change" value="Save revision" />
+    </div>
+}

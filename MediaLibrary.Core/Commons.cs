@@ -46,16 +46,12 @@ namespace MediaLibrary.Core
             return false;
         }
 
-        public static bool IsNewerThen(string filter, DateTime compare)
+        public static bool IsNewerThen(DateTime? filter, DateTime compare)
         {
-            if (String.IsNullOrEmpty(filter))
+            if (filter == null)
                 return true;
 
-            DateTime fdt;
-            if (DateTime.TryParse(filter, out fdt))
-                return fdt <= compare;
-
-            return false;
+            return filter.Value <= compare;
         }
 
         public static bool TestThreeStates(bool? filter, bool value)

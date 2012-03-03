@@ -1,0 +1,51 @@
+﻿@model MediaLibrary.Web.Models.ViewModel.EditDatabaseModel
+
+@{
+    ViewBag.Section = "Editing database: " + Model.Name;
+}
+
+@section ActionPanel {
+    @Html.ActionLink("Create database revision", "createrevision", "database", new { id = Model.ID }, new { @class = "tiny-button orange" })
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.EditorFor(m => m.ID)
+    
+    <div class="editor-folder">
+
+        <div class="editor-item w300">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Name)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <p>
+            List of all revisions
+        </p>
+        <div class="w400">
+        @{ 
+        
+            UI.Grid(Model.Revisions)
+                .AddColumn("Revision", r => r.Revision)
+                .AddColumn("Modified", r => r.Timestamp)
+                .AddColumn("", r => Html.ActionLink("[Edit revision]", "editrevision", new { id = r.ID }) + " " + UI.DeleteLink("[Delete]", "deleterevision", new { id = r.ID }))
+                .Render();
+                
+        }
+        </div>
+
+        <div class="clear"></div>
+
+    </div>
+
+    <div class="buttons">
+        <input type="submit" name="change" value="Save database" />
+    </div>
+}
