@@ -7,7 +7,7 @@ using DesktopCore;
 
 namespace MediaLibrary.Core
 {
-    public class OnlineDatabases : ObservableCollection<OnlineDatabase> { }
+    public class OnlineDatabases : DesktopCore.ObservableCollection<OnlineDatabase> { }
 
     public class OnlineDatabase : NotifyPropertyChanged
     {
@@ -35,7 +35,7 @@ namespace MediaLibrary.Core
         }
     }
 
-    public class OnlineLinks : ObservableCollection<OnlineLink> { }
+    public class OnlineLinks : DesktopCore.ObservableCollection<OnlineLink> { }
 
     public class OnlineLink : NotifyPropertyChanged
     {

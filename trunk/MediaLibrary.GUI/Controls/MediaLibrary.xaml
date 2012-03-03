@@ -113,7 +113,7 @@
 
                     <ComboBox Text="{Binding Filter.Country}" ItemsSource="{Binding Movies.Countries}" IsEditable="True" Margin="5" Grid.Column="3" Grid.Row="0" />
                     <TextBox Text="{Binding Filter.Year}" Margin="5" Grid.Column="3" Grid.Row="1" />
-                    <DatePicker Text="{Binding Filter.Added}" Margin="5" Grid.Column="3" Grid.Row="2" />
+                    <DatePicker SelectedDate="{Binding Filter.Added}" Margin="5" Grid.Column="3" Grid.Row="2" />
                     <CheckBox IsChecked="{Binding Filter.Starred}" Content="{c:Resource Starred}" Margin="5" Grid.Column="3" Grid.Row="3" />
 
                     <Grid Margin="5" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4">

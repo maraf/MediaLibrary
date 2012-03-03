@@ -8,6 +8,8 @@ using DesktopCore;
 using System.Globalization;
 using System.Security.Cryptography;
 using MediaLibrary.Export;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace MediaLibrary.TestConsole
 {
@@ -15,13 +17,22 @@ namespace MediaLibrary.TestConsole
     {
         static void Main(string[] args)
         {
-            TestImport();
+            //TestSerialize();
+            //TestImport();
             //TransformSource();
             //TestCryptography();
             //TestExport();
 
             //ReadKey
             Console.ReadKey(true);
+        }
+
+        static void TestSerialize()
+        {
+            Database db = new Database(@"D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.GUI\bin\Release\MediaLibrary.xml");
+            XmlSerializer serializer = new XmlSerializer(typeof(Database));
+
+            serializer.Serialize(Console.Out, db);
         }
 
         static void TestImport()

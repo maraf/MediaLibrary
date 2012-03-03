@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Section = "Welcome to MediaLibrary";
+}
+
+@if (!Request.IsAuthenticated)
+{
+    <p>
+        If you don't have account, you can register -> @Html.ActionLink("Register form", "register", "account")
+    </p>
+    <p>
+        Or you can use your account to login -> @Html.ActionLink("Login", "login", "account")
+    </p>
+}

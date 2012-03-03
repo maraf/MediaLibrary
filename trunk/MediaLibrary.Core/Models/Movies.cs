@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace MediaLibrary.Core
 {
-    public class Movies : ObservableCollection<Movie>
+    public class Movies : DesktopCore.ObservableCollection<Movie>
     {
         private int idCounter = 1;
         private HashSet<int> usedIds = new HashSet<int>();
@@ -107,11 +107,11 @@ namespace MediaLibrary.Core
         }
     }
 
-    public class Categories : ObservableCollection<string> { }
+    public class Categories : DesktopCore.ObservableCollection<string> { }
 
-    public class Countries : ObservableCollection<string> { }
+    public class Countries : DesktopCore.ObservableCollection<string> { }
 
-    public class Actors : ObservableCollection<string> { }
+    public class Actors : DesktopCore.ObservableCollection<string> { }
 
     public class Movie : NotifyPropertyChanged
     {
@@ -126,7 +126,7 @@ namespace MediaLibrary.Core
         private DateTime added;
         private string language;
         private string description;
-        private ObservableCollection<Movie> related = new ObservableCollection<Movie>();
+        private DesktopCore.ObservableCollection<Movie> related = new DesktopCore.ObservableCollection<Movie>();
         private string[] actors;
         private string onlineIdentifier;
         private bool starred;
@@ -247,7 +247,7 @@ namespace MediaLibrary.Core
             }
         }
 
-        public ObservableCollection<Movie> Related
+        public DesktopCore.ObservableCollection<Movie> Related
         {
             get { return related; }
             set
@@ -339,7 +339,7 @@ namespace MediaLibrary.Core
         private string year;
         private string country;
         private string actors;
-        private string added;
+        private DateTime? added;
         private bool? starred = false;
 
         public string Name
@@ -402,7 +402,7 @@ namespace MediaLibrary.Core
             }
         }
 
-        public string Added
+        public DateTime? Added
         {
             get { return added; }
             set

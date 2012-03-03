@@ -17,6 +17,7 @@ using System.ComponentModel;
 using System.Collections.Specialized;
 using DesktopCore;
 using System.IO;
+using DesktopCore.Data;
 
 namespace MediaLibrary.Controls
 {
@@ -437,6 +438,11 @@ namespace MediaLibrary.Controls
                     ml.lvwMovies.MouseDoubleClick += new MouseButtonEventHandler(ml.lvwMovies_MouseDoubleClick);
                 }
             }
+        }
+
+        private void dpcFilterAdded_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Database.Filter.Added = dpcFilterAdded.SelectedDate;
         }
     }
 }
