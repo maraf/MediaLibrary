@@ -9,13 +9,14 @@
 }
 
 <div class="editor-folder">
-    <div class="w600">
+    <div class="w800">
 
         @{ 
             UI.Grid(Model)
                 .SetEmptyText("No databases")
                 .AddColumn("ID", d => d.ID)
-                .AddColumn("Name", d => d.Name, "w400")
+                .AddColumn("Name", d => d.Name, "w300")
+                .AddColumn("Identifier", d => d.PublicIdentifier, "w300")
                 .AddColumn("Revision", d => d.Revision)
                 .AddColumn("", d => Html.ActionLink("[Edit]", "edit", new { id = d.ID }) + " " + UI.DeleteLink("[Delete]", "delete", new { id = d.ID }))
                 .Render(); 

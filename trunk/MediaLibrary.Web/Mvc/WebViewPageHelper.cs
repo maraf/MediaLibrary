@@ -20,6 +20,8 @@ namespace MediaLibrary.Web.Mvc
 
             //Register
             TabList.Register("home", "*", homeIndex, dbList, changeAccount);
+            TabList.Register("account", "login", homeIndex);
+            TabList.Register("account", "register", homeIndex);
             TabList.Register("account", "change", homeIndex, dbList, changeAccount);
             TabList.Register("database", "*", homeIndex, dbList, changeAccount);
         }

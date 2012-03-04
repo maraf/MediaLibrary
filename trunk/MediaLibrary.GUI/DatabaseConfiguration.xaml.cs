@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MediaLibrary.Core;
 using DesktopCore;
+using System.Net;
+using System.IO;
 
 namespace MediaLibrary.GUI
 {
@@ -34,7 +36,7 @@ namespace MediaLibrary.GUI
         {
             base.OnSourceInitialized(e);
 
-            GlassHelper.ExtendGlassFrame(this, new Thickness(-1));
+            WindowHelper.ExtendGlassFrame(this, new Thickness(-1));
         }
 
         protected void CollapseExpander(Expander source, Expander eventTarget)
@@ -50,6 +52,7 @@ namespace MediaLibrary.GUI
             {
                 CollapseExpander(expCommon, expander);
                 CollapseExpander(expPassword, expander);
+                CollapseExpander(expOnline, expander);
             }
         }
 
@@ -65,6 +68,20 @@ namespace MediaLibrary.GUI
         {
             if(tbxPassword.IsEnabled)
                 tbxPassword.Focus();
+        }
+
+        private void btnDownloadNow_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient client = new WebClient(); //TODO: Encoding problem!!
+            string content = client.DownloadString(String.Format("http://localhost:16599/api/database/{0}", Database.PublicIdentifier));
+            File.WriteAllText(Database.Location, content);
+            Database.Load();
+        }
+
+        private void btnPulishNow_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient client = new WebClient();
+            client.UploadData(String.Format("http://localhost:16599/api/database/{0}/update", Database.PublicIdentifier), "POST", File.ReadAllBytes(Database.Location));
         }
     }
 }

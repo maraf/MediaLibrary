@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\DatabaseApiController.cs" />
     <Compile Include="Controllers\DatabaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Core\Bootstrapper.cs" />
@@ -92,6 +93,10 @@
     <Compile Include="Migrations\201203031446095_DatabaseRevisions.cs" />
     <Compile Include="Migrations\201203031446095_DatabaseRevisions.Designer.cs">
       <DependentUpon>201203031446095_DatabaseRevisions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201203041617448_DatabasePublicIdentifier.cs" />
+    <Compile Include="Migrations\201203041617448_DatabasePublicIdentifier.Designer.cs">
+      <DependentUpon>201203041617448_DatabasePublicIdentifier.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DataContext.cs" />

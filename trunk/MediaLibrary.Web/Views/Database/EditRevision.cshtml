@@ -27,5 +27,6 @@
 
     <div class="buttons">
         <input type="submit" name="change" value="Save revision" />
+        @Html.ActionLink("Back to database edit", "edit", new { id = Model.DatabaseID }, new { @class = "button" })
     </div>
 }

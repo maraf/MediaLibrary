@@ -23,6 +23,14 @@ namespace MediaLibrary.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // WS database api
+            routes.MapRoute(
+                null,
+                "api/database/{identifier}/{action}",
+                new { controller = "DatabaseApi", action = "Get" }
+            );
+
+            //Default web route
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters

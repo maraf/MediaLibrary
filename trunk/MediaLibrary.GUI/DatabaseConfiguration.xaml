@@ -59,5 +59,45 @@
                 <TextBox x:Name="tbxPassword" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Margin="0,5" IsEnabled="{Binding Encrypted}" IsEnabledChanged="tbxPassword_IsEnabledChanged" Grid.Column="1" Grid.Row="0" />
             </Grid>
         </Expander>
+        <Expander x:Name="expOnline" Header="{c:Resource ConfOnline}" Padding="5" Expanded="Expander_Expanded">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid Margin="0,5" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <Label Target="{Binding ElementName=tbxPublicIdentifier}" Content="{c:Resource PublicIdentifier}" Style="{StaticResource label}" />
+                        <TextBox x:Name="tbxPublicIdentifier" Text="{Binding PublicIdentifier}" />
+                    </StackPanel>
+                    <StackPanel Margin="4,0" Grid.Column="1">
+                        <Label Target="{Binding ElementName=tbxPublicUsername}" Content="{c:Resource PublicUsername}" Style="{StaticResource label}" />
+                        <TextBox x:Name="tbxUsername" Text="{Binding PublicUsername}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <Label Target="{Binding ElementName=tbxPublicPassword}" Content="{c:Resource PublicPassword}" Style="{StaticResource label}" />
+                        <TextBox x:Name="tbxPublicPassword" Text="{Binding PublicPassword}" />
+                    </StackPanel>
+                </Grid>
+                <CheckBox x:Name="cbxPublishOnSave" Content="{c:Resource PublishOnSave}" IsChecked="{Binding PublishOnSave}" Margin="0,4" Grid.Row="1" />
+                <CheckBox x:Name="cbxDownloadOnLoad" Content="{c:Resource DownloadOnLoad}" IsChecked="{Binding DownloadOnLoad}" Margin="0,4" Grid.Row="2" />
+                <CheckBox x:Name="cbxSavePublicPassword" Content="{c:Resource SavePublicPassword}" IsChecked="{Binding SavePublicPassword}" Margin="0,4" Grid.Row="3" />
+                <DockPanel Grid.Row="4">
+                    <Button x:Name="btnPulishNow" Content="{c:Resource PublishNow}" Click="btnPulishNow_Click" Width="150" HorizontalAlignment="Left" Padding="0,2" DockPanel.Dock="Left" />
+                    <Button x:Name="btnDownloadNow" Content="{c:Resource DownloadNow}" Click="btnDownloadNow_Click" Width="150" HorizontalAlignment="Left" Margin="5,0,10,0" Padding="0,2" DockPanel.Dock="Left" />
+                    <TextBlock x:Name="tblOnlineMessage" VerticalAlignment="Center" />
+                </DockPanel>
+            </Grid>
+        </Expander>
     </StackPanel>
 </Window>

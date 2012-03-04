@@ -11,6 +11,7 @@ using MediaLibrary.Web.Mvc;
 
 namespace MediaLibrary.Web.Controllers
 {
+    [Authorize]
     public class DatabaseController : MediaLibrary.Web.Mvc.Controller
     {
         [Dependency]
@@ -41,7 +42,8 @@ namespace MediaLibrary.Web.Controllers
                 {
                     Name = model.Name,
                     Revision = 1,
-                    OwnerID = UserAccount.ID
+                    OwnerID = UserAccount.ID,
+                    PublicIdentifier = Guid.NewGuid().ToString()
                 };
                 Databases.Add(database);
 
@@ -74,20 +76,6 @@ namespace MediaLibrary.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
-        {
-            Database database = Databases.Get(id);
-            if (database == null || database.OwnerID != UserAccount.ID)
-            {
-                ShowMessage("No such database", HtmlMessageType.Error);
-                return RedirectToAction("index");
-            }
-
-            Databases.Delete(database);
-            return RedirectToAction("index");
-        }
-
-        [HttpPost]
         public ActionResult Edit(EditDatabaseModel model)
         {
             Database database = Databases.Get(model.ID);
@@ -100,11 +88,28 @@ namespace MediaLibrary.Web.Controllers
             if (ModelState.IsValid)
             {
                 database.Name = model.Name;
+                if (String.IsNullOrEmpty(database.PublicIdentifier))
+                    database.PublicIdentifier = Guid.NewGuid().ToString();
+
                 Databases.Update(database);
                 ShowMessage("Database updated.");
             }
 
             return View(new EditDatabaseModel(database, Revisions.GetList().Where(r => r.DatabaseID == database.ID).OrderByDescending(r => r.Revision)));
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            Database database = Databases.Get(id);
+            if (database == null || database.OwnerID != UserAccount.ID)
+            {
+                ShowMessage("No such database", HtmlMessageType.Error);
+                return RedirectToAction("index");
+            }
+
+            Databases.Delete(database);
+            return RedirectToAction("index");
         }
 
         public ActionResult CreateRevision(int id)
@@ -189,6 +194,7 @@ namespace MediaLibrary.Web.Controllers
             }
 
             Revisions.Delete(revision);
+            ShowMessage("Database revision deleted.");
             return RedirectToAction("edit", new { id = revision.DatabaseID });
         }
     }

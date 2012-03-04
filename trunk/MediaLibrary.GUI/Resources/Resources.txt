@@ -98,3 +98,12 @@ ConfPassword=Nastavení hesla
 EncryptByPassword=Šifrovat pomocí hesla
 PasswordRequired=_Požadováno heslo:
 SavePassword=Uložit heslo v aplikaci
+
+ConfOnline=Online konfigurace
+PublicIdentifier=Veřejný identifikátor
+PublicUsername=Online uživ. jméno
+PublicPassword=Online heslo
+PublishOnSave=Nahrát online při uložení
+DownloadOnLoad=Načíst při otevření
+PublishNow=Nahrát online 
+SavePublicPassword=Uložit heslo

@@ -39,6 +39,7 @@ namespace MediaLibrary.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Logout()
         {
             AuthProvider.SignOut();
@@ -66,12 +67,14 @@ namespace MediaLibrary.Web.Controllers
             return RedirectToAction("login");
         }
 
+        [Authorize]
         public ActionResult Change()
         {
             return View(new ChangePasswordModel());
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Change(ChangePasswordModel model)
         {
             if (model.CurrentPassword != UserAccount.Password)
