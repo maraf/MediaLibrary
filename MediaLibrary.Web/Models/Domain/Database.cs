@@ -16,5 +16,7 @@ namespace MediaLibrary.Web.Models.Domain
         public string Name { get; set; }
 
         public int Revision { get; set; }
+
+        public string PublicIdentifier { get; set; }
     }
 }

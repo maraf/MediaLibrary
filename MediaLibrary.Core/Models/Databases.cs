@@ -29,6 +29,13 @@ namespace MediaLibrary.Core
         private bool savePassword;
         private string password;
 
+        private string publicIdentifier;
+        private string publicUsername;
+        private string publicPassword;
+        private bool publishOnSave = false;
+        private bool downloadOnLoad = false;
+        private bool savePublicPassword = true;
+
         public string Name
         {
             get { return name; }
@@ -128,6 +135,66 @@ namespace MediaLibrary.Core
             }
         }
 
+        public string PublicIdentifier
+        {
+            get { return publicIdentifier; }
+            set
+            {
+                publicIdentifier = value;
+                FirePropertyChanged("PublicIdentifier");
+            }
+        }
+
+        public string PublicUsername
+        {
+            get { return publicUsername; }
+            set
+            {
+                publicUsername = value;
+                FirePropertyChanged("PublicUsername");
+            }
+        }
+
+        public string PublicPassword
+        {
+            get { return publicPassword; }
+            set
+            {
+                publicPassword = value;
+                FirePropertyChanged("PublicPassword");
+            }
+        }
+
+        public bool PublishOnSave
+        {
+            get { return publishOnSave; }
+            set
+            {
+                publishOnSave = value;
+                FirePropertyChanged("PublishOnSave");
+            }
+        }
+
+        public bool DownloadOnLoad
+        {
+            get { return downloadOnLoad; }
+            set
+            {
+                downloadOnLoad = value;
+                FirePropertyChanged("DownloadOnLoad");
+            }
+        }
+
+        public bool SavePublicPassword
+        {
+            get { return savePublicPassword; }
+            set
+            {
+                savePublicPassword = value;
+                FirePropertyChanged("SavePublicPassword");
+            }
+        }
+
         public Database()
         {
             Movies = new Movies();
@@ -181,6 +248,16 @@ namespace MediaLibrary.Core
                 XmlAttribute name = doc.CreateAttribute("Name");
                 name.Value = Name;
                 media.Attributes.Append(name);
+
+                XmlHelper.SetAttribute(doc, media, "PublicIdentifier", PublicIdentifier);
+                XmlHelper.SetAttribute(doc, media, "PublicUsername", PublicUsername);
+
+                if (SavePublicPassword)
+                    XmlHelper.SetAttribute(doc, media, "PublicPassword", PublicPassword);
+
+                XmlHelper.SetAttribute(doc, media, "SavePublicPassword", SavePublicPassword);
+                XmlHelper.SetAttribute(doc, media, "PublishOnSave", PublishOnSave);
+                XmlHelper.SetAttribute(doc, media, "DownloadOnLoad", DownloadOnLoad);
 
                 XmlAttribute enc = doc.CreateAttribute("Encrypted");
                 enc.Value = (Encrypted && Password != null).ToString();
@@ -348,6 +425,14 @@ namespace MediaLibrary.Core
                 Encrypted = XmlHelper.GetAttributeBool(doc.DocumentElement, "Encrypted");
                 OnlineName = XmlHelper.GetAttributeValue(doc.DocumentElement, "OnlineName", "ČSFD");
                 OnlineFormat = XmlHelper.GetAttributeValue(doc.DocumentElement, "OnlineFormat", "http://www.csfd.cz/film/{0}");
+
+                PublicIdentifier = XmlHelper.GetAttributeValue(doc.DocumentElement, "PublicIdentifier");
+                PublicUsername = XmlHelper.GetAttributeValue(doc.DocumentElement, "PublicUsername");
+                SavePublicPassword = XmlHelper.GetAttributeBool(doc.DocumentElement, "SavePublicPassword");
+                if (SavePublicPassword)
+                    PublicPassword = XmlHelper.GetAttributeValue(doc.DocumentElement, "PublicPassword");
+                PublishOnSave = XmlHelper.GetAttributeBool(doc.DocumentElement, "PublishOnSave");
+                DownloadOnLoad = XmlHelper.GetAttributeBool(doc.DocumentElement, "DownloadOnLoad");
 
                 if (Encrypted && !RequiresPassword)
                 {

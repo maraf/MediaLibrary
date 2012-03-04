@@ -17,6 +17,9 @@ namespace MediaLibrary.Web.Models.ViewModel
         [Display(Name = "Database name")]
         public string Name { get; set; }
 
+        [Display(Name = "Identifier")]
+        public string PublicIdentifier { get; set; }
+
         public List<ListDatabaseRevisionModel> Revisions { get; set; }
 
         public EditDatabaseModel()
@@ -28,6 +31,7 @@ namespace MediaLibrary.Web.Models.ViewModel
         {
             ID = database.ID;
             Name = database.Name;
+            PublicIdentifier = database.PublicIdentifier;
             Revisions = revisions.Select(r => new ListDatabaseRevisionModel
             {
                 ID = r.ID,
