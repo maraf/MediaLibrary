@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commons.cs" />
+    <Compile Include="Helpers\DatabaseHelper.cs" />
     <Compile Include="Helpers\MovieHelper.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Models\CompareData.cs" />

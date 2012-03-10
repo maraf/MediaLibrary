@@ -98,3 +98,22 @@ ConfPassword=Nastavení hesla
 EncryptByPassword=Šifrovat pomocí hesla
 PasswordRequired=_Požadováno heslo:
 SavePassword=Uložit heslo v aplikaci
+
+ConfOnline=Online konfigurace
+PublicIdentifier=Veřejný identifikátor
+PublicUsername=Online uživ. jméno
+PublicPassword=Online heslo
+PublishOnSave=Nahrát online při uložení
+PublicDownloadUrlPattern=Vzor url pro stažení databáze, musí obsahovat {0} pro veř.identif.
+PublicUploadUrlPattern=Vzor url pro nahrání databáze, musí obsahovat {0} pro veř.identif.
+DownloadOnLoad=Načíst při otevření
+PublishNow=Nahrát online 
+DownloadNow=Stáhnout
+SavePublicPassword=Uložit heslo
+
+DownloadingMessage=Stahuji ze serveru ...
+DownloadedMessage=Databáze stažena.
+ErrorDownloadingMessage=Chyba při stahování databáze!
+UploadingMessage=Nahrávám na server ...
+UploadedMessage=Databáze nahrána.
+ErrorUploadingMessage=Chyba při nahrávání databáze!

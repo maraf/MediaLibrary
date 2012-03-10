@@ -118,7 +118,7 @@
     <Compile Include="Models\ViewModel\LoginModel.cs" />
     <Compile Include="Models\ViewModel\RegisterModel.cs" />
     <Compile Include="Mvc\Controller.cs" />
-    <Compile Include="Mvc\DependencyAttribute.Extensions.cs" />
+    <Compile Include="Mvc\DependencyAttributes.cs" />
     <Compile Include="Mvc\HtmlMessage.cs" />
     <Compile Include="Mvc\Html\GridView.cs" />
     <Compile Include="Mvc\Html\GridViewColumn.cs" />

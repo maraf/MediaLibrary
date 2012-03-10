@@ -72,16 +72,26 @@ namespace MediaLibrary.GUI
 
         private void btnDownloadNow_Click(object sender, RoutedEventArgs e)
         {
-            WebClient client = new WebClient(); //TODO: Encoding problem!!
-            string content = client.DownloadString(String.Format("http://localhost:16599/api/database/{0}", Database.PublicIdentifier));
-            File.WriteAllText(Database.Location, content);
-            Database.Load();
+            tblOnlineMessage.Text = Resource.Get("DownloadingMessage");
+            Database.Download(delegate
+            {
+                Database.Load(true);
+                tblOnlineMessage.Text = Resource.Get("DownloadedMessage");
+            }, delegate(string error)
+            {
+                tblOnlineMessage.Text = Resource.Get("ErrorDownloadingMessage");
+            });
         }
 
-        private void btnPulishNow_Click(object sender, RoutedEventArgs e)
+        private void btnPublishNow_Click(object sender, RoutedEventArgs e)
         {
-            WebClient client = new WebClient();
-            client.UploadData(String.Format("http://localhost:16599/api/database/{0}/update", Database.PublicIdentifier), "POST", File.ReadAllBytes(Database.Location));
+            Database.Save(true);
+            tblOnlineMessage.Text = Resource.Get("UploadingMessage");
+            Database.Upload(delegate {
+                tblOnlineMessage.Text = Resource.Get("UploadedMessage");
+            }, delegate(string error) {
+                tblOnlineMessage.Text = Resource.Get("ErrorUploadingMessage");
+            });
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Configuration WindowHeight="750" ExitMode="Autosave" Culture="cs-CZ">
   <Database Location="D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.GUI\bin\Release\MediaLibrary.xml" />
-  <Database Location="D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.GUI\bin\Release\TestLibrary.xml" Password="5aYgG7psWT8=" />
 </Configuration>

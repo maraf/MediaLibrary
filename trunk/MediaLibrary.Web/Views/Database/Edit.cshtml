@@ -36,7 +36,7 @@
         <div class="clear"></div>
 
         <p>
-            List of all revisions
+            List of latest 30 revisions:
         </p>
         <div class="w400">
         @{ 
@@ -44,7 +44,7 @@
             UI.Grid(Model.Revisions)
                 .AddColumn("Revision", r => r.Revision)
                 .AddColumn("Modified", r => r.Timestamp)
-                .AddColumn("", r => Html.ActionLink("[Edit revision]", "editrevision", new { id = r.ID }) + " " + UI.DeleteLink("[Delete]", "deleterevision", new { id = r.ID }))
+                .AddColumn("", r => Html.ActionLink("[Edit revision]", "editrevision", new { id = r.ID }) + " " + Html.ActionLink("[Delete]", "deleterevision", new { id = r.ID }))
                 .Render();
                 
         }
