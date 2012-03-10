@@ -72,7 +72,7 @@ namespace MediaLibrary.Web.Controllers
                 return RedirectToAction("index");
             }
 
-            return View(new EditDatabaseModel(database, Revisions.GetList().Where(r => r.DatabaseID == database.ID).OrderByDescending(r => r.Revision)));
+            return View(new EditDatabaseModel(database, Revisions.GetList().Where(r => r.DatabaseID == database.ID).OrderByDescending(r => r.Revision).Take(30)));
         }
 
         [HttpPost]
@@ -183,7 +183,6 @@ namespace MediaLibrary.Web.Controllers
             return View();
         }
 
-        [HttpPost]
         public ActionResult DeleteRevision(int id)
         {
             DatabaseRevision revision = Revisions.Get(id);

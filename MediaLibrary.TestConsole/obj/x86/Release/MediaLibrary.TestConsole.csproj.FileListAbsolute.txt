@@ -1,11 +1,11 @@
 D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Release\MediaLibrary.TestConsole.exe
 D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Release\MediaLibrary.TestConsole.pdb
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Release\DesktopCore.dll
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Release\DesktopCore.Resources.dll
 D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Release\MediaLibrary.Core.dll
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Release\DesktopCore.Resources.pdb
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Release\DesktopCore.pdb
 D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Release\MediaLibrary.Core.pdb
 D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\obj\x86\Release\ResolveAssemblyReference.cache
 D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\obj\x86\Release\MediaLibrary.TestConsole.exe
 D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\obj\x86\Release\MediaLibrary.TestConsole.pdb
-D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Release\DesktopCore.Resources.dll
-D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Release\DesktopCore.Resources.pdb
-D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Release\DesktopCore.dll
-D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.TestConsole\bin\Release\DesktopCore.pdb

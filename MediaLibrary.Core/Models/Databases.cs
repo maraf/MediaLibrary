@@ -7,6 +7,8 @@ using System.IO;
 using System.Xml;
 using DesktopCore;
 using MediaLibrary.Export;
+using System.Net;
+using MediaLibrary.Core.Helpers;
 
 namespace MediaLibrary.Core
 {
@@ -35,6 +37,8 @@ namespace MediaLibrary.Core
         private bool publishOnSave = false;
         private bool downloadOnLoad = false;
         private bool savePublicPassword = true;
+        private string publicDownloadUrlPattern = "http://medialibrary.neptuo.com/api/database/{0}";
+        private string publicUploadUrlPattern = "http://medialibrary.neptuo.com/api/database/{0}/update";
 
         public string Name
         {
@@ -69,7 +73,8 @@ namespace MediaLibrary.Core
         public string OnlineFormat
         {
             get { return onlineFormat; }
-            set {
+            set
+            {
                 onlineFormat = value;
                 FirePropertyChanged("OnlineFormat");
             }
@@ -195,6 +200,26 @@ namespace MediaLibrary.Core
             }
         }
 
+        public string PublicDownloadUrlPattern
+        {
+            get { return publicDownloadUrlPattern; }
+            set
+            {
+                publicDownloadUrlPattern = value;
+                FirePropertyChanged("PublicDownloadUrlPattern");
+            }
+        }
+
+        public string PublicUploadUrlPattern
+        {
+            get { return publicUploadUrlPattern; }
+            set
+            {
+                publicUploadUrlPattern = value;
+                FirePropertyChanged("PublicUploadUrlPattern");
+            }
+        }
+
         public Database()
         {
             Movies = new Movies();
@@ -220,7 +245,7 @@ namespace MediaLibrary.Core
             Load();
         }
 
-        public void Save()
+        public void Save(bool ignorePublic = false)
         {
             if (Encrypted && RequiresPassword)
                 return;
@@ -232,158 +257,17 @@ namespace MediaLibrary.Core
             try
             {
                 if (File.Exists(location))
-                {
                     File.Copy(location, backupLocation);
-                }
 
-                HashSet<KeyValuePair<int, int>> relatedMovies = new HashSet<KeyValuePair<int, int>>();
-
-                XmlDocument doc = new XmlDocument();
-                XmlDeclaration dec = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
-                doc.AppendChild(dec);
-
-                XmlElement media = doc.CreateElement("MediaLibrary");
-                doc.AppendChild(media);
-
-                XmlAttribute name = doc.CreateAttribute("Name");
-                name.Value = Name;
-                media.Attributes.Append(name);
-
-                XmlHelper.SetAttribute(doc, media, "PublicIdentifier", PublicIdentifier);
-                XmlHelper.SetAttribute(doc, media, "PublicUsername", PublicUsername);
-
-                if (SavePublicPassword)
-                    XmlHelper.SetAttribute(doc, media, "PublicPassword", PublicPassword);
-
-                XmlHelper.SetAttribute(doc, media, "SavePublicPassword", SavePublicPassword);
-                XmlHelper.SetAttribute(doc, media, "PublishOnSave", PublishOnSave);
-                XmlHelper.SetAttribute(doc, media, "DownloadOnLoad", DownloadOnLoad);
-
-                XmlAttribute enc = doc.CreateAttribute("Encrypted");
-                enc.Value = (Encrypted && Password != null).ToString();
-                media.Attributes.Append(enc);
-
-                XmlElement movies = doc.CreateElement("Movies");
-                media.AppendChild(movies);
-
-                foreach (Movie m in Movies)
-                {
-                    XmlElement movie = doc.CreateElement("Movie");
-                    XmlAttribute attr;
-
-                    if (m.Name != null)
-                    {
-                        attr = doc.CreateAttribute("Name");
-                        attr.Value = m.Name;
-                        movie.Attributes.Append(attr);
-                    }
-                    if (m.OriginalName != null)
-                    {
-                        attr = doc.CreateAttribute("OriginalName");
-                        attr.Value = m.OriginalName;
-                        movie.Attributes.Append(attr);
-                    }
-                    if (m.ID != null)
-                    {
-                        attr = doc.CreateAttribute("ID");
-                        attr.Value = m.ID.ToString();
-                        movie.Attributes.Append(attr);
-                    }
-                    if (m.Storage != null)
-                    {
-                        attr = doc.CreateAttribute("Storage");
-                        attr.Value = m.Storage;
-                        movie.Attributes.Append(attr);
-                    }
-                    if (m.Year != null)
-                    {
-                        attr = doc.CreateAttribute("Year");
-                        attr.Value = m.Year.ToString();
-                        movie.Attributes.Append(attr);
-                    }
-                    if (m.Country != null)
-                    {
-                        attr = doc.CreateAttribute("Country");
-                        attr.Value = m.Country;
-                        movie.Attributes.Append(attr);
-                    }
-                    if (m.Genre != null)
-                    {
-                        attr = doc.CreateAttribute("Genre");
-                        attr.Value = m.Genre;
-                        movie.Attributes.Append(attr);
-                    }
-                    if (m.Category != null)
-                    {
-                        attr = doc.CreateAttribute("Category");
-                        attr.Value = m.Category;
-                        movie.Attributes.Append(attr);
-                    }
-                    if (m.Added != null)
-                    {
-                        attr = doc.CreateAttribute("Added");
-                        attr.Value = m.Added.ToString();
-                        movie.Attributes.Append(attr);
-                    }
-                    if (m.Language != null)
-                    {
-                        attr = doc.CreateAttribute("Language");
-                        attr.Value = m.Language;
-                        movie.Attributes.Append(attr);
-                    }
-                    if (!String.IsNullOrEmpty(m.Description))
-                    {
-                        movie.InnerText = m.Description;
-                    }
-                    if (m.Actors != null && m.Actors.Count() > 0)
-                    {
-                        attr = doc.CreateAttribute("Actors");
-                        attr.Value = m.Actors.ConcatWith(',');
-                        movie.Attributes.Append(attr);
-                    }
-                    if (m.OnlineIdentifier != null)
-                    {
-                        attr = doc.CreateAttribute("OnlineIdentifier");
-                        attr.Value = m.OnlineIdentifier;
-                        movie.Attributes.Append(attr);
-                    }
-                    if (m.Starred)
-                    {
-                        attr = doc.CreateAttribute("Starred");
-                        attr.Value = m.Starred.ToString();
-                        movie.Attributes.Append(attr);
-                    }
-
-                    movies.AppendChild(movie);
-
-                    MovieHelper.FindRelatedMovies(relatedMovies, m, m.Related);
-                }
-
-                XmlElement related = doc.CreateElement("RelatedMovies");
-                media.AppendChild(related);
-
-                foreach (KeyValuePair<int, int> item in relatedMovies)
-                {
-                    XmlElement single = doc.CreateElement("Related");
-
-                    XmlAttribute sourceId = doc.CreateAttribute("SourceID");
-                    sourceId.Value = item.Key.ToString();
-                    single.Attributes.Append(sourceId);
-
-                    XmlAttribute targetId = doc.CreateAttribute("TargetID");
-                    targetId.Value = item.Value.ToString();
-                    single.Attributes.Append(targetId);
-
-                    related.AppendChild(single);
-                }
+                XmlDocument doc = DatabaseHelper.Serialize(this);
 
                 if (Encrypted && Password != null)
                 {
                     string content;
-                    if (CryptoHelper.Encrypt(media.InnerXml, Password, out content))
-                        media.InnerXml = content;
+                    if (CryptoHelper.Encrypt(doc.DocumentElement.InnerXml, Password, out content))
+                        doc.DocumentElement.InnerXml = content;
                     else
-                        enc.Value = false.ToString();
+                        doc.DocumentElement.Attributes["Encrypted"].Value = false.ToString();
                 }
 
                 doc.Save(location);
@@ -401,13 +285,14 @@ namespace MediaLibrary.Core
             finally
             {
                 if (File.Exists(backupLocation))
-                {
                     File.Delete(backupLocation);
-                }
             }
+
+            if (!ignorePublic && PublishOnSave)
+                Upload();
         }
 
-        public void Load()
+        public void Load(bool ignorePublic = false)
         {
             if (Movies == null)
                 Movies = new Movies();
@@ -421,94 +306,84 @@ namespace MediaLibrary.Core
                 doc.LoadXml(sr.ReadToEnd());
                 sr.Close();
 
-                Name = XmlHelper.GetAttributeValue(doc.DocumentElement, "Name");
-                Encrypted = XmlHelper.GetAttributeBool(doc.DocumentElement, "Encrypted");
-                OnlineName = XmlHelper.GetAttributeValue(doc.DocumentElement, "OnlineName", "ČSFD");
-                OnlineFormat = XmlHelper.GetAttributeValue(doc.DocumentElement, "OnlineFormat", "http://www.csfd.cz/film/{0}");
+                DatabaseHelper.Deserialize(doc, this);
 
-                PublicIdentifier = XmlHelper.GetAttributeValue(doc.DocumentElement, "PublicIdentifier");
-                PublicUsername = XmlHelper.GetAttributeValue(doc.DocumentElement, "PublicUsername");
-                SavePublicPassword = XmlHelper.GetAttributeBool(doc.DocumentElement, "SavePublicPassword");
-                if (SavePublicPassword)
-                    PublicPassword = XmlHelper.GetAttributeValue(doc.DocumentElement, "PublicPassword");
-                PublishOnSave = XmlHelper.GetAttributeBool(doc.DocumentElement, "PublishOnSave");
-                DownloadOnLoad = XmlHelper.GetAttributeBool(doc.DocumentElement, "DownloadOnLoad");
-
-                if (Encrypted && !RequiresPassword)
+                if (!ignorePublic && DownloadOnLoad)
                 {
-                    RequiresPassword = true;
-                    return;
-                } 
-                else if (Encrypted)
-                {
-                    string content;
-                    if (CryptoHelper.Decrypt(doc.DocumentElement.InnerXml, Password, out content))
+                    Download(delegate
                     {
-                        RequiresPassword = false;
-                        doc.DocumentElement.InnerXml = content;
-                    }
-                }
+                        Movies.Clear();
 
-                foreach (XmlElement m in doc.GetElementsByTagName("Movie"))
-                {
-                    Movies.Add(new Movie()
-                    {
-                        ID = XmlHelper.GetAttributeInt(m, "ID", Movies.NextID),
-                        Name = XmlHelper.GetAttributeValue(m, "Name"),
-                        OriginalName = XmlHelper.GetAttributeValue(m, "OriginalName"),
-                        Country = XmlHelper.GetAttributeValue(m, "Country"),
-                        Genre = XmlHelper.GetAttributeValue(m, "Genre"),
-                        Storage = XmlHelper.GetAttributeValue(m, "Storage"),
-                        Year = XmlHelper.GetAttributeInt(m, "Year", DateTime.Now.Year),
-                        Category = XmlHelper.GetAttributeValue(m, "Category"),
-                        Added = XmlHelper.GetAttributeDateTime(m, "Added"),
-                        Language = XmlHelper.GetAttributeValue(m, "Language"),
-                        Actors = XmlHelper.GetAttributeValue(m, "Actors", ','),
-                        OnlineIdentifier = XmlHelper.GetAttributeValue(m, "OnlineIdentifier"),
-                        Starred = XmlHelper.GetAttributeBool(m, "Starred", false),
-                        Description = m.InnerText
+                        doc = new XmlDocument();
+                        sr = new StreamReader(location);
+                        doc.LoadXml(sr.ReadToEnd());
+                        sr.Close();
+
+                        DatabaseHelper.Deserialize(doc, this);
                     });
-                }
-
-                Dictionary<int, Movie> cache = new Dictionary<int, Movie>();
-                foreach (XmlElement r in doc.GetElementsByTagName("Related"))
-                {
-                    int sourceId = Int32.Parse(XmlHelper.GetAttributeValue(r, "SourceID"));
-                    int targetId = Int32.Parse(XmlHelper.GetAttributeValue(r, "TargetID"));
-
-                    Movie source;
-                    Movie target;
-
-                    if (cache.ContainsKey(sourceId))
-                    {
-                        source = cache[sourceId];
-                    }
-                    else
-                    {
-                        source = Movies.FindByID(sourceId);
-                        cache.Add(sourceId, source);
-                    }
-
-                    if (cache.ContainsKey(targetId))
-                    {
-                        target = cache[targetId];
-                    }
-                    else
-                    {
-                        target = Movies.FindByID(targetId);
-                        cache.Add(targetId, target);
-                    }
-
-                    if (source != null && target != null)
-                    {
-                        source.Related.Add(target);
-                        target.Related.Add(source);
-                    }
                 }
             }
             else
             {
                 File.Create(location);
+            }
+        }
+
+        public void Download(Action onCompleted = null, Action<string> onError = null)
+        {
+            try
+            {
+                WebClient client = new WebClient(); //TODO: Encoding problem!!
+                client.Encoding = Encoding.UTF8;
+                client.DownloadStringAsync(new Uri(String.Format(PublicDownloadUrlPattern, PublicIdentifier)));
+                client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(delegate(object sender, DownloadStringCompletedEventArgs e)
+                {
+                    if (e.Error == null)
+                    {
+                        File.WriteAllText(Location, e.Result);
+
+                        if (onCompleted != null)
+                            onCompleted();
+                    }
+                    else
+                    {
+                        if (onError != null)
+                            onError(e.Error.Message);
+                    }
+                });
+            }
+            catch (Exception e)
+            {
+                if (onError != null)
+                    onError(e.Message);
+            }
+        }
+
+        public void Upload(Action onCompleted = null, Action<string> onError = null)
+        {
+            try
+            {
+                WebClient client = new WebClient(); //TODO: Encoding problem!!
+                client.Encoding = Encoding.UTF8;
+                client.UploadStringAsync(new Uri(String.Format(PublicUploadUrlPattern, PublicIdentifier)), "POST", File.ReadAllText(Location));
+                client.UploadStringCompleted += new UploadStringCompletedEventHandler(delegate(object sender, UploadStringCompletedEventArgs e)
+                {
+                    if (e.Error == null)
+                    {
+                        if (onCompleted != null)
+                            onCompleted();
+                    }
+                    else
+                    {
+                        if (onError != null)
+                            onError(e.Error.Message);
+                    }
+                });
+            }
+            catch (Exception e)
+            {
+                if (onError != null)
+                    onError(e.Message);
             }
         }
 
@@ -559,7 +434,7 @@ namespace MediaLibrary.Core
                 {
                     if (count == 0)
                         output.Append("<tr>");
-                    else 
+                    else
                         output.Append("</tr><tr>");
                 }
 

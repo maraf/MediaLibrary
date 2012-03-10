@@ -1,16 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<MediaLibrary Name="MediaLibrary" Encrypted="False">
+<MediaLibrary Name="MediaLibrary" PublicIdentifier="eccf065e-c0e3-4c17-9f92-d4d3d450f945" PublicUsername="Mara" PublicPassword="1111" SavePublicPassword="True" PublishOnSave="False" DownloadOnLoad="False" PublicDownloadUrlPattern="http://localhost:16599/api/database/{0}" PublicUploadUrlPattern="http://localhost:16599/api/database/{0}/update" Encrypted="False">
   <Movies>
-    <Movie Name="Test" ID="1" Year="2011" Added="20.7.2011 19:44:22" />
-    <Movie Name="Test3" ID="2" Year="2011" Added="20.7.2011 19:51:05">asdadad</Movie>
-    <Movie Name="Test4" ID="3" Year="2011" Added="20.7.2011 19:51:09" />
-    <Movie Name="Test2" ID="4" Year="2011" Added="20.7.2011 19:51:19" Starred="True" />
-    <Movie Name="Test5" OriginalName="Test56" ID="5" Storage="M" Year="2010" Country="USA" Category="Dobrodužný" Added="20.7.2011 19:52:50" Language="cs" Actors="M.Testovic,A.Antonovic" OnlineIdentifier="23424" />
-    <Movie Name="Test from Test2" ID="6" Year="2011" Added="21.7.2011 19:43:40" />
+    <Movie Name="Test" ID="10" Year="2011" Added="20.7.2011 19:44:22" />
+    <Movie Name="Test3" ID="12" Year="2011" Added="20.7.2011 19:51:05">asdadad</Movie>
+    <Movie Name="Test4" ID="14" Year="2011" Added="20.7.2011 19:51:09" />
+    <Movie Name="Test2" ID="16" Year="2011" Added="20.7.2011 19:51:19" Starred="True" />
+    <Movie Name="Test5" OriginalName="Test56" ID="18" Storage="M" Year="2010" Country="USA" Category="Dobrodužný" Added="20.7.2011 19:52:50" Language="cs" Actors="M.Testovic,A.Antonovic" OnlineIdentifier="23424" />
+    <Movie Name="Test from Test2" ID="20" Year="2011" Added="21.7.2011 19:43:40" />
+    <Movie Name="Test 2012-03-01" ID="22" Year="2012" Added="1.3.2012 15:32:17" />
+    <Movie Name="1+2ě3š4č5ř6ž7ý8á9í0é1" ID="24" Year="2012" Added="10.3.2012 20:59:59" />
   </Movies>
-  <RelatedMovies>
-    <Related SourceID="1" TargetID="4" />
-    <Related SourceID="1" TargetID="3" />
-    <Related SourceID="3" TargetID="4" />
-  </RelatedMovies>
+  <RelatedMovies />
 </MediaLibrary>

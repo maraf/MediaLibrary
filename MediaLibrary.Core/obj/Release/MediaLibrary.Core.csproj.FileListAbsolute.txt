@@ -1,9 +1,9 @@
 D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.Core\bin\Release\MediaLibrary.Core.dll
 D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.Core\bin\Release\MediaLibrary.Core.pdb
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.Core\bin\Release\DesktopCore.dll
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.Core\bin\Release\DesktopCore.Resources.dll
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.Core\bin\Release\DesktopCore.Resources.pdb
+D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.Core\bin\Release\DesktopCore.pdb
 D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.Core\obj\Release\ResolveAssemblyReference.cache
 D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.Core\obj\Release\MediaLibrary.Core.dll
 D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.Core\obj\Release\MediaLibrary.Core.pdb
-D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.Core\bin\Release\DesktopCore.Resources.dll
-D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.Core\bin\Release\DesktopCore.Resources.pdb
-D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.Core\bin\Release\DesktopCore.dll
-D:\Projects\VS10\Projects\MediaLibrary\MediaLibrary.Core\bin\Release\DesktopCore.pdb
