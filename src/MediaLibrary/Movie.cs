@@ -16,6 +16,11 @@ namespace MediaLibrary
     public class Movie : ObservableObject
     {
         /// <summary>
+        /// Gets a library where movie belongs.
+        /// </summary>
+        public Library Library { get; private set; }
+
+        /// <summary>
         /// Gets an unique movie key.
         /// </summary>
         public IKey Key { get; private set; }
@@ -41,17 +46,20 @@ namespace MediaLibrary
         /// <summary>
         /// Gets a collection of keys of related movies.
         /// </summary>
-        public ObservableCollection<IKey> RelatedMovieKeys { get; private set; }
+        public RelatedMovieObservableCollection RelatedMovieKeys { get; private set; }
 
         /// <summary>
         /// Creates a new instance.
         /// </summary>
         /// <param name="key">An unique movie key.</param>
-        public Movie(IKey key)
+        /// <param name="library">A library where movie belongs.</param>
+        public Movie(IKey key, Library library)
         {
             Ensure.Condition.NotEmptyKey(key);
+            Ensure.NotNull(library, "library");
             Key = key;
-            RelatedMovieKeys = new ObservableCollection<IKey>();
+            Library = library;
+            RelatedMovieKeys = new RelatedMovieObservableCollection(Key, library.Movies);
         }
     }
 }

@@ -117,16 +117,16 @@ namespace MediaLibrary
             {
                 XDocument document = XDocument.Load(model.Configuration.FilePath);
                 foreach (XElement movieElement in document.Descendants(XmlStructure.Movies).Descendants(XmlStructure.Movie))
-                    model.Movies.Add(LoadMovie(movieElement));
+                    model.Movies.Add(LoadMovie(model, movieElement));
 
                 foreach (XElement relatedElement in document.Descendants(XmlStructure.RelatedMovies).Descendants(XmlStructure.RelatedMovie))
                 {
                     var keys = LoadRelatedMovieKeys(relatedElement);
-                    Movie movie1 = model.FindByKey(keys.key1);
+                    Movie movie1 = model.Movies.FindByKey(keys.key1);
                     if (movie1 != null)
                         movie1.RelatedMovieKeys.Add(keys.key2);
 
-                    Movie movie2 = model.FindByKey(keys.key2);
+                    Movie movie2 = model.Movies.FindByKey(keys.key2);
                     if (movie2 != null)
                         movie2.RelatedMovieKeys.Add(keys.key1);
                 }
@@ -135,10 +135,10 @@ namespace MediaLibrary
             return Task.CompletedTask;
         }
 
-        private Movie LoadMovie(XElement element)
+        private Movie LoadMovie(Library library, XElement element)
         {
             IKey key = LoadMovieKey(element, XmlStructure.MovieId);
-            Movie model = new Movie(key);
+            Movie model = new Movie(key, library);
             model.Name = element.Attribute(XmlStructure.MovieName)?.Value;
 
             return model;

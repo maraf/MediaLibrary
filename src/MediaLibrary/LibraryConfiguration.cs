@@ -37,29 +37,29 @@ namespace MediaLibrary
             }
         }
 
-        private string onlineName;
-        public string OnlineName
+        private string onlineDatabaseName;
+        public string OnlineDatabaseName
         {
-            get { return onlineName; }
+            get { return onlineDatabaseName; }
             set
             {
-                if (onlineName != value)
+                if (onlineDatabaseName != value)
                 {
-                    onlineName = value;
+                    onlineDatabaseName = value;
                     RaisePropertyChanged();
                 }
             }
         }
 
-        private string onlineFormat;
-        public string OnlineFormat
+        private string onlineDatabaseUrlFormat;
+        public string OnlineDatabaseUrlFormat
         {
-            get { return onlineFormat; }
+            get { return onlineDatabaseUrlFormat; }
             set
             {
-                if (onlineFormat != value)
+                if (onlineDatabaseUrlFormat != value)
                 {
-                    onlineFormat = value;
+                    onlineDatabaseUrlFormat = value;
                     RaisePropertyChanged();
                 }
             }

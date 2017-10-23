@@ -15,12 +15,12 @@ namespace MediaLibrary
     /// <summary>
     /// A collection of movies saved at a location.
     /// </summary>
-    public class Library : IFactory<Movie>
+    public class Library : IFactory<Movie>, IFactory<Movie, string>
     {
         /// <summary>
         /// Gets a collection of movies.
         /// </summary>
-        public ObservableCollection<Movie> Movies { get; private set; }
+        public MovieCollection Movies { get; private set; }
 
         /// <summary>
         /// Gets a library configuration.
@@ -32,7 +32,7 @@ namespace MediaLibrary
         /// </summary>
         public Library()
         {
-            Movies = new ObservableCollection<Movie>();
+            Movies = new MovieCollection();
             Movies.CollectionChanged += OnMoviesChanged;
 
             Configuration = new LibraryConfiguration();
@@ -49,15 +49,26 @@ namespace MediaLibrary
 
         }
 
-        public Movie Create()
+        public IKey CreateMovieKey()
         {
-            return new Movie(GuidKey.Create(Guid.NewGuid(), "Movie"));
+            return GuidKey.Create(Guid.NewGuid(), "Movie");
         }
 
-        public Movie FindByKey(IKey key)
+        public Movie Create()
         {
-            Ensure.Condition.NotEmptyKey(key);
-            return Movies.FirstOrDefault(m => m.Key.Equals(key));
+            Movie movie = new Movie(CreateMovieKey(), this);
+            Movies.Add(movie);
+            return movie;
+        }
+
+        public Movie Create(string name)
+        {
+            Movie movie = new Movie(GuidKey.Create(Guid.NewGuid(), "Movie"), this)
+            {
+                Name = name
+            };
+            Movies.Add(movie);
+            return movie;
         }
     }
 }
