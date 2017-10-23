@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="MediaLibrary.Views.Controls.LibraryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dd="clr-namespace:MediaLibrary.Views.DesignData"
+             xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
+             mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="300" d:DataContext="{x:Static dd:ViewModelLocator.Library}"
+             Background="White" Padding="8">
+    <UserControl.Resources>
+        <Style x:Key="SearchTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="0,0,0,8" />
+            <Setter Property="Padding" Value="4,2" />
+            <Setter Property="FontSize" Value="{StaticResource NameFontSize}" />
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Filter -->
+        <TextBox x:Name="tbxFilter" Text="{controls:Localize 'Search (press enter)...'}" KeyUp="tbxFilter_KeyUp" Style="{StaticResource SearchTextBoxStyle}" Grid.Row="0" />
+
+        <!-- ListView -->
+        <ListView ItemsSource="{Binding Movies}" Grid.Row="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" FontSize="{StaticResource NameFontSize}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Buttons -->
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Content="{controls:Localize 'Create new movie'}" Command="{Binding Create}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

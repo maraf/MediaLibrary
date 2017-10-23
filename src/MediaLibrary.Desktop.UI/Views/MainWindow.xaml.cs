@@ -20,6 +20,8 @@ namespace MediaLibrary.Views
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = DesignData.ViewModelLocator.Library;
         }
     }
 }
