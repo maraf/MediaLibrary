@@ -7,6 +7,9 @@ namespace MediaLibrary.Test
     [TestClass]
     public class XmlStoreTest : Test
     {
+        protected IKey MovieKey1 { get; } = StringKey.Create("1", "Movie");
+        protected IKey MovieKey2 { get; } = StringKey.Create("2", "Movie");
+
         [TestMethod]
         public void EnsureStorage()
         {
@@ -21,27 +24,39 @@ namespace MediaLibrary.Test
 
             Assert.AreEqual(2, library.Movies.Count);
 
-            IKey movieKey1 = StringKey.Create("1", "Movie");
-            Movie movie1 = library.Movies.FindByKey(movieKey1);
+            Movie movie1 = library.Movies.FindByKey(MovieKey1);
             Assert.IsNotNull(movie1);
 
-            IKey movieKey2 = StringKey.Create("2", "Movie");
-            Movie movie2 = library.Movies.FindByKey(movieKey2);
+            Movie movie2 = library.Movies.FindByKey(MovieKey2);
             Assert.IsNotNull(movie2);
 
             Assert.AreEqual("Movie 1", movie1.Name);
             Assert.AreEqual(1, movie1.RelatedMovieKeys.Count);
-            Assert.IsTrue(movie1.RelatedMovieKeys.Contains(movieKey2));
+            Assert.IsTrue(movie1.RelatedMovieKeys.Contains(MovieKey2));
 
             Assert.AreEqual("Movie 2", movie2.Name);
             Assert.AreEqual(1, movie2.RelatedMovieKeys.Count);
-            Assert.IsTrue(movie2.RelatedMovieKeys.Contains(movieKey1));
+            Assert.IsTrue(movie2.RelatedMovieKeys.Contains(MovieKey1));
         }
 
         [TestMethod]
         public void Save()
         {
             Library library = CreateEmpty();
+
+            Movie movie1 = new Movie(MovieKey1, library);
+            movie1.Name = "Movie 1";
+            library.Movies.Add(movie1);
+
+            Movie movie2 = new Movie(MovieKey2, library);
+            movie2.Name = "Movie 2";
+            library.Movies.Add(movie2);
+
+            movie1.RelatedMovieKeys.Add(movie2.Key);
+
+            Store.SaveAsync(library).GetAwaiter().GetResult();
+
+            Load();
         }
     }
 }

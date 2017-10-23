@@ -125,10 +125,6 @@ namespace MediaLibrary
                     Movie movie1 = model.Movies.FindByKey(keys.key1);
                     if (movie1 != null)
                         movie1.RelatedMovieKeys.Add(keys.key2);
-
-                    Movie movie2 = model.Movies.FindByKey(keys.key2);
-                    if (movie2 != null)
-                        movie2.RelatedMovieKeys.Add(keys.key1);
                 }
             }
 
