@@ -15,6 +15,11 @@ namespace MediaLibrary
     /// </summary>
     public class XmlStore
     {
+        /// <summary>
+        /// Saves content from <paramref name="model"/> to its storage file as XML.
+        /// </summary>
+        /// <param name="model">A library to save.</param>
+        /// <returns>Continuation task.</returns>
         public Task SaveAsync(Library model)
         {
             Ensure.NotNull(model, "model");
@@ -99,6 +104,11 @@ namespace MediaLibrary
             }
         }
 
+        /// <summary>
+        /// Loads (adds) movies from file storage of <paramref name="model"/>.
+        /// </summary>
+        /// <param name="model">A library to load to.</param>
+        /// <returns>Continuation task.</returns>
         public Task LoadAsync(Library model)
         {
             Ensure.NotNull(model, "model");
