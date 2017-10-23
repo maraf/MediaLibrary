@@ -14,7 +14,7 @@
         </Style>
         <Style TargetType="ListView">
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Margin" Value="8,0" />
+            <Setter Property="Margin" Value="8" />
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -25,7 +25,9 @@
         </Grid.RowDefinitions>
 
         <!-- Filter -->
-        <TextBox x:Name="tbxFilter" Text="{controls:Localize 'Search (press enter)...'}" KeyUp="tbxFilter_KeyUp" Style="{StaticResource SearchTextBoxStyle}" Grid.Row="0" />
+        <Border Style="{StaticResource ButtonsTopStyle}" Grid.Row="0">
+            <TextBox x:Name="tbxFilter" Text="{controls:Localize 'Search (press enter)...'}" KeyUp="tbxFilter_KeyUp" Style="{StaticResource SearchTextBoxStyle}" />
+        </Border>
 
         <!-- ListView -->
         <ListView x:Name="lvwMovies" ItemsSource="{Binding Movies}" MouseDoubleClick="lvwMovies_MouseDoubleClick" Grid.Row="1">
@@ -37,13 +39,15 @@
         </ListView>
 
         <!-- Buttons -->
-        <Grid Grid.Row="2">
-            <StackPanel Style="{StaticResource ButtonsLeftStyle}">
-                <Button Content="{controls:Localize 'Create new movie'}" Command="{Binding Create}" />
-            </StackPanel>
-            <StackPanel Style="{StaticResource ButtonsRightStyle}">
-                
-            </StackPanel>
-        </Grid>
+        <Border Style="{StaticResource ButtonsBottomStyle}" Grid.Row="2">
+            <Grid>
+                <StackPanel Style="{StaticResource ButtonsLeftStyle}">
+                    <Button Content="{controls:Localize 'Create new movie'}" Command="{Binding Create}" />
+                </StackPanel>
+                <StackPanel Style="{StaticResource ButtonsRightStyle}">
+
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

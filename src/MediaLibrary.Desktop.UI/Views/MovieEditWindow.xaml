@@ -27,11 +27,11 @@
         </StackPanel>
 
         <!-- Buttons -->
-        <Grid Grid.Row="1">
+        <Border Style="{StaticResource ButtonsBottomStyle}" Grid.Row="1">
             <StackPanel Style="{StaticResource ButtonsRightStyle}">
                 <Button Content="{controls:Localize 'Save'}" />
                 <Button Content="{controls:Localize 'Close'}" />
             </StackPanel>
-        </Grid>
+        </Border>
     </Grid>
 </Window>

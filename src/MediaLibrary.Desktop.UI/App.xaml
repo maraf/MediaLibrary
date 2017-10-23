@@ -18,6 +18,16 @@
         <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}" />
 
 
+        <Style x:Key="ButtonsTopStyle" TargetType="Border">
+            <Setter Property="Background" Value="#F1EDED" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+            <Setter Property="BorderBrush" Value="#ABADB3" />
+        </Style>
+        <Style x:Key="ButtonsBottomStyle" TargetType="Border">
+            <Setter Property="Background" Value="#F1EDED" />
+            <Setter Property="BorderThickness" Value="0,1,0,0" />
+            <Setter Property="BorderBrush" Value="#ABADB3" />
+        </Style>
         <Style x:Key="ButtonsLeftStyle" TargetType="StackPanel">
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="HorizontalAlignment" Value="Left" />
