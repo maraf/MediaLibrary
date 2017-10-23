@@ -1,4 +1,5 @@
-﻿using Neptuo.Activators;
+﻿using Neptuo;
+using Neptuo.Activators;
 using Neptuo.Models.Keys;
 using Neptuo.Observables.Collections;
 using System;
@@ -51,6 +52,12 @@ namespace MediaLibrary
         public Movie Create()
         {
             return new Movie(GuidKey.Create(Guid.NewGuid(), "Movie"));
+        }
+
+        public Movie FindByKey(IKey key)
+        {
+            Ensure.Condition.NotEmptyKey(key);
+            return Movies.FirstOrDefault(m => m.Key.Equals(key));
         }
     }
 }

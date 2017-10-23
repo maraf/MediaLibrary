@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Old", "Old", "{253BDABA-FC1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaLibrary.Desktop.UI", "src\MediaLibrary.Desktop.UI\MediaLibrary.Desktop.UI.csproj", "{D162661C-0F70-4887-A37C-4008A38714E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaLibrary.Xml", "src\MediaLibrary.Xml\MediaLibrary.Xml.csproj", "{5E3C59D2-AC63-4A8D-872E-54B97957F8AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -130,6 +132,18 @@ Global
 		{D162661C-0F70-4887-A37C-4008A38714E7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D162661C-0F70-4887-A37C-4008A38714E7}.Release|x86.ActiveCfg = Release|Any CPU
 		{D162661C-0F70-4887-A37C-4008A38714E7}.Release|x86.Build.0 = Release|Any CPU
+		{5E3C59D2-AC63-4A8D-872E-54B97957F8AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E3C59D2-AC63-4A8D-872E-54B97957F8AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E3C59D2-AC63-4A8D-872E-54B97957F8AA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5E3C59D2-AC63-4A8D-872E-54B97957F8AA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5E3C59D2-AC63-4A8D-872E-54B97957F8AA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5E3C59D2-AC63-4A8D-872E-54B97957F8AA}.Debug|x86.Build.0 = Debug|Any CPU
+		{5E3C59D2-AC63-4A8D-872E-54B97957F8AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E3C59D2-AC63-4A8D-872E-54B97957F8AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E3C59D2-AC63-4A8D-872E-54B97957F8AA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5E3C59D2-AC63-4A8D-872E-54B97957F8AA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5E3C59D2-AC63-4A8D-872E-54B97957F8AA}.Release|x86.ActiveCfg = Release|Any CPU
+		{5E3C59D2-AC63-4A8D-872E-54B97957F8AA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
