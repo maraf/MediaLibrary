@@ -14,7 +14,7 @@
         </Style>
         <Style TargetType="ListView">
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Margin" Value="8" />
+            <Setter Property="ItemContainerStyle" Value="{StaticResource ListViewItemStyle}" />
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -33,7 +33,7 @@
         <ListView x:Name="lvwMovies" ItemsSource="{Binding Movies}" MouseDoubleClick="lvwMovies_MouseDoubleClick" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}" FontSize="{StaticResource NameFontSize}" />
+                    <TextBlock Text="{Binding Name}" FontSize="{StaticResource NameFontSize}" Margin="8,0" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
