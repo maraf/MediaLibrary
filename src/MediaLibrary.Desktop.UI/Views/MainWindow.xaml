@@ -6,7 +6,7 @@
         xmlns:dd="clr-namespace:MediaLibrary.Views.DesignData"
         xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
         mc:Ignorable="d" d:DataContext="{x:Static dd:ViewModelLocator.Library}"
-        Title="MainWindow" Icon="{StaticResource IconImage}" Height="350" Width="525">
+        Title="{controls:Localize 'Media Library'}" Icon="{StaticResource IconImage}" Height="350" Width="525">
     <Grid>
         <controls:LibraryView ViewModel="{Binding}" />
     </Grid>

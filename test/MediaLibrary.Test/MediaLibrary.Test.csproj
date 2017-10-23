@@ -54,6 +54,9 @@
     <Reference Include="Neptuo.Observables, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Neptuo.Observables.1.2.1\lib\net45\Neptuo.Observables.dll</HintPath>
     </Reference>
+    <Reference Include="Neptuo.PresentationModels, Version=7.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Neptuo.PresentationModels.7.1.0\lib\net45\Neptuo.PresentationModels.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>

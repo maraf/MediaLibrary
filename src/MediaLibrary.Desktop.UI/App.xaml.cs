@@ -15,8 +15,8 @@ namespace MediaLibrary
         {
             base.OnStartup(e);
 
-            MainWindow window = new MainWindow();
-            window.Show();
+            AppNavigator navigator = new AppNavigator();
+            navigator.Library(Views.DesignData.ViewModelLocator.LibraryModel);
         }
     }
 }

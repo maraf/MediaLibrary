@@ -6,15 +6,15 @@
              xmlns:dd="clr-namespace:MediaLibrary.Views.DesignData"
              xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
              mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="300" d:DataContext="{x:Static dd:ViewModelLocator.Library}"
-             Background="White" Padding="8">
+             Background="White">
     <UserControl.Resources>
-        <Style x:Key="SearchTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Margin" Value="0,0,0,8" />
-            <Setter Property="Padding" Value="4,2" />
+        <Style x:Key="SearchTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle}">
+            <Setter Property="Margin" Value="8" />
             <Setter Property="FontSize" Value="{StaticResource NameFontSize}" />
         </Style>
         <Style TargetType="ListView">
             <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Margin" Value="8,0" />
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -28,7 +28,7 @@
         <TextBox x:Name="tbxFilter" Text="{controls:Localize 'Search (press enter)...'}" KeyUp="tbxFilter_KeyUp" Style="{StaticResource SearchTextBoxStyle}" Grid.Row="0" />
 
         <!-- ListView -->
-        <ListView ItemsSource="{Binding Movies}" Grid.Row="1">
+        <ListView x:Name="lvwMovies" ItemsSource="{Binding Movies}" MouseDoubleClick="lvwMovies_MouseDoubleClick" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" FontSize="{StaticResource NameFontSize}" />
@@ -38,10 +38,10 @@
 
         <!-- Buttons -->
         <Grid Grid.Row="2">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <StackPanel Style="{StaticResource ButtonsLeftStyle}">
                 <Button Content="{controls:Localize 'Create new movie'}" Command="{Binding Create}" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Style="{StaticResource ButtonsRightStyle}">
                 
             </StackPanel>
         </Grid>

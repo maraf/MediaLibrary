@@ -7,11 +7,27 @@
 
         <system:Double x:Key="NameFontSize">16</system:Double>
 
-        <Style TargetType="TextBox">
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
             <Setter Property="Padding" Value="4,2" />
         </Style>
-        <Style TargetType="Button">
+        <Style TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle}" />
+        
+        <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Padding" Value="4,2" />
         </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}" />
+
+
+        <Style x:Key="ButtonsLeftStyle" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="8" />
+        </Style>
+        <Style x:Key="ButtonsRightStyle" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Margin" Value="8" />
+        </Style>
+        
     </Application.Resources>
 </Application>

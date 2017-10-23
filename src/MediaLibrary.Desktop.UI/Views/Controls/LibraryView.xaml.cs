@@ -48,5 +48,12 @@ namespace MediaLibrary.Views.Controls
             if (e.Key == Key.Enter)
                 await ViewModel.FilterAsync(tbxFilter.Text);
         }
+
+        private void lvwMovies_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Movie movie = (Movie)lvwMovies.SelectedItem;
+            if (movie != null && ViewModel.Edit.CanExecute(movie.Key))
+                ViewModel.Edit.Execute(movie.Key);
+        }
     }
 }

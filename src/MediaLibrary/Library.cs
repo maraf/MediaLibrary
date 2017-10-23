@@ -1,7 +1,9 @@
 ﻿using Neptuo;
 using Neptuo.Activators;
+using Neptuo.Collections.Specialized;
 using Neptuo.Models.Keys;
 using Neptuo.Observables.Collections;
+using Neptuo.PresentationModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -23,6 +25,11 @@ namespace MediaLibrary
         public MovieCollection Movies { get; private set; }
 
         /// <summary>
+        /// Gets a collection of movie additional fields.
+        /// </summary>
+        public ObservableCollection<IFieldDefinition> MovieFields { get; private set; }
+
+        /// <summary>
         /// Gets a library configuration.
         /// </summary>
         public LibraryConfiguration Configuration { get; private set; }
@@ -34,6 +41,10 @@ namespace MediaLibrary
         {
             Movies = new MovieCollection();
             Movies.CollectionChanged += OnMoviesChanged;
+
+            MovieFields = new ObservableCollection<IFieldDefinition>();
+            MovieFields.Add(new FieldDefinition("OriginalName", typeof(string), new KeyValueCollection().Add("Label", "Original Name")));
+            MovieFields.Add(new FieldDefinition("Storage", typeof(string), new KeyValueCollection().Add("Label", "Storage")));
 
             Configuration = new LibraryConfiguration();
             Configuration.PropertyChanged += OnConfigurationChanged;

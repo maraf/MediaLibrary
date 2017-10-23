@@ -1,5 +1,6 @@
 ﻿using MediaLibrary.ViewModels.Services;
 using Neptuo;
+using Neptuo.Models.Keys;
 using Neptuo.Observables;
 using Neptuo.Observables.Commands;
 using System;
@@ -21,6 +22,7 @@ namespace MediaLibrary.ViewModels
         public IEnumerable<Movie> Movies => library.Movies;
 
         public ICommand Create { get; }
+        public Command<IKey> Edit { get; }
 
         public LibraryViewModel(Library library, INavigator navigator)
         {
@@ -30,6 +32,7 @@ namespace MediaLibrary.ViewModels
             this.navigator = navigator;
 
             Create = new DelegateCommand(() => navigator.CreateMovieAsync(library));
+            Edit = new DelegateCommand<IKey>(key => navigator.EditMovieAsync(library, key));
 
             library.Configuration.PropertyChanged += OnConfigurationPropertyChanged;
         }

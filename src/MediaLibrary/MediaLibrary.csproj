@@ -57,6 +57,9 @@
     <PackageReference Include="Neptuo.Observables">
       <Version>1.2.1</Version>
     </PackageReference>
+    <PackageReference Include="Neptuo.PresentationModels">
+      <Version>7.1.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

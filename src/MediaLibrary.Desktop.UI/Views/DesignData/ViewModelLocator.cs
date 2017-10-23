@@ -9,6 +9,25 @@ namespace MediaLibrary.Views.DesignData
 {
     public static class ViewModelLocator
     {
+        private static Library libraryModel;
+
+        public static Library LibraryModel
+        {
+            get
+            {
+                if (libraryModel == null)
+                {
+                    libraryModel = new Library();
+                    libraryModel.Configuration.Name = "Library";
+                    libraryModel.Create("Movie 1");
+                    libraryModel.Create("Movie 2");
+                    libraryModel.Create("Movie 3");
+                }
+
+                return libraryModel;
+            }
+        }
+
         private static LibraryViewModel library;
 
         public static LibraryViewModel Library
@@ -16,17 +35,25 @@ namespace MediaLibrary.Views.DesignData
             get
             {
                 if (library == null)
-                {
-                    Library model = new Library();
-                    model.Configuration.Name = "Library";
-                    model.Create("Movie 1");
-                    model.Create("Movie 2");
-                    model.Create("Movie 3");
-
-                    library = new LibraryViewModel(model, new MockNavigator());
-                }
+                    library = new LibraryViewModel(LibraryModel, new MockNavigator());
 
                 return library;
+            }
+        }
+
+        private static MovieEditViewModel movieEdit;
+
+        public static MovieEditViewModel MovieEdit
+        {
+            get
+            {
+                if (movieEdit == null)
+                {
+                    movieEdit = new MovieEditViewModel(LibraryModel.Movies, LibraryModel.MovieFields);
+                    movieEdit.Name = "Movie 1";
+                }
+
+                return movieEdit;
             }
         }
     }
