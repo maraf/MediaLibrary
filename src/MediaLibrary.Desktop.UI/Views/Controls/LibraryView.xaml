@@ -7,6 +7,10 @@
              xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
              mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="300" d:DataContext="{x:Static dd:ViewModelLocator.Library}"
              Background="White">
+    <UserControl.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding Create}" />
+        <KeyBinding x:Name="kebFind" Modifiers="Ctrl" Key="F" />
+    </UserControl.InputBindings>
     <UserControl.Resources>
         <Style x:Key="SearchTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle}">
             <Setter Property="Margin" Value="8" />

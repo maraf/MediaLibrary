@@ -1,4 +1,5 @@
 ﻿using MediaLibrary.ViewModels;
+using Neptuo.Observables.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,13 @@ namespace MediaLibrary.Views.Controls
         {
             InitializeComponent();
             Background = null;
+
+            kebFind.Command = new DelegateCommand(() => tbxFilter.Focus());
+        }
+
+        public new void Focus()
+        {
+            lvwMovies.Focus();
         }
 
         private async void tbxFilter_KeyUp(object sender, KeyEventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MediaLibrary.Views.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,14 @@ namespace MediaLibrary.Views
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+
+            if (Content is LibraryView view)
+                view.Focus();
         }
     }
 }
