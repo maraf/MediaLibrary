@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
         mc:Ignorable="d" d:DataContext="{x:Static dd:ViewModelLocator.MovieEdit}"
-        Title="{controls:Localize 'Movie Edit'}" Height="400" Width="500">
+        Title="{controls:Localize 'Movie Edit'}" Height="400" Width="600">
     <Window.Resources>
         <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
             <Setter Property="Margin" Value="8,0,0,0" />
@@ -19,17 +19,17 @@
         </Grid.RowDefinitions>
         
         <!-- Content -->
-        <StackPanel>
+        <StackPanel Margin="8">
             <StackPanel>
                 <Label Content="{controls:Localize 'Name'}" />
-                <TextBox Text="{Binding Name}" />
+                <TextBox x:Name="tbxName" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
         </StackPanel>
 
         <!-- Buttons -->
         <Border Style="{StaticResource ButtonsBottomStyle}" Grid.Row="1">
             <StackPanel Style="{StaticResource ButtonsRightStyle}">
-                <Button Content="{controls:Localize 'Save'}" />
+                <Button Content="{controls:Localize 'Save'}" Command="{Binding Save}" IsDefault="True" />
                 <Button Content="{controls:Localize 'Close'}" />
             </StackPanel>
         </Border>

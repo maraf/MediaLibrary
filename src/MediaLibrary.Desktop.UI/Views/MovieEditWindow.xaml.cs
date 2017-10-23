@@ -1,4 +1,5 @@
 ﻿using MediaLibrary.ViewModels;
+using MediaLibrary.ViewModels.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ using System.Windows.Shapes;
 
 namespace MediaLibrary.Views
 {
-    public partial class MovieEditWindow : Window
+    public partial class MovieEditWindow : Window, INavigatorContext
     {
         public MovieEditViewModel ViewModel
         {
@@ -25,6 +26,13 @@ namespace MediaLibrary.Views
         public MovieEditWindow()
         {
             InitializeComponent();
+        }
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+
+            tbxName.Focus();
         }
     }
 }

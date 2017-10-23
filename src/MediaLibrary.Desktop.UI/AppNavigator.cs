@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MediaLibrary
 {
@@ -21,17 +22,30 @@ namespace MediaLibrary
             Ensure.NotNull(library, "library");
             if (movieEdit == null)
             {
-                MovieEditViewModel viewModel = new MovieEditViewModel(library.Movies, library.MovieFields);
                 movieEdit = new MovieEditWindow();
-                movieEdit.DataContext = viewModel;
+                movieEdit.Closed += OnMovieEditClosed;
+                movieEdit.DataContext = new MovieEditViewModel(library, movieEdit);
 
                 if (main != null)
+                {
                     movieEdit.Owner = main;
+                    movieEdit.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                }
+                else
+                {
+                    movieEdit.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                }
 
                 movieEdit.Show();
             }
 
             movieEdit.Activate();
+        }
+
+        private void OnMovieEditClosed(object sender, EventArgs e)
+        {
+            movieEdit.Closed -= OnMovieEditClosed;
+            movieEdit = null;
         }
 
         public Task EditMovieAsync(Library library, IKey movieKey)
@@ -45,12 +59,20 @@ namespace MediaLibrary
             if (main == null)
             {
                 main = new MainWindow();
+                main.Closed += OnMainClosed;
                 main.DataContext = new LibraryViewModel(library, this);
 
+                main.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 main.Show();
             }
 
             main.Activate();
+        }
+
+        private void OnMainClosed(object sender, EventArgs e)
+        {
+            main.Closed -= OnMainClosed;
+            main = null;
         }
     }
 }

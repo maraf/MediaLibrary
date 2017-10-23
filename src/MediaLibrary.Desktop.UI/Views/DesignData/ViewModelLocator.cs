@@ -49,7 +49,7 @@ namespace MediaLibrary.Views.DesignData
             {
                 if (movieEdit == null)
                 {
-                    movieEdit = new MovieEditViewModel(LibraryModel.Movies, LibraryModel.MovieFields);
+                    movieEdit = new MovieEditViewModel(LibraryModel, new MockNavigatorContext());
                     movieEdit.Name = "Movie 1";
                 }
 
