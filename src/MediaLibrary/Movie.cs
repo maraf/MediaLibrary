@@ -49,6 +49,11 @@ namespace MediaLibrary
         public RelatedMovieObservableCollection RelatedMovieKeys { get; private set; }
 
         /// <summary>
+        /// Gets a collection of additional field values.
+        /// </summary>
+        public MovieFieldValueCollection FieldValues { get; private set; }
+
+        /// <summary>
         /// Creates a new instance.
         /// </summary>
         /// <param name="key">An unique movie key.</param>
@@ -60,6 +65,7 @@ namespace MediaLibrary
             Key = key;
             Library = library;
             RelatedMovieKeys = new RelatedMovieObservableCollection(Key, library.Movies);
+            FieldValues = new MovieFieldValueCollection(library.MovieFields, RaisePropertyChanged);
         }
     }
 }

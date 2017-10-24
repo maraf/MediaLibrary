@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace MediaLibrary.ViewModels
 {
-    public class MovieEditViewModel : ObservableObject
+    public class MovieEditViewModel : ObservableObject, IModelValueProvider
     {
         private readonly Movie movie;
 
@@ -59,7 +59,43 @@ namespace MediaLibrary.ViewModels
             Name = movie.Name;
             Fields = new List<FieldViewModel>(library.MovieFields.Select(f => new FieldViewModel(f)));
 
+            foreach (FieldViewModel fieldViewModel in Fields)
+            {
+                if (movie.FieldValues.TryGetValue(fieldViewModel.Definition.Identifier, out object value))
+                    fieldViewModel.Value = value;
+            }
+
             Save = new SaveMovieCommand(this, library, navigator, movie);
         }
+
+        public bool TryGetValue(string identifier, out object value)
+        {
+            Ensure.NotNullOrEmpty(identifier, "identifier");
+            FieldViewModel field = Fields.FirstOrDefault(f => f.Definition.Identifier == identifier);
+            if(field != null)
+            {
+                value = field.Value;
+                return true;
+            }
+
+            value = null;
+            return false;
+        }
+
+        public bool TrySetValue(string identifier, object value)
+        {
+            Ensure.NotNullOrEmpty(identifier, "identifier");
+            FieldViewModel field = Fields.FirstOrDefault(f => f.Definition.Identifier == identifier);
+            if (field != null)
+            {
+                field.Value = value;
+                return true;
+            }
+
+            return false;
+        }
+
+        public void Dispose()
+        { }
     }
 }

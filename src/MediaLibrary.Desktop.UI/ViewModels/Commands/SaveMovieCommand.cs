@@ -2,6 +2,7 @@
 using Neptuo;
 using Neptuo.Activators;
 using Neptuo.Observables.Commands;
+using Neptuo.PresentationModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,6 +49,9 @@ namespace MediaLibrary.ViewModels.Commands
                 model = movieFactory.Create();
 
             model.Name = viewModel.Name;
+
+            foreach (FieldViewModel fieldViewModel in viewModel.Fields)
+                model.FieldValues.TrySetValue(fieldViewModel.Definition.Identifier, fieldViewModel.Value);
 
             navigator.Close();
         }
