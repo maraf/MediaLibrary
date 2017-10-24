@@ -48,9 +48,31 @@ namespace MediaLibrary
             movieEdit = null;
         }
 
-        public Task EditMovieAsync(Library library, IKey movieKey)
+        public async Task EditMovieAsync(Library library, IKey movieKey)
         {
-            throw new NotImplementedException();
+            Ensure.NotNull(library, "library");
+            Ensure.Condition.NotEmptyKey(movieKey);
+
+            if (movieEdit == null)
+            {
+                movieEdit = new MovieEditWindow();
+                movieEdit.Closed += OnMovieEditClosed;
+                movieEdit.DataContext = new MovieEditViewModel(library, movieEdit, library.Movies.FindByKey(movieKey));
+
+                if (main != null)
+                {
+                    movieEdit.Owner = main;
+                    movieEdit.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                }
+                else
+                {
+                    movieEdit.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                }
+
+                movieEdit.Show();
+            }
+
+            movieEdit.Activate();
         }
 
         public async Task Library(Library library)
