@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\Commands\SaveCommand.cs" />
     <Compile Include="ViewModels\Commands\SaveMovieCommand.cs" />
     <Compile Include="ViewModels\FieldViewModel.cs" />
     <Compile Include="ViewModels\MovieEditViewModel.cs" />
@@ -129,6 +130,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FontAwesome.WPF">
+      <Version>4.7.0.9</Version>
+    </PackageReference>
     <PackageReference Include="Neptuo">
       <Version>5.5.0</Version>
     </PackageReference>
@@ -139,7 +143,7 @@
       <Version>1.2.1</Version>
     </PackageReference>
     <PackageReference Include="Neptuo.PresentationModels">
-      <Version>7.1.0</Version>
+      <Version>7.2.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +162,10 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MediaLibrary.Xml\MediaLibrary.Xml.csproj">
+      <Project>{5e3c59d2-ac63-4a8d-872e-54b97957f8aa}</Project>
+      <Name>MediaLibrary.Xml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MediaLibrary\MediaLibrary.csproj">
       <Project>{9fe95cc7-67a8-474e-8b71-6734fda3ac9a}</Project>
       <Name>MediaLibrary</Name>

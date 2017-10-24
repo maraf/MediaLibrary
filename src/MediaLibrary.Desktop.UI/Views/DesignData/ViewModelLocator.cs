@@ -35,7 +35,7 @@ namespace MediaLibrary.Views.DesignData
             get
             {
                 if (library == null)
-                    library = new LibraryViewModel(LibraryModel, new MockNavigator());
+                    library = new LibraryViewModel(LibraryModel, new MockNavigator(), new XmlStore());
 
                 return library;
             }

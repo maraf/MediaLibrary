@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:dd="clr-namespace:MediaLibrary.Views.DesignData"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
              mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="300" d:DataContext="{x:Static dd:ViewModelLocator.Library}"
              Background="White">
@@ -30,7 +31,24 @@
 
         <!-- Filter -->
         <Border x:Name="brdTop" Style="{StaticResource ButtonsTopStyle}" Grid.Row="0">
-            <TextBox x:Name="tbxFilter" Text="{controls:Localize 'Search (press enter)...'}" KeyUp="tbxFilter_KeyUp" Style="{StaticResource SearchTextBoxStyle}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                
+                <TextBox x:Name="tbxFilter" Text="{controls:Localize 'Search (press enter)...'}" KeyUp="tbxFilter_KeyUp" GotFocus="tbxFilter_GotFocus" Style="{StaticResource SearchTextBoxStyle}" Grid.Column="1" />
+
+                <StackPanel Orientation="Horizontal" Grid.Column="2">
+                    <Button Style="{StaticResource IconBarButtonStyle}">
+                        <fa:ImageAwesome Icon="Save" />
+                    </Button>
+                    <Button Style="{StaticResource IconBarButtonStyle}">
+                        <fa:ImageAwesome Icon="Gears" />
+                    </Button>
+                </StackPanel>
+            </Grid>
         </Border>
 
         <!-- ListView -->
@@ -49,7 +67,7 @@
                     <Button Content="{controls:Localize 'Create new movie'}" Command="{Binding Create}" />
                 </StackPanel>
                 <StackPanel Style="{StaticResource ButtonsRightStyle}">
-
+                    <Button Content="{controls:Localize 'Save library'}" Command="{Binding Save}" />
                 </StackPanel>
             </Grid>
         </Border>

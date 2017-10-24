@@ -45,7 +45,7 @@ namespace MediaLibrary.Views.Controls
 
             kebFind.Command = new DelegateCommand(() => tbxFilter.Focus());
 
-            brdTop.Background = new SolidColorBrush(SystemColorProvider.ColorizationColor());
+            //brdTop.Background = new SolidColorBrush(SystemColorProvider.ColorizationColor());
         }
 
         public new void Focus()
@@ -64,6 +64,11 @@ namespace MediaLibrary.Views.Controls
             Movie movie = (Movie)lvwMovies.SelectedItem;
             if (movie != null && ViewModel.Edit.CanExecute(movie.Key))
                 ViewModel.Edit.Execute(movie.Key);
+        }
+
+        private void tbxFilter_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ((TextBox)sender).SelectAll();
         }
     }
 }

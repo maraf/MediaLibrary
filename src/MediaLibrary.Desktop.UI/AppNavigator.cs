@@ -82,7 +82,7 @@ namespace MediaLibrary
             {
                 main = new MainWindow();
                 main.Closed += OnMainClosed;
-                main.DataContext = new LibraryViewModel(library, this);
+                main.DataContext = new LibraryViewModel(library, this, new XmlStore());
 
                 main.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 main.Show();

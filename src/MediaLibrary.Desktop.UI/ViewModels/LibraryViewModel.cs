@@ -1,4 +1,5 @@
-﻿using MediaLibrary.ViewModels.Services;
+﻿using MediaLibrary.ViewModels.Commands;
+using MediaLibrary.ViewModels.Services;
 using Neptuo;
 using Neptuo.Models.Keys;
 using Neptuo.Observables;
@@ -23,8 +24,9 @@ namespace MediaLibrary.ViewModels
 
         public ICommand Create { get; }
         public Command<IKey> Edit { get; }
+        public ICommand Save { get; }
 
-        public LibraryViewModel(Library library, INavigator navigator)
+        public LibraryViewModel(Library library, INavigator navigator, XmlStore store)
         {
             Ensure.NotNull(library, "library");
             Ensure.NotNull(navigator, "navigator");
@@ -33,6 +35,7 @@ namespace MediaLibrary.ViewModels
 
             Create = new DelegateCommand(() => navigator.CreateMovieAsync(library));
             Edit = new DelegateCommand<IKey>(key => navigator.EditMovieAsync(library, key));
+            Save = new SaveCommand(library, store);
 
             library.Configuration.PropertyChanged += OnConfigurationPropertyChanged;
         }
