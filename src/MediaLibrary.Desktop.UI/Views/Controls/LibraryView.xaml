@@ -41,7 +41,7 @@
                 <TextBox x:Name="tbxFilter" Text="{controls:Localize 'Search (press enter)...'}" KeyUp="tbxFilter_KeyUp" GotFocus="tbxFilter_GotFocus" Style="{StaticResource SearchTextBoxStyle}" Grid.Column="1" />
 
                 <StackPanel Orientation="Horizontal" Grid.Column="2">
-                    <Button Style="{StaticResource IconBarButtonStyle}">
+                    <Button Command="{Binding Save}" Style="{StaticResource IconBarButtonStyle}">
                         <fa:ImageAwesome Icon="Save" />
                     </Button>
                     <Button Style="{StaticResource IconBarButtonStyle}">
