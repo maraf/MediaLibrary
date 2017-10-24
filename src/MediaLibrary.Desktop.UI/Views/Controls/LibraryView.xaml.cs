@@ -44,6 +44,8 @@ namespace MediaLibrary.Views.Controls
             Background = null;
 
             kebFind.Command = new DelegateCommand(() => tbxFilter.Focus());
+
+            brdTop.Background = new SolidColorBrush(SystemColorProvider.ColorizationColor());
         }
 
         public new void Focus()

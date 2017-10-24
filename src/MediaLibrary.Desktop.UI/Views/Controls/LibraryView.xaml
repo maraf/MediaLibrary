@@ -29,7 +29,7 @@
         </Grid.RowDefinitions>
 
         <!-- Filter -->
-        <Border Style="{StaticResource ButtonsTopStyle}" Grid.Row="0">
+        <Border x:Name="brdTop" Style="{StaticResource ButtonsTopStyle}" Grid.Row="0">
             <TextBox x:Name="tbxFilter" Text="{controls:Localize 'Search (press enter)...'}" KeyUp="tbxFilter_KeyUp" Style="{StaticResource SearchTextBoxStyle}" />
         </Border>
 

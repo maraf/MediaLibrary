@@ -40,6 +40,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -61,6 +62,7 @@
     <Compile Include="ViewModels\Commands\SaveMovieCommand.cs" />
     <Compile Include="ViewModels\MovieEditViewModel.cs" />
     <Compile Include="ViewModels\Services\INavigatorContext.cs" />
+    <Compile Include="Views\Controls\SystemColorProvider.cs" />
     <Compile Include="Views\DesignData\MockNavigatorContext.cs" />
     <Compile Include="Views\MovieEditWindow.xaml.cs">
       <DependentUpon>MovieEditWindow.xaml</DependentUpon>
