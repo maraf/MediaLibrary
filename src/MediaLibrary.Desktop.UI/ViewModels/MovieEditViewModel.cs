@@ -34,12 +34,16 @@ namespace MediaLibrary.ViewModels
             }
         }
 
+        public IReadOnlyCollection<FieldViewModel> Fields { get; private set; }
+
         public ICommand Save { get; }
 
         public MovieEditViewModel(Library library, INavigatorContext navigator)
         {
             Ensure.NotNull(library, "library");
+
             Collection = library.Movies;
+            Fields = new List<FieldViewModel>(library.MovieFields.Select(f => new FieldViewModel(f)));
             IsNewRecord = true;
 
             Save = new SaveMovieCommand(this, library, navigator, null);
@@ -53,6 +57,7 @@ namespace MediaLibrary.ViewModels
 
             Collection = library.Movies;
             Name = movie.Name;
+            Fields = new List<FieldViewModel>(library.MovieFields.Select(f => new FieldViewModel(f)));
 
             Save = new SaveMovieCommand(this, library, navigator, movie);
         }

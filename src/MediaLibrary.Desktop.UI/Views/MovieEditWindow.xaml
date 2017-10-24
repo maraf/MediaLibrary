@@ -24,6 +24,14 @@
                 <Label Content="{controls:Localize 'Name'}" />
                 <TextBox x:Name="tbxName" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
+
+            <ItemsControl ItemsSource="{Binding Fields}" IsTabStop="False">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:FieldEdit Definition="{Binding Definition}" Value="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
 
         <!-- Buttons -->

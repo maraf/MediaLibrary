@@ -8,4 +8,4 @@
         mc:Ignorable="d" d:DataContext="{x:Static dd:ViewModelLocator.Library}"
         Title="{controls:Localize 'Media Library'}" Icon="{StaticResource IconImage}" Height="700" Width="500">
     <controls:LibraryView ViewModel="{Binding}" />
-</Window>
+</Window>   
