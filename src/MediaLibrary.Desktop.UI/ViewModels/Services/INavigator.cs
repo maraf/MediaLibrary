@@ -9,7 +9,8 @@ namespace MediaLibrary.ViewModels.Services
 {
     public interface INavigator
     {
-        Task Library(Library library);
+        Task LibraryAsync(Library library);
+        Task LibraryConfigurationAsync(Library library);
         Task CreateMovieAsync(Library library);
         Task EditMovieAsync(Library library, IKey movieKey);
     }

@@ -10,7 +10,6 @@ namespace MediaLibrary.Views.DesignData
     public static class ViewModelLocator
     {
         private static Library libraryModel;
-
         public static Library LibraryModel
         {
             get
@@ -29,7 +28,6 @@ namespace MediaLibrary.Views.DesignData
         }
 
         private static LibraryViewModel library;
-
         public static LibraryViewModel Library
         {
             get
@@ -42,7 +40,6 @@ namespace MediaLibrary.Views.DesignData
         }
 
         private static MovieEditViewModel movieEdit;
-
         public static MovieEditViewModel MovieEdit
         {
             get
@@ -54,6 +51,18 @@ namespace MediaLibrary.Views.DesignData
                 }
 
                 return movieEdit;
+            }
+        }
+
+        private static LibraryConfigurationViewModel libraryConfiguration;
+        public static LibraryConfigurationViewModel LibraryConfiguration
+        {
+            get
+            {
+                if (libraryConfiguration == null)
+                    libraryConfiguration = new LibraryConfigurationViewModel(LibraryModel.Configuration, new MockNavigatorContext());
+
+                return libraryConfiguration;
             }
         }
     }

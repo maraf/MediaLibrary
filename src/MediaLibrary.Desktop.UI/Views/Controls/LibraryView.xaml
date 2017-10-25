@@ -44,7 +44,7 @@
                     <Button Command="{Binding Save}" Style="{StaticResource IconBarButtonStyle}">
                         <fa:ImageAwesome Icon="Save" />
                     </Button>
-                    <Button Style="{StaticResource IconBarButtonStyle}">
+                    <Button Command="{Binding OpenConfiguration}" Style="{StaticResource IconBarButtonStyle}">
                         <fa:ImageAwesome Icon="Gears" />
                     </Button>
                 </StackPanel>

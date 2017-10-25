@@ -59,9 +59,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\Commands\CloseCommand.cs" />
     <Compile Include="ViewModels\Commands\SaveCommand.cs" />
+    <Compile Include="ViewModels\Commands\SaveLibraryConfigurationCommand.cs" />
     <Compile Include="ViewModels\Commands\SaveMovieCommand.cs" />
     <Compile Include="ViewModels\FieldViewModel.cs" />
+    <Compile Include="ViewModels\LibraryConfigurationViewModel.cs" />
     <Compile Include="ViewModels\MovieEditViewModel.cs" />
     <Compile Include="ViewModels\Services\INavigatorContext.cs" />
     <Compile Include="Views\Controls\FieldEdit.xaml.cs">
@@ -69,6 +72,9 @@
     </Compile>
     <Compile Include="Views\Controls\SystemColorProvider.cs" />
     <Compile Include="Views\DesignData\MockNavigatorContext.cs" />
+    <Compile Include="Views\LibraryConfigurationWindow.xaml.cs">
+      <DependentUpon>LibraryConfigurationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MovieEditWindow.xaml.cs">
       <DependentUpon>MovieEditWindow.xaml</DependentUpon>
     </Compile>
@@ -77,6 +83,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\LibraryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LibraryConfigurationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

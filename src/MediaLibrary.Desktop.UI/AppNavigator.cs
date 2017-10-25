@@ -15,6 +15,7 @@ namespace MediaLibrary
     public class AppNavigator : INavigator
     {
         private MainWindow main;
+        private LibraryConfigurationWindow libraryConfiguration;
         private MovieEditWindow movieEdit;
 
         public async Task CreateMovieAsync(Library library)
@@ -75,7 +76,7 @@ namespace MediaLibrary
             movieEdit.Activate();
         }
 
-        public async Task Library(Library library)
+        public async Task LibraryAsync(Library library)
         {
             Ensure.NotNull(library, "library");
             if (main == null)
@@ -95,6 +96,37 @@ namespace MediaLibrary
         {
             main.Closed -= OnMainClosed;
             main = null;
+        }
+
+        public async Task LibraryConfigurationAsync(Library library)
+        {
+            Ensure.NotNull(library, "library");
+            if (libraryConfiguration == null)
+            {
+                libraryConfiguration = new LibraryConfigurationWindow();
+                libraryConfiguration.Closed += OnLibraryConfigurationClosed;
+                libraryConfiguration.DataContext = new LibraryConfigurationViewModel(library.Configuration, libraryConfiguration);
+
+                if (main != null)
+                {
+                    libraryConfiguration.Owner = main;
+                    libraryConfiguration.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                }
+                else
+                {
+                    libraryConfiguration.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                }
+
+                libraryConfiguration.Show();
+            }
+
+            libraryConfiguration.Activate();
+        }
+
+        private void OnLibraryConfigurationClosed(object sender, EventArgs e)
+        {
+            libraryConfiguration.Closed -= OnLibraryConfigurationClosed;
+            libraryConfiguration = null;
         }
     }
 }

@@ -33,7 +33,7 @@
         <Border Style="{StaticResource ButtonsBottomStyle}" Grid.Row="1">
             <StackPanel Style="{StaticResource ButtonsRightStyle}">
                 <Button Content="{controls:Localize 'Save'}" Command="{Binding Save}" IsDefault="True" />
-                <Button Content="{controls:Localize 'Close'}" />
+                <Button Content="{controls:Localize 'Close'}" Command="{Binding Close}" />
             </StackPanel>
         </Border>
     </Grid>

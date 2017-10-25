@@ -20,9 +20,14 @@ namespace MediaLibrary.Views.DesignData
             return Task.CompletedTask;
         }
 
-        public Task Library(Library library)
+        public Task LibraryAsync(Library library)
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
+        }
+
+        public Task LibraryConfigurationAsync(Library library)
+        {
+            return Task.CompletedTask;
         }
     }
 }

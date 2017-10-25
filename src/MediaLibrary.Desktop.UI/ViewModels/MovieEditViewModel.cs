@@ -21,6 +21,7 @@ namespace MediaLibrary.ViewModels
         public bool IsNewRecord { get; }
         public IReadOnlyCollection<FieldViewModel> Fields { get; private set; }
         public ICommand Save { get; }
+        public ICommand Close { get; }
 
         public string Name
         {
@@ -45,6 +46,7 @@ namespace MediaLibrary.ViewModels
             IsNewRecord = true;
 
             Save = new SaveMovieCommand(this, library, navigator, null);
+            Close = new CloseCommand(navigator);
         }
 
         public MovieEditViewModel(Library library, INavigatorContext navigator, Movie movie)
@@ -63,6 +65,7 @@ namespace MediaLibrary.ViewModels
             }
 
             Save = new SaveMovieCommand(this, library, navigator, movie);
+            Close = new CloseCommand(navigator);
         }
 
         public bool TryGetValue(string identifier, out object value)
