@@ -66,6 +66,11 @@ namespace MediaLibrary.Views.Controls
                 ViewModel.Edit.Execute(movie.Key);
         }
 
+        private void lvwMovies_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ViewModel.SelectedMovieChanged();
+        }
+
         private void tbxFilter_GotFocus(object sender, RoutedEventArgs e)
         {
             ((TextBox)sender).SelectAll();

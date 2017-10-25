@@ -36,7 +36,7 @@ namespace MediaLibrary.ViewModels
             this.navigator = navigator;
 
             Create = new DelegateCommand(() => navigator.CreateMovieAsync(library));
-            Edit = new DelegateCommand<IKey>(key => navigator.EditMovieAsync(library, key), key => key != null && !key.IsEmpty);
+            Edit = new EditMovieCommand(library, navigator);
             Delete = new DeleteMovieCommand(library.Movies, navigator);
             Save = new SaveCommand(library, store);
             OpenConfiguration = new DelegateCommand(() => navigator.LibraryConfigurationAsync(library));
@@ -53,6 +53,12 @@ namespace MediaLibrary.ViewModels
         public Task FilterAsync(string text)
         {
             return Task.CompletedTask;
+        }
+
+        public void SelectedMovieChanged()
+        {
+            ((EditMovieCommand)Edit).RaiseCanExecuteChanged();
+            ((DeleteMovieCommand)Delete).RaiseCanExecuteChanged();
         }
     }
 }

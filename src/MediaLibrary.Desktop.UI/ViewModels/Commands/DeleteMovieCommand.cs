@@ -32,5 +32,10 @@ namespace MediaLibrary.ViewModels.Commands
             if (model != null && await navigator.ConfirmAsync($"Delete movie '{model.Name}'?"))
                 collection.Remove(model);
         }
+
+        public new void RaiseCanExecuteChanged()
+        {
+            base.RaiseCanExecuteChanged();
+        }
     }
 }
