@@ -11,6 +11,8 @@
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding Create}" />
         <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding Save}" />
+        <KeyBinding Key="F2" Command="{Binding Edit}" CommandParameter="{Binding SelectedItem, ElementName=lvwMovies}" />
+        <KeyBinding Key="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedItem, ElementName=lvwMovies}" />
         <KeyBinding x:Name="kebFind" Modifiers="Ctrl" Key="F" />
     </UserControl.InputBindings>
     <UserControl.Resources>

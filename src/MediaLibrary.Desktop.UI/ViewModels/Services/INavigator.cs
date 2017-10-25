@@ -13,5 +13,7 @@ namespace MediaLibrary.ViewModels.Services
         Task LibraryConfigurationAsync(Library library);
         Task CreateMovieAsync(Library library);
         Task EditMovieAsync(Library library, IKey movieKey);
+
+        Task<bool> ConfirmAsync(string message);
     }
 }

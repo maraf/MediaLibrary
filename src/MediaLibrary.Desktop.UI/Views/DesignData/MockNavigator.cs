@@ -10,6 +10,11 @@ namespace MediaLibrary.Views.DesignData
 {
     internal class MockNavigator : INavigator
     {
+        public Task<bool> ConfirmAsync(string message)
+        {
+            return Task.FromResult(true);
+        }
+
         public Task CreateMovieAsync(Library library)
         {
             return Task.CompletedTask;

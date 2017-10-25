@@ -128,5 +128,10 @@ namespace MediaLibrary
             libraryConfiguration.Closed -= OnLibraryConfigurationClosed;
             libraryConfiguration = null;
         }
+
+        public Task<bool> ConfirmAsync(string message)
+        {
+            return Task.FromResult(MessageBox.Show(message, "Media Library", MessageBoxButton.YesNo) == MessageBoxResult.Yes);
+        }
     }
 }

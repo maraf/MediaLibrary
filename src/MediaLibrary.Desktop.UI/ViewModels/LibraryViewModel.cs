@@ -24,6 +24,7 @@ namespace MediaLibrary.ViewModels
 
         public ICommand Create { get; }
         public Command<IKey> Edit { get; }
+        public Command<IKey> Delete { get; }
         public ICommand Save { get; }
         public ICommand OpenConfiguration { get; }
 
@@ -36,6 +37,7 @@ namespace MediaLibrary.ViewModels
 
             Create = new DelegateCommand(() => navigator.CreateMovieAsync(library));
             Edit = new DelegateCommand<IKey>(key => navigator.EditMovieAsync(library, key));
+            Delete = new DeleteMovieCommand(library.Movies, navigator);
             Save = new SaveCommand(library, store);
             OpenConfiguration = new DelegateCommand(() => navigator.LibraryConfigurationAsync(library));
 

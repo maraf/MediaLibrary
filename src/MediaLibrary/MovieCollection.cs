@@ -24,5 +24,21 @@ namespace MediaLibrary
             Ensure.Condition.NotEmptyKey(key);
             return this.FirstOrDefault(m => m.Key.Equals(key));
         }
+
+
+        /// <summary>
+        /// Tries to remove movie with <paramref name="key"/>.
+        /// Returns <c>true</c> if removal was successful.
+        /// </summary>
+        /// <param name="key">A key of the movie to remove.</param>
+        /// <returns><c>true</c> if removal was successful; <c>false</c> otherwise.</returns>
+        public bool Remove(IKey key)
+        {
+            Movie model = FindByKey(key);
+            if (model == null)
+                return false;
+
+            return Remove(model);
+        }
     }
 }

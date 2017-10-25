@@ -60,6 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModels\Commands\CloseCommand.cs" />
+    <Compile Include="ViewModels\Commands\DeleteMovieCommand.cs" />
     <Compile Include="ViewModels\Commands\SaveCommand.cs" />
     <Compile Include="ViewModels\Commands\SaveLibraryConfigurationCommand.cs" />
     <Compile Include="ViewModels\Commands\SaveMovieCommand.cs" />
