@@ -36,7 +36,7 @@ namespace MediaLibrary.ViewModels
             this.navigator = navigator;
 
             Create = new DelegateCommand(() => navigator.CreateMovieAsync(library));
-            Edit = new DelegateCommand<IKey>(key => navigator.EditMovieAsync(library, key));
+            Edit = new DelegateCommand<IKey>(key => navigator.EditMovieAsync(library, key), key => key != null && !key.IsEmpty);
             Delete = new DeleteMovieCommand(library.Movies, navigator);
             Save = new SaveCommand(library, store);
             OpenConfiguration = new DelegateCommand(() => navigator.LibraryConfigurationAsync(library));

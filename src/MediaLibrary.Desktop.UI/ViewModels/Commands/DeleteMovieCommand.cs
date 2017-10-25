@@ -24,7 +24,7 @@ namespace MediaLibrary.ViewModels.Commands
             this.navigator = navigator;
         }
 
-        protected override bool CanExecuteOverride(IKey key) => true;
+        protected override bool CanExecuteOverride(IKey key) => key != null && !key.IsEmpty;
 
         protected override async Task ExecuteAsync(IKey key, CancellationToken cancellationToken)
         {
