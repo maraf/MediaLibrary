@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             xmlns:fa="http://schemas.fontawesome.io/icons/">
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             ShutdownMode="OnMainWindowClose">
     <Application.Resources>
         <BitmapImage x:Key="IconImage" UriSource="/Views/Resources/Icon32x32.png" />
         <system:Double x:Key="NameFontSize">16</system:Double>

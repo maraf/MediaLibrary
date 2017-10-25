@@ -14,9 +14,16 @@ namespace MediaLibrary
 {
     public class AppNavigator : INavigator
     {
+        private readonly App application;
         private MainWindow main;
         private LibraryConfigurationWindow libraryConfiguration;
         private MovieEditWindow movieEdit;
+
+        public AppNavigator(App application)
+        {
+            Ensure.NotNull(application, "application");
+            this.application = application;
+        }
 
         public async Task CreateMovieAsync(Library library)
         {
@@ -87,6 +94,8 @@ namespace MediaLibrary
 
                 main.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 main.Show();
+
+                application.MainWindow = main;
             }
 
             main.Activate();
@@ -96,6 +105,7 @@ namespace MediaLibrary
         {
             main.Closed -= OnMainClosed;
             main = null;
+            application.MainWindow = null;
         }
 
         public async Task LibraryConfigurationAsync(Library library)

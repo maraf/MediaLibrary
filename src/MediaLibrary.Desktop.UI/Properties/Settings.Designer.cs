@@ -22,5 +22,17 @@ namespace MediaLibrary.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DefaultFilePath {
+            get {
+                return ((string)(this["DefaultFilePath"]));
+            }
+            set {
+                this["DefaultFilePath"] = value;
+            }
+        }
     }
 }

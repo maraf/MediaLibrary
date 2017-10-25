@@ -1,4 +1,5 @@
-﻿using MediaLibrary.Views;
+﻿using MediaLibrary.Properties;
+using MediaLibrary.Views;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -17,20 +18,35 @@ namespace MediaLibrary
         {
             base.OnStartup(e);
 
-            AppNavigator navigator = new AppNavigator();
+            AppNavigator navigator = new AppNavigator(this);
 
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.CheckFileExists = true;
-            dialog.CheckPathExists = true;
-            dialog.DefaultExt = ".xml";
-            bool? result = dialog.ShowDialog();
-            if (result ?? false)
+            string filePath = null;
+            if (String.IsNullOrEmpty(Settings.Default.DefaultFilePath) || !File.Exists(Settings.Default.DefaultFilePath))
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.CheckFileExists = true;
+                dialog.CheckPathExists = true;
+                dialog.DefaultExt = ".xml";
+                bool? result = dialog.ShowDialog();
+                if (result ?? false)
+                    filePath = dialog.FileName;
+            }
+            else
+            {
+                filePath = Settings.Default.DefaultFilePath;
+            }
+
+            if (filePath != null)
             {
                 XmlStore store = new XmlStore();
                 Library library = new Library();
-                library.Configuration.FilePath = dialog.FileName;
-                library.Configuration.Name = Path.GetFileNameWithoutExtension(dialog.FileName);
+                library.Configuration.FilePath = filePath;
+                library.Configuration.Name = Path.GetFileNameWithoutExtension(filePath);
                 await store.LoadAsync(library);
+
+                Settings.Default.DefaultFilePath = filePath;
+                Settings.Default.Save();
+
                 await navigator.LibraryAsync(library);
             }
             else
