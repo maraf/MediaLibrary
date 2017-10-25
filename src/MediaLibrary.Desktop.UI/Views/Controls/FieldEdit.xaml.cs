@@ -47,9 +47,9 @@ namespace MediaLibrary.Views.Controls
         }
 
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
-            "Value", 
-            typeof(object), 
-            typeof(FieldEdit), 
+            "Value",
+            typeof(object),
+            typeof(FieldEdit),
             new PropertyMetadata(null, OnValueChanged)
         );
 
@@ -63,6 +63,12 @@ namespace MediaLibrary.Views.Controls
         {
             InitializeComponent();
             Background = null;
+            Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            AutoFocus();
         }
 
         private void OnFieldDefinitionChanged()
@@ -73,8 +79,8 @@ namespace MediaLibrary.Views.Controls
                 Editor.Content = textBox = new TextBox();
                 textBox.TextChanged += OnTextBoxTextChanged;
 
-
                 OnValueChanged();
+                AutoFocus();
             }
             else
             {
@@ -91,6 +97,12 @@ namespace MediaLibrary.Views.Controls
         private void OnValueChanged()
         {
             textBox.Text = Value?.ToString();
+        }
+
+        private void AutoFocus()
+        {
+            if (Definition != null && Definition.Metadata.TryGet("AutoFocus", out bool autoFocus) && autoFocus)
+                textBox.Focus();
         }
     }
 }
