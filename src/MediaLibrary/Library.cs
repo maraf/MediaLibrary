@@ -25,9 +25,9 @@ namespace MediaLibrary
         public MovieCollection Movies { get; private set; }
 
         /// <summary>
-        /// Gets a collection of movie additional fields.
+        /// Gets a movie presentation model definition.
         /// </summary>
-        public ObservableCollection<IFieldDefinition> MovieFields { get; private set; }
+        public IModelDefinition MovieDefinition { get; private set; }
 
         /// <summary>
         /// Gets a library configuration.
@@ -42,9 +42,16 @@ namespace MediaLibrary
             Movies = new MovieCollection();
             Movies.CollectionChanged += OnMoviesChanged;
 
-            MovieFields = new ObservableCollection<IFieldDefinition>();
-            MovieFields.Add(new FieldDefinition("OriginalName", typeof(string), new KeyValueCollection().Add("Label", "Original Name")));
-            MovieFields.Add(new FieldDefinition("Storage", typeof(string), new KeyValueCollection().Add("Label", "Storage")));
+            MovieDefinition = new ModelDefinition(
+                "Movie", 
+                new List<IFieldDefinition>()
+                {
+                    new FieldDefinition(nameof(Movie.Name), typeof(string), new KeyValueCollection().Add("Label", "Name")),
+                    new FieldDefinition("OriginalName", typeof(string), new KeyValueCollection().Add("Label", "Original Name")),
+                    new FieldDefinition("Storage", typeof(string), new KeyValueCollection().Add("Label", "Storage"))
+                },
+                new KeyValueCollection()
+            );
 
             Configuration = new LibraryConfiguration();
             Configuration.PropertyChanged += OnConfigurationChanged;

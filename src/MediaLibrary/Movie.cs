@@ -25,22 +25,13 @@ namespace MediaLibrary
         /// </summary>
         public IKey Key { get; private set; }
 
-        private string name;
-
         /// <summary>
         /// Gets a name of the movie.
         /// </summary>
         public string Name
         {
-            get { return name; }
-            set
-            {
-                if (name != value)
-                {
-                    name = value;
-                    RaisePropertyChanged();
-                }
-            }
+            get { return FieldValues.FindValue<string>(nameof(Name)); }
+            set { FieldValues.TrySetValue(nameof(Name), value); }
         }
 
         /// <summary>
@@ -65,7 +56,7 @@ namespace MediaLibrary
             Key = key;
             Library = library;
             RelatedMovieKeys = new RelatedMovieObservableCollection(Key, library.Movies);
-            FieldValues = new MovieFieldValueCollection(library.MovieFields, RaisePropertyChanged);
+            FieldValues = new MovieFieldValueCollection(library.MovieDefinition.Fields, RaisePropertyChanged);
         }
     }
 }

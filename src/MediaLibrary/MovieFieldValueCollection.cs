@@ -13,10 +13,10 @@ namespace MediaLibrary
     public class MovieFieldValueCollection : IModelValueProvider
     {
         private readonly Dictionary<string, object> storage = new Dictionary<string, object>();
-        private readonly IReadOnlyCollection<IFieldDefinition> fieldDefinitions;
+        private readonly IEnumerable<IFieldDefinition> fieldDefinitions;
         private readonly Action<string> propertyChanged;
 
-        public MovieFieldValueCollection(IReadOnlyCollection<IFieldDefinition> fieldDefinitions, Action<string> propertyChanged)
+        public MovieFieldValueCollection(IEnumerable<IFieldDefinition> fieldDefinitions, Action<string> propertyChanged)
         {
             Ensure.NotNull(fieldDefinitions, "fieldDefinitions");
             Ensure.NotNull(propertyChanged, "propertyChanged");
@@ -39,6 +39,14 @@ namespace MediaLibrary
             return false;
         }
 
+        public T FindValue<T>(string identifier)
+        {
+            if (TryGetValue(identifier, out object rawValue) && rawValue is T value)
+                return value;
+
+            return default(T);
+        }
+
         public bool TrySetValue(string identifier, object value)
         {
             Ensure.NotNullOrEmpty(identifier, "identifier");
@@ -46,7 +54,15 @@ namespace MediaLibrary
 
             if (fieldDefinition != null)
             {
+                bool isChanged = true;
+                if (storage.TryGetValue(identifier, out object oldValue))
+                    isChanged = !Object.Equals(value, oldValue);
+
                 storage[identifier] = value;
+
+                if (isChanged)
+                    propertyChanged(identifier);
+
                 return true;
             }
 

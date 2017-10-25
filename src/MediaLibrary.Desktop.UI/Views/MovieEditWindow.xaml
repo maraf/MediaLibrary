@@ -20,12 +20,7 @@
         
         <!-- Content -->
         <StackPanel Margin="8">
-            <StackPanel>
-                <Label Content="{controls:Localize 'Name'}" />
-                <TextBox x:Name="tbxName" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-            </StackPanel>
-
-            <ItemsControl ItemsSource="{Binding Fields}" IsTabStop="False">
+            <ItemsControl x:Name="itcFields" ItemsSource="{Binding Fields}" IsTabStop="False">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <controls:FieldEdit Definition="{Binding Definition}" Value="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />

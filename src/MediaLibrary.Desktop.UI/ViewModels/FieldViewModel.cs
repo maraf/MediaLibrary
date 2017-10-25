@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace MediaLibrary.ViewModels
 {
-    public class FieldViewModel : ObservableObject
+    public class FieldViewModel
     {
+        private readonly Action<string> propertyChanged;
+
         public IFieldDefinition Definition { get; private set; }
 
         private object value;
@@ -22,15 +24,17 @@ namespace MediaLibrary.ViewModels
                 if (this.value != value)
                 {
                     this.value = value;
-                    RaisePropertyChanged();
+                    propertyChanged(Definition.Identifier);
                 }
             }
         }
 
-        public FieldViewModel(IFieldDefinition definition)
+        public FieldViewModel(IFieldDefinition definition, Action<string> propertyChanged)
         {
             Ensure.NotNull(definition, "definition");
+            Ensure.NotNull(propertyChanged, "propertyChanged");
             Definition = definition;
+            this.propertyChanged = propertyChanged;
         }
     }
 }

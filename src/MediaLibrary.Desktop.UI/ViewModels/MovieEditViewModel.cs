@@ -19,31 +19,29 @@ namespace MediaLibrary.ViewModels
 
         public MovieCollection Collection { get; }
         public bool IsNewRecord { get; }
+        public IReadOnlyCollection<FieldViewModel> Fields { get; private set; }
+        public ICommand Save { get; }
 
-        private string name;
         public string Name
         {
-            get { return name; }
+            get
+            {
+                FieldViewModel fieldDefinition = Fields.First(f => f.Definition.Identifier == nameof(Movie.Name));
+                return fieldDefinition.Value as string;
+            }
             set
             {
-                if (name != value)
-                {
-                    name = value;
-                    RaisePropertyChanged();
-                }
+                FieldViewModel fieldDefinition = Fields.First(f => f.Definition.Identifier == nameof(Movie.Name));
+                fieldDefinition.Value = value;
             }
         }
-
-        public IReadOnlyCollection<FieldViewModel> Fields { get; private set; }
-
-        public ICommand Save { get; }
 
         public MovieEditViewModel(Library library, INavigatorContext navigator)
         {
             Ensure.NotNull(library, "library");
 
             Collection = library.Movies;
-            Fields = new List<FieldViewModel>(library.MovieFields.Select(f => new FieldViewModel(f)));
+            Fields = new List<FieldViewModel>(library.MovieDefinition.Fields.Select(f => new FieldViewModel(f, RaisePropertyChanged)));
             IsNewRecord = true;
 
             Save = new SaveMovieCommand(this, library, navigator, null);
@@ -56,8 +54,7 @@ namespace MediaLibrary.ViewModels
             this.movie = movie;
 
             Collection = library.Movies;
-            Name = movie.Name;
-            Fields = new List<FieldViewModel>(library.MovieFields.Select(f => new FieldViewModel(f)));
+            Fields = new List<FieldViewModel>(library.MovieDefinition.Fields.Select(f => new FieldViewModel(f, RaisePropertyChanged)));
 
             foreach (FieldViewModel fieldViewModel in Fields)
             {

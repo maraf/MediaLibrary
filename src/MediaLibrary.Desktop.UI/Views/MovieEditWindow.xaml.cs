@@ -32,7 +32,7 @@ namespace MediaLibrary.Views
         {
             base.OnSourceInitialized(e);
 
-            tbxName.Focus();
+            itcFields.Focus();
         }
     }
 }
