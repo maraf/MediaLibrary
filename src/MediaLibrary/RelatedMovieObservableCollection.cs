@@ -68,6 +68,12 @@ namespace MediaLibrary
             base.RemoveItem(index);
         }
 
+        protected override void ClearItems()
+        {
+            while (Count > 0)
+                RemoveAt(0);
+        }
+
 
         private bool isInternal = false;
 

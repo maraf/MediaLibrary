@@ -43,7 +43,7 @@ namespace MediaLibrary
             Movies.CollectionChanged += OnMoviesChanged;
 
             MovieDefinition = new ModelDefinition(
-                "Movie", 
+                "Movie",
                 new List<IFieldDefinition>()
                 {
                     new FieldDefinition(nameof(Movie.Name), typeof(string), new KeyValueCollection().Add("Label", "Name").Add("AutoFocus", true)),
@@ -59,7 +59,11 @@ namespace MediaLibrary
 
         private void OnMoviesChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Movie model in e.OldItems)
+                    model.RelatedMovieKeys.Clear();
+            }
         }
 
         private void OnConfigurationChanged(object sender, PropertyChangedEventArgs e)
