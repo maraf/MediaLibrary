@@ -19,6 +19,8 @@ namespace MediaLibrary.Views.Controls
 {
     public partial class LibraryView : UserControl
     {
+        private readonly CollectionViewSource movies;
+
         public LibraryViewModel ViewModel
         {
             get { return (LibraryViewModel)GetValue(ViewModelProperty); }
@@ -46,6 +48,15 @@ namespace MediaLibrary.Views.Controls
             kebFind.Command = new DelegateCommand(() => tbxFilter.Focus());
 
             //brdTop.Background = new SolidColorBrush(SystemColorProvider.ColorizationColor());
+
+            movies = (CollectionViewSource)Resources["MoviesCollectionView"];
+            movies.Filter += OnMoviesFilter;
+        }
+
+        private void OnMoviesFilter(object sender, FilterEventArgs e)
+        {
+            Movie model = (Movie)e.Item;
+            e.Accepted = model.IsMatched(serachPhrase);
         }
 
         public new void Focus()
@@ -53,10 +64,16 @@ namespace MediaLibrary.Views.Controls
             lvwMovies.Focus();
         }
 
+        private string serachPhrase;
+
         private async void tbxFilter_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-                await ViewModel.FilterAsync(tbxFilter.Text);
+            {
+                serachPhrase = tbxFilter.Text.ToLowerInvariant();
+                movies.View.Refresh();
+                lvwMovies.SelectedIndex = 0;
+            }
         }
 
         private void lvwMovies_MouseDoubleClick(object sender, MouseButtonEventArgs e)

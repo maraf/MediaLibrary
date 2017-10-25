@@ -58,5 +58,12 @@ namespace MediaLibrary
             RelatedMovieKeys = new RelatedMovieObservableCollection(Key, library.Movies);
             FieldValues = new MovieFieldValueCollection(library.MovieDefinition.Fields, RaisePropertyChanged);
         }
+
+        /// <summary>
+        /// Returns <c>true</c> if any value contains <paramref name="text"/>.
+        /// </summary>
+        /// <param name="text">A search phrase.</param>
+        /// <returns><c>true</c> if any value contains <paramref name="text"/>; <c>false</c> otherwise.</returns>
+        public bool IsMatched(string text) => FieldValues.IsMatched(text);
     }
 }

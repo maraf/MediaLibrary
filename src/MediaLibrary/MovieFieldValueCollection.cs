@@ -69,6 +69,23 @@ namespace MediaLibrary
             return false;
         }
 
+        public bool IsMatched(string text)
+        {
+            if (String.IsNullOrEmpty(text))
+                return true;
+
+            foreach (object value in storage.Values)
+            {
+                if (value == null)
+                    continue;
+
+                if (value.ToString().ToLowerInvariant().Contains(text))
+                    return true;
+            }
+
+            return false;
+        }
+
         public void Dispose()
         { }
     }

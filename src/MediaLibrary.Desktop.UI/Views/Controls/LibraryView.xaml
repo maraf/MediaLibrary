@@ -8,14 +8,9 @@
              xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
              mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="300" d:DataContext="{x:Static dd:ViewModelLocator.Library}"
              Background="White">
-    <UserControl.InputBindings>
-        <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding Create}" />
-        <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding Save}" />
-        <KeyBinding Key="F2" Command="{Binding Edit}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" />
-        <KeyBinding Key="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" />
-        <KeyBinding x:Name="kebFind" Modifiers="Ctrl" Key="F" />
-    </UserControl.InputBindings>
     <UserControl.Resources>
+        <CollectionViewSource x:Key="MoviesCollectionView" Source="{Binding Movies}" />
+
         <Style x:Key="SearchTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle}">
             <Setter Property="Margin" Value="8" />
             <Setter Property="FontSize" Value="{StaticResource NameFontSize}" />
@@ -25,6 +20,13 @@
             <Setter Property="ItemContainerStyle" Value="{StaticResource ListViewItemStyle}" />
         </Style>
     </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding Create}" />
+        <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding Save}" />
+        <KeyBinding Key="F2" Command="{Binding Edit}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" />
+        <KeyBinding Key="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" />
+        <KeyBinding x:Name="kebFind" Modifiers="Ctrl" Key="F" />
+    </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -60,7 +62,7 @@
         </Border>
 
         <!-- ListView -->
-        <ListView x:Name="lvwMovies" ItemsSource="{Binding Movies}" SelectionChanged="lvwMovies_SelectionChanged" MouseDoubleClick="lvwMovies_MouseDoubleClick" Grid.Row="1">
+        <ListView x:Name="lvwMovies" ItemsSource="{Binding Source={StaticResource MoviesCollectionView}}" SelectionChanged="lvwMovies_SelectionChanged" MouseDoubleClick="lvwMovies_MouseDoubleClick" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" FontSize="{StaticResource NameFontSize}" Margin="8,0" />

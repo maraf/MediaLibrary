@@ -49,12 +49,7 @@ namespace MediaLibrary.ViewModels
             if (e.PropertyName == nameof(library.Configuration.Name))
                 RaisePropertyChanged(nameof(Name));
         }
-
-        public Task FilterAsync(string text)
-        {
-            return Task.CompletedTask;
-        }
-
+        
         public void SelectedMovieChanged()
         {
             ((EditMovieCommand)Edit).RaiseCanExecuteChanged();
