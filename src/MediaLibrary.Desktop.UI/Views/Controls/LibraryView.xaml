@@ -35,22 +35,27 @@
         <!-- Filter -->
         <Border x:Name="brdTop" Style="{StaticResource ButtonsTopStyle}" Grid.Row="0">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                
-                <TextBox x:Name="tbxFilter" Text="{controls:Localize 'Search (press enter)...'}" KeyUp="tbxFilter_KeyUp" GotFocus="tbxFilter_GotFocus" Style="{StaticResource SearchTextBoxStyle}" Grid.Column="1" />
+
+                <TextBlock Text="{Binding Name}" FontSize="{StaticResource TitleFontSize}" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0" />
 
                 <StackPanel Orientation="Horizontal" Grid.Column="2">
-                    <Button Command="{Binding Save}" Style="{StaticResource IconBarButtonStyle}">
+                    <Button Command="{Binding Save}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{controls:Localize 'Save Library to File'}">
                         <fa:ImageAwesome Icon="Save" />
                     </Button>
-                    <Button Command="{Binding OpenConfiguration}" Style="{StaticResource IconBarButtonStyle}">
+                    <Button Command="{Binding OpenConfiguration}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{controls:Localize 'Open Library Configuration'}">
                         <fa:ImageAwesome Icon="Gears" />
                     </Button>
                 </StackPanel>
+                
+                <TextBox x:Name="tbxFilter" Text="{controls:Localize 'Search (press enter)...'}" KeyUp="tbxFilter_KeyUp" GotFocus="tbxFilter_GotFocus" Style="{StaticResource SearchTextBoxStyle}" Grid.ColumnSpan="2" Grid.Row="1" />
             </Grid>
         </Border>
 

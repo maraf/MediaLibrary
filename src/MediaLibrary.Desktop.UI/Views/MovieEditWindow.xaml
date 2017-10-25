@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
         mc:Ignorable="d" d:DataContext="{x:Static dd:ViewModelLocator.MovieEdit}"
-        Title="{controls:Localize 'Movie Edit'}" Height="400" Width="600">
+        Title="{controls:Localize 'Movie Edit'}" Height="400" Width="400">
     <Window.Resources>
         <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
             <Setter Property="Margin" Value="8,0,0,0" />

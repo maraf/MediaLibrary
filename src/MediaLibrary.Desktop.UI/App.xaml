@@ -6,6 +6,7 @@
     <Application.Resources>
         <BitmapImage x:Key="IconImage" UriSource="/Views/Resources/Icon32x32.png" />
         <system:Double x:Key="NameFontSize">16</system:Double>
+        <system:Double x:Key="TitleFontSize">20</system:Double>
         <SolidColorBrush x:Key="HoverBrush">#663683D3</SolidColorBrush>
         <SolidColorBrush x:Key="ActiveBrush">#569DE5</SolidColorBrush>
 
