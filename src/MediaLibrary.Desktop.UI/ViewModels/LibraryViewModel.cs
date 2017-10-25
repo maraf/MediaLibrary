@@ -21,6 +21,7 @@ namespace MediaLibrary.ViewModels
 
         public string Name => library.Configuration.Name;
         public IEnumerable<Movie> Movies => library.Movies;
+        public IEnumerable<SortViewModel> Sorts { get; }
 
         public ICommand Create { get; }
         public Command<IKey> Edit { get; }
@@ -34,6 +35,8 @@ namespace MediaLibrary.ViewModels
             Ensure.NotNull(navigator, "navigator");
             this.library = library;
             this.navigator = navigator;
+
+            Sorts = new List<SortViewModel>(library.MovieDefinition.Fields.Select(f => new SortViewModel(f)));
 
             Create = new DelegateCommand(() => navigator.CreateMovieAsync(library));
             Edit = new EditMovieCommand(library, navigator);

@@ -72,20 +72,36 @@
 
         <!-- Buttons -->
         <Border Style="{StaticResource ButtonsBottomStyle}" Grid.Row="2">
-            <Grid>
-                <StackPanel Style="{StaticResource ButtonsLeftStyle}">
-                    <Button Content="{controls:Localize 'Create New'}" Command="{Binding Create}" />
-                </StackPanel>
-                <StackPanel Style="{StaticResource ButtonsRightStyle}">
-                    <StackPanel.Resources>
-                        <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
-                            <Setter Property="Margin" Value="8,0,0,0" />
-                        </Style>
-                    </StackPanel.Resources>
-                    <Button Content="{controls:Localize 'Edit'}" Command="{Binding Edit}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" />
-                    <Button Content="{controls:Localize 'Delete'}" Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" />
-                </StackPanel>
-            </Grid>
+            <StackPanel>
+                <ItemsControl ItemsSource="{Binding Sorts}" Margin="8,8,8,0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnSort" Tag="{Binding}" Click="btnSort_Click" Style="{StaticResource PlainButtonStyle}">
+                                <TextBlock Text="{Binding Label}" Margin="0,0,8,0" />
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Grid>
+                    <StackPanel Style="{StaticResource ButtonsLeftStyle}">
+                        <Button Content="{controls:Localize 'Create New'}" Command="{Binding Create}" />
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource ButtonsRightStyle}">
+                        <StackPanel.Resources>
+                            <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+                                <Setter Property="Margin" Value="8,0,0,0" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <Button Content="{controls:Localize 'Edit'}" Command="{Binding Edit}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" />
+                        <Button Content="{controls:Localize 'Delete'}" Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" />
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
         </Border>
     </Grid>
 </UserControl>

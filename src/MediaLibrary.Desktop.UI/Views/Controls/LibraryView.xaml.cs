@@ -2,6 +2,7 @@
 using Neptuo.Observables.Commands;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,9 +29,9 @@ namespace MediaLibrary.Views.Controls
         }
 
         public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
-            "ViewModel", 
-            typeof(LibraryViewModel), 
-            typeof(LibraryView), 
+            "ViewModel",
+            typeof(LibraryViewModel),
+            typeof(LibraryView),
             new PropertyMetadata(null, OnViewModelChanged)
         );
 
@@ -91,6 +92,21 @@ namespace MediaLibrary.Views.Controls
         private void tbxFilter_GotFocus(object sender, RoutedEventArgs e)
         {
             ((TextBox)sender).SelectAll();
+        }
+
+        private void btnSort_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            SortViewModel viewModel = (SortViewModel)button.Tag;
+
+            SortDescription description = movies.SortDescriptions.FirstOrDefault(s => s.PropertyName == viewModel.FieldDefinition.Identifier);
+            ListSortDirection direction = ListSortDirection.Ascending;
+            if (description != null && description.PropertyName == viewModel.FieldDefinition.Identifier)
+                direction = description.Direction == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
+            movies.SortDescriptions.Clear();
+            movies.SortDescriptions.Add(new SortDescription(viewModel.FieldDefinition.Identifier, direction));
+            movies.View.Refresh();
         }
     }
 }

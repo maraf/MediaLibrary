@@ -69,6 +69,7 @@
     <Compile Include="ViewModels\LibraryConfigurationViewModel.cs" />
     <Compile Include="ViewModels\MovieEditViewModel.cs" />
     <Compile Include="ViewModels\Services\INavigatorContext.cs" />
+    <Compile Include="ViewModels\SortViewModel.cs" />
     <Compile Include="Views\Controls\FieldEdit.xaml.cs">
       <DependentUpon>FieldEdit.xaml</DependentUpon>
     </Compile>
