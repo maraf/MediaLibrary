@@ -10,6 +10,7 @@
              Background="White">
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding Create}" />
+        <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding Save}" />
         <KeyBinding x:Name="kebFind" Modifiers="Ctrl" Key="F" />
     </UserControl.InputBindings>
     <UserControl.Resources>
