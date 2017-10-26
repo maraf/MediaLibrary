@@ -1,5 +1,7 @@
 ﻿using Neptuo;
+using Neptuo.Converters;
 using Neptuo.Models.Keys;
+using Neptuo.PresentationModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +17,25 @@ namespace MediaLibrary
     /// </summary>
     public class XmlStore
     {
+        private readonly IConverterRepository converters;
+
+        /// <summary>
+        /// Creates a new instance with default collection of converters (<see cref="Converts.Repository"/>).
+        /// </summary>
+        public XmlStore()
+            : this(Converts.Repository)
+        { }
+
+        /// <summary>
+        /// Creates a new instance with <paramref name="converters"/> for serializing and deserializing values.
+        /// </summary>
+        /// <param name="converters">A collection of converters.</param>
+        public XmlStore(IConverterRepository converters)
+        {
+            Ensure.NotNull(converters, "converters");
+            this.converters = converters;
+        }
+
         /// <summary>
         /// Saves content from <paramref name="model"/> to its storage file as XML.
         /// </summary>
@@ -73,7 +94,15 @@ namespace MediaLibrary
         private void SaveMovie(XElement element, Movie model)
         {
             SaveMovieKey(element, XmlStructure.MovieId, model.Key);
-            element.SetAttributeValue(XmlStructure.MovieName, model.Name);
+
+            foreach (IFieldDefinition fieldDefinition in model.Library.MovieDefinition.Fields)
+            {
+                if(model.FieldValues.TryGetValue(fieldDefinition.Identifier, out object value))
+                {
+                    if (value != null && converters.TryConvert(value.GetType(), typeof(string), value, out object stringValue))
+                        element.SetAttributeValue(fieldDefinition.Identifier, (string)stringValue);
+                }
+            }
         }
 
         private void SaveRelated(XElement parentElement, Movie model)
@@ -135,7 +164,13 @@ namespace MediaLibrary
         {
             IKey key = LoadMovieKey(element, XmlStructure.MovieId);
             Movie model = new Movie(key, library);
-            model.Name = element.Attribute(XmlStructure.MovieName)?.Value;
+
+            foreach (IFieldDefinition fieldDefinition in library.MovieDefinition.Fields)
+            {
+                XAttribute attribute = element.Attribute(fieldDefinition.Identifier);
+                if (attribute != null && converters.TryConvert(typeof(string), fieldDefinition.FieldType, attribute.Value, out object value))
+                    model.FieldValues.TrySetValue(fieldDefinition.Identifier, value);
+            }
 
             return model;
         }

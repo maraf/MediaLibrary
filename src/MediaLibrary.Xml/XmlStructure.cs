@@ -15,7 +15,6 @@ namespace MediaLibrary
         public static readonly XName Movies = XName.Get("Movies", Namespace);
         public static readonly XName Movie = XName.Get("Movie", Namespace);
         public static readonly XName MovieId = XName.Get("ID");
-        public static readonly XName MovieName = XName.Get("Name");
 
         public static readonly XName RelatedMovies = XName.Get("RelatedMovies", Namespace);
         public static readonly XName RelatedMovie = XName.Get("Related", Namespace);
