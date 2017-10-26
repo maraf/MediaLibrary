@@ -21,11 +21,11 @@
         </Style>
         <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}" />
 
-        <Style TargetType="fa:ImageAwesome">
+        <Style x:Key="ImageAwesome" TargetType="fa:ImageAwesome">
             <Setter Property="Width" Value="20" />
             <Setter Property="Height" Value="20" />
-            <!--<Setter Property="Foreground" Value="White" />-->
         </Style>
+        <Style TargetType="fa:ImageAwesome" BasedOn="{StaticResource ImageAwesome}" />
 
         <Style x:Key="PlainButtonStyle" TargetType="Button">
             <Setter Property="Template">
