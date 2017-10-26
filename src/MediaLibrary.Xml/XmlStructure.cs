@@ -9,16 +9,31 @@ namespace MediaLibrary
 {
     public class XmlStructure
     {
-        public const string Namespace = "http://schemas.neptuo.com/xsd/MediaLibrary/v1.xsd";
+        private readonly bool isNamespaceUsed;
 
-        public static readonly XName Root = XName.Get("MediaLibrary", Namespace);
-        public static readonly XName Movies = XName.Get("Movies", Namespace);
-        public static readonly XName Movie = XName.Get("Movie", Namespace);
-        public static readonly XName MovieId = XName.Get("ID");
+        public static string Namespace => "http://schemas.neptuo.com/xsd/MediaLibrary/v1.xsd";
 
-        public static readonly XName RelatedMovies = XName.Get("RelatedMovies", Namespace);
-        public static readonly XName RelatedMovie = XName.Get("Related", Namespace);
-        public static readonly XName RelatedMovieSourceId = XName.Get("SourceID");
-        public static readonly XName RelatedMovieTargetId = XName.Get("TargetID");
+        public XName Root => GetName("MediaLibrary", Namespace);
+        public XName Movies => GetName("Movies", Namespace);
+        public XName Movie => GetName("Movie", Namespace);
+        public XName MovieId => GetName("ID");
+
+        public XName RelatedMovies => GetName("RelatedMovies", Namespace);
+        public XName RelatedMovie => GetName("Related", Namespace);
+        public XName RelatedMovieSourceId => GetName("SourceID");
+        public XName RelatedMovieTargetId => GetName("TargetID");
+
+        public XmlStructure(bool isNamespaceUsed = true)
+        {
+            this.isNamespaceUsed = isNamespaceUsed;
+        }
+
+        private XName GetName(string name, string namespaceName = null)
+        {
+            if (isNamespaceUsed && namespaceName != null)
+                return XName.Get(name, namespaceName);
+
+            return XName.Get(name);
+        }
     }
 }
