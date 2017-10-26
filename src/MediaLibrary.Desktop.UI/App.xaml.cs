@@ -18,7 +18,8 @@ namespace MediaLibrary
         {
             base.OnStartup(e);
 
-            AppNavigator navigator = new AppNavigator(this);
+            AppLibraryStore store = new AppLibraryStore(Settings.Default, new XmlStore());
+            AppNavigator navigator = new AppNavigator(this, store);
 
             string filePath = null;
             if (String.IsNullOrEmpty(Settings.Default.DefaultFilePath) || !File.Exists(Settings.Default.DefaultFilePath))
@@ -38,20 +39,16 @@ namespace MediaLibrary
 
             if (filePath != null)
             {
-                XmlStore store = new XmlStore();
                 Library library = new Library();
                 library.Configuration.FilePath = filePath;
                 library.Configuration.Name = Path.GetFileNameWithoutExtension(filePath);
                 await store.LoadAsync(library);
-
-                Settings.Default.DefaultFilePath = filePath;
-                Settings.Default.Save();
-
                 await navigator.LibraryAsync(library);
             }
             else
             {
-                Shutdown();
+                Library library = new Library();
+                await navigator.LibraryAsync(library);
             }
         }
     }

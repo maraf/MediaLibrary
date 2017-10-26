@@ -29,7 +29,7 @@ namespace MediaLibrary.ViewModels
         public ICommand Save { get; }
         public ICommand OpenConfiguration { get; }
 
-        public LibraryViewModel(Library library, INavigator navigator, XmlStore store)
+        public LibraryViewModel(Library library, INavigator navigator, ILibraryStore store)
         {
             Ensure.NotNull(library, "library");
             Ensure.NotNull(navigator, "navigator");

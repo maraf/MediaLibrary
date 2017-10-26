@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AppLibraryStore.cs" />
     <Compile Include="ViewModels\Commands\CloseCommand.cs" />
     <Compile Include="ViewModels\Commands\DeleteMovieCommand.cs" />
     <Compile Include="ViewModels\Commands\EditMovieCommand.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="ViewModels\FieldViewModel.cs" />
     <Compile Include="ViewModels\LibraryConfigurationViewModel.cs" />
     <Compile Include="ViewModels\MovieEditViewModel.cs" />
+    <Compile Include="ViewModels\Services\ILibraryStore.cs" />
     <Compile Include="ViewModels\Services\INavigatorContext.cs" />
     <Compile Include="ViewModels\SortViewModel.cs" />
     <Compile Include="Views\Controls\FieldEdit.xaml.cs">
@@ -80,6 +82,7 @@
     <Compile Include="Views\Controls\SystemColorProvider.cs" />
     <Compile Include="Views\Converters\BoolConverter.cs" />
     <Compile Include="Views\Converters\ListSortDirectionToImageAwesomeConverter.cs" />
+    <Compile Include="Views\DesignData\MockLibraryStore.cs" />
     <Compile Include="Views\DesignData\MockNavigatorContext.cs" />
     <Compile Include="Views\LibraryConfigurationWindow.xaml.cs">
       <DependentUpon>LibraryConfigurationWindow.xaml</DependentUpon>

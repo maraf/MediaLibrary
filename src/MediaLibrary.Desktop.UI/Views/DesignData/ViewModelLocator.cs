@@ -34,7 +34,7 @@ namespace MediaLibrary.Views.DesignData
             {
                 if (library == null)
                 {
-                    library = new LibraryViewModel(LibraryModel, new MockNavigator(), new XmlStore());
+                    library = new LibraryViewModel(LibraryModel, new MockNavigator(), new MockLibraryStore());
                     library.Sorts.First().IsActive = true;
                 }
 

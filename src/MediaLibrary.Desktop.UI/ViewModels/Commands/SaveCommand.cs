@@ -1,20 +1,21 @@
-﻿using Neptuo.Observables.Commands;
+﻿using MediaLibrary.ViewModels.Services;
+using Neptuo;
+using Neptuo.Observables.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
-using Neptuo;
 
 namespace MediaLibrary.ViewModels.Commands
 {
     public class SaveCommand : AsyncCommand
     {
         private readonly Library library;
-        private readonly XmlStore store;
+        private readonly ILibraryStore store;
 
-        public SaveCommand(Library library, XmlStore store)
+        public SaveCommand(Library library, ILibraryStore store)
         {
             Ensure.NotNull(library, "library");
             Ensure.NotNull(store, "store");
