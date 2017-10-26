@@ -13,7 +13,7 @@
         <CollectionViewSource x:Key="MoviesCollectionView" Source="{Binding Movies}" />
 
         <Style x:Key="SearchTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle}">
-            <Setter Property="Margin" Value="8" />
+            <Setter Property="Margin" Value="8,0,8,8" />
             <Setter Property="FontSize" Value="{StaticResource NameFontSize}" />
         </Style>
         <Style TargetType="ListView">
@@ -24,8 +24,6 @@
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding Create}" />
         <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding Save}" />
-        <KeyBinding Key="F2" Command="{Binding Edit}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" />
-        <KeyBinding Key="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" />
         <KeyBinding x:Name="kebFind" Modifiers="Ctrl" Key="F" />
     </UserControl.InputBindings>
     <Grid>
@@ -58,12 +56,16 @@
                     </Button>
                 </StackPanel>
                 
-                <TextBox x:Name="tbxFilter" Text="{controls:Localize 'Search (press enter)...'}" KeyUp="tbxFilter_KeyUp" GotFocus="tbxFilter_GotFocus" Style="{StaticResource SearchTextBoxStyle}" Grid.ColumnSpan="2" Grid.Row="1" />
+                <TextBox x:Name="tbxFilter" Text="{controls:Localize 'Search (press enter)...'}" KeyUp="tbxFilter_KeyUp" GotFocus="tbxFilter_GotFocus" Style="{StaticResource SearchTextBoxStyle}" Grid.ColumnSpan="2" Grid.Row="1"/>
             </Grid>
         </Border>
 
         <!-- ListView -->
         <ListView x:Name="lvwMovies" ItemsSource="{Binding Source={StaticResource MoviesCollectionView}}" SelectionChanged="lvwMovies_SelectionChanged" MouseDoubleClick="lvwMovies_MouseDoubleClick" Grid.Row="1">
+            <ListView.InputBindings>
+                <KeyBinding Key="F2" Command="{Binding Edit}" CommandParameter="{Binding SelectedItem.Key, RelativeSource={RelativeSource AncestorType=ListView, Mode=FindAncestor}}" />
+                <KeyBinding Key="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, RelativeSource={RelativeSource AncestorType=ListView, Mode=FindAncestor}}" />
+            </ListView.InputBindings>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="8,0">

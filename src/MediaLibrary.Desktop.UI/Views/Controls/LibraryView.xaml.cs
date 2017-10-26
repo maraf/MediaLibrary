@@ -82,7 +82,7 @@ namespace MediaLibrary.Views.Controls
 
         private string serachPhrase;
 
-        private async void tbxFilter_KeyUp(object sender, KeyEventArgs e)
+        private void tbxFilter_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
