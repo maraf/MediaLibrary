@@ -48,8 +48,6 @@ namespace MediaLibrary.ViewModels.Commands
             if (model == null)
                 model = movieFactory.Create();
 
-            model.Name = viewModel.Name;
-
             foreach (FieldViewModel fieldViewModel in viewModel.Fields)
                 model.TrySetValue(fieldViewModel.Definition.Identifier, fieldViewModel.Value);
 

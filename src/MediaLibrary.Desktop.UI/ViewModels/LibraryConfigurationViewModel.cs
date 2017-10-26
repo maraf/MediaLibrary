@@ -13,74 +13,23 @@ namespace MediaLibrary.ViewModels
 {
     public class LibraryConfigurationViewModel : ObservableObject
     {
-        private string name;
-        public string Name
-        {
-            get { return name; }
-            set
-            {
-                if (name != value)
-                {
-                    name = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        private string filePath;
-        public string FilePath
-        {
-            get { return filePath; }
-            set
-            {
-                if (filePath != value)
-                {
-                    filePath = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        private string onlineDatabaseName;
-        public string OnlineDatabaseName
-        {
-            get { return onlineDatabaseName; }
-            set
-            {
-                if (onlineDatabaseName != value)
-                {
-                    onlineDatabaseName = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        private string onlineDatabaseUrlFormat;
-        public string OnlineDatabaseUrlFormat
-        {
-            get { return onlineDatabaseUrlFormat; }
-            set
-            {
-                if (onlineDatabaseUrlFormat != value)
-                {
-                    onlineDatabaseUrlFormat = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
+        public IReadOnlyCollection<FieldViewModel> Fields { get; private set; }
 
         public ICommand Save { get; }
         public ICommand Close { get; }
 
-        public LibraryConfigurationViewModel(LibraryConfiguration model, INavigatorContext navigator)
+        public LibraryConfigurationViewModel(Library library, INavigatorContext navigator)
         {
-            Ensure.NotNull(model, "model");
-            Name = model.Name;
-            FilePath = model.FilePath;
-            OnlineDatabaseName = model.OnlineDatabaseName;
-            OnlineDatabaseUrlFormat = model.OnlineDatabaseUrlFormat;
+            Ensure.NotNull(library, "library");
+            Fields = new List<FieldViewModel>(library.ConfigurationDefinition.Fields.Select(f => new FieldViewModel(f, RaisePropertyChanged)));
 
-            Save = new SaveLibraryConfigurationCommand(this, model, navigator);
+            foreach (FieldViewModel fieldViewModel in Fields)
+            {
+                if (library.Configuration.TryGetValue(fieldViewModel.Definition.Identifier, out object value))
+                    fieldViewModel.Value = value;
+            }
+
+            Save = new SaveLibraryConfigurationCommand(this, library, navigator);
             Close = new CloseCommand(navigator);
         }
     }

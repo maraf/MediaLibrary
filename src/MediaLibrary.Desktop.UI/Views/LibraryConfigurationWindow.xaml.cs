@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace MediaLibrary.Views
 {
-    /// <summary>
-    /// Interaction logic for LibraryConfigurationWindow.xaml
-    /// </summary>
     public partial class LibraryConfigurationWindow : Window, INavigatorContext
     {
         public LibraryConfigurationWindow()
@@ -26,13 +23,6 @@ namespace MediaLibrary.Views
             InitializeComponent();
 
             kebClose.Command = new DelegateCommand(Close);
-        }
-
-        protected override void OnSourceInitialized(EventArgs e)
-        {
-            base.OnSourceInitialized(e);
-
-            tbxName.Focus();
         }
     }
 }

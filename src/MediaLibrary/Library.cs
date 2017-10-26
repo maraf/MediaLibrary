@@ -35,12 +35,24 @@ namespace MediaLibrary
         public LibraryConfiguration Configuration { get; private set; }
 
         /// <summary>
+        /// Gets a configuration presentation model definition.
+        /// </summary>
+        public IModelDefinition ConfigurationDefinition { get; private set; }
+
+        /// <summary>
         /// Creates a new instance.
         /// </summary>
         public Library()
         {
-            Movies = new MovieCollection();
-            Movies.CollectionChanged += OnMoviesChanged;
+            ConfigurationDefinition = new ModelDefinition(
+                "LibraryConfiguration",
+                new List<IFieldDefinition>()
+                {
+                    new FieldDefinition(nameof(LibraryConfiguration.Name), typeof(string), new KeyValueCollection().Add("Label", "Name").Add("AutoFocus", true)),
+                    new FieldDefinition(nameof(LibraryConfiguration.FilePath), typeof(string), new KeyValueCollection().Add("Label", "File Path")),
+                },
+                new KeyValueCollection()
+            );
 
             MovieDefinition = new ModelDefinition(
                 "Movie",
@@ -53,8 +65,11 @@ namespace MediaLibrary
                 new KeyValueCollection()
             );
 
-            Configuration = new LibraryConfiguration();
+            Configuration = new LibraryConfiguration(this);
             Configuration.PropertyChanged += OnConfigurationChanged;
+
+            Movies = new MovieCollection();
+            Movies.CollectionChanged += OnMoviesChanged;
         }
 
         private void OnMoviesChanged(object sender, NotifyCollectionChangedEventArgs e)

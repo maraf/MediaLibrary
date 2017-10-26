@@ -63,7 +63,7 @@ namespace MediaLibrary.Views.DesignData
             get
             {
                 if (libraryConfiguration == null)
-                    libraryConfiguration = new LibraryConfigurationViewModel(LibraryModel.Configuration, new MockNavigatorContext());
+                    libraryConfiguration = new LibraryConfigurationViewModel(LibraryModel, new MockNavigatorContext());
 
                 return libraryConfiguration;
             }

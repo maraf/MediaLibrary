@@ -119,7 +119,7 @@ namespace MediaLibrary
             {
                 libraryConfiguration = new LibraryConfigurationWindow();
                 libraryConfiguration.Closed += OnLibraryConfigurationClosed;
-                libraryConfiguration.DataContext = new LibraryConfigurationViewModel(library.Configuration, libraryConfiguration);
+                libraryConfiguration.DataContext = new LibraryConfigurationViewModel(library, libraryConfiguration);
 
                 if (main != null)
                 {

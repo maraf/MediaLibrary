@@ -19,11 +19,6 @@ namespace MediaLibrary.Views
 {
     public partial class MovieEditWindow : Window, INavigatorContext
     {
-        public MovieEditViewModel ViewModel
-        {
-            get { return (MovieEditViewModel)DataContext; }
-        }
-
         public MovieEditWindow()
         {
             InitializeComponent();

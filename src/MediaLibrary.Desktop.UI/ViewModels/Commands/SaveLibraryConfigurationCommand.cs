@@ -12,15 +12,15 @@ namespace MediaLibrary.ViewModels.Commands
     public class SaveLibraryConfigurationCommand : CloseCommand
     {
         private readonly LibraryConfigurationViewModel viewModel;
-        private readonly LibraryConfiguration model;
+        private readonly Library library;
 
-        public SaveLibraryConfigurationCommand(LibraryConfigurationViewModel viewModel, LibraryConfiguration model, INavigatorContext navigator)
+        public SaveLibraryConfigurationCommand(LibraryConfigurationViewModel viewModel, Library library, INavigatorContext navigator)
             : base(navigator)
         {
             Ensure.NotNull(viewModel, "viewModel");
-            Ensure.NotNull(model, "model");
+            Ensure.NotNull(library, "library");
             this.viewModel = viewModel;
-            this.model = model;
+            this.library = library;
         }
 
         public override bool CanExecute()
@@ -30,10 +30,8 @@ namespace MediaLibrary.ViewModels.Commands
 
         public override void Execute()
         {
-            model.Name = viewModel.Name;
-            model.FilePath = viewModel.FilePath;
-            model.OnlineDatabaseName = viewModel.OnlineDatabaseName;
-            model.OnlineDatabaseUrlFormat = viewModel.OnlineDatabaseUrlFormat;
+            foreach (FieldViewModel fieldViewModel in viewModel.Fields)
+                library.Configuration.TrySetValue(fieldViewModel.Definition.Identifier, fieldViewModel.Value);
 
             base.Execute();
         }
