@@ -45,6 +45,10 @@ namespace MediaLibrary.ViewModels
             Fields = new List<FieldViewModel>(library.MovieDefinition.Fields.Select(f => new FieldViewModel(f, RaisePropertyChanged)));
             IsNewRecord = true;
 
+            FieldViewModel addedField = Fields.FirstOrDefault(f => f.Definition.Identifier == nameof(Movie.Added));
+            if (addedField != null)
+                addedField.Value = DateTime.Now;
+
             Save = new SaveMovieCommand(this, library, navigator, null);
             Close = new CloseCommand(navigator);
         }

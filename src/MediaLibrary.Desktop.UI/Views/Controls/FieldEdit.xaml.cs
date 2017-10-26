@@ -79,6 +79,9 @@ namespace MediaLibrary.Views.Controls
                 Editor.Content = textBox = new TextBox();
                 textBox.TextChanged += OnTextBoxTextChanged;
 
+                if (Definition.Metadata.TryGet("IsReadOnly", out bool isReadOnly) && isReadOnly)
+                    textBox.IsEnabled = false;
+
                 OnValueChanged();
                 AutoFocus();
             }

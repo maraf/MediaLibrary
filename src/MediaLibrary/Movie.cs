@@ -29,12 +29,21 @@ namespace MediaLibrary
         public IKey Key { get; private set; }
 
         /// <summary>
-        /// Gets a name of the movie.
+        /// Gets or sets a name of the movie.
         /// </summary>
         public string Name
         {
             get { return this.GetValueOrDefault(nameof(Name), (string)null); }
             set { this.TrySetValue(nameof(Name), value); }
+        }
+
+        /// <summary>
+        /// Gets or sets a date time stamp when the movies was added.
+        /// </summary>
+        public DateTime Added
+        {
+            get { return this.GetValueOrDefault(nameof(Added), DateTime.Now); }
+            set { this.TrySetValue(nameof(Added), value); }
         }
 
         /// <summary>

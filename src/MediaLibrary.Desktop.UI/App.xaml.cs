@@ -1,6 +1,8 @@
 ﻿using MediaLibrary.Properties;
 using MediaLibrary.Views;
 using Microsoft.Win32;
+using Neptuo;
+using Neptuo.Converters;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,6 +18,11 @@ namespace MediaLibrary
     {
         protected async override void OnStartup(StartupEventArgs e)
         {
+            Converts.Repository
+                .AddStringTo<bool>(Boolean.TryParse)
+                .AddStringTo<int>(Int32.TryParse)
+                .AddStringTo<DateTime>(DateTime.TryParse);
+
             base.OnStartup(e);
 
             AppLibraryStore store = new AppLibraryStore(Settings.Default, new XmlStore());
