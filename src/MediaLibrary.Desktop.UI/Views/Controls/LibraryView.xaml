@@ -78,10 +78,17 @@
             </ListView.InputBindings>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="8,0">
-                        <TextBlock Text="{Binding Name}" FontSize="{StaticResource NameFontSize}" />
-                        <TextBlock Text="{Binding Storage}" Margin="4,0,0,0" />
-                    </StackPanel>
+                    <Grid>
+                        <StackPanel HorizontalAlignment="Left" Margin="8,0">
+                            <TextBlock Text="{Binding Name}" FontSize="{StaticResource NameFontSize}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding OriginalName}" Margin="0,0,4,0" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="8,0">
+                            <TextBlock Text="{Binding Storage}" FontSize="{StaticResource NameFontSize}" />
+                        </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
