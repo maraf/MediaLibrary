@@ -1,4 +1,5 @@
 ﻿using Neptuo;
+using Neptuo.Collections.Specialized;
 using Neptuo.Converters;
 using Neptuo.Models.Keys;
 using Neptuo.PresentationModels;
@@ -52,6 +53,7 @@ namespace MediaLibrary
 
                 XElement rootElement = new XElement(structure.Root);
                 document.Add(rootElement);
+                SaveFields(rootElement, model.ConfigurationDefinition, model.Configuration);
 
                 XElement moviesElement = new XElement(structure.Movies);
                 rootElement.Add(moviesElement);
@@ -95,15 +97,7 @@ namespace MediaLibrary
         private void SaveMovie(XmlStructure structure, XElement element, Movie model)
         {
             SaveMovieKey(element, structure.MovieId, model.Key);
-
-            foreach (IFieldDefinition fieldDefinition in model.Library.MovieDefinition.Fields)
-            {
-                if(model.TryGetValue(fieldDefinition.Identifier, out object value))
-                {
-                    if (value != null && converters.TryConvert(value.GetType(), typeof(string), value, out object stringValue))
-                        element.SetAttributeValue(fieldDefinition.Identifier, (string)stringValue);
-                }
-            }
+            SaveFields(element, model.Library.MovieDefinition, model);
         }
 
         private void SaveRelated(XmlStructure structure, XElement parentElement, Movie model)
@@ -134,6 +128,21 @@ namespace MediaLibrary
             }
         }
 
+        private void SaveFields(XElement element, IModelDefinition modelDefinition, IModelValueGetter getter)
+        {
+            foreach (IFieldDefinition fieldDefinition in modelDefinition.Fields)
+            {
+                if (fieldDefinition.Metadata.Get("IsPersistent", true))
+                {
+                    if (getter.TryGetValue(fieldDefinition.Identifier, out object value))
+                    {
+                        if (value != null && converters.TryConvert(value.GetType(), typeof(string), value, out object stringValue))
+                            element.SetAttributeValue(fieldDefinition.Identifier, (string)stringValue);
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Loads (adds) movies from file storage of <paramref name="model"/>.
         /// </summary>
@@ -148,6 +157,7 @@ namespace MediaLibrary
                 XmlStructure structure = new XmlStructure();
 
                 XDocument document = XDocument.Load(model.Configuration.FilePath);
+                LoadFields(document.Root, model.ConfigurationDefinition, model.Configuration);
 
                 XElement moviesRootElement = document.Descendants(structure.Movies).FirstOrDefault();
                 if (moviesRootElement == null)
@@ -176,14 +186,7 @@ namespace MediaLibrary
         {
             IKey key = LoadMovieKey(structure, element, structure.MovieId);
             Movie model = new Movie(key, library);
-
-            foreach (IFieldDefinition fieldDefinition in library.MovieDefinition.Fields)
-            {
-                XAttribute attribute = element.Attribute(fieldDefinition.Identifier);
-                if (attribute != null && converters.TryConvert(typeof(string), fieldDefinition.FieldType, attribute.Value, out object value))
-                    model.TrySetValue(fieldDefinition.Identifier, value);
-            }
-
+            LoadFields(element, library.MovieDefinition, model);
             return model;
         }
 
@@ -208,6 +211,19 @@ namespace MediaLibrary
             IKey targetKey = LoadMovieKey(structure, element, structure.RelatedMovieTargetId);
 
             return (sourceKey, targetKey);
+        }
+
+        private void LoadFields(XElement element, IModelDefinition modelDefinition, IModelValueSetter setter)
+        {
+            foreach (IFieldDefinition fieldDefinition in modelDefinition.Fields)
+            {
+                if (fieldDefinition.Metadata.Get("IsPersistent", true))
+                {
+                    XAttribute attribute = element.Attribute(fieldDefinition.Identifier);
+                    if (attribute != null && converters.TryConvert(typeof(string), fieldDefinition.FieldType, attribute.Value, out object value))
+                        setter.TrySetValue(fieldDefinition.Identifier, value);
+                }
+            }
         }
     }
 }

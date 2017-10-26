@@ -49,7 +49,7 @@ namespace MediaLibrary
                 new List<IFieldDefinition>()
                 {
                     new FieldDefinition(nameof(LibraryConfiguration.Name), typeof(string), new KeyValueCollection().Add("Label", "Name").Add("AutoFocus", true)),
-                    new FieldDefinition(nameof(LibraryConfiguration.FilePath), typeof(string), new KeyValueCollection().Add("Label", "File Path")),
+                    new FieldDefinition(nameof(LibraryConfiguration.FilePath), typeof(string), new KeyValueCollection().Add("Label", "File Path").Add("IsPersistent", false)),
                 },
                 new KeyValueCollection()
             );
