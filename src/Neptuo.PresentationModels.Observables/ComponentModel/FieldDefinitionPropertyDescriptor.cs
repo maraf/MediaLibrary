@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Neptuo.PresentationModels.Observables
+namespace Neptuo.PresentationModels.Observables.ComponentModel
 {
     /// <summary>
     /// An implementation of <see cref="PropertyDescriptor"/> based on <see cref="IFieldDefinition"/>.

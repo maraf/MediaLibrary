@@ -40,8 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FieldDefinitionPropertyDescriptor.cs" />
+    <Compile Include="ComponentModel\FieldDefinitionPropertyDescriptor.cs" />
+    <Compile Include="IModelDefinitionContainer.cs" />
+    <Compile Include="ComponentModel\ModelDefinitionCustomTypeDescriptor.cs" />
     <Compile Include="ObservableModel.cs" />
+    <Compile Include="ComponentModel\ModelDefinitionContainerTypeDescriptorProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
