@@ -69,28 +69,45 @@ namespace MediaLibrary.Views.Controls
             }
         }
 
-        private void OnMoviesFilter(object sender, FilterEventArgs e)
-        {
-            Movie model = (Movie)e.Item;
-            e.Accepted = model.IsMatched(serachPhrase);
-        }
-
         public new void Focus()
         {
             lvwMovies.Focus();
         }
+
+        private void lvwMovies_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ViewModel.SelectedMovieChanged();
+        }
+
+        #region Filtering
 
         private string serachPhrase;
 
         private void tbxFilter_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-            {
-                serachPhrase = tbxFilter.Text.ToLowerInvariant();
-                movies.View.Refresh();
-                lvwMovies.SelectedIndex = 0;
-            }
+                Filter();
         }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void OnMoviesFilter(object sender, FilterEventArgs e)
+        {
+            Movie model = (Movie)e.Item;
+            e.Accepted = model.IsMatched(serachPhrase);
+        }
+
+        private void Filter()
+        {
+            serachPhrase = tbxFilter.Text.ToLowerInvariant();
+            movies.View.Refresh();
+            lvwMovies.SelectedIndex = 0;
+        }
+
+        private void tbxFilter_GotFocus(object sender, RoutedEventArgs e) => ((TextBox)sender).SelectAll();
 
         private void lvwMovies_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -99,15 +116,9 @@ namespace MediaLibrary.Views.Controls
                 ViewModel.Edit.Execute(movie.Key);
         }
 
-        private void lvwMovies_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ViewModel.SelectedMovieChanged();
-        }
+        #endregion
 
-        private void tbxFilter_GotFocus(object sender, RoutedEventArgs e)
-        {
-            ((TextBox)sender).SelectAll();
-        }
+        #region Sorting
 
         private void srvSorts_SelectionChanged(object sender, SortViewModelChangedEventArgs e) => UpdateSorting(e.ViewModel);
 
@@ -139,5 +150,7 @@ namespace MediaLibrary.Views.Controls
             movies.SortDescriptions.Add(new SortDescription(newViewModel.FieldDefinition.Identifier, newViewModel.Direction));
             movies.View.Refresh();
         }
+
+        #endregion
     }
 }
