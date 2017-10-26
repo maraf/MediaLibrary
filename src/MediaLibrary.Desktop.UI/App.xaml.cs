@@ -21,7 +21,8 @@ namespace MediaLibrary
             Converts.Repository
                 .AddStringTo<bool>(Boolean.TryParse)
                 .AddStringTo<int>(Int32.TryParse)
-                .AddStringTo<DateTime>(DateTime.TryParse);
+                .AddStringTo<DateTime>(DateTime.TryParse)
+                .AddToStringSearchHandler();
 
             base.OnStartup(e);
 
