@@ -19,12 +19,12 @@
     </ItemsControl.Resources>
     <ItemsControl.ItemsPanel>
         <ItemsPanelTemplate>
-            <StackPanel Orientation="Horizontal" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" />
         </ItemsPanelTemplate>
     </ItemsControl.ItemsPanel>
     <ItemsControl.ItemTemplate>
         <DataTemplate>
-            <Button x:Name="btnSort" Tag="{Binding}" Click="btnSort_Click" Style="{StaticResource PlainButtonStyle}" Margin="0,0,8,0">
+            <Button x:Name="btnSort" Tag="{Binding}" Click="btnSort_Click" Style="{StaticResource PlainButtonStyle}" Margin="0,0,16,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding Label}" FontWeight="{Binding IsActive, Converter={StaticResource TrueToBoldFontWeightConverter}}" />
                     <fa:ImageAwesome Icon="{Binding Direction, Converter={StaticResource ListSortDirectionToImageAwesomeConverter}}" Visibility="{Binding IsActive, Converter={StaticResource TrueToVisibleConverter}}" Style="{StaticResource SortImageStyle}" />

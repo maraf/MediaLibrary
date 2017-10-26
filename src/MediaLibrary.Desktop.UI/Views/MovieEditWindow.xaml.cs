@@ -1,5 +1,6 @@
 ﻿using MediaLibrary.ViewModels;
 using MediaLibrary.ViewModels.Services;
+using Neptuo.Observables.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace MediaLibrary.Views
         public MovieEditWindow()
         {
             InitializeComponent();
+
+            kebClose.Command = new DelegateCommand(Close);
         }
     }
 }

@@ -12,6 +12,9 @@
             <Setter Property="Margin" Value="8,0,0,0" />
         </Style>
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding x:Name="kebClose" Key="Esc" />
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

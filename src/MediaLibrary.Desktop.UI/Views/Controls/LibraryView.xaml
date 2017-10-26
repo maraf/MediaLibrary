@@ -51,11 +51,11 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="{Binding Name}" FontSize="{StaticResource TitleFontSize}" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0" />
+                <TextBlock Text="{Binding Name}" FontSize="{StaticResource TitleFontSize}" VerticalAlignment="Center" Margin="8,0" />
 
                 <StackPanel Orientation="Horizontal" Grid.Column="2">
                     <Button Command="{Binding Save}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{controls:Localize 'Save Library to File'}">
-                        <fa:ImageAwesome Icon="Save" />
+                        <fa:ImageAwesome Icon="Save" Width="16" Height="16" Margin="2" />
                     </Button>
                     <Button Command="{Binding OpenConfiguration}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{controls:Localize 'Open Library Configuration'}">
                         <fa:ImageAwesome Icon="Gears" />
@@ -73,6 +73,7 @@
         <ListView x:Name="lvwMovies" ItemsSource="{Binding Source={StaticResource MoviesCollectionView}}" SelectionChanged="lvwMovies_SelectionChanged" MouseDoubleClick="lvwMovies_MouseDoubleClick" Grid.Row="1">
             <ListView.InputBindings>
                 <KeyBinding Key="F2" Command="{Binding Edit}" CommandParameter="{Binding SelectedItem.Key, RelativeSource={RelativeSource AncestorType=ListView, Mode=FindAncestor}}" />
+                <KeyBinding Key="Enter" Command="{Binding Edit}" CommandParameter="{Binding SelectedItem.Key, RelativeSource={RelativeSource AncestorType=ListView, Mode=FindAncestor}}" />
                 <KeyBinding Key="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, RelativeSource={RelativeSource AncestorType=ListView, Mode=FindAncestor}}" />
             </ListView.InputBindings>
             <ListView.ItemTemplate>
@@ -88,19 +89,27 @@
         <!-- Buttons -->
         <Border Style="{StaticResource ButtonsBottomStyle}" Grid.Row="2">
             <StackPanel>
-                <controls:SortView x:Name="srvSorts" ViewModel="{Binding Sorts}" SelectionChanged="srvSorts_SelectionChanged" Margin="8,8,8,0" />
+                <Border Style="{StaticResource ButtonsTopStyle}" Background="White">
+                    <controls:SortView x:Name="srvSorts" ViewModel="{Binding Sorts}" SelectionChanged="srvSorts_SelectionChanged" Margin="8" />
+                </Border>
                 <Grid>
-                    <StackPanel Style="{StaticResource ButtonsLeftStyle}">
-                        <Button Content="{controls:Localize 'Create New'}" Command="{Binding Create}" />
+                    <StackPanel Style="{StaticResource ButtonsLeftStyle}" Margin="8,0,0,0">
+                        <Button Command="{Binding Create}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{controls:Localize 'Create New Movie'}">
+                            <fa:ImageAwesome Icon="Plus" Width="16" Height="16" Margin="2" />
+                        </Button>
                     </StackPanel>
-                    <StackPanel Style="{StaticResource ButtonsRightStyle}">
+                    <StackPanel Style="{StaticResource ButtonsRightStyle}" Margin="0,0,8,0">
                         <StackPanel.Resources>
-                            <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+                            <Style TargetType="Button" BasedOn="{StaticResource IconBarButtonStyle}">
                                 <Setter Property="Margin" Value="8,0,0,0" />
                             </Style>
                         </StackPanel.Resources>
-                        <Button Content="{controls:Localize 'Edit'}" Command="{Binding Edit}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" />
-                        <Button Content="{controls:Localize 'Delete'}" Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" />
+                        <Button Command="{Binding Edit}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" ToolTip="{controls:Localize 'Edit Selected Movie'}">
+                            <fa:ImageAwesome Icon="Edit" />
+                        </Button>
+                        <Button Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" ToolTip="{controls:Localize 'Delete Selected Movie'}">
+                            <fa:ImageAwesome Icon="Remove" Width="16" Height="16" Margin="2" />
+                        </Button>
                     </StackPanel>
                 </Grid>
             </StackPanel>

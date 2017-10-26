@@ -1,4 +1,5 @@
 ﻿using MediaLibrary.ViewModels.Services;
+using Neptuo.Observables.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace MediaLibrary.Views
         public LibraryConfigurationWindow()
         {
             InitializeComponent();
+
+            kebClose.Command = new DelegateCommand(Close);
         }
 
         protected override void OnSourceInitialized(EventArgs e)
