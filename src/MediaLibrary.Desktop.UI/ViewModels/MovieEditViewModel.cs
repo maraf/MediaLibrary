@@ -60,7 +60,7 @@ namespace MediaLibrary.ViewModels
 
             foreach (FieldViewModel fieldViewModel in Fields)
             {
-                if (movie.FieldValues.TryGetValue(fieldViewModel.Definition.Identifier, out object value))
+                if (movie.TryGetValue(fieldViewModel.Definition.Identifier, out object value))
                     fieldViewModel.Value = value;
             }
 

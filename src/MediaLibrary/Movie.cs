@@ -2,8 +2,11 @@
 using Neptuo.Models.Keys;
 using Neptuo.Observables;
 using Neptuo.Observables.Collections;
+using Neptuo.PresentationModels;
+using Neptuo.PresentationModels.Observables;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +16,7 @@ namespace MediaLibrary
     /// <summary>
     /// A single movie.
     /// </summary>
-    public class Movie : ObservableObject
+    public class Movie : ObservableModel
     {
         /// <summary>
         /// Gets a library where movie belongs.
@@ -30,8 +33,8 @@ namespace MediaLibrary
         /// </summary>
         public string Name
         {
-            get { return FieldValues.FindValue<string>(nameof(Name)); }
-            set { FieldValues.TrySetValue(nameof(Name), value); }
+            get { return this.GetValueOrDefault(nameof(Name), (string)null); }
+            set { this.TrySetValue(nameof(Name), value); }
         }
 
         /// <summary>
@@ -40,23 +43,18 @@ namespace MediaLibrary
         public RelatedMovieObservableCollection RelatedMovieKeys { get; private set; }
 
         /// <summary>
-        /// Gets a collection of additional field values.
-        /// </summary>
-        public MovieFieldValueCollection FieldValues { get; private set; }
-
-        /// <summary>
         /// Creates a new instance.
         /// </summary>
         /// <param name="key">An unique movie key.</param>
         /// <param name="library">A library where movie belongs.</param>
         public Movie(IKey key, Library library)
+            : base(library.MovieDefinition)
         {
             Ensure.Condition.NotEmptyKey(key);
             Ensure.NotNull(library, "library");
             Key = key;
             Library = library;
             RelatedMovieKeys = new RelatedMovieObservableCollection(Key, library.Movies);
-            FieldValues = new MovieFieldValueCollection(library.MovieDefinition.Fields, RaisePropertyChanged);
         }
 
         /// <summary>
@@ -64,6 +62,24 @@ namespace MediaLibrary
         /// </summary>
         /// <param name="text">A search phrase.</param>
         /// <returns><c>true</c> if any value contains <paramref name="text"/>; <c>false</c> otherwise.</returns>
-        public bool IsMatched(string text) => FieldValues.IsMatched(text);
+        public bool IsMatched(string text)
+        {
+            if (String.IsNullOrEmpty(text))
+                return true;
+
+            foreach (IFieldDefinition fieldDefinition in ModelDefinition.Fields)
+            {
+                if (TryGetValue(fieldDefinition.Identifier, out object value))
+                {
+                    if (value == null)
+                        continue;
+
+                    if (value.ToString().ToLowerInvariant().Contains(text))
+                        return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

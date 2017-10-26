@@ -184,6 +184,10 @@
       <Project>{9fe95cc7-67a8-474e-8b71-6734fda3ac9a}</Project>
       <Name>MediaLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Neptuo.PresentationModels.Observables\Neptuo.PresentationModels.Observables.csproj">
+      <Project>{8a6ecceb-b35b-4957-8d20-062fc6252a7f}</Project>
+      <Name>Neptuo.PresentationModels.Observables</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

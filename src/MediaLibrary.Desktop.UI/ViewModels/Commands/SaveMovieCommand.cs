@@ -51,7 +51,7 @@ namespace MediaLibrary.ViewModels.Commands
             model.Name = viewModel.Name;
 
             foreach (FieldViewModel fieldViewModel in viewModel.Fields)
-                model.FieldValues.TrySetValue(fieldViewModel.Definition.Identifier, fieldViewModel.Value);
+                model.TrySetValue(fieldViewModel.Definition.Identifier, fieldViewModel.Value);
 
             navigator.Close();
         }

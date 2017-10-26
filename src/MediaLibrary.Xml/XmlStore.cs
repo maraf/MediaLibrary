@@ -97,7 +97,7 @@ namespace MediaLibrary
 
             foreach (IFieldDefinition fieldDefinition in model.Library.MovieDefinition.Fields)
             {
-                if(model.FieldValues.TryGetValue(fieldDefinition.Identifier, out object value))
+                if(model.TryGetValue(fieldDefinition.Identifier, out object value))
                 {
                     if (value != null && converters.TryConvert(value.GetType(), typeof(string), value, out object stringValue))
                         element.SetAttributeValue(fieldDefinition.Identifier, (string)stringValue);
@@ -169,7 +169,7 @@ namespace MediaLibrary
             {
                 XAttribute attribute = element.Attribute(fieldDefinition.Identifier);
                 if (attribute != null && converters.TryConvert(typeof(string), fieldDefinition.FieldType, attribute.Value, out object value))
-                    model.FieldValues.TrySetValue(fieldDefinition.Identifier, value);
+                    model.TrySetValue(fieldDefinition.Identifier, value);
             }
 
             return model;
