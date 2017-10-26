@@ -45,6 +45,8 @@ namespace MediaLibrary.Views.Controls
         {
             InitializeComponent();
             Background = null;
+            DataContextChanged += OnDataContextChanged;
+            Loaded += OnLoaded;
 
             kebFind.Command = new DelegateCommand(() => tbxFilter.Focus());
 
@@ -52,6 +54,19 @@ namespace MediaLibrary.Views.Controls
 
             movies = (CollectionViewSource)Resources["MoviesCollectionView"];
             movies.Filter += OnMoviesFilter;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e) => UpdateDefaultSorting();
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e) => UpdateDefaultSorting();
+
+        private void UpdateDefaultSorting()
+        {
+            if (ViewModel != null)
+            {
+                SortViewModel sortViewModel = ViewModel.Sorts.FirstOrDefault(s => s.IsActive);
+                if (sortViewModel != null)
+                    UpdateSorting(sortViewModel);
+            }
         }
 
         private void OnMoviesFilter(object sender, FilterEventArgs e)
@@ -94,18 +109,34 @@ namespace MediaLibrary.Views.Controls
             ((TextBox)sender).SelectAll();
         }
 
-        private void btnSort_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
-            SortViewModel viewModel = (SortViewModel)button.Tag;
+        private void srvSorts_SelectionChanged(object sender, SortViewModelChangedEventArgs e) => UpdateSorting(e.ViewModel);
 
-            SortDescription description = movies.SortDescriptions.FirstOrDefault(s => s.PropertyName == viewModel.FieldDefinition.Identifier);
-            ListSortDirection direction = ListSortDirection.Ascending;
-            if (description != null && description.PropertyName == viewModel.FieldDefinition.Identifier)
-                direction = description.Direction == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+        private void UpdateSorting(SortViewModel newViewModel)
+        {
+            SortDescription description = movies.SortDescriptions.FirstOrDefault();
+            SortViewModel oldViewModel = description != null ? ViewModel.Sorts.FirstOrDefault(s => s.FieldDefinition.Identifier == description.PropertyName) : null;
+
+            if (oldViewModel != null)
+            {
+                if (newViewModel == oldViewModel)
+                {
+                    oldViewModel.Direction = oldViewModel.Direction == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+                }
+                else
+                {
+                    oldViewModel.IsActive = false;
+                    newViewModel.Direction = newViewModel.DefaultDirection;
+                }
+            }
+            else
+            {
+                newViewModel.Direction = newViewModel.DefaultDirection;
+            }
+
+            newViewModel.IsActive = true;
 
             movies.SortDescriptions.Clear();
-            movies.SortDescriptions.Add(new SortDescription(viewModel.FieldDefinition.Identifier, direction));
+            movies.SortDescriptions.Add(new SortDescription(newViewModel.FieldDefinition.Identifier, newViewModel.Direction));
             movies.View.Refresh();
         }
     }

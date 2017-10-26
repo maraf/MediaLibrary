@@ -6,6 +6,7 @@
              xmlns:dd="clr-namespace:MediaLibrary.Views.DesignData"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
+             xmlns:converters="clr-namespace:MediaLibrary.Views.Converters"
              mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="300" d:DataContext="{x:Static dd:ViewModelLocator.Library}"
              Background="White">
     <UserControl.Resources>
@@ -65,7 +66,10 @@
         <ListView x:Name="lvwMovies" ItemsSource="{Binding Source={StaticResource MoviesCollectionView}}" SelectionChanged="lvwMovies_SelectionChanged" MouseDoubleClick="lvwMovies_MouseDoubleClick" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}" FontSize="{StaticResource NameFontSize}" Margin="8,0" />
+                    <StackPanel Orientation="Horizontal" Margin="8,0">
+                        <TextBlock Text="{Binding Name}" FontSize="{StaticResource NameFontSize}" />
+                        <TextBlock Text="{Binding Storage}" Margin="4,0,0,0" />
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
@@ -73,20 +77,7 @@
         <!-- Buttons -->
         <Border Style="{StaticResource ButtonsBottomStyle}" Grid.Row="2">
             <StackPanel>
-                <ItemsControl ItemsSource="{Binding Sorts}" Margin="8,8,8,0">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Button x:Name="btnSort" Tag="{Binding}" Click="btnSort_Click" Style="{StaticResource PlainButtonStyle}">
-                                <TextBlock Text="{Binding Label}" Margin="0,0,8,0" />
-                            </Button>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <controls:SortView x:Name="srvSorts" ViewModel="{Binding Sorts}" SelectionChanged="srvSorts_SelectionChanged" Margin="8,8,8,0" />
                 <Grid>
                     <StackPanel Style="{StaticResource ButtonsLeftStyle}">
                         <Button Content="{controls:Localize 'Create New'}" Command="{Binding Create}" />

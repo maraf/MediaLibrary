@@ -73,7 +73,13 @@
     <Compile Include="Views\Controls\FieldEdit.xaml.cs">
       <DependentUpon>FieldEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\SortView.xaml.cs">
+      <DependentUpon>SortView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\SortViewModelChangedEventArgs.cs" />
     <Compile Include="Views\Controls\SystemColorProvider.cs" />
+    <Compile Include="Views\Converters\BoolConverter.cs" />
+    <Compile Include="Views\Converters\ListSortDirectionToImageAwesomeConverter.cs" />
     <Compile Include="Views\DesignData\MockNavigatorContext.cs" />
     <Compile Include="Views\LibraryConfigurationWindow.xaml.cs">
       <DependentUpon>LibraryConfigurationWindow.xaml</DependentUpon>
@@ -86,6 +92,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\LibraryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\SortView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

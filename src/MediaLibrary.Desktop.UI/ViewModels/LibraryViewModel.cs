@@ -37,6 +37,9 @@ namespace MediaLibrary.ViewModels
             this.navigator = navigator;
 
             Sorts = new List<SortViewModel>(library.MovieDefinition.Fields.Select(f => new SortViewModel(f)));
+            SortViewModel firstSort = Sorts.FirstOrDefault();
+            if (firstSort != null)
+                firstSort.IsActive = true;
 
             Create = new DelegateCommand(() => navigator.CreateMovieAsync(library));
             Edit = new EditMovieCommand(library, navigator);
