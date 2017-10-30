@@ -32,6 +32,10 @@ namespace Neptuo.PresentationModels.UI.ModelViews
             {
                 IFieldView<IWpfRenderContext> fieldView = fieldViewProvider.Get(modelDefinition, fieldDefinition);
                 AddFieldView(fieldDefinition.Identifier, fieldView);
+
+                if (fieldDefinition.Metadata.TryGet("Label", out string label))
+                    fieldContext.Add(new TextBlock() { Text = label });
+
                 fieldView.Render(fieldContext);
             }
         }
