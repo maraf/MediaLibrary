@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Neptuo.PresentationModels.UI
@@ -27,7 +28,7 @@ namespace Neptuo.PresentationModels.UI
 
         public void Add(object control)
         {
-            parent.Children.Add(control);
+            parent.Children.Add((UIElement)control);
         }
     }
 }
