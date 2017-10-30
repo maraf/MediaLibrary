@@ -1,5 +1,4 @@
-﻿using Neptuo;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +7,12 @@ using System.Windows.Controls;
 
 namespace Neptuo.PresentationModels.UI.ModelViews
 {
-    public class WpfGridModelView : ModelView<IWpfRenderContext>
+    public class WpfStackPanelModelView : ModelView<IWpfRenderContext>
     {
         private readonly IModelDefinition modelDefinition;
         private readonly IFieldViewProvider<IWpfRenderContext> fieldViewProvider;
 
-        public WpfGridModelView(IModelDefinition modelDefinition, IFieldViewProvider<IWpfRenderContext> fieldViewProvider)
+        public WpfStackPanelModelView(IModelDefinition modelDefinition, IFieldViewProvider<IWpfRenderContext> fieldViewProvider)
             : base(modelDefinition)
         {
             Ensure.NotNull(modelDefinition, "modelDefinition");
@@ -24,7 +23,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews
 
         protected override void RenderInternal(IWpfRenderContext context)
         {
-            Grid grid = new Grid();
+            StackPanel grid = new StackPanel();
 
             context.Add(grid);
 
@@ -36,7 +35,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews
                 fieldView.Render(fieldContext);
             }
         }
-        
+
         protected override void DisposeManagedResources()
         {
             base.DisposeManagedResources();
