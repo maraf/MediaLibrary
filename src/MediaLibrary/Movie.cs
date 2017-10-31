@@ -78,6 +78,9 @@ namespace MediaLibrary
 
             foreach (IFieldDefinition fieldDefinition in ModelDefinition.Fields)
             {
+                if (fieldDefinition.Metadata.TryGet("IsSearchable", out bool isSearchable) && !isSearchable)
+                    continue;
+
                 if (TryGetValue(fieldDefinition.Identifier, out object value))
                 {
                     if (value == null)
