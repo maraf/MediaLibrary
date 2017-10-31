@@ -34,7 +34,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews
                 AddFieldView(fieldDefinition.Identifier, fieldView);
 
                 if (fieldDefinition.Metadata.TryGet("Label", out string label))
-                    fieldContext.Add(new TextBlock() { Text = label });
+                    fieldContext.Add(new Label() { Content = label });
 
                 fieldView.Render(fieldContext);
             }

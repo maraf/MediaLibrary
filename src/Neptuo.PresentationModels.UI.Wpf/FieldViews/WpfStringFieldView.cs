@@ -11,7 +11,7 @@ namespace Neptuo.PresentationModels.UI.FieldViews
     {
         private TextBox textBox;
 
-        public WpfStringFieldView(IFieldDefinition fieldDefinition) 
+        public WpfStringFieldView(IFieldDefinition fieldDefinition)
             : base(fieldDefinition)
         { }
 
@@ -19,6 +19,10 @@ namespace Neptuo.PresentationModels.UI.FieldViews
         {
             textBox = new TextBox();
             textBox.Text = defaultValue;
+
+            if (FieldDefinition.Metadata.TryGet("IsReadOnly", out bool isReadOnly))
+                textBox.IsReadOnly = isReadOnly;
+
             context.Add(textBox);
         }
 
