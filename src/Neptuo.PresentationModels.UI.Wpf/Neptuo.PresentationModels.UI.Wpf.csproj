@@ -48,6 +48,7 @@
     <Compile Include="Controls\VisualTree.cs" />
     <Compile Include="Controls\ModelView.cs" />
     <Compile Include="FieldViews\WpfDateFieldEditor.cs" />
+    <Compile Include="FieldViews\WpfInt32FieldEditor.cs" />
     <Compile Include="FieldViews\WpfStringFieldEditor.cs" />
     <Compile Include="ModelViews\WpfStackPanelModelView.cs" />
     <Compile Include="WpfDefaultViewProvider.cs" />
