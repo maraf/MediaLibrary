@@ -34,7 +34,9 @@ namespace MediaLibrary.Views
         {
             fieldView = null;
 
-            if (fieldDefinition.FieldType == typeof(DateTime))
+            if (fieldDefinition.Identifier == "Country")
+                fieldView = new WpfComboBoxFieldEditor<string>(fieldDefinition, GetCountries());
+            else if (fieldDefinition.FieldType == typeof(DateTime))
                 fieldView = new WpfDateFieldEditor(fieldDefinition);
             else if (fieldDefinition.FieldType == typeof(string))
                 fieldView = new WpfStringFieldEditor(fieldDefinition);
@@ -43,5 +45,10 @@ namespace MediaLibrary.Views
 
             return fieldView != null;
         }
+
+        private IEnumerable<string> GetCountries() => library.Movies
+            .Select(m => m.GetValueOrDefault("Country", (string)null))
+            .Where(c => c != null)
+            .Distinct();
     }
 }
