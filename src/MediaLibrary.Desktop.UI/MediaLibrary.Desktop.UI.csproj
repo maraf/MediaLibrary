@@ -72,6 +72,9 @@
     <Compile Include="ViewModels\Services\ILibraryStore.cs" />
     <Compile Include="ViewModels\Services\INavigatorContext.cs" />
     <Compile Include="ViewModels\SortViewModel.cs" />
+    <Compile Include="Views\Controls\EditButtons.xaml.cs">
+      <DependentUpon>EditButtons.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\FieldEdit.xaml.cs">
       <DependentUpon>FieldEdit.xaml</DependentUpon>
     </Compile>
@@ -90,6 +93,10 @@
     <Compile Include="Views\MovieEditWindow.xaml.cs">
       <DependentUpon>MovieEditWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Controls\EditButtons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Controls\FieldEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
