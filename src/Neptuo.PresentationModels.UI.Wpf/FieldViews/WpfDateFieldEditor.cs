@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Neptuo.PresentationModels.UI.FieldViews
 {
-    public class WpfDateFieldEditor : FieldView<DateTime, IWpfRenderContext>
+    public class WpfDateFieldEditor : FieldView<DateTime?, IWpfRenderContext>
     {
         private TextBox textBox;
 
@@ -15,7 +15,7 @@ namespace Neptuo.PresentationModels.UI.FieldViews
             : base(fieldDefinition)
         { }
 
-        protected override void RenderInternal(IWpfRenderContext context, DateTime defaultValue)
+        protected override void RenderInternal(IWpfRenderContext context, DateTime? defaultValue)
         {
             textBox = new TextBox();
             TrySetValueInternal(defaultValue);
@@ -28,18 +28,30 @@ namespace Neptuo.PresentationModels.UI.FieldViews
                 textBox.Loaded += (sender, e) => textBox.Focus();
         }
 
-        protected override bool TryGetValueInternal(out DateTime value)
+        protected override bool TryGetValueInternal(out DateTime? value)
         {
-            if (DateTime.TryParse(textBox.Text, out value))
+            if (DateTime.TryParse(textBox.Text, out DateTime rawValue))
+            {
+                value = rawValue;
                 return true;
+            }
+
+            if (FieldDefinition.FieldType == typeof(DateTime?))
+            {
+                value = null;
+                return true;
+            }
 
             value = DateTime.MinValue;
             return false;
         }
 
-        protected override bool TrySetValueInternal(DateTime value)
+        protected override bool TrySetValueInternal(DateTime? value)
         {
-            textBox.Text = value.ToString();
+            if (value == null)
+                textBox.Text = String.Empty;
+            else
+                textBox.Text = value.ToString();
             return true;
         }
     }
