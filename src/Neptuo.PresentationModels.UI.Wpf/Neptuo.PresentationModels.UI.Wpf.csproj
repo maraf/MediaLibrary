@@ -44,6 +44,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FieldViews\WpfDateFieldView.cs" />
     <Compile Include="FieldViews\WpfStringFieldView.cs" />
     <Compile Include="ModelViews\WpfStackPanelModelView.cs" />
     <Compile Include="WpfDefaultViewProvider.cs" />
