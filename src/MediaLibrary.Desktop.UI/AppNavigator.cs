@@ -34,9 +34,8 @@ namespace MediaLibrary
             Ensure.NotNull(library, "library");
             if (movieEdit == null)
             {
-                movieEdit = new MovieEditWindow();
+                movieEdit = new MovieEditWindow(library, null);
                 movieEdit.Closed += OnMovieEditClosed;
-                movieEdit.DataContext = new MovieEditViewModel(library, movieEdit);
 
                 if (main != null)
                 {
@@ -67,9 +66,8 @@ namespace MediaLibrary
 
             if (movieEdit == null)
             {
-                movieEdit = new MovieEditWindow();
+                movieEdit = new MovieEditWindow(library, library.Movies.FindByKey(movieKey));
                 movieEdit.Closed += OnMovieEditClosed;
-                movieEdit.DataContext = new MovieEditViewModel(library, movieEdit, library.Movies.FindByKey(movieKey));
 
                 if (main != null)
                 {
@@ -117,9 +115,8 @@ namespace MediaLibrary
             Ensure.NotNull(library, "library");
             if (libraryConfiguration == null)
             {
-                libraryConfiguration = new LibraryConfigurationWindow();
+                libraryConfiguration = new LibraryConfigurationWindow(library);
                 libraryConfiguration.Closed += OnLibraryConfigurationClosed;
-                libraryConfiguration.DataContext = new LibraryConfigurationViewModel(library, libraryConfiguration);
 
                 if (main != null)
                 {

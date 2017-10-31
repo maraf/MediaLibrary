@@ -64,11 +64,7 @@
     <Compile Include="ViewModels\Commands\DeleteMovieCommand.cs" />
     <Compile Include="ViewModels\Commands\EditMovieCommand.cs" />
     <Compile Include="ViewModels\Commands\SaveCommand.cs" />
-    <Compile Include="ViewModels\Commands\SaveLibraryConfigurationCommand.cs" />
-    <Compile Include="ViewModels\Commands\SaveMovieCommand.cs" />
     <Compile Include="ViewModels\FieldViewModel.cs" />
-    <Compile Include="ViewModels\LibraryConfigurationViewModel.cs" />
-    <Compile Include="ViewModels\MovieEditViewModel.cs" />
     <Compile Include="ViewModels\Services\ILibraryStore.cs" />
     <Compile Include="ViewModels\Services\INavigatorContext.cs" />
     <Compile Include="ViewModels\SortViewModel.cs" />
@@ -90,6 +86,7 @@
     <Compile Include="Views\LibraryConfigurationWindow.xaml.cs">
       <DependentUpon>LibraryConfigurationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ModelWindow.cs" />
     <Compile Include="Views\MovieEditWindow.xaml.cs">
       <DependentUpon>MovieEditWindow.xaml</DependentUpon>
     </Compile>
@@ -207,6 +204,14 @@
     <ProjectReference Include="..\Neptuo.PresentationModels.Observables\Neptuo.PresentationModels.Observables.csproj">
       <Project>{8a6ecceb-b35b-4957-8d20-062fc6252a7f}</Project>
       <Name>Neptuo.PresentationModels.Observables</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Neptuo.PresentationModels.UI.Wpf\Neptuo.PresentationModels.UI.Wpf.csproj">
+      <Project>{a7b5e043-8929-498a-b55d-acb576cdf61b}</Project>
+      <Name>Neptuo.PresentationModels.UI.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Neptuo.PresentationModels.UI\Neptuo.PresentationModels.UI.csproj">
+      <Project>{23e62643-f6c3-4d6a-862b-38999ebc6959}</Project>
+      <Name>Neptuo.PresentationModels.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

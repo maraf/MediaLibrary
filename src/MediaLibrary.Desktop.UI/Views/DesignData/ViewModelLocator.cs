@@ -41,32 +41,5 @@ namespace MediaLibrary.Views.DesignData
                 return library;
             }
         }
-
-        private static MovieEditViewModel movieEdit;
-        public static MovieEditViewModel MovieEdit
-        {
-            get
-            {
-                if (movieEdit == null)
-                {
-                    movieEdit = new MovieEditViewModel(LibraryModel, new MockNavigatorContext());
-                    movieEdit.Name = "Movie 1";
-                }
-
-                return movieEdit;
-            }
-        }
-
-        private static LibraryConfigurationViewModel libraryConfiguration;
-        public static LibraryConfigurationViewModel LibraryConfiguration
-        {
-            get
-            {
-                if (libraryConfiguration == null)
-                    libraryConfiguration = new LibraryConfigurationViewModel(LibraryModel, new MockNavigatorContext());
-
-                return libraryConfiguration;
-            }
-        }
     }
 }

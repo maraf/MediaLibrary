@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace Neptuo.PresentationModels.UI.Controls
 {
-    public static class VisualTree
+    internal static class VisualTree
     {
         public static T FindAncestorOfType<T>(FrameworkElement element)
         {
