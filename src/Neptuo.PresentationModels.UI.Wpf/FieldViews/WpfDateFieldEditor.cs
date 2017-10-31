@@ -7,18 +7,18 @@ using System.Windows.Controls;
 
 namespace Neptuo.PresentationModels.UI.FieldViews
 {
-    public class WpfStringFieldView : FieldView<string, IWpfRenderContext>
+    public class WpfDateFieldEditor : FieldView<DateTime, IWpfRenderContext>
     {
         private TextBox textBox;
 
-        public WpfStringFieldView(IFieldDefinition fieldDefinition)
+        public WpfDateFieldEditor(IFieldDefinition fieldDefinition)
             : base(fieldDefinition)
         { }
 
-        protected override void RenderInternal(IWpfRenderContext context, string defaultValue)
+        protected override void RenderInternal(IWpfRenderContext context, DateTime defaultValue)
         {
             textBox = new TextBox();
-            textBox.Text = defaultValue;
+            TrySetValueInternal(defaultValue);
 
             if (FieldDefinition.Metadata.TryGet("IsReadOnly", out bool isReadOnly))
                 textBox.IsReadOnly = isReadOnly;
@@ -26,23 +26,20 @@ namespace Neptuo.PresentationModels.UI.FieldViews
             context.Add(textBox);
         }
 
-        protected override bool TryGetValueInternal(out string value)
+        protected override bool TryGetValueInternal(out DateTime value)
         {
-            if (textBox != null)
-            {
-                value = textBox.Text;
+            if (textBox != null && DateTime.TryParse(textBox.Text, out value))
                 return true;
-            }
 
-            value = null;
+            value = DateTime.MinValue;
             return false;
         }
 
-        protected override bool TrySetValueInternal(string value)
+        protected override bool TrySetValueInternal(DateTime value)
         {
             if (textBox != null)
             {
-                textBox.Text = value;
+                textBox.Text = value.ToString();
                 return true;
             }
 
