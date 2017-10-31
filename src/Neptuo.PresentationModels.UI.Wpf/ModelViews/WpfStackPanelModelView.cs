@@ -23,11 +23,10 @@ namespace Neptuo.PresentationModels.UI.ModelViews
 
         protected override void RenderInternal(IWpfRenderContext context)
         {
-            StackPanel grid = new StackPanel();
+            StackPanel panel = new StackPanel();
+            context.Add(panel);
 
-            context.Add(grid);
-
-            IWpfRenderContext fieldContext = new WpfPanelRenderContext(grid);
+            IWpfRenderContext fieldContext = new WpfPanelRenderContext(panel);
             foreach (IFieldDefinition fieldDefinition in modelDefinition.Fields)
             {
                 IFieldView<IWpfRenderContext> fieldView = fieldViewProvider.Get(modelDefinition, fieldDefinition);
