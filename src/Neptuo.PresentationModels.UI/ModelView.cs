@@ -17,6 +17,14 @@ namespace Neptuo.PresentationModels.UI
         private bool isRendered;
 
         /// <summary>
+        /// Gets a collection of field views.
+        /// </summary>
+        protected IReadOnlyCollection<IFieldView<T>> FieldViews
+        {
+            get { return fieldViews.Values; }
+        }
+
+        /// <summary>
         /// Creates new instance for model defined by <paramref name="modelDefinition"/>.
         /// </summary>
         /// <param name="modelDefinition">Model definition.</param>
@@ -82,5 +90,19 @@ namespace Neptuo.PresentationModels.UI
         protected abstract void RenderInternal(T target);
 
         #endregion
+
+        /// <summary>
+        /// Disposes all <see cref="FieldViews"/> that implements <see cref="IDisposable"/>.
+        /// </summary>
+        protected override void DisposeManagedResources()
+        {
+            base.DisposeManagedResources();
+
+            foreach (IFieldView<T> fieldView in FieldViews)
+            {
+                if (fieldView is IDisposable disposable)
+                    disposable.Dispose();
+            }
+        }
     }
 }

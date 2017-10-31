@@ -39,16 +39,5 @@ namespace Neptuo.PresentationModels.UI.ModelViews
                 fieldView.Render(fieldContext);
             }
         }
-
-        protected override void DisposeManagedResources()
-        {
-            base.DisposeManagedResources();
-
-            //foreach (IFieldView<IWpfRenderContext> fieldView in fieldViews.Values)
-            //{
-            //    if (fieldView is IDisposable disposable)
-            //        disposable.Dispose();
-            //}
-        }
     }
 }

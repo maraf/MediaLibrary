@@ -19,16 +19,18 @@ namespace Neptuo.PresentationModels.UI.FieldViews
         {
             textBox = new TextBox();
             TrySetValueInternal(defaultValue);
+            context.Add(textBox);
 
             if (FieldDefinition.Metadata.TryGet("IsReadOnly", out bool isReadOnly))
                 textBox.IsReadOnly = isReadOnly;
 
-            context.Add(textBox);
+            if (FieldDefinition.Metadata.TryGet("IsAutoFocus", out bool isAutoFocus) && isAutoFocus)
+                textBox.Loaded += (sender, e) => textBox.Focus();
         }
 
         protected override bool TryGetValueInternal(out DateTime value)
         {
-            if (textBox != null && DateTime.TryParse(textBox.Text, out value))
+            if (DateTime.TryParse(textBox.Text, out value))
                 return true;
 
             value = DateTime.MinValue;
@@ -37,13 +39,8 @@ namespace Neptuo.PresentationModels.UI.FieldViews
 
         protected override bool TrySetValueInternal(DateTime value)
         {
-            if (textBox != null)
-            {
-                textBox.Text = value.ToString();
-                return true;
-            }
-
-            return false;
+            textBox.Text = value.ToString();
+            return true;
         }
     }
 }
