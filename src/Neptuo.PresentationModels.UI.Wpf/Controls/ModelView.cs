@@ -10,7 +10,7 @@ namespace Neptuo.PresentationModels.UI.Controls
 {
     public class ModelView : ContentControl, IModelValueProvider
     {
-        protected IModelView<IWpfRenderContext> ModelView { get; set; }
+        protected IModelView<IWpfRenderContext> View { get; set; }
 
         public IModelDefinition Definition
         {
@@ -47,14 +47,14 @@ namespace Neptuo.PresentationModels.UI.Controls
             if (container == null)
                 throw Ensure.Exception.NotSupported($"Missing '{nameof(IModelViewProviderContainer<IWpfRenderContext>)}' in ancestor chain.");
 
-            ModelView = container.ModelViewProvider.Get(Definition);
-            ModelView.Render(new WpfContentControlRenderContext(this));
+            View = container.ModelViewProvider.Get(Definition);
+            View.Render(new WpfContentControlRenderContext(this));
         }
 
         public bool TryGetValue(string identifier, out object value)
         {
-            if (ModelView != null)
-                return ModelView.TryGetValue(identifier, out value);
+            if (View != null)
+                return View.TryGetValue(identifier, out value);
 
             value = null;
             return false;
@@ -62,18 +62,18 @@ namespace Neptuo.PresentationModels.UI.Controls
 
         public bool TrySetValue(string identifier, object value)
         {
-            if (ModelView != null)
-                return ModelView.TrySetValue(identifier, value);
+            if (View != null)
+                return View.TrySetValue(identifier, value);
 
             return false;
         }
 
         private void TryDisposeModelView()
         {
-            if (ModelView != null && ModelView is IDisposable disposable)
+            if (View != null && View is IDisposable disposable)
             {
                 disposable.Dispose();
-                ModelView = null;
+                View = null;
             }
         }
 
