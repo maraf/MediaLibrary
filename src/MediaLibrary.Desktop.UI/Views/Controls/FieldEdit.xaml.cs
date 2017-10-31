@@ -104,7 +104,7 @@ namespace MediaLibrary.Views.Controls
 
         private void AutoFocus()
         {
-            if (Definition != null && Definition.Metadata.TryGet("AutoFocus", out bool autoFocus) && autoFocus)
+            if (Definition != null && Definition.Metadata.TryGet("IsAutoFocus", out bool autoFocus) && autoFocus)
                 textBox.Focus();
         }
     }

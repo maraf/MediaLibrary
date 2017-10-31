@@ -48,7 +48,7 @@ namespace MediaLibrary
                 "LibraryConfiguration",
                 new List<IFieldDefinition>()
                 {
-                    new FieldDefinition(nameof(LibraryConfiguration.Name), typeof(string), new KeyValueCollection().Add("Label", "Name").Add("AutoFocus", true)),
+                    new FieldDefinition(nameof(LibraryConfiguration.Name), typeof(string), new KeyValueCollection().Add("Label", "Name").Add("IsAutoFocus", true)),
                     new FieldDefinition(nameof(LibraryConfiguration.FilePath), typeof(string), new KeyValueCollection().Add("Label", "File Path").Add("IsPersistent", false)),
                 },
                 new KeyValueCollection()
@@ -58,7 +58,7 @@ namespace MediaLibrary
                 "Movie",
                 new List<IFieldDefinition>()
                 {
-                    new FieldDefinition(nameof(Movie.Name), typeof(string), new KeyValueCollection().Add("Label", "Name").Add("AutoFocus", true)),
+                    new FieldDefinition(nameof(Movie.Name), typeof(string), new KeyValueCollection().Add("Label", "Name").Add("IsAutoFocus", true)),
                     new FieldDefinition("OriginalName", typeof(string), new KeyValueCollection().Add("Label", "Original Name")),
                     new FieldDefinition("Storage", typeof(string), new KeyValueCollection().Add("Label", "Storage")),
                     new FieldDefinition("Added", typeof(DateTime), new KeyValueCollection().Add("Label", "Added").Add("IsReadOnly", true))
