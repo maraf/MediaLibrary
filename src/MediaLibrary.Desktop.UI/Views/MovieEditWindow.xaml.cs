@@ -30,6 +30,7 @@ namespace MediaLibrary.Views
         private Movie model;
 
         public MovieEditWindow(Library library, Movie model)
+            : base(library)
         {
             Ensure.NotNull(library, "library");
 
