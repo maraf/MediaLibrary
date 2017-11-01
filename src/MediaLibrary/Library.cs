@@ -63,6 +63,7 @@ namespace MediaLibrary
                     new FieldDefinition("Storage", typeof(string), new KeyValueCollection().Add("Label", "Storage")),
                     new FieldDefinition("Year", typeof(int?), new KeyValueCollection().Add("Label", "Year of issue")),
                     new FieldDefinition("Country", typeof(string), new KeyValueCollection().Add("Label", "Country")),
+                    new FieldDefinition("Category", typeof(string), new KeyValueCollection().Add("Label", "Category")),
                     new FieldDefinition("Added", typeof(DateTime), new KeyValueCollection().Add("Label", "Added").Add("IsReadOnly", true).Add("IsSearchable", false))
                 },
                 new KeyValueCollection()
