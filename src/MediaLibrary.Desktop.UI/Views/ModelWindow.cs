@@ -26,7 +26,11 @@ namespace MediaLibrary.Views
 
         public bool TryGet(IModelDefinition modelDefinition, out IModelView<IWpfRenderContext> modelView)
         {
-            modelView = new WpfStackPanelModelView(modelDefinition, this);
+            if (modelDefinition.Identifier == "Movie")
+                modelView = new WpfGridModelView(modelDefinition, this);
+            else
+                modelView = new WpfStackPanelModelView(modelDefinition, this);
+
             return true;
         }
 

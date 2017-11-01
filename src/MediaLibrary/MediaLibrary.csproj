@@ -66,6 +66,10 @@
       <Project>{8A6ECCEB-B35B-4957-8D20-062FC6252A7F}</Project>
       <Name>Neptuo.PresentationModels.Observables</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Neptuo.PresentationModels.UI.Metadata\Neptuo.PresentationModels.UI.Metadata.csproj">
+      <Project>{941693dd-a99e-456b-bf0e-00af29189369}</Project>
+      <Name>Neptuo.PresentationModels.UI.Metadata</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

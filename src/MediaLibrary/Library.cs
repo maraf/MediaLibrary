@@ -4,6 +4,7 @@ using Neptuo.Collections.Specialized;
 using Neptuo.Models.Keys;
 using Neptuo.Observables.Collections;
 using Neptuo.PresentationModels;
+using Neptuo.PresentationModels.UI;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -48,27 +49,89 @@ namespace MediaLibrary
                 "LibraryConfiguration",
                 new List<IFieldDefinition>()
                 {
-                    new FieldDefinition(nameof(LibraryConfiguration.Name), typeof(string), new KeyValueCollection().Add("Label", "Name").Add("IsAutoFocus", true)),
-                    new FieldDefinition(nameof(LibraryConfiguration.FilePath), typeof(string), new KeyValueCollection().Add("Label", "File Path").Add("IsPersistent", false)),
+                    new FieldDefinition(
+                        nameof(LibraryConfiguration.Name), 
+                        typeof(string), 
+                        (MetadataCollection)new MetadataCollection()
+                            .AddLabel("Name")
+                            .AddIsAutoFocus(true)
+                    ),
+                    new FieldDefinition(
+                        nameof(LibraryConfiguration.FilePath), 
+                        typeof(string),
+                        (MetadataCollection)new MetadataCollection()
+                            .AddLabel("File Path")
+                            .Add("IsPersistent", false)
+                    ),
                 },
-                new KeyValueCollection()
+                new MetadataCollection()
             );
 
             MovieDefinition = new ModelDefinition(
                 "Movie",
                 new List<IFieldDefinition>()
                 {
-                    new FieldDefinition(nameof(Movie.Name), typeof(string), new KeyValueCollection().Add("Label", "Name").Add("IsAutoFocus", true)),
-                    new FieldDefinition("OriginalName", typeof(string), new KeyValueCollection().Add("Label", "Original Name")),
-                    new FieldDefinition("Storage", typeof(string), new KeyValueCollection().Add("Label", "Storage")),
-                    new FieldDefinition("Year", typeof(int?), new KeyValueCollection().Add("Label", "Year of issue")),
-                    new FieldDefinition("Country", typeof(string), new KeyValueCollection().Add("Label", "Country")),
-                    new FieldDefinition("Category", typeof(string), new KeyValueCollection().Add("Label", "Category")),
-                    new FieldDefinition("Added", typeof(DateTime), new KeyValueCollection().Add("Label", "Added").Add("IsReadOnly", true).Add("IsSearchable", false))
+                    new FieldDefinition(
+                        nameof(Movie.Name),
+                        typeof(string),
+                        (MetadataCollection)new MetadataCollection()
+                            .AddGrid(0, 0)
+                            .AddGridColumnSpan(2)
+                            .AddLabel("Name")
+                            .AddIsAutoFocus(true)
+                    ),
+                    new FieldDefinition(
+                        "OriginalName",
+                        typeof(string),
+                        (MetadataCollection)new MetadataCollection()
+                            .AddGrid(0, 1)
+                            .AddGridColumnSpan(2)
+                            .AddLabel("Original Name")
+                    ),
+                    new FieldDefinition(
+                        "Storage",
+                        typeof(string),
+                        (MetadataCollection)new MetadataCollection()
+                            .AddGrid(0, 2)
+                            .AddGridColumnSpan(2)
+                            .AddLabel("Storage")
+                    ),
+                    new FieldDefinition(
+                        "Year",
+                        typeof(int?),
+                        (MetadataCollection)new MetadataCollection()
+                            .AddGrid(0, 3)
+                            .AddLabel("Year of issue")
+                    ),
+                    new FieldDefinition(
+                        "Country",
+                        typeof(string),
+                        (MetadataCollection)new MetadataCollection()
+                            .AddGrid(1, 3)
+                            .AddLabel("Country")
+                    ),
+                    new FieldDefinition(
+                        "Category",
+                        typeof(string),
+                        (MetadataCollection)new MetadataCollection()
+                            .AddGrid(0, 4)
+                            .AddGridColumnSpan(2)
+                            .AddLabel("Category")
+                    ),
+                    new FieldDefinition(
+                        nameof(Movie.Added),
+                        typeof(DateTime),
+                        (MetadataCollection)new MetadataCollection()
+                            .AddGrid(1, 5)
+                            .AddGridColumnSpan(2)
+                            .AddLabel("Added")
+                            .AddIsReadOnly(true)
+                            .Add("IsSearchable", false)
+                    )
                 },
-                new KeyValueCollection()
+                new MetadataCollection()
             );
-
+            
             Configuration = new LibraryConfiguration(this);
             Configuration.PropertyChanged += OnConfigurationChanged;
 
