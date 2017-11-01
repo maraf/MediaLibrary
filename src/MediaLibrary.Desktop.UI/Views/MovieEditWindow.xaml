@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:MediaLibrary.Views"
         xmlns:pmui="clr-namespace:Neptuo.PresentationModels.UI.Controls;assembly=Neptuo.PresentationModels.UI.Wpf"
         mc:Ignorable="d"
-        Title="{controls:Localize 'Movie Edit'}" Height="400" Width="400">
+        Title="{controls:Localize 'Movie Edit'}" Width="400" SizeToContent="Height">
     <views:ModelWindow.InputBindings>
         <KeyBinding x:Name="kebClose" Key="Esc" />
     </views:ModelWindow.InputBindings>
@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <!-- Content -->
-        <pmui:ModelView x:Name="ModelView" Margin="8" />
+        <pmui:ModelView x:Name="ModelView" Margin="8,8,8,20" />
 
         <!-- Buttons -->
         <controls:EditButtons SaveClick="OnSaveClick" CloseClick="OnCloseClick" Grid.Row="1" />
