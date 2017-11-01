@@ -17,6 +17,11 @@ namespace Neptuo.PresentationModels.UI
         private readonly Panel parent;
 
         /// <summary>
+        /// An event raised when new element is added to the container.
+        /// </summary>
+        public event Action<UIElement> Added;
+
+        /// <summary>
         /// Creates a new instance for <paramref name="parent"/>.
         /// </summary>
         /// <param name="parent">A panel to add controls to.</param>
@@ -28,7 +33,10 @@ namespace Neptuo.PresentationModels.UI
 
         public void Add(object control)
         {
-            parent.Children.Add((UIElement)control);
+            UIElement element = (UIElement)control;
+            parent.Children.Add(element);
+
+            Added?.Invoke(element);
         }
     }
 }

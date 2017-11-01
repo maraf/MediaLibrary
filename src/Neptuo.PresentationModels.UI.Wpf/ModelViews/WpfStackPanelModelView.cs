@@ -26,14 +26,24 @@ namespace Neptuo.PresentationModels.UI.ModelViews
             StackPanel panel = new StackPanel();
             context.Add(panel);
 
-            IWpfRenderContext fieldContext = new WpfPanelRenderContext(panel);
             foreach (IFieldDefinition fieldDefinition in modelDefinition.Fields)
             {
+                Label label = null;
+                if (fieldDefinition.Metadata.TryGet("Label", out string labelText))
+                {
+                    label = new Label() { Content = labelText };
+                    panel.Children.Add(label);
+                }
+
+                WpfPanelRenderContext fieldContext = new WpfPanelRenderContext(panel);
+                fieldContext.Added += element =>
+                {
+                    if (label != null)
+                        label.Target = element;
+                };
+
                 IFieldView<IWpfRenderContext> fieldView = fieldViewProvider.Get(modelDefinition, fieldDefinition);
                 AddFieldView(fieldDefinition.Identifier, fieldView);
-
-                if (fieldDefinition.Metadata.TryGet("Label", out string label))
-                    fieldContext.Add(new Label() { Content = label });
 
                 fieldView.Render(fieldContext);
             }
