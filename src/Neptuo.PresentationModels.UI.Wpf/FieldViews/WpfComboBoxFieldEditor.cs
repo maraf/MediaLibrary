@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Neptuo.PresentationModels;
 using System.Windows.Controls;
-using Neptuo;
 
 namespace Neptuo.PresentationModels.UI.FieldViews
 {

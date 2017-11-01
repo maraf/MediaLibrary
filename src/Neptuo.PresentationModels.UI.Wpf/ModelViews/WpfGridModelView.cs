@@ -34,8 +34,8 @@ namespace Neptuo.PresentationModels.UI.ModelViews
 
             foreach (IFieldDefinition fieldDefinition in modelDefinition.Fields)
             {
-                int column = fieldDefinition.Metadata.Get("Grid.Column", 0);
-                int row = fieldDefinition.Metadata.Get("Grid.Row", 0);
+                int column = fieldDefinition.Metadata.GetGridColumn(0);
+                int row = fieldDefinition.Metadata.GetGridRow(0);
 
                 fieldPositions.Add((column, row, 0, 0, fieldDefinition));
             }
@@ -57,14 +57,14 @@ namespace Neptuo.PresentationModels.UI.ModelViews
                 node.Column = fieldPosition.column;
                 node.Row = fieldPosition.row;
 
-                if (fieldPosition.definition.Metadata.TryGet("Grid.ColumnSpan", out int columnSpan))
+                if (fieldPosition.definition.Metadata.TryGetGridColumnSpan(out int columnSpan))
                     node.ColumnSpan = columnSpan;
 
-                if (fieldPosition.definition.Metadata.TryGet("Grid.RowSpan", out int rowSpan))
+                if (fieldPosition.definition.Metadata.TryGetGridRowSpan(out int rowSpan))
                     node.RowSpan = rowSpan;
 
                 Label label = null;
-                if (fieldPosition.definition.Metadata.TryGet("Label", out string labelText))
+                if (fieldPosition.definition.Metadata.TryGetLabel(out string labelText))
                 {
                     label = new Label() { Content = labelText };
                     node.Children.Add(label);

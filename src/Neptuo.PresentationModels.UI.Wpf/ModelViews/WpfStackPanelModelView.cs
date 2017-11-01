@@ -29,7 +29,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews
             foreach (IFieldDefinition fieldDefinition in modelDefinition.Fields)
             {
                 Label label = null;
-                if (fieldDefinition.Metadata.TryGet("Label", out string labelText))
+                if (fieldDefinition.Metadata.TryGetLabel(out string labelText))
                 {
                     label = new Label() { Content = labelText };
                     panel.Children.Add(label);
