@@ -50,6 +50,7 @@
     <Compile Include="FieldViews\WpfDateFieldEditor.cs" />
     <Compile Include="FieldViews\WpfInt32FieldEditor.cs" />
     <Compile Include="FieldViews\WpfStringFieldEditor.cs" />
+    <Compile Include="ModelViews\Controls\GridNode.cs" />
     <Compile Include="ModelViews\WpfComboBoxFieldEditor.cs" />
     <Compile Include="ModelViews\WpfStackPanelModelView.cs" />
     <Compile Include="WpfDefaultViewProvider.cs" />

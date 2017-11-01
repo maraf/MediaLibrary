@@ -1,5 +1,6 @@
 ﻿using Neptuo;
 using Neptuo.Collections.Specialized;
+using Neptuo.PresentationModels.UI.ModelViews.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,26 +51,26 @@ namespace Neptuo.PresentationModels.UI.ModelViews
 
             foreach (var fieldPosition in fieldPositions)
             {
-                StackPanel panel = new StackPanel();
-                grid.Children.Add(panel);
+                GridNode node = new GridNode();
+                grid.Children.Add(node);
 
-                panel.SetValue(Grid.ColumnProperty, fieldPosition.column);
-                panel.SetValue(Grid.RowProperty, fieldPosition.row);
+                node.Column = fieldPosition.column;
+                node.Row = fieldPosition.row;
 
                 if (fieldPosition.definition.Metadata.TryGet("Grid.ColumnSpan", out int columnSpan))
-                    panel.SetValue(Grid.ColumnSpanProperty, columnSpan);
+                    node.ColumnSpan = columnSpan;
 
                 if (fieldPosition.definition.Metadata.TryGet("Grid.RowSpan", out int rowSpan))
-                    panel.SetValue(Grid.ColumnSpanProperty, rowSpan);
+                    node.RowSpan = rowSpan;
 
                 Label label = null;
                 if (fieldPosition.definition.Metadata.TryGet("Label", out string labelText))
                 {
                     label = new Label() { Content = labelText };
-                    panel.Children.Add(label);
+                    node.Children.Add(label);
                 }
 
-                WpfPanelRenderContext fieldContext = new WpfPanelRenderContext(panel);
+                WpfPanelRenderContext fieldContext = new WpfPanelRenderContext(node);
                 fieldContext.Added += element =>
                 {
                     if (label != null)
