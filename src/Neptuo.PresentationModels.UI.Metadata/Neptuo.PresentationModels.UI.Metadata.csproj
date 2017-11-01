@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GridAttribute.cs" />
+    <Compile Include="GridRowSpanAttribute.cs" />
+    <Compile Include="GridColumnSpanAttribute.cs" />
     <Compile Include="KeyCollectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
