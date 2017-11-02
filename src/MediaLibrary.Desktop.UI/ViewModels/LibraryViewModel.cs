@@ -1,6 +1,7 @@
 ﻿using MediaLibrary.ViewModels.Commands;
 using MediaLibrary.ViewModels.Services;
 using Neptuo;
+using Neptuo.Collections.Specialized;
 using Neptuo.Models.Keys;
 using Neptuo.Observables;
 using Neptuo.Observables.Commands;
@@ -36,7 +37,7 @@ namespace MediaLibrary.ViewModels
             this.library = library;
             this.navigator = navigator;
 
-            Sorts = new List<SortViewModel>(library.MovieDefinition.Fields.Select(f => new SortViewModel(f)));
+            Sorts = new List<SortViewModel>(library.MovieDefinition.Fields.Where(f => f.Metadata.Get("IsSortable", true)).Select(f => new SortViewModel(f)));
             SortViewModel firstSort = Sorts.FirstOrDefault();
             if (firstSort != null)
                 firstSort.IsActive = true;

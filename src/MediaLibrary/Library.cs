@@ -125,6 +125,8 @@ namespace MediaLibrary
                             .AddGrid(0, 5)
                             .AddGridColumnSpan(2)
                             .AddLabel("Related Movies")
+                            .Add("IsSearchable", false)
+                            .Add("IsSortable", false)
                     ),
                     new FieldDefinition(
                         nameof(Movie.Added),
