@@ -93,5 +93,14 @@ namespace MediaLibrary
 
             return false;
         }
+
+        public override bool Equals(object obj)
+        {
+            Movie other = obj as Movie;
+            if (other == null)
+                return false;
+
+            return Key.Equals(other.Key);
+        }
     }
 }

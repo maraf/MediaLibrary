@@ -46,11 +46,14 @@ namespace MediaLibrary.ViewModels.Commands
         {
             Ensure.Condition.NotEmptyKey(key);
 
-            Movie model = library.Movies.FindByKey(key);
-            if (model == null)
+            Movie selected = library.Movies.FindByKey(key);
+            if (selected == null)
                 return false;
 
-            items.Add(model);
+            if (items.Contains(selected))
+                return false;
+
+            items.Add(selected);
             return true;
         }
     }

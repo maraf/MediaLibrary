@@ -7,7 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
         Title="{controls:Localize 'Media Library - Select Movie'}" Height="500" Width="450">
-    <controls:LibraryView x:Name="Library" ViewModel="{Binding}">
+    <controls:LibraryView x:Name="Library" ViewModel="{Binding}" ListViewMouseDoubleClick="OnListViewMouseDoubleClick">
         <controls:LibraryView.BottomLeftCommands>
             <controls:UiCommand Icon="Plus" Executed="OnSelectExecuted" Text="{controls:Localize 'Select'}" ToolTip="{controls:Localize 'Add Selected Movies'}" />
         </controls:LibraryView.BottomLeftCommands>

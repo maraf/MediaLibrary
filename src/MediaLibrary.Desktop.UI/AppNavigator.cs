@@ -127,6 +127,7 @@ namespace MediaLibrary
 
                 movieSelect = new MovieSelectWindow(navigator);
                 navigator.SetWindow(movieSelect);
+                StartupLocation(movieSelect, (Window)movieEdit ?? main);
 
                 movieSelect.Closed += OnMovieSelectClosed;
                 movieSelect.DataContext = new LibraryViewModel(library);
@@ -143,11 +144,14 @@ namespace MediaLibrary
             movieSelect = null;
         }
 
-        private void StartupLocation(Window wnd)
+        private void StartupLocation(Window wnd, Window owner = null)
         {
-            if (main != null)
+            if (owner == null)
+                owner = main;
+
+            if (owner != null)
             {
-                wnd.Owner = main;
+                wnd.Owner = owner;
                 wnd.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             }
             else

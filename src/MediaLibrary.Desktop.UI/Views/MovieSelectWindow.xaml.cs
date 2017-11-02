@@ -28,9 +28,7 @@ namespace MediaLibrary.Views
             InitializeComponent();
         }
 
-        private void OnSelectExecuted()
-        {
-            navigator.Close(Library.SelectedItems.Select(m => m.Key));
-        }
+        private void OnListViewMouseDoubleClick(object sender, MouseButtonEventArgs e) => OnSelectExecuted();
+        private void OnSelectExecuted() => navigator.Close(Library.SelectedItems.Select(m => m.Key));
     }
 }
