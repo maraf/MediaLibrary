@@ -120,7 +120,7 @@ namespace MediaLibrary
                     ),
                     new FieldDefinition(
                         nameof(Movie.RelatedMovieKeys),
-                        typeof(string),
+                        typeof(IEnumerable<IKey>),
                         (MetadataCollection)new MetadataCollection()
                             .AddGrid(0, 5)
                             .AddGridColumnSpan(2)

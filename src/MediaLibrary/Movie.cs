@@ -49,7 +49,11 @@ namespace MediaLibrary
         /// <summary>
         /// Gets a collection of keys of related movies.
         /// </summary>
-        public RelatedMovieObservableCollection RelatedMovieKeys { get; private set; }
+        public RelatedMovieObservableCollection RelatedMovieKeys
+        {
+            get { return this.GetValueOrDefault(nameof(RelatedMovieKeys), (RelatedMovieObservableCollection)null); }
+            private set { this.TrySetValue(nameof(RelatedMovieKeys), value); }
+        }
 
         /// <summary>
         /// Creates a new instance.
@@ -92,6 +96,21 @@ namespace MediaLibrary
             }
 
             return false;
+        }
+
+        public override bool TrySetValue(string identifier, object value)
+        {
+            if (identifier == nameof(RelatedMovieKeys) && !(value is RelatedMovieObservableCollection))
+            {
+                IEnumerable<IKey> keys = value as IEnumerable<IKey>;
+                RelatedMovieKeys.Clear();
+                if (keys != null)
+                    RelatedMovieKeys.AddRange(keys);
+
+                return true;
+            }
+
+            return base.TrySetValue(identifier, value);
         }
 
         public override bool Equals(object obj)
