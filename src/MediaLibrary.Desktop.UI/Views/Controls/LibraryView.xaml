@@ -36,18 +36,6 @@
                     </ItemsPanelTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="ItemTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <Button Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{Binding ToolTip}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:ImageAwesome Icon="{Binding Icon}" Width="16" Height="16" Margin="2" />
-                                <TextBlock Text="{Binding Text}" VerticalAlignment="Center" />
-                            </StackPanel>
-                        </Button>
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
         </Style>
     </UserControl.Resources>
     <UserControl.InputBindings>

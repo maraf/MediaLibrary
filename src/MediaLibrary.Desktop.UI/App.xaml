@@ -115,5 +115,13 @@
             <Setter Property="Margin" Value="8" />
         </Style>
         
+        <DataTemplate DataType="{x:Type controls:UiCommand}">
+            <Button Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{Binding ToolTip}">
+                <StackPanel Orientation="Horizontal">
+                    <fa:ImageAwesome Icon="{Binding Icon}" Width="{Binding IconSize}" Height="{Binding IconSize}" Margin="2" />
+                    <TextBlock Text="{Binding Text}" VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
+        </DataTemplate>
     </Application.Resources>
 </Application>

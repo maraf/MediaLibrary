@@ -20,6 +20,19 @@ namespace MediaLibrary.Views.Controls
             set { SetValue(IconProperty, value); }
         }
 
+        public double IconSize
+        {
+            get { return (double)GetValue(IconSizeProperty); }
+            set { SetValue(IconSizeProperty, value); }
+        }
+
+        public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(
+            "IconSize", 
+            typeof(double), 
+            typeof(UiCommand), 
+            new PropertyMetadata(16d)
+        );
+
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
             "Icon", 
             typeof(FontAwesomeIcon), 
