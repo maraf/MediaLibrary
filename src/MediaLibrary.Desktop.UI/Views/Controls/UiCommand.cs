@@ -53,21 +53,21 @@ namespace MediaLibrary.Views.Controls
             new PropertyMetadata(null)
         );
 
-        private Action execute;
-        public event Action Execute
+        private Action executed;
+        public event Action Executed
         {
             add
             {
-                execute += value;
+                executed += value;
 
-                if (execute != null)
-                    Command = new ActionCommand(execute);
+                if (executed != null)
+                    Command = new ActionCommand(executed);
             }
             remove
             {
-                execute -= value;
+                executed -= value;
 
-                if (execute == null && Command is ActionCommand)
+                if (executed == null && Command is ActionCommand)
                     Command = null;
             }
         }

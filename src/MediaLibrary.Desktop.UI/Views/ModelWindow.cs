@@ -45,7 +45,7 @@ namespace MediaLibrary.Views
             fieldView = null;
 
             if (modelDefinition.Identifier == nameof(Movie) && fieldDefinition.Identifier == nameof(Movie.RelatedMovieKeys))
-                fieldView = new WpfControlFieldView<RelatedMoviesFieldView>(fieldDefinition, new RelatedMoviesFieldView(new RelatedMoviesViewModel(navigator, library.Movies)));
+                fieldView = new WpfControlFieldView<RelatedMoviesFieldView>(fieldDefinition, new RelatedMoviesFieldView(new RelatedMoviesViewModel(navigator, library)));
             else if (fieldDefinition.Identifier == "Country")
                 fieldView = new WpfComboBoxFieldEditor<string>(fieldDefinition, GetCountries());
             else if (fieldDefinition.Identifier == "Category")

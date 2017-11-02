@@ -19,12 +19,12 @@ namespace MediaLibrary.ViewModels
         public Command<Movie> Remove { get; set; }
         public AddRelatedMovieCommand Add { get; set; }
 
-        public RelatedMoviesViewModel(INavigator navigator, MovieCollection models)
+        public RelatedMoviesViewModel(INavigator navigator, Library library)
         {
             Ensure.NotNull(navigator, "navigator");
             Items = new ObservableCollection<Movie>();
             Remove = new DelegateCommand<Movie>(m => Items.Remove(m));
-            Add = new AddRelatedMovieCommand(navigator, models, Items);
+            Add = new AddRelatedMovieCommand(navigator, library, Items);
         }
     }
 }

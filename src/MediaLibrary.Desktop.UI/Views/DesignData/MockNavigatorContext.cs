@@ -13,5 +13,10 @@ namespace MediaLibrary.Views.DesignData
         {
             throw new NotImplementedException();
         }
+
+        public void Close(object result)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

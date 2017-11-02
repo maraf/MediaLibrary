@@ -60,6 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppLibraryStore.cs" />
+    <Compile Include="AppNavigator.Context.cs" />
     <Compile Include="ViewModels\Commands\AddRelatedMovieCommand.cs" />
     <Compile Include="ViewModels\Commands\CloseCommand.cs" />
     <Compile Include="ViewModels\Commands\DeleteMovieCommand.cs" />
@@ -93,6 +94,9 @@
     <Compile Include="Views\ModelWindow.cs" />
     <Compile Include="Views\MovieEditWindow.xaml.cs">
       <DependentUpon>MovieEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MovieSelectWindow.xaml.cs">
+      <DependentUpon>MovieSelectWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Controls\EditButtons.xaml">
       <SubType>Designer</SubType>
@@ -136,6 +140,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\MovieEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MovieSelectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

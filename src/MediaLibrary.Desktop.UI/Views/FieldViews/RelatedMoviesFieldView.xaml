@@ -7,7 +7,7 @@
              xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
              xmlns:converters="clr-namespace:MediaLibrary.Views.Converters"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
-             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" Background="White" d:DataContext="{x:Static dd:ViewModelLocator.RelatedMovies}">
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" Background="White" d:DataContext="{x:Static dd:ViewModelLocator.Related}">
     <UserControl.Resources>
         <converters:CuttingConverter x:Key="ZeroToVisibleConverter" EdgeValue="0" GreaterValue="Collapsed" EqualValue="Visible" />
     </UserControl.Resources>

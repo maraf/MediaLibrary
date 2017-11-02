@@ -14,16 +14,16 @@ namespace MediaLibrary.ViewModels.Commands
     public class AddRelatedMovieCommand : Command
     {
         private readonly INavigator navigator;
-        private readonly MovieCollection models;
+        private readonly Library library;
         private readonly ObservableCollection<Movie> items;
 
-        public AddRelatedMovieCommand(INavigator navigator, MovieCollection models, ObservableCollection<Movie> items)
+        public AddRelatedMovieCommand(INavigator navigator, Library library, ObservableCollection<Movie> items)
         {
             Ensure.NotNull(navigator, "navigator");
-            Ensure.NotNull(models, "models");
+            Ensure.NotNull(library, "library");
             Ensure.NotNull(items, "items");
             this.navigator = navigator;
-            this.models = models;
+            this.library = library;
             this.items = items;
         }
 
@@ -34,14 +34,19 @@ namespace MediaLibrary.ViewModels.Commands
 
         public override async void Execute()
         {
-            IEnumerable<IKey> keys = await navigator.SelectMoviesAsync();
+            IEnumerable<IKey> keys = await navigator.SelectMoviesAsync(library);
+            if (keys != null)
+            {
+                foreach (IKey key in keys)
+                    AddKey(key);
+            }
         }
 
         public bool AddKey(IKey key)
         {
             Ensure.Condition.NotEmptyKey(key);
 
-            Movie model = models.FindByKey(key);
+            Movie model = library.Movies.FindByKey(key);
             if (model == null)
                 return false;
 

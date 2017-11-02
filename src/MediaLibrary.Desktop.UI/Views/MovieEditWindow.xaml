@@ -9,7 +9,7 @@
         xmlns:pmui="clr-namespace:Neptuo.PresentationModels.UI.Controls;assembly=Neptuo.PresentationModels.UI.Wpf"
         xmlns:pmuimvc="clr-namespace:Neptuo.PresentationModels.UI.ModelViews.Controls;assembly=Neptuo.PresentationModels.UI.Wpf"
         mc:Ignorable="d"
-        Title="{controls:Localize 'Movie Edit'}" Width="400" SizeToContent="Height">
+        Title="{controls:Localize 'Media Library - Movie Edit'}" Width="400" SizeToContent="Height">
     <views:ModelWindow.Resources>
         <Style TargetType="pmuimvc:GridNode">
             <Setter Property="Margin" Value="0,0,8,0" />

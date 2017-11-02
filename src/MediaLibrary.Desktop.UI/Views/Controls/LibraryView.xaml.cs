@@ -89,6 +89,8 @@ namespace MediaLibrary.Views.Controls
             set { SetValue(SelectedItemProperty, value); }
         }
 
+        public IEnumerable<Movie> SelectedItems => lvwMovies.SelectedItems.OfType<Movie>();
+
         public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register(
             "SelectedItem", 
             typeof(Movie), 

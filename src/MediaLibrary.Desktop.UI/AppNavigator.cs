@@ -12,7 +12,7 @@ using System.Windows;
 
 namespace MediaLibrary
 {
-    public class AppNavigator : INavigator
+    public partial class AppNavigator : INavigator
     {
         private readonly App application;
         private readonly ILibraryStore store;
@@ -20,6 +20,7 @@ namespace MediaLibrary
         private MainWindow main;
         private LibraryConfigurationWindow libraryConfiguration;
         private MovieEditWindow movieEdit;
+        private MovieSelectWindow movieSelect;
 
         public AppNavigator(App application, ILibraryStore store)
         {
@@ -36,17 +37,7 @@ namespace MediaLibrary
             {
                 movieEdit = new MovieEditWindow(this, library, null);
                 movieEdit.Closed += OnMovieEditClosed;
-
-                if (main != null)
-                {
-                    movieEdit.Owner = main;
-                    movieEdit.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                }
-                else
-                {
-                    movieEdit.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                }
-
+                StartupLocation(movieEdit);
                 movieEdit.Show();
             }
 
@@ -68,17 +59,7 @@ namespace MediaLibrary
             {
                 movieEdit = new MovieEditWindow(this, library, library.Movies.FindByKey(movieKey));
                 movieEdit.Closed += OnMovieEditClosed;
-
-                if (main != null)
-                {
-                    movieEdit.Owner = main;
-                    movieEdit.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                }
-                else
-                {
-                    movieEdit.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                }
-
+                StartupLocation(movieEdit);
                 movieEdit.Show();
             }
 
@@ -117,17 +98,7 @@ namespace MediaLibrary
             {
                 libraryConfiguration = new LibraryConfigurationWindow(this, library);
                 libraryConfiguration.Closed += OnLibraryConfigurationClosed;
-
-                if (main != null)
-                {
-                    libraryConfiguration.Owner = main;
-                    libraryConfiguration.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                }
-                else
-                {
-                    libraryConfiguration.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                }
-
+                StartupLocation(libraryConfiguration);
                 libraryConfiguration.Show();
             }
 
@@ -145,9 +116,44 @@ namespace MediaLibrary
             return Task.FromResult(MessageBox.Show(message, "Media Library", MessageBoxButton.YesNo) == MessageBoxResult.Yes);
         }
 
-        public Task<IEnumerable<IKey>> SelectMoviesAsync()
+        public Task<IEnumerable<IKey>> SelectMoviesAsync(Library library)
         {
-            return Task.FromResult(Enumerable.Empty<IKey>());
+            Ensure.NotNull(library, "library");
+            TaskCompletionSource<IEnumerable<IKey>> result = new TaskCompletionSource<IEnumerable<IKey>>();
+
+            if (movieSelect == null)
+            {
+                Context<IEnumerable<IKey>> navigator = new Context<IEnumerable<IKey>>(result);
+
+                movieSelect = new MovieSelectWindow(navigator);
+                navigator.SetWindow(movieSelect);
+
+                movieSelect.Closed += OnMovieSelectClosed;
+                movieSelect.DataContext = new LibraryViewModel(library);
+                movieSelect.Show();
+            }
+
+            movieSelect.Activate();
+            return result.Task;
+        }
+
+        private void OnMovieSelectClosed(object sender, EventArgs e)
+        {
+            movieSelect.Closed -= OnMovieSelectClosed;
+            movieSelect = null;
+        }
+
+        private void StartupLocation(Window wnd)
+        {
+            if (main != null)
+            {
+                wnd.Owner = main;
+                wnd.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            }
+            else
+            {
+                wnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            }
         }
     }
 }

@@ -57,20 +57,20 @@ namespace MediaLibrary.Views.DesignData
             }
         }
 
-        private static RelatedMoviesViewModel relatedMovies;
-        public static RelatedMoviesViewModel RelatedMovies
+        private static RelatedMoviesViewModel related;
+        public static RelatedMoviesViewModel Related
         {
             get
             {
-                if (relatedMovies == null)
+                if (related == null)
                 {
-                    relatedMovies = new RelatedMoviesViewModel(new MockNavigator(), LibraryModel.Movies);
-                    relatedMovies.Items.Add(LibraryModel.Movies[0]);
-                    relatedMovies.Items.Add(LibraryModel.Movies[1]);
-                    relatedMovies.Items.Add(LibraryModel.Movies[2]);
+                    related = new RelatedMoviesViewModel(new MockNavigator(), LibraryModel);
+                    related.Items.Add(LibraryModel.Movies[0]);
+                    related.Items.Add(LibraryModel.Movies[1]);
+                    related.Items.Add(LibraryModel.Movies[2]);
                 }
 
-                return relatedMovies;
+                return related;
             }
         }
     }

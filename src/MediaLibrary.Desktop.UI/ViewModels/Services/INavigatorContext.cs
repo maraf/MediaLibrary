@@ -9,5 +9,6 @@ namespace MediaLibrary.ViewModels.Services
     public interface INavigatorContext
     {
         void Close();
+        void Close(object result);
     }
 }
