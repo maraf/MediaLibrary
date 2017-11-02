@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
              ShutdownMode="OnMainWindowClose">
     <Application.Resources>
         <BitmapImage x:Key="IconImage" UriSource="/Views/Resources/Icon32x32.png" />

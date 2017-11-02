@@ -8,7 +8,16 @@
         xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
         mc:Ignorable="d" d:DataContext="{x:Static dd:ViewModelLocator.Main}"
         Title="{controls:Localize 'Media Library'}" Icon="{StaticResource IconImage}" Height="700" Width="500">
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding Create}" />
+        <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding Save}" />
+        <KeyBinding x:Name="kebFind" Modifiers="Ctrl" Key="F" />
+    </Window.InputBindings>
     <controls:LibraryView x:Name="Library" ViewModel="{Binding}" ListViewMouseDoubleClick="lvwMovies_MouseDoubleClick" ListViewMouseSelectionChanged="lvwMovies_SelectionChanged">
+        <controls:LibraryView.InputBindings>
+            <KeyBinding Key="F2" Command="{Binding Edit}" CommandParameter="{Binding SelectedItem.Key, ElementName=Library}" />
+            <KeyBinding Key="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, ElementName=Library}" />
+        </controls:LibraryView.InputBindings>
         <controls:LibraryView.TopCommands>
             <controls:UiCommand Command="{Binding DataContext.Save, ElementName=this}" Icon="Save" ToolTip="{controls:Localize 'Save Library to File'}" />
             <controls:UiCommand Command="{Binding DataContext.OpenConfiguration, ElementName=this}" Icon="Gears" ToolTip="{controls:Localize 'Open Library Configuration'}" />

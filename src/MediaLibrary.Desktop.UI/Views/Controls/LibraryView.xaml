@@ -51,8 +51,6 @@
         </Style>
     </UserControl.Resources>
     <UserControl.InputBindings>
-        <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding Create}" />
-        <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding Save}" />
         <KeyBinding x:Name="kebFind" Modifiers="Ctrl" Key="F" />
     </UserControl.InputBindings>
     <Grid x:Name="Content">
@@ -89,11 +87,6 @@
 
         <!-- ListView -->
         <ListView x:Name="lvwMovies" ItemsSource="{Binding Source={StaticResource MoviesCollectionView}}" SelectionChanged="lvwMovies_SelectionChanged" MouseDoubleClick="lvwMovies_MouseDoubleClick" Grid.Row="1">
-            <ListView.InputBindings>
-                <KeyBinding Key="F2" Command="{Binding Edit}" CommandParameter="{Binding SelectedItem.Key, RelativeSource={RelativeSource AncestorType=ListView, Mode=FindAncestor}}" />
-                <KeyBinding Key="Enter" Command="{Binding Edit}" CommandParameter="{Binding SelectedItem.Key, RelativeSource={RelativeSource AncestorType=ListView, Mode=FindAncestor}}" />
-                <KeyBinding Key="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, RelativeSource={RelativeSource AncestorType=ListView, Mode=FindAncestor}}" />
-            </ListView.InputBindings>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
