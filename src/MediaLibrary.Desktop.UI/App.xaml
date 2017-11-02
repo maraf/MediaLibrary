@@ -46,6 +46,7 @@
         <Style TargetType="fa:ImageAwesome" BasedOn="{StaticResource ImageAwesome}" />
 
         <Style x:Key="PlainButtonStyle" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -53,6 +54,11 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="{StaticResource ActiveBrush}" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style x:Key="IconBarButtonStyle" BasedOn="{StaticResource PlainButtonStyle}" TargetType="Button">
             <Setter Property="Margin" Value="0,8,8,8" />
@@ -114,7 +120,7 @@
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="Margin" Value="8" />
         </Style>
-        
+
         <DataTemplate DataType="{x:Type controls:UiCommand}">
             <Button Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{Binding ToolTip}">
                 <StackPanel Orientation="Horizontal">
@@ -123,5 +129,6 @@
                 </StackPanel>
             </Button>
         </DataTemplate>
+
     </Application.Resources>
 </Application>
