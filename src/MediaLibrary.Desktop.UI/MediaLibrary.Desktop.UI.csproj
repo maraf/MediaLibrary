@@ -65,16 +65,12 @@
     <Compile Include="ViewModels\Commands\DeleteMovieCommand.cs" />
     <Compile Include="ViewModels\Commands\EditMovieCommand.cs" />
     <Compile Include="ViewModels\Commands\SaveCommand.cs" />
-    <Compile Include="ViewModels\FieldViewModel.cs" />
     <Compile Include="ViewModels\RelatedMoviesViewModel.cs" />
     <Compile Include="ViewModels\Services\ILibraryStore.cs" />
     <Compile Include="ViewModels\Services\INavigatorContext.cs" />
     <Compile Include="ViewModels\SortViewModel.cs" />
     <Compile Include="Views\Controls\EditButtons.xaml.cs">
       <DependentUpon>EditButtons.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Controls\FieldEdit.xaml.cs">
-      <DependentUpon>FieldEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\SortView.xaml.cs">
       <DependentUpon>SortView.xaml</DependentUpon>
@@ -97,10 +93,6 @@
       <DependentUpon>MovieEditWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Controls\EditButtons.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Controls\FieldEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
