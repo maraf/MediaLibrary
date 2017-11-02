@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Neptuo.PresentationModels.UI.ModelViews
@@ -47,7 +48,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
 
             for (int i = 0; i < rows; i++)
-                grid.RowDefinitions.Add(new RowDefinition());
+                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(0, GridUnitType.Auto) });
 
             foreach (var fieldPosition in fieldPositions)
             {
