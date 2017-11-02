@@ -38,22 +38,81 @@ namespace MediaLibrary.Views.Controls
         private static void OnViewModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             LibraryView control = (LibraryView)d;
-            control.DataContext = e.NewValue;
+            control.Content.DataContext = e.NewValue;
         }
+
+        public FreezableCollection<UiCommand> TopCommands
+        {
+            get { return (FreezableCollection<UiCommand>)GetValue(TopCommandsProperty); }
+            set { SetValue(TopCommandsProperty, value); }
+        }
+
+        public static readonly DependencyProperty TopCommandsProperty = DependencyProperty.Register(
+            "TopCommands", 
+            typeof(FreezableCollection<UiCommand>), 
+            typeof(LibraryView),
+            new PropertyMetadata(new FreezableCollection<UiCommand>())
+        );
+
+        public FreezableCollection<UiCommand> BottomLeftCommands
+        {
+            get { return (FreezableCollection<UiCommand>)GetValue(BottomLeftCommandsProperty); }
+            set { SetValue(BottomLeftCommandsProperty, value); }
+        }
+
+        public static readonly DependencyProperty BottomLeftCommandsProperty = DependencyProperty.Register(
+            "BottomLeftCommands", 
+            typeof(FreezableCollection<UiCommand>), 
+            typeof(LibraryView),
+            new PropertyMetadata(new FreezableCollection<UiCommand>())
+        );
+
+        public FreezableCollection<UiCommand> BottomRightCommands
+        {
+            get { return (FreezableCollection<UiCommand>)GetValue(BottomRightCommandsProperty); }
+            set { SetValue(BottomRightCommandsProperty, value); }
+        }
+
+        public static readonly DependencyProperty BottomRightCommandsProperty = DependencyProperty.Register(
+            "BottomRightCommands", 
+            typeof(FreezableCollection<UiCommand>), 
+            typeof(LibraryView),
+            new PropertyMetadata(new FreezableCollection<UiCommand>())
+        );
+
+        public event EventHandler<MouseButtonEventArgs> ListViewMouseDoubleClick;
+        public event EventHandler<SelectionChangedEventArgs> ListViewMouseSelectionChanged;
+
+        public Movie SelectedItem
+        {
+            get { return (Movie)GetValue(SelectedItemProperty); }
+            set { SetValue(SelectedItemProperty, value); }
+        }
+
+        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register(
+            "SelectedItem", 
+            typeof(Movie), 
+            typeof(LibraryView), 
+            new PropertyMetadata(null)
+        );
 
         public LibraryView()
         {
             InitializeComponent();
+            SetValue(TopCommandsProperty, new FreezableCollection<UiCommand>());
+            SetValue(BottomLeftCommandsProperty, new FreezableCollection<UiCommand>());
+            SetValue(BottomRightCommandsProperty, new FreezableCollection<UiCommand>());
+
             Background = null;
             DataContextChanged += OnDataContextChanged;
             Loaded += OnLoaded;
 
             kebFind.Command = new DelegateCommand(() => tbxFilter.Focus());
 
-            //brdTop.Background = new SolidColorBrush(SystemColorProvider.ColorizationColor());
-
             movies = (CollectionViewSource)Resources["MoviesCollectionView"];
             movies.Filter += OnMoviesFilter;
+
+            ListViewMouseSelectionChanged += (sender, e) => SelectedItem = lvwMovies.SelectedItem as Movie;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e) => UpdateDefaultSorting();
@@ -72,11 +131,6 @@ namespace MediaLibrary.Views.Controls
         public new void Focus()
         {
             lvwMovies.Focus();
-        }
-
-        private void lvwMovies_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ViewModel.SelectedMovieChanged();
         }
 
         #region Filtering
@@ -108,13 +162,6 @@ namespace MediaLibrary.Views.Controls
         }
 
         private void tbxFilter_GotFocus(object sender, RoutedEventArgs e) => ((TextBox)sender).SelectAll();
-
-        private void lvwMovies_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            Movie movie = (Movie)lvwMovies.SelectedItem;
-            if (movie != null && ViewModel.Edit.CanExecute(movie.Key))
-                ViewModel.Edit.Execute(movie.Key);
-        }
 
         #endregion
 
@@ -152,5 +199,8 @@ namespace MediaLibrary.Views.Controls
         }
 
         #endregion
+
+        private void lvwMovies_SelectionChanged(object sender, SelectionChangedEventArgs e) => ListViewMouseSelectionChanged?.Invoke(this, e);
+        private void lvwMovies_MouseDoubleClick(object sender, MouseButtonEventArgs e) => ListViewMouseDoubleClick?.Invoke(this, e);
     }
 }

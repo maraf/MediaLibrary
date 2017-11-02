@@ -1,4 +1,5 @@
 ﻿<UserControl x:Class="MediaLibrary.Views.Controls.LibraryView"
+             x:Name="this"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -26,13 +27,32 @@
             <Setter Property="Margin" Value="0,1,10,0" />
             <Setter Property="Padding" Value="2" />
         </Style>
+
+        <Style x:Key="CommandsItemsControlStyle" TargetType="ItemsControl">
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Button Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{Binding ToolTip}">
+                            <fa:ImageAwesome Icon="{Binding Icon}" Width="16" Height="16" Margin="2" />
+                        </Button>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding Create}" />
         <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding Save}" />
         <KeyBinding x:Name="kebFind" Modifiers="Ctrl" Key="F" />
     </UserControl.InputBindings>
-    <Grid>
+    <Grid x:Name="Content">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -53,14 +73,16 @@
 
                 <TextBlock Text="{Binding Name}" FontSize="{StaticResource TitleFontSize}" VerticalAlignment="Center" Margin="8,0" />
 
-                <StackPanel Orientation="Horizontal" Grid.Column="2">
+                <ItemsControl ItemsSource="{Binding TopCommands, ElementName=this}" Style="{StaticResource CommandsItemsControlStyle}" Grid.Column="2" />
+
+                <!--<StackPanel Orientation="Horizontal" Grid.Column="2">
                     <Button Command="{Binding Save}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{controls:Localize 'Save Library to File'}">
                         <fa:ImageAwesome Icon="Save" Width="16" Height="16" Margin="2" />
                     </Button>
                     <Button Command="{Binding OpenConfiguration}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{controls:Localize 'Open Library Configuration'}">
                         <fa:ImageAwesome Icon="Gears" />
                     </Button>
-                </StackPanel>
+                </StackPanel>-->
 
                 <Grid Grid.ColumnSpan="2" Grid.Row="1">
                     <TextBox x:Name="tbxFilter" KeyUp="tbxFilter_KeyUp" GotFocus="tbxFilter_GotFocus" Style="{StaticResource SearchTextBoxStyle}" />
@@ -102,24 +124,20 @@
                     <controls:SortView x:Name="srvSorts" ViewModel="{Binding Sorts}" SelectionChanged="srvSorts_SelectionChanged" Margin="8" />
                 </Border>
                 <Grid>
-                    <StackPanel Style="{StaticResource ButtonsLeftStyle}" Margin="8,0,0,0">
-                        <Button Command="{Binding Create}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{controls:Localize 'Create New Movie'}">
-                            <fa:ImageAwesome Icon="Plus" Width="16" Height="16" Margin="2" />
-                        </Button>
-                    </StackPanel>
-                    <StackPanel Style="{StaticResource ButtonsRightStyle}" Margin="0,0,8,0">
-                        <StackPanel.Resources>
-                            <Style TargetType="Button" BasedOn="{StaticResource IconBarButtonStyle}">
-                                <Setter Property="Margin" Value="8,0,0,0" />
-                            </Style>
-                        </StackPanel.Resources>
-                        <Button Command="{Binding Edit}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" ToolTip="{controls:Localize 'Edit Selected Movie'}">
-                            <fa:ImageAwesome Icon="Edit" />
-                        </Button>
-                        <Button Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwMovies}" ToolTip="{controls:Localize 'Delete Selected Movie'}">
-                            <fa:ImageAwesome Icon="Remove" Width="16" Height="16" Margin="2" />
-                        </Button>
-                    </StackPanel>
+                    <ItemsControl ItemsSource="{Binding BottomLeftCommands, ElementName=this}" Style="{StaticResource CommandsItemsControlStyle}" Margin="8,0,0,0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Style="{StaticResource ButtonsLeftStyle}" Margin="0" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                    <ItemsControl ItemsSource="{Binding BottomRightCommands, ElementName=this}" Style="{StaticResource CommandsItemsControlStyle}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Style="{StaticResource ButtonsRightStyle}" Margin="0" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
                 </Grid>
             </StackPanel>
         </Border>

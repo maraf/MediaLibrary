@@ -18,35 +18,20 @@ namespace MediaLibrary.ViewModels
     public class LibraryViewModel : ObservableObject
     {
         private readonly Library library;
-        private readonly INavigator navigator;
 
         public string Name => library.Configuration.Name;
         public IEnumerable<Movie> Movies => library.Movies;
         public IEnumerable<SortViewModel> Sorts { get; }
 
-        public ICommand Create { get; }
-        public Command<IKey> Edit { get; }
-        public Command<IKey> Delete { get; }
-        public ICommand Save { get; }
-        public ICommand OpenConfiguration { get; }
-
-        public LibraryViewModel(Library library, INavigator navigator, ILibraryStore store)
+        public LibraryViewModel(Library library)
         {
             Ensure.NotNull(library, "library");
-            Ensure.NotNull(navigator, "navigator");
             this.library = library;
-            this.navigator = navigator;
 
             Sorts = new List<SortViewModel>(library.MovieDefinition.Fields.Where(f => f.Metadata.Get("IsSortable", true)).Select(f => new SortViewModel(f)));
             SortViewModel firstSort = Sorts.FirstOrDefault();
             if (firstSort != null)
                 firstSort.IsActive = true;
-
-            Create = new DelegateCommand(() => navigator.CreateMovieAsync(library));
-            Edit = new EditMovieCommand(library, navigator);
-            Delete = new DeleteMovieCommand(library.Movies, navigator);
-            Save = new SaveCommand(library, store);
-            OpenConfiguration = new DelegateCommand(() => navigator.LibraryConfigurationAsync(library));
 
             library.Configuration.PropertyChanged += OnConfigurationPropertyChanged;
         }
@@ -55,12 +40,6 @@ namespace MediaLibrary.ViewModels
         {
             if (e.PropertyName == nameof(library.Configuration.Name))
                 RaisePropertyChanged(nameof(Name));
-        }
-        
-        public void SelectedMovieChanged()
-        {
-            ((EditMovieCommand)Edit).RaiseCanExecuteChanged();
-            ((DeleteMovieCommand)Delete).RaiseCanExecuteChanged();
         }
     }
 }

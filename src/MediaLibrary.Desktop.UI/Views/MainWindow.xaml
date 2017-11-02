@@ -1,11 +1,24 @@
 ﻿<Window x:Class="MediaLibrary.Views.MainWindow"
+        x:Name="this"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:dd="clr-namespace:MediaLibrary.Views.DesignData"
         xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
-        mc:Ignorable="d" d:DataContext="{x:Static dd:ViewModelLocator.Library}"
+        mc:Ignorable="d" d:DataContext="{x:Static dd:ViewModelLocator.Main}"
         Title="{controls:Localize 'Media Library'}" Icon="{StaticResource IconImage}" Height="700" Width="500">
-    <controls:LibraryView ViewModel="{Binding}" />
+    <controls:LibraryView x:Name="Library" ViewModel="{Binding}" ListViewMouseDoubleClick="lvwMovies_MouseDoubleClick" ListViewMouseSelectionChanged="lvwMovies_SelectionChanged">
+        <controls:LibraryView.TopCommands>
+            <controls:UiCommand Command="{Binding DataContext.Save, ElementName=this}" Icon="Save" ToolTip="{controls:Localize 'Save Library to File'}" />
+            <controls:UiCommand Command="{Binding DataContext.OpenConfiguration, ElementName=this}" Icon="Gears" ToolTip="{controls:Localize 'Open Library Configuration'}" />
+        </controls:LibraryView.TopCommands>
+        <controls:LibraryView.BottomLeftCommands>
+            <controls:UiCommand Command="{Binding DataContext.Create, ElementName=this}" Icon="Plus" ToolTip="{controls:Localize 'Create New Movie'}" />
+        </controls:LibraryView.BottomLeftCommands>
+        <controls:LibraryView.BottomRightCommands>
+            <controls:UiCommand Command="{Binding DataContext.Edit, ElementName=this}" CommandParameter="{Binding SelectedItem.Key, ElementName=Library}" Icon="Edit" ToolTip="{controls:Localize 'Edit Selected Movie'}" />
+            <controls:UiCommand Command="{Binding DataContext.Delete, ElementName=this}" CommandParameter="{Binding SelectedItem.Key, ElementName=Library}" Icon="Remove" ToolTip="{controls:Localize 'Delete Selected Movie'}" />
+        </controls:LibraryView.BottomRightCommands>
+    </controls:LibraryView>
 </Window>   

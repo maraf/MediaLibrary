@@ -65,6 +65,7 @@
     <Compile Include="ViewModels\Commands\DeleteMovieCommand.cs" />
     <Compile Include="ViewModels\Commands\EditMovieCommand.cs" />
     <Compile Include="ViewModels\Commands\SaveCommand.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RelatedMoviesViewModel.cs" />
     <Compile Include="ViewModels\Services\ILibraryStore.cs" />
     <Compile Include="ViewModels\Services\INavigatorContext.cs" />
@@ -77,6 +78,7 @@
     </Compile>
     <Compile Include="Views\Controls\SortViewModelChangedEventArgs.cs" />
     <Compile Include="Views\Controls\SystemColorProvider.cs" />
+    <Compile Include="Views\Controls\UiCommand.cs" />
     <Compile Include="Views\Converters\BoolConverter.cs" />
     <Compile Include="Views\Converters\CuttingConverter.cs" />
     <Compile Include="Views\Converters\ListSortDirectionToImageAwesomeConverter.cs" />

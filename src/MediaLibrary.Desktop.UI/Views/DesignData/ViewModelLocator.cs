@@ -34,11 +34,26 @@ namespace MediaLibrary.Views.DesignData
             {
                 if (library == null)
                 {
-                    library = new LibraryViewModel(LibraryModel, new MockNavigator(), new MockLibraryStore());
+                    library = new LibraryViewModel(LibraryModel);
                     library.Sorts.First().IsActive = true;
                 }
 
                 return library;
+            }
+        }
+
+        private static MainViewModel main;
+        public static MainViewModel Main
+        {
+            get
+            {
+                if (main == null)
+                {
+                    main = new MainViewModel(LibraryModel, new MockNavigator(), new MockLibraryStore());
+                    main.Sorts.First().IsActive = true;
+                }
+
+                return main;
             }
         }
 

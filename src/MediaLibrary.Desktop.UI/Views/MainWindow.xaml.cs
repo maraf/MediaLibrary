@@ -1,4 +1,8 @@
-﻿using MediaLibrary.Views.Controls;
+﻿using MediaLibrary.ViewModels;
+using MediaLibrary.ViewModels.Services;
+using MediaLibrary.Views.Controls;
+using Neptuo;
+using Neptuo.Observables.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +22,9 @@ namespace MediaLibrary.Views
 {
     public partial class MainWindow : Window
     {
+        public MainViewModel ViewModel => (MainViewModel)DataContext;
+        public LibraryView View => (LibraryView)Content;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -26,9 +33,19 @@ namespace MediaLibrary.Views
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
+            View.Focus();
+        }
 
-            if (Content is LibraryView view)
-                view.Focus();
+        private void lvwMovies_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ViewModel.SelectedMovieChanged();
+        }
+
+        private void lvwMovies_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Movie movie = View.SelectedItem;
+            if (movie != null && ViewModel.Edit.CanExecute(movie.Key))
+                ViewModel.Edit.Execute(movie.Key);
         }
     }
 }
