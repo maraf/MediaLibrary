@@ -44,6 +44,7 @@
     <Compile Include="GridRowSpanAttribute.cs" />
     <Compile Include="GridColumnSpanAttribute.cs" />
     <Compile Include="KeyCollectionExtensions.cs" />
+    <Compile Include="LabelAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
