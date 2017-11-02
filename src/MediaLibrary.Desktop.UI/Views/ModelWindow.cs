@@ -1,4 +1,7 @@
-﻿using Neptuo;
+﻿using MediaLibrary.ViewModels;
+using MediaLibrary.ViewModels.Services;
+using MediaLibrary.Views.FieldViews;
+using Neptuo;
 using Neptuo.PresentationModels;
 using Neptuo.PresentationModels.UI;
 using Neptuo.PresentationModels.UI.FieldViews;
@@ -14,13 +17,16 @@ namespace MediaLibrary.Views
 {
     public abstract class ModelWindow : Window, IModelViewProviderContainer<IWpfRenderContext>, IModelViewProvider<IWpfRenderContext>, IFieldViewProvider<IWpfRenderContext>
     {
+        private readonly INavigator navigator;
         private readonly Library library;
 
         public IModelViewProvider<IWpfRenderContext> ModelViewProvider => this;
 
-        public ModelWindow(Library library)
+        public ModelWindow(INavigator navigator, Library library)
         {
+            Ensure.NotNull(navigator, "navigator");
             Ensure.NotNull(library, "library");
+            this.navigator = navigator;
             this.library = library;
         }
 
@@ -38,7 +44,9 @@ namespace MediaLibrary.Views
         {
             fieldView = null;
 
-            if (fieldDefinition.Identifier == "Country")
+            if (modelDefinition.Identifier == nameof(Movie) && fieldDefinition.Identifier == nameof(Movie.RelatedMovieKeys))
+                fieldView = new WpfControlFieldView<RelatedMoviesFieldView>(fieldDefinition, new RelatedMoviesFieldView(new RelatedMoviesViewModel(navigator, library.Movies)));
+            else if (fieldDefinition.Identifier == "Country")
                 fieldView = new WpfComboBoxFieldEditor<string>(fieldDefinition, GetCountries());
             else if (fieldDefinition.Identifier == "Category")
                 fieldView = new WpfComboBoxFieldEditor<string>(fieldDefinition, GetCategories());

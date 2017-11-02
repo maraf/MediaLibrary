@@ -60,11 +60,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppLibraryStore.cs" />
+    <Compile Include="ViewModels\Commands\AddRelatedMovieCommand.cs" />
     <Compile Include="ViewModels\Commands\CloseCommand.cs" />
     <Compile Include="ViewModels\Commands\DeleteMovieCommand.cs" />
     <Compile Include="ViewModels\Commands\EditMovieCommand.cs" />
     <Compile Include="ViewModels\Commands\SaveCommand.cs" />
     <Compile Include="ViewModels\FieldViewModel.cs" />
+    <Compile Include="ViewModels\RelatedMoviesViewModel.cs" />
     <Compile Include="ViewModels\Services\ILibraryStore.cs" />
     <Compile Include="ViewModels\Services\INavigatorContext.cs" />
     <Compile Include="ViewModels\SortViewModel.cs" />
@@ -80,9 +82,13 @@
     <Compile Include="Views\Controls\SortViewModelChangedEventArgs.cs" />
     <Compile Include="Views\Controls\SystemColorProvider.cs" />
     <Compile Include="Views\Converters\BoolConverter.cs" />
+    <Compile Include="Views\Converters\CuttingConverter.cs" />
     <Compile Include="Views\Converters\ListSortDirectionToImageAwesomeConverter.cs" />
     <Compile Include="Views\DesignData\MockLibraryStore.cs" />
     <Compile Include="Views\DesignData\MockNavigatorContext.cs" />
+    <Compile Include="Views\FieldViews\RelatedMoviesFieldView.xaml.cs">
+      <DependentUpon>RelatedMoviesFieldView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LibraryConfigurationWindow.xaml.cs">
       <DependentUpon>LibraryConfigurationWindow.xaml</DependentUpon>
     </Compile>
@@ -103,6 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\SortView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FieldViews\RelatedMoviesFieldView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

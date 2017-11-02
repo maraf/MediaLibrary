@@ -34,5 +34,10 @@ namespace MediaLibrary.Views.DesignData
         {
             return Task.CompletedTask;
         }
+
+        public Task<IEnumerable<IKey>> SelectMoviesAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

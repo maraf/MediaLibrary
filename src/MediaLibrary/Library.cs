@@ -119,10 +119,18 @@ namespace MediaLibrary
                             .AddLabel("Category")
                     ),
                     new FieldDefinition(
+                        nameof(Movie.RelatedMovieKeys),
+                        typeof(string),
+                        (MetadataCollection)new MetadataCollection()
+                            .AddGrid(0, 5)
+                            .AddGridColumnSpan(2)
+                            .AddLabel("Related Movies")
+                    ),
+                    new FieldDefinition(
                         nameof(Movie.Added),
                         typeof(DateTime),
                         (MetadataCollection)new MetadataCollection()
-                            .AddGrid(1, 5)
+                            .AddGrid(1, 6)
                             .AddGridColumnSpan(2)
                             .AddLabel("Added")
                             .AddIsReadOnly(true)

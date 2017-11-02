@@ -29,8 +29,8 @@ namespace MediaLibrary.Views
         private readonly IModelDefinition modelDefinition;
         private Movie model;
 
-        public MovieEditWindow(Library library, Movie model)
-            : base(library)
+        public MovieEditWindow(INavigator navigator, Library library, Movie model)
+            : base(navigator, library)
         {
             Ensure.NotNull(library, "library");
 

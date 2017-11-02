@@ -11,9 +11,11 @@
         
         <SolidColorBrush x:Key="HoverBrush">#663683D3</SolidColorBrush>
         <SolidColorBrush x:Key="ActiveBrush">#569DE5</SolidColorBrush>
+        <SolidColorBrush x:Key="InactiveBorderBrush">#ABADB3</SolidColorBrush>
 
         <Style x:Key="TextBoxStyle" TargetType="TextBox">
             <Setter Property="Padding" Value="4,2" />
+            <Setter Property="BorderBrush" Value="{StaticResource InactiveBorderBrush}" />
         </Style>
         <Style TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle}" />
         

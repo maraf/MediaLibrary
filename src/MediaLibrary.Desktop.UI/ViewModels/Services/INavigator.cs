@@ -15,5 +15,6 @@ namespace MediaLibrary.ViewModels.Services
         Task EditMovieAsync(Library library, IKey movieKey);
 
         Task<bool> ConfirmAsync(string message);
+        Task<IEnumerable<IKey>> SelectMoviesAsync();
     }
 }

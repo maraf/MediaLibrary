@@ -34,7 +34,7 @@ namespace MediaLibrary
             Ensure.NotNull(library, "library");
             if (movieEdit == null)
             {
-                movieEdit = new MovieEditWindow(library, null);
+                movieEdit = new MovieEditWindow(this, library, null);
                 movieEdit.Closed += OnMovieEditClosed;
 
                 if (main != null)
@@ -66,7 +66,7 @@ namespace MediaLibrary
 
             if (movieEdit == null)
             {
-                movieEdit = new MovieEditWindow(library, library.Movies.FindByKey(movieKey));
+                movieEdit = new MovieEditWindow(this, library, library.Movies.FindByKey(movieKey));
                 movieEdit.Closed += OnMovieEditClosed;
 
                 if (main != null)
@@ -115,7 +115,7 @@ namespace MediaLibrary
             Ensure.NotNull(library, "library");
             if (libraryConfiguration == null)
             {
-                libraryConfiguration = new LibraryConfigurationWindow(library);
+                libraryConfiguration = new LibraryConfigurationWindow(this, library);
                 libraryConfiguration.Closed += OnLibraryConfigurationClosed;
 
                 if (main != null)
@@ -143,6 +143,11 @@ namespace MediaLibrary
         public Task<bool> ConfirmAsync(string message)
         {
             return Task.FromResult(MessageBox.Show(message, "Media Library", MessageBoxButton.YesNo) == MessageBoxResult.Yes);
+        }
+
+        public Task<IEnumerable<IKey>> SelectMoviesAsync()
+        {
+            return Task.FromResult(Enumerable.Empty<IKey>());
         }
     }
 }

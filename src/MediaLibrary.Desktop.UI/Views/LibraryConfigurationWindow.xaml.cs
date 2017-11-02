@@ -26,8 +26,8 @@ namespace MediaLibrary.Views
         private readonly Library library;
         private readonly IModelDefinition modelDefinition;
 
-        public LibraryConfigurationWindow(Library library)
-            : base(library)
+        public LibraryConfigurationWindow(INavigator navigator, Library library)
+            : base(navigator, library)
         {
             Ensure.NotNull(library, "library");
 

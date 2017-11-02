@@ -20,7 +20,6 @@ namespace MediaLibrary.ViewModels.Commands
         }
 
         public override bool CanExecute() => true;
-
         public override void Execute() => context.Close();
     }
 }
