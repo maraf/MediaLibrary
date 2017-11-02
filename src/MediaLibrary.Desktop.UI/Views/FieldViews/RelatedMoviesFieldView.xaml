@@ -11,7 +11,7 @@
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" Background="White" d:DataContext="{x:Static dd:ViewModelLocator.Related}">
     <UserControl.Resources>
         <converters:CuttingConverter x:Key="ZeroToVisibleConverter" EdgeValue="0" GreaterValue="Collapsed" EqualValue="Visible" />
-        
+
         <CollectionViewSource x:Key="ItemsViewSource" Source="{Binding Items}">
             <CollectionViewSource.SortDescriptions>
                 <cm:SortDescription PropertyName="Name" />
@@ -23,37 +23,45 @@
             <Setter Property="ItemContainerStyle" Value="{StaticResource ListViewItemStyle}" />
         </Style>
     </UserControl.Resources>
-    <Border BorderThickness="1" BorderBrush="{StaticResource InactiveBorderBrush}" SnapsToDevicePixels="True">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-            <!-- Items -->
+        <!-- Items -->
+        <Border BorderThickness="1" BorderBrush="{StaticResource InactiveBorderBrush}" SnapsToDevicePixels="True">
             <Grid>
-                <ListView x:Name="lvwItems" ItemsSource="{Binding Source={StaticResource ItemsViewSource}}">
-                    <ListView.ItemTemplate>
+                <ItemsControl x:Name="lvwItems" ItemsSource="{Binding Source={StaticResource ItemsViewSource}}">
+                    <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}" Padding="4,0" />
+                            <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource InactiveBorderBrush}">
+                                <Grid Margin="4">
+                                    <TextBlock Text="{Binding Name}" />
+                                    <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.Remove}" CommandParameter="{Binding}" 
+                                     Style="{StaticResource PlainButtonStyle}" ToolTip="{controls:Localize 'Remove Selected Movie'}" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <fa:ImageAwesome Icon="Remove" Width="10" Height="10" />
+                                    </Button>
+                                </Grid>
+                            </Border>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
-                <TextBlock Text="{controls:Localize 'No Related Movies'}" Visibility="{Binding Items.Count, Converter={StaticResource ZeroToVisibleConverter}}" Padding="4" />
+                <TextBlock Text="{controls:Localize 'No Related Movies'}" Visibility="{Binding Items.Count, Converter={StaticResource ZeroToVisibleConverter}}" Margin="4" Opacity=".5" />
             </Grid>
+        </Border>
 
-            <!-- Commands -->
-            <Border BorderThickness="0,1,0,0" BorderBrush="{StaticResource InactiveBorderBrush}" SnapsToDevicePixels="True" Grid.Row="1">
-                <Grid Margin="2,2,2,0">
-                    <Button Command="{Binding Add}" Style="{StaticResource PlainButtonStyle}" ToolTip="{controls:Localize 'Add Movie'}" HorizontalAlignment="Left">
-                        <fa:ImageAwesome Icon="Plus" Width="16" Height="16" Margin="2" />
-                    </Button>
-                    <Button Command="{Binding Remove}" Style="{StaticResource PlainButtonStyle}" CommandParameter="{Binding SelectedItem.Key, ElementName=lvwItems}" ToolTip="{controls:Localize 'Remove Selected Movie'}" HorizontalAlignment="Right">
-                        <fa:ImageAwesome Icon="Remove" Width="16" Height="16" Margin="2" />
-                    </Button>
-                </Grid>
-            </Border>
-        </Grid>
-    </Border>
+        <!-- Commands -->
+        <Border Grid.Row="1">
+            <Grid Margin="2,2,2,0">
+                <Button Command="{Binding Add}" Style="{StaticResource PlainButtonStyle}" ToolTip="{controls:Localize 'Add Related Movie'}" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Icon="Plus" Width="12" Height="12" Margin="2" />
+                        <TextBlock Text="{controls:Localize 'Add Related Movie'}" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
 </UserControl>
