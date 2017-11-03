@@ -137,7 +137,12 @@ namespace MediaLibrary
                     if (getter.TryGetValue(fieldDefinition.Identifier, out object value))
                     {
                         if (value != null && converters.TryConvert(value.GetType(), typeof(string), value, out object stringValue))
-                            element.SetAttributeValue(fieldDefinition.Identifier, (string)stringValue);
+                        {
+                            if (fieldDefinition.Metadata.Get("IsXmlElementContent", false))
+                                element.Value = (string)stringValue;
+                            else
+                                element.SetAttributeValue(fieldDefinition.Identifier, (string)stringValue);
+                        }
                     }
                 }
             }
@@ -219,9 +224,18 @@ namespace MediaLibrary
             {
                 if (fieldDefinition.Metadata.Get("IsPersistent", true))
                 {
-                    XAttribute attribute = element.Attribute(fieldDefinition.Identifier);
-                    if (attribute != null && converters.TryConvert(typeof(string), fieldDefinition.FieldType, attribute.Value, out object value))
-                        setter.TrySetValue(fieldDefinition.Identifier, value);
+                    string rawValue = null;
+                    if (fieldDefinition.Metadata.Get("IsXmlElementContent", false))
+                        rawValue = element.Value;
+                    else
+                        rawValue = element.Attribute(fieldDefinition.Identifier)?.Value;
+
+                    if (rawValue != null)
+                    {
+                        rawValue = rawValue.Trim();
+                        if (converters.TryConvert(typeof(string), fieldDefinition.FieldType, rawValue, out object value))
+                            setter.TrySetValue(fieldDefinition.Identifier, value);
+                    }
                 }
             }
         }

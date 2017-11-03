@@ -129,10 +129,19 @@ namespace MediaLibrary
                             .Add("IsSortable", false)
                     ),
                     new FieldDefinition(
+                        "Description",
+                        typeof(string),
+                        (MetadataCollection)new MetadataCollection()
+                            .AddGrid(0, 6)
+                            .AddGridColumnSpan(2)
+                            .AddLabel("Description")
+                            .Add("IsXmlElementContent", true)
+                    ),
+                    new FieldDefinition(
                         nameof(Movie.Added),
                         typeof(DateTime),
                         (MetadataCollection)new MetadataCollection()
-                            .AddGrid(1, 6)
+                            .AddGrid(1, 7)
                             .AddGridColumnSpan(2)
                             .AddLabel("Added")
                             .AddIsReadOnly(true)

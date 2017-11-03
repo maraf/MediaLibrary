@@ -45,7 +45,7 @@
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MSTest.TestFramework.1.1.18\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Neptuo, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Neptuo">
       <HintPath>..\..\packages\Neptuo.5.5.0\lib\net45\Neptuo.dll</HintPath>
     </Reference>
     <Reference Include="Neptuo.Models, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -82,6 +82,10 @@
     <ProjectReference Include="..\..\src\MediaLibrary\MediaLibrary.csproj">
       <Project>{9fe95cc7-67a8-474e-8b71-6734fda3ac9a}</Project>
       <Name>MediaLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Neptuo.PresentationModels.Observables\Neptuo.PresentationModels.Observables.csproj">
+      <Project>{8A6ECCEB-B35B-4957-8D20-062FC6252A7F}</Project>
+      <Name>Neptuo.PresentationModels.Observables</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

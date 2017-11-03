@@ -2,7 +2,9 @@
 <MediaLibrary xmlns="http://schemas.neptuo.com/xsd/MediaLibrary/v1.xsd">
   <Movies>
     <Movie Name="Movie 1" ID="1" />
-    <Movie Name="Movie 2" ID="2" />
+    <Movie Name="Movie 2" ID="2">
+      Description
+    </Movie>
   </Movies>
   <RelatedMovies>
     <Related SourceID="1" TargetID="2" />

@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Neptuo.Models.Keys;
+using Neptuo.PresentationModels;
 using System.IO;
 
 namespace MediaLibrary.Test
@@ -35,6 +36,7 @@ namespace MediaLibrary.Test
             Assert.IsTrue(movie1.RelatedMovieKeys.Contains(MovieKey2));
 
             Assert.AreEqual("Movie 2", movie2.Name);
+            Assert.AreEqual("Description", movie2.GetValueOrDefault("Description", (string)null));
             Assert.AreEqual(1, movie2.RelatedMovieKeys.Count);
             Assert.IsTrue(movie2.RelatedMovieKeys.Contains(MovieKey1));
         }
@@ -50,6 +52,7 @@ namespace MediaLibrary.Test
 
             Movie movie2 = new Movie(MovieKey2, library);
             movie2.Name = "Movie 2";
+            movie2.TrySetValue("Description", "Description");
             library.Movies.Add(movie2);
 
             movie1.RelatedMovieKeys.Add(movie2.Key);
