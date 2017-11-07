@@ -49,7 +49,7 @@ namespace MediaLibrary.Views.DesignData
             {
                 if (main == null)
                 {
-                    main = new MainViewModel(LibraryModel, new MockNavigator(), new MockLibraryStore());
+                    main = new MainViewModel(LibraryModel, new MockNavigator(), new MockLibraryStore(), new MockChangeTracker());
                     main.Sorts.First().IsActive = true;
                 }
 

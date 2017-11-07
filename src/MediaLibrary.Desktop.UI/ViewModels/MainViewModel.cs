@@ -20,10 +20,28 @@ namespace MediaLibrary.ViewModels
         public ICommand Save { get; }
         public ICommand OpenConfiguration { get; }
 
-        public MainViewModel(Library library, INavigator navigator, ILibraryStore store)
+        private bool hasChange;
+        public bool HasChange
+        {
+            get { return hasChange; }
+            set
+            {
+                if (hasChange != value)
+                {
+                    hasChange = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public MainViewModel(Library library, INavigator navigator, ILibraryStore store, IChangeTracker changeTracker)
             : base(library)
         {
             Ensure.NotNull(navigator, "navigator");
+            Ensure.NotNull(changeTracker, "changeTracker");
+
+            changeTracker.Added += () => HasChange = true;
+            changeTracker.Cleared += () => HasChange = false;
 
             Create = new DelegateCommand(() => navigator.CreateMovieAsync(library));
             Edit = new EditMovieCommand(library, navigator);
