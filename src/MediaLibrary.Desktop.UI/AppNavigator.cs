@@ -16,18 +16,21 @@ namespace MediaLibrary
     {
         private readonly App application;
         private readonly ILibraryStore store;
+        private readonly IChangeTracker changeTracker;
 
         private MainWindow main;
         private LibraryConfigurationWindow libraryConfiguration;
         private MovieEditWindow movieEdit;
         private MovieSelectWindow movieSelect;
 
-        public AppNavigator(App application, ILibraryStore store)
+        public AppNavigator(App application, ILibraryStore store, IChangeTracker changeTracker)
         {
             Ensure.NotNull(application, "application");
             Ensure.NotNull(store, "store");
+            Ensure.NotNull(changeTracker, "changeTracker");
             this.application = application;
             this.store = store;
+            this.changeTracker = changeTracker;
         }
 
         public async Task CreateMovieAsync(Library library)
@@ -35,7 +38,7 @@ namespace MediaLibrary
             Ensure.NotNull(library, "library");
             if (movieEdit == null)
             {
-                movieEdit = new MovieEditWindow(this, library, null);
+                movieEdit = new MovieEditWindow(this, changeTracker, library, null);
                 movieEdit.Closed += OnMovieEditClosed;
                 StartupLocation(movieEdit);
                 movieEdit.Show();
@@ -57,7 +60,7 @@ namespace MediaLibrary
 
             if (movieEdit == null)
             {
-                movieEdit = new MovieEditWindow(this, library, library.Movies.FindByKey(movieKey));
+                movieEdit = new MovieEditWindow(this, changeTracker, library, library.Movies.FindByKey(movieKey));
                 movieEdit.Closed += OnMovieEditClosed;
                 StartupLocation(movieEdit);
                 movieEdit.Show();
@@ -96,7 +99,7 @@ namespace MediaLibrary
             Ensure.NotNull(library, "library");
             if (libraryConfiguration == null)
             {
-                libraryConfiguration = new LibraryConfigurationWindow(this, library);
+                libraryConfiguration = new LibraryConfigurationWindow(this, changeTracker, library);
                 libraryConfiguration.Closed += OnLibraryConfigurationClosed;
                 StartupLocation(libraryConfiguration);
                 libraryConfiguration.Show();

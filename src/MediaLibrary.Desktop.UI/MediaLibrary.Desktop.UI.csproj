@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AppChangeTracker.cs" />
     <Compile Include="AppLibraryStore.cs" />
     <Compile Include="AppNavigator.Context.cs" />
     <Compile Include="ViewModels\Commands\AddRelatedMovieCommand.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="ViewModels\Commands\SaveCommand.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RelatedMoviesViewModel.cs" />
+    <Compile Include="ViewModels\Services\IChangeTracker.cs" />
     <Compile Include="ViewModels\Services\ILibraryStore.cs" />
     <Compile Include="ViewModels\Services\INavigatorContext.cs" />
     <Compile Include="ViewModels\SortViewModel.cs" />

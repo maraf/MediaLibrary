@@ -27,7 +27,7 @@ namespace MediaLibrary
             base.OnStartup(e);
 
             AppLibraryStore store = new AppLibraryStore(Settings.Default, new XmlStore());
-            AppNavigator navigator = new AppNavigator(this, store);
+            AppNavigator navigator = new AppNavigator(this, store, new AppChangeTracker());
 
             string filePath = null;
             if (String.IsNullOrEmpty(Settings.Default.DefaultFilePath) || !File.Exists(Settings.Default.DefaultFilePath))

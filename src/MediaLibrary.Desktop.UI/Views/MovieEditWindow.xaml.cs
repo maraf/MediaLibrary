@@ -2,8 +2,7 @@
 using MediaLibrary.ViewModels.Services;
 using Neptuo;
 using Neptuo.Observables.Commands;
-using Neptuo.PresentationModels.UI;
-using Neptuo.PresentationModels.UI.ModelViews;
+using Neptuo.PresentationModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,27 +16,27 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Neptuo.PresentationModels;
-using Neptuo.PresentationModels.UI.FieldViews;
-using Neptuo.PresentationModels.TypeModels;
 
 namespace MediaLibrary.Views
 {
     public partial class MovieEditWindow : ModelWindow
     {
+        private readonly IChangeTracker changeTracker;
         private readonly Library library;
         private readonly IModelDefinition modelDefinition;
         private Movie model;
 
-        public MovieEditWindow(INavigator navigator, Library library, Movie model)
+        public MovieEditWindow(INavigator navigator, IChangeTracker changeTracker, Library library, Movie model)
             : base(navigator, library)
         {
+            Ensure.NotNull(changeTracker, "changeTracker");
             Ensure.NotNull(library, "library");
 
             InitializeComponent();
 
             kebClose.Command = new DelegateCommand(Close);
 
+            this.changeTracker = changeTracker;
             this.library = library;
             this.modelDefinition = library.MovieDefinition;
             this.model = model;
@@ -67,8 +66,7 @@ namespace MediaLibrary.Views
             if (model == null)
                 model = library.Create();
 
-            CopyModelValueProvider copy = new CopyModelValueProvider(modelDefinition, true);
-            copy.Update(model, ModelView);
+            changeTracker.UpdateModel(modelDefinition, model, ModelView);
 
             Close();
         }

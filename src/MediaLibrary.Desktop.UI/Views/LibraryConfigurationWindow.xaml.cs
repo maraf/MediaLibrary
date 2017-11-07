@@ -23,18 +23,21 @@ namespace MediaLibrary.Views
 {
     public partial class LibraryConfigurationWindow : ModelWindow
     {
+        private readonly IChangeTracker changeTracker;
         private readonly Library library;
         private readonly IModelDefinition modelDefinition;
 
-        public LibraryConfigurationWindow(INavigator navigator, Library library)
+        public LibraryConfigurationWindow(INavigator navigator, IChangeTracker changeTracker, Library library)
             : base(navigator, library)
         {
+            Ensure.NotNull(changeTracker, "changeTracker");
             Ensure.NotNull(library, "library");
 
             InitializeComponent();
 
             kebClose.Command = new DelegateCommand(Close);
 
+            this.changeTracker = changeTracker;
             this.library = library;
             this.modelDefinition = library.ConfigurationDefinition;
         }
@@ -50,16 +53,10 @@ namespace MediaLibrary.Views
 
         private void OnSaveClick()
         {
-            CopyModelValueProvider copy = new CopyModelValueProvider(modelDefinition, true);
-            copy.Update(library.Configuration, ModelView);
-
+            changeTracker.UpdateModel(modelDefinition, library.Configuration, ModelView);
             Close();
         }
 
         private void OnCloseClick() => Close();
-
-        #region Presentation Models
-
-        #endregion
     }
 }
