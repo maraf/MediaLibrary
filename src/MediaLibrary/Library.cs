@@ -101,7 +101,7 @@ namespace MediaLibrary
                         typeof(int?),
                         (MetadataCollection)new MetadataCollection()
                             .AddGrid(0, 3)
-                            .AddLabel("Year of issue")
+                            .AddLabel("Year")
                     ),
                     new FieldDefinition(
                         "Country",
@@ -135,6 +135,7 @@ namespace MediaLibrary
                             .AddGrid(0, 6)
                             .AddGridColumnSpan(2)
                             .AddLabel("Description")
+                            .Add("IsSortable", false)
                             .Add("IsXmlElementContent", true)
                     ),
                     new FieldDefinition(

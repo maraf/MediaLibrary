@@ -19,7 +19,9 @@
         </Grid.RowDefinitions>
 
         <!-- Content -->
-        <pmui:ModelView x:Name="ModelView" Margin="8" />
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <pmui:ModelView x:Name="ModelView" Margin="8" />
+        </ScrollViewer>
 
         <!-- Buttons -->
         <controls:EditButtons SaveClick="OnSaveClick" CloseClick="OnCloseClick" Grid.Row="1" />
