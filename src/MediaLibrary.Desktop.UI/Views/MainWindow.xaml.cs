@@ -2,7 +2,6 @@
 using MediaLibrary.ViewModels.Services;
 using MediaLibrary.Views.Controls;
 using Neptuo;
-using Neptuo.Observables.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
