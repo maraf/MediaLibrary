@@ -116,7 +116,8 @@ namespace MediaLibrary
 
         public Task<bool> ConfirmAsync(string message)
         {
-            return Task.FromResult(MessageBox.Show(message, "Media Library", MessageBoxButton.YesNo) == MessageBoxResult.Yes);
+            bool result = MessageBox.Show(message, "Media Library", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
+            return Task.Run(() => result);
         }
 
         public Task<IEnumerable<IKey>> SelectMoviesAsync(Library library)
