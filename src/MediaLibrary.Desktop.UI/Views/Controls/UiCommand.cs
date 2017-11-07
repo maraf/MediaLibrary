@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
 namespace MediaLibrary.Views.Controls
 {
-    public class UiCommand : Freezable, INotifyPropertyChanged
+    public class UiCommand : ContentControl
     {
         public FontAwesomeIcon Icon
         {
@@ -50,7 +51,7 @@ namespace MediaLibrary.Views.Controls
             "Command",
             typeof(ICommand),
             typeof(UiCommand),
-            new PropertyMetadata(OnCommandChanged)
+            new PropertyMetadata(null)
         );
 
         public object CommandParameter
@@ -97,54 +98,6 @@ namespace MediaLibrary.Views.Controls
             typeof(UiCommand),
             new PropertyMetadata(null)
         );
-
-
-        public string ToolTip
-        {
-            get { return (string)GetValue(ToolTipProperty); }
-            set { SetValue(ToolTipProperty, value); }
-        }
-
-        public static readonly DependencyProperty ToolTipProperty = DependencyProperty.Register(
-            "ToolTip",
-            typeof(string),
-            typeof(UiCommand),
-            new PropertyMetadata(null)
-        );
-
-        public Brush Foreground
-        {
-            get { return (Brush)GetValue(ForegroundProperty); }
-            set { SetValue(ForegroundProperty, value); }
-        }
-
-        public static readonly DependencyProperty ForegroundProperty = DependencyProperty.Register(
-            "Foreground", 
-            typeof(Brush), 
-            typeof(UiCommand), 
-            new PropertyMetadata(null)
-        );
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public UiCommand()
-        {
-        }
-
-        private static void OnCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((UiCommand)d).PropertyChanged?.Invoke(d, new PropertyChangedEventArgs(e.Property.Name));
-        }
-
-        protected override Freezable CreateInstanceCore()
-        {
-            return new UiCommand()
-            {
-                Command = Command,
-                Text = Text,
-                ToolTip = ToolTip
-            };
-        }
 
         private class ActionCommand : Command
         {

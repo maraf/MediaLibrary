@@ -1,7 +1,9 @@
 ﻿using MediaLibrary.ViewModels;
+using Neptuo.Observables.Collections;
 using Neptuo.Observables.Commands;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -41,43 +43,43 @@ namespace MediaLibrary.Views.Controls
             control.Content.DataContext = e.NewValue;
         }
 
-        public FreezableCollection<UiCommand> TopCommands
+        public ObservableCollection<UiCommand> TopCommands
         {
-            get { return (FreezableCollection<UiCommand>)GetValue(TopCommandsProperty); }
+            get { return (ObservableCollection<UiCommand>)GetValue(TopCommandsProperty); }
             set { SetValue(TopCommandsProperty, value); }
         }
 
         public static readonly DependencyProperty TopCommandsProperty = DependencyProperty.Register(
-            "TopCommands", 
-            typeof(FreezableCollection<UiCommand>), 
+            "TopCommands",
+            typeof(ObservableCollection<UiCommand>),
             typeof(LibraryView),
-            new PropertyMetadata(new FreezableCollection<UiCommand>())
+            new PropertyMetadata(new ObservableCollection<UiCommand>())
         );
 
-        public FreezableCollection<UiCommand> BottomLeftCommands
+        public ObservableCollection<UiCommand> BottomLeftCommands
         {
-            get { return (FreezableCollection<UiCommand>)GetValue(BottomLeftCommandsProperty); }
+            get { return (ObservableCollection<UiCommand>)GetValue(BottomLeftCommandsProperty); }
             set { SetValue(BottomLeftCommandsProperty, value); }
         }
 
         public static readonly DependencyProperty BottomLeftCommandsProperty = DependencyProperty.Register(
-            "BottomLeftCommands", 
-            typeof(FreezableCollection<UiCommand>), 
+            "BottomLeftCommands",
+            typeof(ObservableCollection<UiCommand>),
             typeof(LibraryView),
-            new PropertyMetadata(new FreezableCollection<UiCommand>())
+            new PropertyMetadata(new ObservableCollection<UiCommand>())
         );
 
-        public FreezableCollection<UiCommand> BottomRightCommands
+        public ObservableCollection<UiCommand> BottomRightCommands
         {
-            get { return (FreezableCollection<UiCommand>)GetValue(BottomRightCommandsProperty); }
+            get { return (ObservableCollection<UiCommand>)GetValue(BottomRightCommandsProperty); }
             set { SetValue(BottomRightCommandsProperty, value); }
         }
 
         public static readonly DependencyProperty BottomRightCommandsProperty = DependencyProperty.Register(
-            "BottomRightCommands", 
-            typeof(FreezableCollection<UiCommand>), 
+            "BottomRightCommands",
+            typeof(ObservableCollection<UiCommand>),
             typeof(LibraryView),
-            new PropertyMetadata(new FreezableCollection<UiCommand>())
+            new PropertyMetadata(new ObservableCollection<UiCommand>())
         );
 
         public event EventHandler<MouseButtonEventArgs> ListViewMouseDoubleClick;
@@ -92,18 +94,18 @@ namespace MediaLibrary.Views.Controls
         public IEnumerable<Movie> SelectedItems => lvwMovies.SelectedItems.OfType<Movie>();
 
         public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register(
-            "SelectedItem", 
-            typeof(Movie), 
-            typeof(LibraryView), 
+            "SelectedItem",
+            typeof(Movie),
+            typeof(LibraryView),
             new PropertyMetadata(null)
         );
 
         public LibraryView()
         {
             InitializeComponent();
-            SetValue(TopCommandsProperty, new FreezableCollection<UiCommand>());
-            SetValue(BottomLeftCommandsProperty, new FreezableCollection<UiCommand>());
-            SetValue(BottomRightCommandsProperty, new FreezableCollection<UiCommand>());
+            SetValue(TopCommandsProperty, new ObservableCollection<UiCommand>());
+            SetValue(BottomLeftCommandsProperty, new ObservableCollection<UiCommand>());
+            SetValue(BottomRightCommandsProperty, new ObservableCollection<UiCommand>());
 
             Background = null;
             DataContextChanged += OnDataContextChanged;
@@ -116,7 +118,7 @@ namespace MediaLibrary.Views.Controls
 
             ListViewMouseSelectionChanged += (sender, e) => SelectedItem = lvwMovies.SelectedItem as Movie;
         }
-
+        
         private void OnLoaded(object sender, RoutedEventArgs e) => UpdateDefaultSorting();
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e) => UpdateDefaultSorting();
 

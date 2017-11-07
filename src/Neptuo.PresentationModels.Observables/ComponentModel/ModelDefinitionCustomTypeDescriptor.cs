@@ -31,7 +31,7 @@ namespace Neptuo.PresentationModels.Observables.ComponentModel
 
         string ICustomTypeDescriptor.GetComponentName() => null;
 
-        TypeConverter ICustomTypeDescriptor.GetConverter() => null;
+        TypeConverter ICustomTypeDescriptor.GetConverter() => new TypeConverter();
 
         EventDescriptor ICustomTypeDescriptor.GetDefaultEvent() => null;
 
