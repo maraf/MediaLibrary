@@ -54,12 +54,25 @@ namespace MediaLibrary.Views
                 ViewModel.Edit.Execute(movie.Key);
         }
 
+        private bool isConfirmed;
+
         private async void OnClosing(object sender, CancelEventArgs e)
         {
+            if (isConfirmed)
+            {
+                isConfirmed = false;
+                return;
+            }
+
             if (ViewModel.HasChange)
             {
+                e.Cancel = true;
+
                 if (await navigator.ConfirmAsync("You have unsaved changes. Do you want to save them now?"))
                     ViewModel.Save.Execute(null);
+
+                isConfirmed = true;
+                Close();
             }
         }
     }
