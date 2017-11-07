@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComponentModel\FieldDefinitionPropertyDescriptor.cs" />
-    <Compile Include="IModelDefinitionContainer.cs" />
+    <Compile Include="_\IModelDefinitionContainer.cs" />
     <Compile Include="ComponentModel\ModelDefinitionCustomTypeDescriptor.cs" />
     <Compile Include="ObservableModel.cs" />
     <Compile Include="ComponentModel\ModelDefinitionContainerTypeDescriptorProvider.cs" />
