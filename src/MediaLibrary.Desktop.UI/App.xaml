@@ -124,8 +124,8 @@
         <DataTemplate DataType="{x:Type controls:UiCommand}">
             <Button Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{Binding ToolTip}">
                 <StackPanel Orientation="Horizontal">
-                    <fa:ImageAwesome Icon="{Binding Icon}" Width="{Binding IconSize}" Height="{Binding IconSize}" Margin="2" />
-                    <TextBlock Text="{Binding Text}" VerticalAlignment="Center" />
+                    <fa:ImageAwesome Icon="{Binding Icon}" Width="{Binding IconSize}" Height="{Binding IconSize}" Foreground="{Binding Foreground}" Margin="2" />
+                    <TextBlock Text="{Binding Text}" Foreground="{Binding Foreground}" VerticalAlignment="Center" />
                 </StackPanel>
             </Button>
         </DataTemplate>

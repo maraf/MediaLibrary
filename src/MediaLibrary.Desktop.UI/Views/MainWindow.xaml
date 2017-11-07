@@ -19,7 +19,7 @@
             <KeyBinding Key="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, ElementName=Library}" />
         </controls:LibraryView.InputBindings>
         <controls:LibraryView.TopCommands>
-            <controls:UiCommand Command="{Binding DataContext.Save, ElementName=this}" Icon="Save" ToolTip="{controls:Localize 'Save Library to File'}" />
+            <controls:UiCommand Command="{Binding DataContext.Save, ElementName=this}" Icon="Save" ToolTip="{controls:Localize 'Save Library to File'}" Foreground="Red" />
             <controls:UiCommand Command="{Binding DataContext.OpenConfiguration, ElementName=this}" Icon="Gears" ToolTip="{controls:Localize 'Open Library Configuration'}" />
         </controls:LibraryView.TopCommands>
         <controls:LibraryView.BottomLeftCommands>

@@ -112,6 +112,19 @@ namespace MediaLibrary.Views.Controls
             new PropertyMetadata(null)
         );
 
+        public Brush Foreground
+        {
+            get { return (Brush)GetValue(ForegroundProperty); }
+            set { SetValue(ForegroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty ForegroundProperty = DependencyProperty.Register(
+            "Foreground", 
+            typeof(Brush), 
+            typeof(UiCommand), 
+            new PropertyMetadata(null)
+        );
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public UiCommand()
