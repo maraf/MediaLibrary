@@ -4,6 +4,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
+             xmlns:converters="clr-namespace:MediaLibrary.Views.Converters"
              ShutdownMode="OnMainWindowClose">
     <Application.Resources>
         <BitmapImage x:Key="IconImage" UriSource="/Views/Resources/Icon32x32.png" />
@@ -13,6 +14,8 @@
         <SolidColorBrush x:Key="HoverBrush">#663683D3</SolidColorBrush>
         <SolidColorBrush x:Key="ActiveBrush">#569DE5</SolidColorBrush>
         <SolidColorBrush x:Key="InactiveBorderBrush">#ABADB3</SolidColorBrush>
+
+        <converters:ValueOrDefaultConverter x:Key="ValueOrControlTextBrushConverter" Default="{x:Static SystemColors.ControlTextBrush}" />
 
         <Style x:Key="TextBoxStyle" TargetType="TextBox">
             <Setter Property="Padding" Value="4,2" />
@@ -124,7 +127,7 @@
         <DataTemplate DataType="{x:Type controls:UiCommand}">
             <Button Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{Binding ToolTip}">
                 <StackPanel Orientation="Horizontal">
-                    <fa:ImageAwesome Icon="{Binding Icon}" Width="{Binding IconSize}" Height="{Binding IconSize}" Foreground="{Binding Foreground}" Margin="2" />
+                    <fa:ImageAwesome Icon="{Binding Icon}" Width="{Binding IconSize}" Height="{Binding IconSize}" Foreground="{Binding Foreground, Converter={StaticResource ValueOrControlTextBrushConverter}}" Margin="2" />
                     <TextBlock Text="{Binding Text}" Foreground="{Binding Foreground}" VerticalAlignment="Center" />
                 </StackPanel>
             </Button>
