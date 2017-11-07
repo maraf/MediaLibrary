@@ -5,6 +5,7 @@ using Neptuo;
 using Neptuo.Observables.Commands;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,11 +23,16 @@ namespace MediaLibrary.Views
 {
     public partial class MainWindow : Window
     {
+        private readonly INavigator navigator;
+
         public MainViewModel ViewModel => (MainViewModel)DataContext;
         public LibraryView View => (LibraryView)Content;
 
-        public MainWindow()
+        public MainWindow(INavigator navigator)
         {
+            Ensure.NotNull(navigator, "navigator");
+            this.navigator = navigator;
+
             InitializeComponent();
         }
 
@@ -46,6 +52,15 @@ namespace MediaLibrary.Views
             Movie movie = View.SelectedItem;
             if (movie != null && ViewModel.Edit.CanExecute(movie.Key))
                 ViewModel.Edit.Execute(movie.Key);
+        }
+
+        private async void OnClosing(object sender, CancelEventArgs e)
+        {
+            if (ViewModel.HasChange)
+            {
+                if (await navigator.ConfirmAsync("You have unsaved changes. Do you want to save them now?"))
+                    ViewModel.Save.Execute(null);
+            }
         }
     }
 }

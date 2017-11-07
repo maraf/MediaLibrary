@@ -7,7 +7,7 @@
         xmlns:dd="clr-namespace:MediaLibrary.Views.DesignData"
         xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
         mc:Ignorable="d" d:DataContext="{x:Static dd:ViewModelLocator.Main}"
-        Title="{controls:Localize 'Media Library'}" Icon="{StaticResource IconImage}" Height="700" Width="500">
+        Title="{controls:Localize 'Media Library'}" Icon="{StaticResource IconImage}" Height="700" Width="500" Closing="OnClosing">
     <Window.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding Create}" />
         <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding Save}" />

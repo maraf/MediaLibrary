@@ -74,7 +74,7 @@ namespace MediaLibrary
             Ensure.NotNull(library, "library");
             if (main == null)
             {
-                main = new MainWindow();
+                main = new MainWindow(this);
                 main.Closed += OnMainClosed;
                 main.DataContext = new MainViewModel(library, this, store, changeTracker);
 
