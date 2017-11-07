@@ -13,13 +13,16 @@ namespace MediaLibrary
     {
         private readonly Settings settings;
         private readonly XmlStore inner;
+        private readonly IChangeTracker changeTracker;
 
-        internal AppLibraryStore(Settings settings, XmlStore inner)
+        internal AppLibraryStore(Settings settings, XmlStore inner, IChangeTracker changeTracker)
         {
             Ensure.NotNull(settings, "settings");
             Ensure.NotNull(inner, "inner");
+            Ensure.NotNull(changeTracker, "changeTracker");
             this.settings = settings;
             this.inner = inner;
+            this.changeTracker = changeTracker;
         }
 
         public Task LoadAsync(Library library)
@@ -33,6 +36,8 @@ namespace MediaLibrary
 
             settings.DefaultFilePath = library.Configuration.FilePath;
             settings.Save();
+
+            changeTracker.Clear();
         }
     }
 }
