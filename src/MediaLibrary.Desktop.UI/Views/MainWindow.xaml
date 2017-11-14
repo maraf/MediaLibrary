@@ -28,6 +28,7 @@
             <KeyBinding Key="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, ElementName=Library}" />
         </controls:LibraryView.InputBindings>
         <controls:LibraryView.TopCommands>
+            <controls:UiCommand Icon="&#xE8E5;" ToolTip="{controls:Localize 'Open Other Library from File'}" Executed="uicOpen_Executed" />
             <controls:UiCommand Command="{Binding DataContext.Save, ElementName=this}" Icon="&#xE74E;" ToolTip="{controls:Localize 'Save Library to File'}" Background="{Binding HasChange, Converter={StaticResource TrueToRedBrushConverter}}" />
             <controls:UiCommand Command="{Binding DataContext.OpenConfiguration, ElementName=this}" Icon="&#xE713;" ToolTip="{controls:Localize 'Open Library Configuration'}" />
         </controls:LibraryView.TopCommands>

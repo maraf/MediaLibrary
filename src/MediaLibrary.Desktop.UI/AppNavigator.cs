@@ -1,10 +1,12 @@
 ﻿using MediaLibrary.ViewModels;
 using MediaLibrary.ViewModels.Services;
 using MediaLibrary.Views;
+using Microsoft.Win32;
 using Neptuo;
 using Neptuo.Models.Keys;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,13 +78,14 @@ namespace MediaLibrary
             {
                 main = new MainWindow(this);
                 main.Closed += OnMainClosed;
-                main.DataContext = new MainViewModel(library, this, store, changeTracker);
-
-                main.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                main.Show();
-
-                application.MainWindow = main;
             }
+
+            main.DataContext = new MainViewModel(library, this, store, changeTracker);
+
+            main.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            main.Show();
+
+            application.MainWindow = main;
 
             main.Activate();
         }
@@ -146,6 +149,27 @@ namespace MediaLibrary
         {
             movieSelect.Closed -= OnMovieSelectClosed;
             movieSelect = null;
+        }
+
+        public async Task SelectLibraryAsync()
+        {
+            string filePath = null;
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.CheckFileExists = true;
+            dialog.CheckPathExists = true;
+            dialog.DefaultExt = ".xml";
+            bool? result = dialog.ShowDialog();
+            if (result ?? false)
+                filePath = dialog.FileName;
+
+            if (filePath != null)
+            {
+                Library library = new Library();
+                library.Configuration.FilePath = filePath;
+                library.Configuration.Name = Path.GetFileNameWithoutExtension(filePath);
+                await store.LoadAsync(library);
+                await LibraryAsync(library);
+            }
         }
 
         private void StartupLocation(Window wnd, Window owner = null)

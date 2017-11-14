@@ -74,5 +74,10 @@ namespace MediaLibrary.Views
                 Close();
             }
         }
+
+        private void uicOpen_Executed()
+        {
+            navigator.SelectLibraryAsync();
+        }
     }
 }
