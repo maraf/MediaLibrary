@@ -14,6 +14,8 @@
         <SolidColorBrush x:Key="ActiveBrush">#569DE5</SolidColorBrush>
         <SolidColorBrush x:Key="InactiveBorderBrush">#ABADB3</SolidColorBrush>
 
+        <converters:StringNullOrEmptyConverter x:Key="StringNullOrEmptyToCollapsedConverter" TrueValue="Collapsed" FalseValue="Visible" />
+
         <Style x:Key="FontIconStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="pack://application:,,,/Views/Resources/#Segoe MDL2 Assets" />
         </Style>
@@ -113,7 +115,7 @@
                         <Button Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{TemplateBinding ToolTip}">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{TemplateBinding Icon}" Style="{StaticResource FontIconStyle}" Foreground="{TemplateBinding Foreground}" FontSize="16" />
-                                <TextBlock Text="{TemplateBinding Text}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" />
+                                <TextBlock Text="{TemplateBinding Text}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" Margin="4,0,0,0" Visibility="{TemplateBinding Text, Converter={StaticResource StringNullOrEmptyToCollapsedConverter}}" />
                             </StackPanel>
                         </Button>
                     </ControlTemplate>

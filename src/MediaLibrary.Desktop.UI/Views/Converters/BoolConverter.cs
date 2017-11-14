@@ -18,12 +18,9 @@ namespace MediaLibrary.Views.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool? boolValue = value as bool?;
-            if (boolValue == null)
-                boolValue = false;
-
+            bool boolValue = ValueAsBool(value);
             object result = null;
-            if (Test == boolValue.Value)
+            if (Test == boolValue)
                 result = TrueValue;
             else
                 result = FalseValue;
@@ -37,6 +34,15 @@ namespace MediaLibrary.Views.Converters
             }
 
             return result;
+        }
+
+        protected virtual bool ValueAsBool(object value)
+        {
+            bool? boolValue = value as bool?;
+            if (boolValue == null)
+                boolValue = false;
+
+            return boolValue.Value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
