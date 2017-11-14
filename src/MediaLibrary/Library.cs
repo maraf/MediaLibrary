@@ -79,6 +79,7 @@ namespace MediaLibrary
                             .AddGridColumnSpan(2)
                             .AddLabel("Name")
                             .AddIsAutoFocus(true)
+                            .Add("Main.Left", true)
                     ),
                     new FieldDefinition(
                         "OriginalName",
@@ -95,6 +96,7 @@ namespace MediaLibrary
                             .AddGrid(0, 2)
                             .AddGridColumnSpan(2)
                             .AddLabel("Storage")
+                            .Add("Main.Right", true)
                     ),
                     new FieldDefinition(
                         "Year",

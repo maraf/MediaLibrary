@@ -79,7 +79,7 @@
                 <DataTemplate>
                     <Grid>
                         <StackPanel HorizontalAlignment="Left" Margin="8,0">
-                            <TextBlock Text="{Binding Name}" FontSize="{StaticResource NameFontSize}" />
+                            <controls:MainLeftField Model="{Binding}" />
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding OriginalName}" Margin="0,0,4,0" />
                             </StackPanel>

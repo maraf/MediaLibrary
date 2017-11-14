@@ -76,6 +76,7 @@
     <Compile Include="Views\Controls\EditButtons.xaml.cs">
       <DependentUpon>EditButtons.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\MainLeftField.cs" />
     <Compile Include="Views\Controls\SortView.xaml.cs">
       <DependentUpon>SortView.xaml</DependentUpon>
     </Compile>
