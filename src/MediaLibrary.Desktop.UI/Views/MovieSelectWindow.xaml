@@ -9,7 +9,7 @@
         Title="{controls:Localize 'Media Library - Select Movie'}" Height="500" Width="450">
     <controls:LibraryView x:Name="Library" ViewModel="{Binding}" ListViewMouseDoubleClick="OnListViewMouseDoubleClick">
         <controls:LibraryView.BottomLeftCommands>
-            <controls:UiCommand Icon="Plus" Executed="OnSelectExecuted" Text="{controls:Localize 'Select'}" ToolTip="{controls:Localize 'Add Selected Movies'}" />
+            <controls:UiCommand Icon="&#xE710;" Executed="OnSelectExecuted" Text="{controls:Localize 'Select'}" ToolTip="{controls:Localize 'Add Selected Movies'}" />
         </controls:LibraryView.BottomLeftCommands>
     </controls:LibraryView>
 </Window>

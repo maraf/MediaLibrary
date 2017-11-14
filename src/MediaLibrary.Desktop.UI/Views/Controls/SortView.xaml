@@ -3,18 +3,18 @@
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
               xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-              xmlns:fa="http://schemas.fontawesome.io/icons/"
               xmlns:converters="clr-namespace:MediaLibrary.Views.Converters"
               mc:Ignorable="d" d:DesignHeight="50" d:DesignWidth="300"
               Background="White">
     <ItemsControl.Resources>
         <converters:BoolConverter x:Key="TrueToBoldFontWeightConverter" TrueValue="Bold" FalseValue="Normal" />
         <converters:BoolConverter x:Key="TrueToVisibleConverter" TrueValue="Visible" FalseValue="Collapsed" />
-        <converters:ListSortDirectionToImageAwesomeConverter x:Key="ListSortDirectionToImageAwesomeConverter" />
+        <converters:ListSortDirectionToFontIconConverter x:Key="ListSortDirectionToFontIconConverter" />
 
-        <Style x:Key="SortImageStyle" TargetType="fa:ImageAwesome">
-            <Setter Property="Margin" Value="2,0,0,0" />
-            <Setter Property="Width" Value="8" />
+        <Style x:Key="IconStyle" TargetType="TextBlock" BasedOn="{StaticResource FontIconStyle}">
+            <Setter Property="FontSize" Value="8" />
+            <Setter Property="Margin" Value="4,0,0,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </ItemsControl.Resources>
     <ItemsControl.ItemsPanel>
@@ -27,7 +27,8 @@
             <Button x:Name="btnSort" Tag="{Binding}" Click="btnSort_Click" Style="{StaticResource PlainButtonStyle}" Margin="0,0,16,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding Label}" FontWeight="{Binding IsActive, Converter={StaticResource TrueToBoldFontWeightConverter}}" />
-                    <fa:ImageAwesome Icon="{Binding Direction, Converter={StaticResource ListSortDirectionToImageAwesomeConverter}}" Visibility="{Binding IsActive, Converter={StaticResource TrueToVisibleConverter}}" Style="{StaticResource SortImageStyle}" />
+                    <TextBlock Style="{StaticResource IconStyle}" Text="{Binding Direction, Converter={StaticResource ListSortDirectionToFontIconConverter}}" 
+                     Visibility="{Binding IsActive, Converter={StaticResource TrueToVisibleConverter}}" />
                 </StackPanel>
             </Button>
         </DataTemplate>

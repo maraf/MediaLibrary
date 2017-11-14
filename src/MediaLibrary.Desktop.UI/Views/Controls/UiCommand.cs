@@ -1,5 +1,4 @@
-﻿using FontAwesome.WPF;
-using Neptuo.Observables.Commands;
+﻿using Neptuo.Observables.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,36 +8,22 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace MediaLibrary.Views.Controls
 {
     public class UiCommand : ContentControl
     {
-        public FontAwesomeIcon Icon
+        public string Icon
         {
-            get { return (FontAwesomeIcon)GetValue(IconProperty); }
+            get { return (string)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
-
-        public double IconSize
-        {
-            get { return (double)GetValue(IconSizeProperty); }
-            set { SetValue(IconSizeProperty, value); }
-        }
-
-        public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(
-            "IconSize", 
-            typeof(double), 
-            typeof(UiCommand), 
-            new PropertyMetadata(16d)
-        );
-
+        
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
             "Icon", 
-            typeof(FontAwesomeIcon), 
+            typeof(string), 
             typeof(UiCommand), 
-            new PropertyMetadata(FontAwesomeIcon.Empire)
+            new PropertyMetadata(null)
         );
 
         public ICommand Command

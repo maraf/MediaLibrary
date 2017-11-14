@@ -7,7 +7,6 @@
              xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
              xmlns:converters="clr-namespace:MediaLibrary.Views.Converters"
-             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" Background="White" d:DataContext="{x:Static dd:ViewModelLocator.Related}">
     <UserControl.Resources>
         <converters:CuttingConverter x:Key="ZeroToVisibleConverter" EdgeValue="0" GreaterValue="Collapsed" EqualValue="Visible" />
@@ -40,7 +39,7 @@
                                     <TextBlock Text="{Binding Name}" />
                                     <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.Remove}" CommandParameter="{Binding}" 
                                      Style="{StaticResource PlainButtonStyle}" ToolTip="{controls:Localize 'Remove Selected Movie'}" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                        <fa:ImageAwesome Icon="Remove" Width="10" Height="10" />
+                                        <TextBlock Text="&#xE711;" Style="{StaticResource FontIconStyle}" />
                                     </Button>
                                 </Grid>
                             </Border>
@@ -57,7 +56,7 @@
             <Grid Margin="2,2,2,0">
                 <Button Command="{Binding Add}" Style="{StaticResource PlainButtonStyle}" ToolTip="{controls:Localize 'Add Related Movie'}" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
-                        <fa:ImageAwesome Icon="Plus" Width="12" Height="12" Margin="2" />
+                        <TextBlock Text="&#xE710;" Style="{StaticResource FontIconStyle}" VerticalAlignment="Center" Margin="0,0,4,0" />
                         <TextBlock Text="{controls:Localize 'Add Related Movie'}" />
                     </StackPanel>
                 </Button>

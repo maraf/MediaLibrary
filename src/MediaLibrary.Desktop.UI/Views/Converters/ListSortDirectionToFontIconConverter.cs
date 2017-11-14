@@ -1,5 +1,4 @@
-﻿using FontAwesome.WPF;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -10,7 +9,7 @@ using System.Windows.Data;
 
 namespace MediaLibrary.Views.Converters
 {
-    public class ListSortDirectionToImageAwesomeConverter : IValueConverter
+    public class ListSortDirectionToFontIconConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -19,9 +18,9 @@ namespace MediaLibrary.Views.Converters
                 switch (direction)
                 {
                     case ListSortDirection.Ascending:
-                        return FontAwesomeIcon.AngleDown;
+                        return "\uE70D";
                     case ListSortDirection.Descending:
-                        return FontAwesomeIcon.AngleUp;
+                        return "\uE70E";
                 }
             }
 

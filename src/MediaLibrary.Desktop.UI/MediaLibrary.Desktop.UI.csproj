@@ -84,7 +84,7 @@
     <Compile Include="Views\Controls\UiCommand.cs" />
     <Compile Include="Views\Converters\BoolConverter.cs" />
     <Compile Include="Views\Converters\CuttingConverter.cs" />
-    <Compile Include="Views\Converters\ListSortDirectionToImageAwesomeConverter.cs" />
+    <Compile Include="Views\Converters\ListSortDirectionToFontIconConverter.cs" />
     <Compile Include="Views\Converters\ValueOrDefaultConverter.cs" />
     <Compile Include="Views\DesignData\MockChangeTracker.cs" />
     <Compile Include="Views\DesignData\MockLibraryStore.cs" />
@@ -175,11 +175,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Views\Resources\segmdl2.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FontAwesome.WPF">
-      <Version>4.7.0.9</Version>
-    </PackageReference>
     <PackageReference Include="Neptuo">
       <Version>5.5.0</Version>
     </PackageReference>

@@ -4,7 +4,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:dd="clr-namespace:MediaLibrary.Views.DesignData"
         xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
         xmlns:converters="clr-namespace:MediaLibrary.Views.Converters"
@@ -16,6 +15,7 @@
                 <SolidColorBrush Color="Red" />
             </converters:BoolConverter.TrueValue>
         </converters:BoolConverter>
+
     </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding Create}" />
@@ -28,19 +28,19 @@
             <KeyBinding Key="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, ElementName=Library}" />
         </controls:LibraryView.InputBindings>
         <controls:LibraryView.TopCommands>
-            <controls:UiCommand Command="{Binding DataContext.Save, ElementName=this}" Icon="Save" ToolTip="{controls:Localize 'Save Library to File'}" />
-            <controls:UiCommand Command="{Binding DataContext.OpenConfiguration, ElementName=this}" Icon="Gears" ToolTip="{controls:Localize 'Open Library Configuration'}" />
+            <controls:UiCommand Command="{Binding DataContext.Save, ElementName=this}" Icon="&#xE74E;" ToolTip="{controls:Localize 'Save Library to File'}" />
+            <controls:UiCommand Command="{Binding DataContext.OpenConfiguration, ElementName=this}" Icon="&#xE713;" ToolTip="{controls:Localize 'Open Library Configuration'}" />
         </controls:LibraryView.TopCommands>
         <controls:LibraryView.BottomLeftCommands>
-            <controls:UiCommand Command="{Binding DataContext.Create, ElementName=this}" Icon="Plus" ToolTip="{controls:Localize 'Create New Movie'}" />
+            <controls:UiCommand Command="{Binding DataContext.Create, ElementName=this}" Icon="&#xE710;" ToolTip="{controls:Localize 'Create New Movie'}" />
         </controls:LibraryView.BottomLeftCommands>
         <controls:LibraryView.BottomRightCommands>
             <controls:UiCommand Command="{Binding DataContext.Edit, ElementName=this}" 
              CommandParameter="{Binding SelectedItem.Key, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LibraryView}}" 
-             Icon="Edit" ToolTip="{controls:Localize 'Edit Selected Movie'}" />
+             Icon="&#xE70F;" ToolTip="{controls:Localize 'Edit Selected Movie'}" />
             <controls:UiCommand Command="{Binding DataContext.Delete, ElementName=this}" 
              CommandParameter="{Binding SelectedItem.Key, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LibraryView}}" 
-             Icon="Remove" ToolTip="{controls:Localize 'Delete Selected Movie'}" />
+             Icon="&#xE74D;" ToolTip="{controls:Localize 'Delete Selected Movie'}" />
         </controls:LibraryView.BottomRightCommands>
     </controls:LibraryView>
 </Window>   
