@@ -129,8 +129,31 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <Style TargetType="controls:MainLeftField">
-            <Setter Property="FontSize" Value="{StaticResource NameFontSize}" />
+        <Style x:Key="LeftFieldStyle" TargetType="controls:Field">
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Margin" Value="0,0,4,0" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RightFieldStyle" TargetType="controls:Field" BasedOn="{StaticResource LeftFieldStyle}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Margin" Value="4,0,0,0" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Application.Resources>
 </Application>

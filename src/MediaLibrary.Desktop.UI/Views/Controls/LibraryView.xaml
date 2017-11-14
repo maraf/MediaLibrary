@@ -79,13 +79,12 @@
                 <DataTemplate>
                     <Grid>
                         <StackPanel HorizontalAlignment="Left" Margin="8,0">
-                            <controls:MainLeftField Model="{Binding}" />
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding OriginalName}" Margin="0,0,4,0" />
-                            </StackPanel>
+                            <controls:Field Model="{Binding}" MetadataKey="Main.Left" Style="{StaticResource LeftFieldStyle}" FontSize="{StaticResource NameFontSize}" />
+                            <controls:Field Model="{Binding}" MetadataKey="Additional.Left" Style="{StaticResource LeftFieldStyle}" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="8,0">
-                            <TextBlock Text="{Binding Storage}" FontSize="{StaticResource NameFontSize}" />
+                        <StackPanel HorizontalAlignment="Right" Margin="8,0">
+                            <controls:Field Model="{Binding}" MetadataKey="Main.Right" Style="{StaticResource RightFieldStyle}" FontSize="{StaticResource NameFontSize}" />
+                            <controls:Field Model="{Binding}" MetadataKey="Additional.Right" Style="{StaticResource RightFieldStyle}" />
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

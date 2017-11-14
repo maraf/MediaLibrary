@@ -88,6 +88,7 @@ namespace MediaLibrary
                             .AddGrid(0, 1)
                             .AddGridColumnSpan(2)
                             .AddLabel("Original Name")
+                            .Add("Additional.Left", true)
                     ),
                     new FieldDefinition(
                         "Storage",
@@ -104,6 +105,7 @@ namespace MediaLibrary
                         (MetadataCollection)new MetadataCollection()
                             .AddGrid(0, 3)
                             .AddLabel("Year")
+                            .Add("Additional.Right", true)
                     ),
                     new FieldDefinition(
                         "Country",
@@ -111,6 +113,7 @@ namespace MediaLibrary
                         (MetadataCollection)new MetadataCollection()
                             .AddGrid(1, 3)
                             .AddLabel("Country")
+                            .Add("Additional.Right", true)
                     ),
                     new FieldDefinition(
                         "Category",

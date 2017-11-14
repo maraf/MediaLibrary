@@ -62,13 +62,13 @@ namespace MediaLibrary.Views
 
         private IEnumerable<string> GetCountries() => library.Movies
             .Select(m => m.GetValueOrDefault("Country", (string)null))
-            .Where(c => c != null)
+            .Where(c => !String.IsNullOrEmpty(c))
             .OrderBy(c => c)
             .Distinct();
 
         private IEnumerable<string> GetCategories() => library.Movies
             .Select(m => m.GetValueOrDefault("Category", (string)null))
-            .Where(c => c != null)
+            .Where(c => !String.IsNullOrEmpty(c))
             .OrderBy(c => c)
             .Distinct();
     }

@@ -41,9 +41,13 @@ namespace Neptuo.PresentationModels.UI.FieldViews
                 return true;
             }
 
-            if (typeof(T) == typeof(string) && !String.IsNullOrEmpty(control.Text))
+            if (typeof(T) == typeof(string))
             {
-                value = (T)(object)control.Text;
+                string stringValue = control.Text;
+                if (String.IsNullOrEmpty(stringValue) || String.IsNullOrWhiteSpace(stringValue))
+                    stringValue = null;
+
+                value = (T)(object)stringValue;
                 return true;
             }
 
