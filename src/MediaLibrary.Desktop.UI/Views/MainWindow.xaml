@@ -10,9 +10,9 @@
         mc:Ignorable="d" d:DataContext="{x:Static dd:ViewModelLocator.Main}"
         Title="{controls:Localize 'Media Library'}" Icon="{StaticResource IconImage}" Height="700" Width="500" Closing="OnClosing">
     <Window.Resources>
-        <converters:BoolConverter x:Key="TrueToRedBrushConverter" FalseValue="{x:Static SystemColors.ControlTextBrush}">
+        <converters:BoolConverter x:Key="TrueToRedBrushConverter" FalseValue="{x:Null}">
             <converters:BoolConverter.TrueValue>
-                <SolidColorBrush Color="Red" />
+                <SolidColorBrush Color="#80ff0000" />
             </converters:BoolConverter.TrueValue>
         </converters:BoolConverter>
 
@@ -28,7 +28,7 @@
             <KeyBinding Key="Delete" Command="{Binding Delete}" CommandParameter="{Binding SelectedItem.Key, ElementName=Library}" />
         </controls:LibraryView.InputBindings>
         <controls:LibraryView.TopCommands>
-            <controls:UiCommand Command="{Binding DataContext.Save, ElementName=this}" Icon="&#xE74E;" ToolTip="{controls:Localize 'Save Library to File'}" Foreground="{Binding HasChange, Converter={StaticResource TrueToRedBrushConverter}}" />
+            <controls:UiCommand Command="{Binding DataContext.Save, ElementName=this}" Icon="&#xE74E;" ToolTip="{controls:Localize 'Save Library to File'}" Background="{Binding HasChange, Converter={StaticResource TrueToRedBrushConverter}}" />
             <controls:UiCommand Command="{Binding DataContext.OpenConfiguration, ElementName=this}" Icon="&#xE713;" ToolTip="{controls:Localize 'Open Library Configuration'}" />
         </controls:LibraryView.TopCommands>
         <controls:LibraryView.BottomLeftCommands>
