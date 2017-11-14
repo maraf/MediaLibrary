@@ -18,8 +18,13 @@ namespace MediaLibrary.Views.DesignData
                 {
                     libraryModel = new Library();
                     libraryModel.Configuration.Name = "Library";
-                    libraryModel.Create("Movie 1");
-                    libraryModel.Create("Movie 2");
+                    var movie1 = libraryModel.Create("Movie 1");
+                    movie1.TrySetValue("Storage", "DVD");
+                    movie1.TrySetValue("Year", "2010");
+                    var movie2 = libraryModel.Create("Movie 2");
+                    movie2.TrySetValue("Storage", "DVD");
+                    movie2.TrySetValue("Year", "1980");
+                    movie2.TrySetValue("Country", "UK");
                     libraryModel.Create("Movie 3");
                 }
 
