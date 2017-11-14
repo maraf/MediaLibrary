@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace Neptuo.PresentationModels.UI.Controls
 {
-    public class ModelView : ContentControl, IModelValueProvider
+    public class ModelPresenter : ContentControl, IModelValueProvider
     {
         protected IModelView<IWpfRenderContext> View { get; set; }
 
@@ -21,17 +21,17 @@ namespace Neptuo.PresentationModels.UI.Controls
         public static readonly DependencyProperty DefinitionProperty = DependencyProperty.Register(
             "Definition",
             typeof(IModelDefinition),
-            typeof(ModelView),
+            typeof(ModelPresenter),
             new PropertyMetadata(null, OnDefinitionChanged)
         );
 
         private static void OnDefinitionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ModelView view = (ModelView)d;
+            ModelPresenter view = (ModelPresenter)d;
             view.OnDefinitionChanged();
         }
 
-        public ModelView()
+        public ModelPresenter()
         {
             IsTabStop = false;
         }

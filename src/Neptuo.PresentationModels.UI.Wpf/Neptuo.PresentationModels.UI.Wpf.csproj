@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\VisualTree.cs" />
-    <Compile Include="Controls\ModelView.cs" />
+    <Compile Include="Controls\ModelPresenter.cs" />
     <Compile Include="FieldViews\WpfControlFieldView.cs" />
     <Compile Include="FieldViews\WpfDateFieldEditor.cs" />
     <Compile Include="FieldViews\WpfInt32FieldEditor.cs" />

@@ -65,6 +65,7 @@
         </Style>
         <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
@@ -129,7 +130,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="LeftFieldStyle" TargetType="controls:Field">
+        <Style x:Key="LeftFieldStyle" TargetType="controls:FieldPresenter">
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>
@@ -145,7 +146,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="RightFieldStyle" TargetType="controls:Field" BasedOn="{StaticResource LeftFieldStyle}">
+        <Style x:Key="RightFieldStyle" TargetType="controls:FieldPresenter" BasedOn="{StaticResource LeftFieldStyle}">
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="ItemContainerStyle">
                 <Setter.Value>
