@@ -114,7 +114,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="controls:UiCommand">
                         <Border Background="{TemplateBinding Background}">
-                            <Button Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{TemplateBinding ToolTip}">
+                            <Button Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" Style="{StaticResource IconBarButtonStyle}" IsDefault="{TemplateBinding IsDefault}" ToolTip="{TemplateBinding ToolTip}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{TemplateBinding Icon}" Style="{StaticResource FontIconStyle}" Foreground="{TemplateBinding Foreground}" FontSize="16" />
                                     <TextBlock Text="{TemplateBinding Text}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" Margin="4,0,0,0" Visibility="{TemplateBinding Text, Converter={StaticResource StringNullOrEmptyToCollapsedConverter}}" />
