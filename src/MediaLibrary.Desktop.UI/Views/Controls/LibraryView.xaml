@@ -99,7 +99,7 @@
                     <controls:SortView x:Name="srvSorts" ViewModel="{Binding Sorts}" SelectionChanged="srvSorts_SelectionChanged" Margin="8" />
                 </Border>
                 <Grid>
-                    <ItemsControl ItemsSource="{Binding BottomLeftCommands, ElementName=this}" Style="{StaticResource CommandsItemsControlStyle}" Margin="8,0,0,0">
+                    <ItemsControl ItemsSource="{Binding BottomLeftCommands, ElementName=this}" Style="{StaticResource CommandsItemsControlStyle}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Style="{StaticResource ButtonsLeftStyle}" Margin="0" />

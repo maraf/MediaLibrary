@@ -19,7 +19,7 @@
         <Style x:Key="FontIconStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="pack://application:,,,/Views/Resources/#Segoe MDL2 Assets" />
         </Style>
-        
+
         <Style x:Key="TextBoxStyle" TargetType="TextBox">
             <Setter Property="Padding" Value="4,2" />
             <Setter Property="BorderBrush" Value="{StaticResource InactiveBorderBrush}" />
@@ -47,7 +47,7 @@
             </Style.Triggers>
         </Style>
         <Style x:Key="IconBarButtonStyle" BasedOn="{StaticResource PlainButtonStyle}" TargetType="Button">
-            <Setter Property="Margin" Value="0,8,8,8" />
+            <Setter Property="Margin" Value="8" />
         </Style>
 
         <Style TargetType="ListView">
@@ -112,12 +112,14 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="controls:UiCommand">
-                        <Button Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{TemplateBinding ToolTip}">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{TemplateBinding Icon}" Style="{StaticResource FontIconStyle}" Foreground="{TemplateBinding Foreground}" FontSize="16" />
-                                <TextBlock Text="{TemplateBinding Text}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" Margin="4,0,0,0" Visibility="{TemplateBinding Text, Converter={StaticResource StringNullOrEmptyToCollapsedConverter}}" />
-                            </StackPanel>
-                        </Button>
+                        <Border Background="{TemplateBinding Background}">
+                            <Button Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" Style="{StaticResource IconBarButtonStyle}" ToolTip="{TemplateBinding ToolTip}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{TemplateBinding Icon}" Style="{StaticResource FontIconStyle}" Foreground="{TemplateBinding Foreground}" FontSize="16" />
+                                    <TextBlock Text="{TemplateBinding Text}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" Margin="4,0,0,0" Visibility="{TemplateBinding Text, Converter={StaticResource StringNullOrEmptyToCollapsedConverter}}" />
+                                </StackPanel>
+                            </Button>
+                        </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
