@@ -11,9 +11,9 @@
         </Style>
     </UserControl.Resources>
     <Border Style="{StaticResource ButtonsBottomStyle}" Grid.Row="1">
-        <StackPanel Style="{StaticResource ButtonsRightStyle}">
-            <Button x:Name="btnSave" Content="{controls:Localize 'Save'}" Click="btnSave_Click" IsDefault="True" />
-            <Button x:Name="btnClose" Content="{controls:Localize 'Close'}" Click="btnClose_Click" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <controls:UiCommand Icon="&#xE74E;" Text="{controls:Localize 'Save'}" IsDefault="True" Executed="btnSave_Click" />
+            <controls:UiCommand Icon="&#xE711;" Text="{controls:Localize 'Close'}" Executed="btnClose_Click" />
         </StackPanel>
     </Border>
 </UserControl>

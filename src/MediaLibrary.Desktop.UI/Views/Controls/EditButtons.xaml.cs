@@ -25,7 +25,7 @@ namespace MediaLibrary.Views.Controls
             InitializeComponent();
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e) => SaveClick?.Invoke();
-        private void btnClose_Click(object sender, RoutedEventArgs e) => CloseClick?.Invoke();
+        private void btnSave_Click() => SaveClick?.Invoke();
+        private void btnClose_Click() => CloseClick?.Invoke();
     }
 }

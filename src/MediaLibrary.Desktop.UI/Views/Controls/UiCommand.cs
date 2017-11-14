@@ -84,6 +84,19 @@ namespace MediaLibrary.Views.Controls
             new PropertyMetadata(null)
         );
 
+        public bool IsDefault
+        {
+            get { return (bool)GetValue(IsDefaultProperty); }
+            set { SetValue(IsDefaultProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsDefaultProperty = DependencyProperty.Register(
+            "IsDefault", 
+            typeof(bool),
+            typeof(UiCommand), 
+            new PropertyMetadata(false)
+        );
+
         private class ActionCommand : Command
         {
             private readonly Action execute;
