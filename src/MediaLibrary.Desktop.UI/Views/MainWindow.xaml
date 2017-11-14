@@ -32,7 +32,7 @@
             <controls:UiCommand Command="{Binding DataContext.OpenConfiguration, ElementName=this}" Icon="&#xE713;" ToolTip="{controls:Localize 'Open Library Configuration'}" />
         </controls:LibraryView.TopCommands>
         <controls:LibraryView.BottomLeftCommands>
-            <controls:UiCommand Command="{Binding DataContext.Create, ElementName=this}" Icon="&#xE710;" ToolTip="{controls:Localize 'Create New Movie'}" />
+            <controls:UiCommand Command="{Binding DataContext.Create, ElementName=this}" Icon="&#xE710;" Text="New Movie" ToolTip="{controls:Localize 'Create New Movie'}" />
         </controls:LibraryView.BottomLeftCommands>
         <controls:LibraryView.BottomRightCommands>
             <controls:UiCommand Command="{Binding DataContext.Edit, ElementName=this}" 
