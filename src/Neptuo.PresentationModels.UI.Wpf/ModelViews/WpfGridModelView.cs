@@ -27,7 +27,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews
 
         protected override void RenderInternal(IWpfRenderContext context)
         {
-            Grid grid = new Grid();
+            GridContainer grid = new GridContainer(modelDefinition);
 
             context.Add(grid);
 
@@ -52,7 +52,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews
 
             foreach (var fieldPosition in fieldPositions)
             {
-                GridNode node = new GridNode();
+                GridNode node = new GridNode(fieldPosition.definition);
                 grid.Children.Add(node);
 
                 node.Column = fieldPosition.column;
@@ -64,24 +64,9 @@ namespace Neptuo.PresentationModels.UI.ModelViews
                 if (fieldPosition.definition.Metadata.TryGetGridRowSpan(out int rowSpan))
                     node.RowSpan = rowSpan;
 
-                Label label = null;
-                if (fieldPosition.definition.Metadata.TryGetLabel(out string labelText))
-                {
-                    label = new Label() { Content = labelText };
-                    node.Children.Add(label);
-                }
-
-                WpfPanelRenderContext fieldContext = new WpfPanelRenderContext(node);
-                fieldContext.Added += element =>
-                {
-                    if (label != null)
-                        label.Target = element;
-                };
-
                 IFieldView<IWpfRenderContext> fieldView = fieldViewProvider.Get(modelDefinition, fieldPosition.definition);
                 AddFieldView(fieldPosition.definition.Identifier, fieldView);
-
-                fieldView.Render(fieldContext);
+                node.FieldView = fieldView;
             }
         }
     }
