@@ -4,14 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:dd="clr-namespace:MediaLibrary.Views.DesignData"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:pm="http://schemas.neptuo.com/xaml/presentationmodels"
         xmlns:controls="clr-namespace:MediaLibrary.Views.Controls"
         xmlns:views="clr-namespace:MediaLibrary.Views"
-        xmlns:pmui="clr-namespace:Neptuo.PresentationModels.UI.Controls;assembly=Neptuo.PresentationModels.UI.Wpf"
-        xmlns:pmuimvc="clr-namespace:Neptuo.PresentationModels.UI.ModelViews.Controls;assembly=Neptuo.PresentationModels.UI.Wpf"
         mc:Ignorable="d"
         Title="{controls:Localize 'Media Library :: Movie Edit'}" Width="400" MinHeight="500" SizeToContent="Height">
     <views:ModelWindow.Resources>
-        <Style TargetType="pmuimvc:GridNode">
+        <Style TargetType="pm:GridNode">
             <Setter Property="Margin" Value="0,0,8,0" />
         </Style>
     </views:ModelWindow.Resources>
@@ -26,7 +25,7 @@
 
         <!-- Content -->
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <pmui:ModelPresenter x:Name="ModelPresenter" Margin="8,8,0,20" />
+            <pm:ModelPresenter x:Name="ModelPresenter" Margin="8,8,0,20" />
         </ScrollViewer>
 
         <!-- Buttons -->

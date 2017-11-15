@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Markup;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
@@ -38,3 +39,5 @@ using System.Windows;
 
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
+[assembly: XmlnsDefinition("http://schemas.neptuo.com/xaml/presentationmodels", "Neptuo.PresentationModels.UI.Controls")]
+[assembly: XmlnsDefinition("http://schemas.neptuo.com/xaml/presentationmodels", "Neptuo.PresentationModels.UI.ModelViews.Controls")]
