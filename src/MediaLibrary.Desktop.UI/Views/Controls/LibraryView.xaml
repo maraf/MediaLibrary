@@ -20,7 +20,7 @@
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="Margin" Value="0,1,10,0" />
-            <Setter Property="Padding" Value="2" />
+            <Setter Property="Padding" Value="4" />
             <Setter Property="FontSize" Value="{StaticResource NameFontSize}" />
         </Style>
         <Style TargetType="ListView">
