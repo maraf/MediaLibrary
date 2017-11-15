@@ -46,14 +46,14 @@ namespace MediaLibrary.Views
         {
             base.OnSourceInitialized(e);
 
-            ModelView.Definition = modelDefinition;
+            ModelPresenter.Definition = modelDefinition;
             CopyModelValueProvider copy = new CopyModelValueProvider(modelDefinition, true);
-            copy.Update(ModelView, library.Configuration);
+            copy.Update(ModelPresenter, library.Configuration);
         }
 
         private void OnSaveClick()
         {
-            changeTracker.UpdateModel(modelDefinition, library.Configuration, ModelView);
+            changeTracker.UpdateModel(modelDefinition, library.Configuration, ModelPresenter);
             Close();
         }
 

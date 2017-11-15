@@ -46,27 +46,27 @@ namespace MediaLibrary.Views
         {
             base.OnSourceInitialized(e);
 
-            ModelView.Definition = modelDefinition;
+            ModelPresenter.Definition = modelDefinition;
             if (model != null)
             {
                 CopyModelValueProvider copy = new CopyModelValueProvider(modelDefinition, true);
-                copy.Update(ModelView, model);
+                copy.Update(ModelPresenter, model);
             }
             else
             {
-                ModelView.TrySetValue(nameof(Movie.Added), DateTime.Now);
+                ModelPresenter.TrySetValue(nameof(Movie.Added), DateTime.Now);
             }
         }
 
         private void OnSaveClick()
         {
-            if (!ModelView.TryGetValue(nameof(Movie.Name), out object rawName) || String.IsNullOrEmpty(rawName as string))
+            if (!ModelPresenter.TryGetValue(nameof(Movie.Name), out object rawName) || String.IsNullOrEmpty(rawName as string))
                 return;
 
             if (model == null)
                 model = library.Create();
 
-            changeTracker.UpdateModel(modelDefinition, model, ModelView);
+            changeTracker.UpdateModel(modelDefinition, model, ModelPresenter);
 
             Close();
         }

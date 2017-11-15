@@ -20,7 +20,7 @@
 
         <!-- Content -->
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <pmui:ModelPresenter x:Name="ModelView" Margin="8" />
+            <pmui:ModelPresenter x:Name="ModelPresenter" Margin="8" />
         </ScrollViewer>
 
         <!-- Buttons -->
