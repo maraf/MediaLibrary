@@ -32,16 +32,9 @@ namespace Neptuo.PresentationModels.UI.ModelViews
                 StackNode node = new StackNode(fieldDefinition);
                 panel.Children.Add(node);
 
-                //Label label = new Label();
-                //node.Children.Add(label);
-                //label.SetValue(FieldUi.MetadataKeyProperty, "Label");
-
-                //WpfPanelRenderContext fieldContext = new WpfPanelRenderContext(node);
                 IFieldView<IWpfRenderContext> fieldView = fieldViewProvider.Get(modelDefinition, fieldDefinition);
                 AddFieldView(fieldDefinition.Identifier, fieldView);
                 node.FieldView = fieldView;
-
-                //fieldView.Render(fieldContext);
             }
         }
     }
