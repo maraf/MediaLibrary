@@ -110,6 +110,7 @@
 
         <Style TargetType="controls:UiCommand">
             <Setter Property="Foreground" Value="{x:Static SystemColors.ControlTextBrush}" />
+            <Setter Property="IsTabStop" Value="False" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="controls:UiCommand">
