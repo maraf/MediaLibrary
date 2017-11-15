@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Neptuo.PresentationModels.UI.ModelViews.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews
 
         protected override void RenderInternal(IWpfRenderContext context)
         {
-            StackPanel panel = new StackPanel();
+            StackNode panel = new StackNode();
             context.Add(panel);
 
             foreach (IFieldDefinition fieldDefinition in modelDefinition.Fields)
