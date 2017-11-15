@@ -39,5 +39,6 @@ using System.Windows.Markup;
 
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
+[assembly: XmlnsPrefix("http://schemas.neptuo.com/xaml/presentationmodels", "pm")]
 [assembly: XmlnsDefinition("http://schemas.neptuo.com/xaml/presentationmodels", "Neptuo.PresentationModels.UI.Controls")]
 [assembly: XmlnsDefinition("http://schemas.neptuo.com/xaml/presentationmodels", "Neptuo.PresentationModels.UI.ModelViews.Controls")]
