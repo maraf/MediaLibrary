@@ -56,5 +56,8 @@
       <Version>7.2.0</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="_\IFieldDefinitionContainer.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
