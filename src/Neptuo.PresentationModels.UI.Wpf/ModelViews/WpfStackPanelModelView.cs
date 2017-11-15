@@ -24,29 +24,24 @@ namespace Neptuo.PresentationModels.UI.ModelViews
 
         protected override void RenderInternal(IWpfRenderContext context)
         {
-            StackNode panel = new StackNode();
+            StackContainer panel = new StackContainer(modelDefinition);
             context.Add(panel);
 
             foreach (IFieldDefinition fieldDefinition in modelDefinition.Fields)
             {
-                Label label = null;
-                if (fieldDefinition.Metadata.TryGetLabel(out string labelText))
-                {
-                    label = new Label() { Content = labelText };
-                    panel.Children.Add(label);
-                }
+                StackNode node = new StackNode(fieldDefinition);
+                panel.Children.Add(node);
 
-                WpfPanelRenderContext fieldContext = new WpfPanelRenderContext(panel);
-                fieldContext.Added += element =>
-                {
-                    if (label != null)
-                        label.Target = element;
-                };
+                //Label label = new Label();
+                //node.Children.Add(label);
+                //label.SetValue(FieldUi.MetadataKeyProperty, "Label");
 
+                //WpfPanelRenderContext fieldContext = new WpfPanelRenderContext(node);
                 IFieldView<IWpfRenderContext> fieldView = fieldViewProvider.Get(modelDefinition, fieldDefinition);
                 AddFieldView(fieldDefinition.Identifier, fieldView);
+                node.FieldView = fieldView;
 
-                fieldView.Render(fieldContext);
+                //fieldView.Render(fieldContext);
             }
         }
     }

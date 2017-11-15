@@ -1,0 +1,18 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mvc="clr-namespace:Neptuo.PresentationModels.UI.ModelViews.Controls">
+    <Style TargetType="mvc:StackNode">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="mvc:StackNode">
+                    <StackPanel>
+                        <Label mvc:FieldUi.MetadataKey="Label" />
+                        <ContentControl x:Name="PART_Value" IsTabStop="False" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
