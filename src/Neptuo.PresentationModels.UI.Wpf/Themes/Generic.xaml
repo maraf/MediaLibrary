@@ -8,7 +8,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="mvc:StackNode">
                     <StackPanel>
-                        <Label mvc:FieldUi.MetadataKey="Label" />
+                        <Label Content="{mvc:FieldMetadata Key=Label}" />
                         <ContentControl x:Name="PART_Value" IsTabStop="False" />
                     </StackPanel>
                 </ControlTemplate>

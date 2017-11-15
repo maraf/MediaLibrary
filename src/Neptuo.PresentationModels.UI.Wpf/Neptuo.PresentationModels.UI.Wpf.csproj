@@ -51,7 +51,8 @@
     <Compile Include="FieldViews\WpfDateFieldEditor.cs" />
     <Compile Include="FieldViews\WpfInt32FieldEditor.cs" />
     <Compile Include="FieldViews\WpfStringFieldEditor.cs" />
-    <Compile Include="ModelViews\Controls\FieldUi.cs" />
+    <Compile Include="ModelViews\Controls\FieldMetadataExtension.cs" />
+    <Compile Include="ModelViews\Controls\FieldMetadata.cs" />
     <Compile Include="ModelViews\Controls\GridNode.cs" />
     <Compile Include="FieldViews\WpfComboBoxFieldEditor.cs" />
     <Compile Include="ModelViews\Controls\StackContainer.cs" />
