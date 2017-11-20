@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -120,7 +121,7 @@ namespace MediaLibrary
         public Task<bool> ConfirmAsync(string message)
         {
             bool result = MessageBox.Show(message, "Media Library", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
-            return Task.Run(() => result);
+            return Task.Run(() => { Thread.Sleep(1); return result; });
         }
 
         public Task<IEnumerable<IKey>> SelectMoviesAsync(Library library)
