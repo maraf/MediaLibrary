@@ -134,10 +134,28 @@ namespace MediaLibrary
                             .Add("IsSortable", false)
                     ),
                     new FieldDefinition(
+                        "Language",
+                        typeof(int?),
+                        (MetadataCollection)new MetadataCollection()
+                            .AddGrid(0, 6)
+                            .AddLabel("Language")
+                            .Add("IsSortable", false)
+                            .Add("IsSortable", false)
+                    ),
+                    new FieldDefinition(
+                        "Actors",
+                        typeof(string),
+                        (MetadataCollection)new MetadataCollection()
+                            .AddGrid(1, 6)
+                            .AddLabel("Actors")
+                            .Add("IsSortable", false)
+                            .Add("Additional.Left", true)
+                    ),
+                    new FieldDefinition(
                         "Description",
                         typeof(string),
                         (MetadataCollection)new MetadataCollection()
-                            .AddGrid(0, 6)
+                            .AddGrid(0, 7)
                             .AddGridColumnSpan(2)
                             .AddLabel("Description")
                             .Add("IsSortable", false)
@@ -147,7 +165,7 @@ namespace MediaLibrary
                         nameof(Movie.Added),
                         typeof(DateTime),
                         (MetadataCollection)new MetadataCollection()
-                            .AddGrid(1, 7)
+                            .AddGrid(1, 8)
                             .AddGridColumnSpan(2)
                             .AddLabel("Added")
                             .AddIsReadOnly(true)
