@@ -115,7 +115,6 @@ namespace MediaLibrary.Views.Controls
 
             Background = null;
             DataContextChanged += OnDataContextChanged;
-            Loaded += OnLoaded;
 
             kebFind.Command = new DelegateCommand(() => tbxFilter.Focus());
 
@@ -125,7 +124,6 @@ namespace MediaLibrary.Views.Controls
             ListViewMouseSelectionChanged += (sender, e) => SelectedItem = lvwMovies.SelectedItem as Movie;
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e) => UpdateDefaultSorting();
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e) => UpdateDefaultSorting();
 
         private void UpdateDefaultSorting()

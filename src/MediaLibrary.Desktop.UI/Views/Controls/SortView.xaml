@@ -24,7 +24,7 @@
     </ItemsControl.ItemsPanel>
     <ItemsControl.ItemTemplate>
         <DataTemplate>
-            <Button x:Name="btnSort" Tag="{Binding}" Click="btnSort_Click" Style="{StaticResource PlainButtonStyle}" Margin="0,0,16,0">
+            <Button x:Name="btnSort" Tag="{Binding}" Click="btnSort_Click" ToolTip="{Binding ToolTip}" Style="{StaticResource PlainButtonStyle}" Margin="0,0,16,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding Label}" FontWeight="{Binding IsActive, Converter={StaticResource TrueToBoldFontWeightConverter}}" />
                     <TextBlock Style="{StaticResource IconStyle}" Text="{Binding Direction, Converter={StaticResource ListSortDirectionToFontIconConverter}}" 

@@ -41,9 +41,12 @@ namespace MediaLibrary.ViewModels
                 {
                     direction = value;
                     RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(ToolTip));
                 }
             }
         }
+
+        public string ToolTip => $"{FieldDefinition.Identifier} - {Direction}";
 
         public SortViewModel(IFieldDefinition fieldDefinition)
         {
