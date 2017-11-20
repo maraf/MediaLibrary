@@ -40,7 +40,13 @@ namespace MediaLibrary.Views.Controls
         private static void OnViewModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             LibraryView control = (LibraryView)d;
-            control.Content.DataContext = e.NewValue;
+            LibraryViewModel viewModel = (LibraryViewModel)e.NewValue;
+
+            control.Content.DataContext = viewModel;
+
+            SortViewModel sortViewModel = viewModel.Sorts.FirstOrDefault();
+            if (sortViewModel != null)
+                control.ApplySortDescription(new SortDescription(sortViewModel.FieldDefinition.Identifier, sortViewModel.Direction));
         }
 
         public ObservableCollection<UiCommand> TopCommands
@@ -118,7 +124,7 @@ namespace MediaLibrary.Views.Controls
 
             ListViewMouseSelectionChanged += (sender, e) => SelectedItem = lvwMovies.SelectedItem as Movie;
         }
-        
+
         private void OnLoaded(object sender, RoutedEventArgs e) => UpdateDefaultSorting();
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e) => UpdateDefaultSorting();
 
@@ -196,9 +202,13 @@ namespace MediaLibrary.Views.Controls
             }
 
             newViewModel.IsActive = true;
+            ApplySortDescription(new SortDescription(newViewModel.FieldDefinition.Identifier, newViewModel.Direction));
+        }
 
+        private void ApplySortDescription(SortDescription sortDescription)
+        {
             movies.SortDescriptions.Clear();
-            movies.SortDescriptions.Add(new SortDescription(newViewModel.FieldDefinition.Identifier, newViewModel.Direction));
+            movies.SortDescriptions.Add(sortDescription);
             movies.View.Refresh();
         }
 
