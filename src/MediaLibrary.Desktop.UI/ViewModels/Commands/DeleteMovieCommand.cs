@@ -15,13 +15,16 @@ namespace MediaLibrary.ViewModels.Commands
     {
         private readonly MovieCollection collection;
         private readonly INavigator navigator;
+        private readonly IChangeTracker changeTracker;
 
-        public DeleteMovieCommand(MovieCollection collection, INavigator navigator)
+        public DeleteMovieCommand(MovieCollection collection, INavigator navigator, IChangeTracker changeTracker)
         {
             Ensure.NotNull(collection, "collection");
             Ensure.NotNull(navigator, "navigator");
+            Ensure.NotNull(changeTracker, "changeTracker");
             this.collection = collection;
             this.navigator = navigator;
+            this.changeTracker = changeTracker;
         }
 
         protected override bool CanExecuteOverride(IKey key) => key != null && !key.IsEmpty;
@@ -30,7 +33,9 @@ namespace MediaLibrary.ViewModels.Commands
         {
             Movie model = collection.FindByKey(key);
             if (model != null && await navigator.ConfirmAsync($"Delete movie '{model.Name}'?"))
-                collection.Remove(model);
+            {
+                changeTracker.Remove(collection, model);
+            }
         }
 
         public new void RaiseCanExecuteChanged()

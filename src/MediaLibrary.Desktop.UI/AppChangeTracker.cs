@@ -20,6 +20,13 @@ namespace MediaLibrary
             Cleared?.Invoke();
         }
 
+        public void Remove(MovieCollection collection, Movie model)
+        {
+            collection.Remove(model);
+            Has = true;
+            Added?.Invoke();
+        }
+
         public void UpdateModel(IModelDefinition definition, IModelValueProvider model, IModelValueGetter newState)
         {
             CopyModelValueProvider copy = new CopyModelValueProvider(definition, true);

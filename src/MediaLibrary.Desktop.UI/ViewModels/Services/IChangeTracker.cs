@@ -36,5 +36,12 @@ namespace MediaLibrary.ViewModels.Services
         /// Raised when all changes are cleared.
         /// </summary>
         event Action Cleared;
+
+        /// <summary>
+        /// Removes <paramref name="model"/> from <paramref name="collection"/>.
+        /// </summary>
+        /// <param name="collection">A collection of movies.</param>
+        /// <param name="model">A movie to remove.</param>
+        void Remove(MovieCollection collection, Movie model);
     }
 }

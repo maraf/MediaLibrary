@@ -45,7 +45,7 @@ namespace MediaLibrary.ViewModels
 
             Create = new DelegateCommand(() => navigator.CreateMovieAsync(library));
             Edit = new EditMovieCommand(library, navigator);
-            Delete = new DeleteMovieCommand(library.Movies, navigator);
+            Delete = new DeleteMovieCommand(library.Movies, navigator, changeTracker);
             Save = new SaveCommand(library, store);
             OpenConfiguration = new DelegateCommand(() => navigator.LibraryConfigurationAsync(library));
         }

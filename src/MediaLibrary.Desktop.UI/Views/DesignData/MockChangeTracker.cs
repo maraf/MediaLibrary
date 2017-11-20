@@ -18,6 +18,9 @@ namespace MediaLibrary.Views.DesignData
         public void Clear()
         { }
 
+        public void Remove(MovieCollection collection, Movie model)
+        { }
+
         public void UpdateModel(IModelDefinition definition, IModelValueProvider model, IModelValueGetter newState)
         { }
     }
