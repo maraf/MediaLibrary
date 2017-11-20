@@ -27,17 +27,24 @@ namespace MediaLibrary
 
         public Task LoadAsync(Library library)
         {
+            TrySaveDefaultFilePath(library);
             return inner.LoadAsync(library);
         }
 
         public async Task SaveAsync(Library library)
         {
             await inner.SaveAsync(library);
-
-            settings.DefaultFilePath = library.Configuration.FilePath;
-            settings.Save();
-
+            TrySaveDefaultFilePath(library);
             changeTracker.Clear();
+        }
+
+        private void TrySaveDefaultFilePath(Library library)
+        {
+            if (settings.DefaultFilePath != library.Configuration.FilePath)
+            {
+                settings.DefaultFilePath = library.Configuration.FilePath;
+                settings.Save();
+            }
         }
     }
 }
