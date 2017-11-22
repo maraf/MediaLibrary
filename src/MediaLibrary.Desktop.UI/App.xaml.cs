@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace MediaLibrary
             Converts.Repository
                 .AddStringTo<bool>(Boolean.TryParse)
                 .AddStringTo<int>(Int32.TryParse)
-                .AddStringTo<DateTime>(DateTime.TryParse)
+                .AddStringTo<DateTime>(TryParseDateTime)
                 .AddToStringSearchHandler();
 
             base.OnStartup(e);
@@ -59,6 +60,20 @@ namespace MediaLibrary
                 Library library = new Library();
                 await navigator.LibraryAsync(library);
             }
+        }
+
+        private bool TryParseDateTime(string input, out DateTime output)
+        {
+            if (DateTime.TryParse(input, out output))
+                return true;
+
+            if (DateTime.TryParseExact(input, "dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture, DateTimeStyles.None, out output))
+                return true;
+
+            if (DateTime.TryParseExact(input, "yyyy-MM-dd HH:mm:ss", CultureInfo.CurrentCulture, DateTimeStyles.None, out output))
+                return true;
+
+            return false;
         }
     }
 }
