@@ -8,12 +8,12 @@ using System.Windows.Controls;
 
 namespace Neptuo.PresentationModels.UI.ModelViews
 {
-    public class WpfStackPanelModelView : ModelView<IWpfRenderContext>
+    public class StackPanelModelView : ModelView<IRenderContext>
     {
         private readonly IModelDefinition modelDefinition;
-        private readonly IFieldViewProvider<IWpfRenderContext> fieldViewProvider;
+        private readonly IFieldViewProvider<IRenderContext> fieldViewProvider;
 
-        public WpfStackPanelModelView(IModelDefinition modelDefinition, IFieldViewProvider<IWpfRenderContext> fieldViewProvider)
+        public StackPanelModelView(IModelDefinition modelDefinition, IFieldViewProvider<IRenderContext> fieldViewProvider)
             : base(modelDefinition)
         {
             Ensure.NotNull(modelDefinition, "modelDefinition");
@@ -22,7 +22,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews
             this.fieldViewProvider = fieldViewProvider;
         }
 
-        protected override void RenderInternal(IWpfRenderContext context)
+        protected override void RenderInternal(IRenderContext context)
         {
             StackContainer panel = new StackContainer(modelDefinition);
             context.Add(panel);
@@ -32,7 +32,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews
                 StackNode node = new StackNode(fieldDefinition);
                 panel.Children.Add(node);
 
-                IFieldView<IWpfRenderContext> fieldView = fieldViewProvider.Get(modelDefinition, fieldDefinition);
+                IFieldView<IRenderContext> fieldView = fieldViewProvider.Get(modelDefinition, fieldDefinition);
                 AddFieldView(fieldDefinition.Identifier, fieldView);
                 node.FieldView = fieldView;
             }

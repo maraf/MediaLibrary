@@ -11,12 +11,12 @@ using System.Windows.Controls;
 
 namespace Neptuo.PresentationModels.UI.ModelViews
 {
-    public partial class WpfGridModelView : ModelView<IWpfRenderContext>
+    public partial class GridModelView : ModelView<IRenderContext>
     {
         private readonly IModelDefinition modelDefinition;
-        private readonly IFieldViewProvider<IWpfRenderContext> fieldViewProvider;
+        private readonly IFieldViewProvider<IRenderContext> fieldViewProvider;
 
-        public WpfGridModelView(IModelDefinition modelDefinition, IFieldViewProvider<IWpfRenderContext> fieldViewProvider)
+        public GridModelView(IModelDefinition modelDefinition, IFieldViewProvider<IRenderContext> fieldViewProvider)
             : base(modelDefinition)
         {
             Ensure.NotNull(modelDefinition, "modelDefinition");
@@ -25,7 +25,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews
             this.fieldViewProvider = fieldViewProvider;
         }
 
-        protected override void RenderInternal(IWpfRenderContext context)
+        protected override void RenderInternal(IRenderContext context)
         {
             GridContainer grid = new GridContainer(modelDefinition);
 
@@ -64,7 +64,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews
                 if (fieldPosition.definition.Metadata.TryGetGridRowSpan(out int rowSpan))
                     node.RowSpan = rowSpan;
 
-                IFieldView<IWpfRenderContext> fieldView = fieldViewProvider.Get(modelDefinition, fieldPosition.definition);
+                IFieldView<IRenderContext> fieldView = fieldViewProvider.Get(modelDefinition, fieldPosition.definition);
                 AddFieldView(fieldPosition.definition.Identifier, fieldView);
                 node.FieldView = fieldView;
             }

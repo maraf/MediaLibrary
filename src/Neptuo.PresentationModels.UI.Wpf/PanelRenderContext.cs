@@ -10,9 +10,9 @@ using System.Windows.Controls;
 namespace Neptuo.PresentationModels.UI
 {
     /// <summary>
-    /// An implementation of <see cref="IWpfRenderContext"/> which uses <see cref="Panel"/> to support multiple childrens.
+    /// An implementation of <see cref="IRenderContext"/> which uses <see cref="Panel"/> to support multiple childrens.
     /// </summary>
-    public class WpfPanelRenderContext : IWpfRenderContext
+    public class PanelRenderContext : IRenderContext
     {
         private readonly Panel parent;
 
@@ -25,7 +25,7 @@ namespace Neptuo.PresentationModels.UI
         /// Creates a new instance for <paramref name="parent"/>.
         /// </summary>
         /// <param name="parent">A panel to add controls to.</param>
-        public WpfPanelRenderContext(Panel parent)
+        public PanelRenderContext(Panel parent)
         {
             Ensure.NotNull(parent, "parent");
             this.parent = parent;

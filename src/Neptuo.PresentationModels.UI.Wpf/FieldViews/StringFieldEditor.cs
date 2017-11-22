@@ -7,15 +7,15 @@ using System.Windows.Controls;
 
 namespace Neptuo.PresentationModels.UI.FieldViews
 {
-    public class WpfStringFieldEditor : FieldView<string, IWpfRenderContext>
+    public class StringFieldEditor : FieldView<string, IRenderContext>
     {
         private TextBox textBox;
 
-        public WpfStringFieldEditor(IFieldDefinition fieldDefinition)
+        public StringFieldEditor(IFieldDefinition fieldDefinition)
             : base(fieldDefinition)
         { }
 
-        protected override void RenderInternal(IWpfRenderContext context, string defaultValue)
+        protected override void RenderInternal(IRenderContext context, string defaultValue)
         {
             textBox = new TextBox();
             TrySetValueInternal(defaultValue);

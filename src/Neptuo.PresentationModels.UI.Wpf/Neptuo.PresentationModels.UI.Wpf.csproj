@@ -47,24 +47,24 @@
   <ItemGroup>
     <Compile Include="Controls\VisualTree.cs" />
     <Compile Include="Controls\ModelPresenter.cs" />
-    <Compile Include="FieldViews\WpfControlFieldView.cs" />
-    <Compile Include="FieldViews\WpfDateFieldEditor.cs" />
-    <Compile Include="FieldViews\WpfInt32FieldEditor.cs" />
-    <Compile Include="FieldViews\WpfStringFieldEditor.cs" />
+    <Compile Include="FieldViews\ControlFieldView.cs" />
+    <Compile Include="FieldViews\DateFieldEditor.cs" />
+    <Compile Include="FieldViews\Int32FieldEditor.cs" />
+    <Compile Include="FieldViews\StringFieldEditor.cs" />
     <Compile Include="ModelViews\Controls\FieldMetadataExtension.cs" />
     <Compile Include="ModelViews\Controls\FieldMetadata.cs" />
     <Compile Include="ModelViews\Controls\GridContainer.cs" />
     <Compile Include="ModelViews\Controls\GridNode.cs" />
-    <Compile Include="FieldViews\WpfComboBoxFieldEditor.cs" />
+    <Compile Include="FieldViews\ComboBoxFieldEditor.cs" />
     <Compile Include="ModelViews\Controls\StackContainer.cs" />
     <Compile Include="ModelViews\Controls\StackNode.cs" />
-    <Compile Include="ModelViews\WpfStackPanelModelView.cs" />
-    <Compile Include="WpfDefaultViewProvider.cs" />
-    <Compile Include="ModelViews\WpfGridModelView.cs" />
-    <Compile Include="IWpfRenderContext.cs" />
+    <Compile Include="ModelViews\StackPanelModelView.cs" />
+    <Compile Include="DefaultViewProvider.cs" />
+    <Compile Include="ModelViews\GridModelView.cs" />
+    <Compile Include="IRenderContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WpfContentControlRenderContext.cs" />
-    <Compile Include="WpfPanelRenderContext.cs" />
+    <Compile Include="ContentControlRenderContext.cs" />
+    <Compile Include="PanelRenderContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Neptuo">

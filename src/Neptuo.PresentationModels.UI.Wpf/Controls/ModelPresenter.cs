@@ -19,7 +19,7 @@ namespace Neptuo.PresentationModels.UI.Controls
     /// </summary>
     public class ModelPresenter : ContentControl, IModelValueProvider
     {
-        protected IModelView<IWpfRenderContext> View { get; set; }
+        protected IModelView<IRenderContext> View { get; set; }
 
         public IModelDefinition Definition
         {
@@ -43,12 +43,12 @@ namespace Neptuo.PresentationModels.UI.Controls
             view.OnChanged();
         }
 
-        public static IModelViewProvider<IWpfRenderContext> GetViewProvider(DependencyObject obj)
+        public static IModelViewProvider<IRenderContext> GetViewProvider(DependencyObject obj)
         {
-            return (IModelViewProvider<IWpfRenderContext>)obj.GetValue(ViewProviderProperty);
+            return (IModelViewProvider<IRenderContext>)obj.GetValue(ViewProviderProperty);
         }
 
-        public static void SetViewProvider(DependencyObject obj, IModelViewProvider<IWpfRenderContext> value)
+        public static void SetViewProvider(DependencyObject obj, IModelViewProvider<IRenderContext> value)
         {
             obj.SetValue(ViewProviderProperty, value);
         }
@@ -58,7 +58,7 @@ namespace Neptuo.PresentationModels.UI.Controls
         /// </summary>
         public static readonly DependencyProperty ViewProviderProperty = DependencyProperty.RegisterAttached(
             "ViewProvider",
-            typeof(IModelViewProvider<IWpfRenderContext>),
+            typeof(IModelViewProvider<IRenderContext>),
             typeof(ModelPresenter),
             new PropertyMetadata(null, OnViewProviderChanged)
         );
@@ -81,14 +81,14 @@ namespace Neptuo.PresentationModels.UI.Controls
             if (Definition == null)
                 return;
 
-            if (TryGetViewProvider(out IModelViewProvider<IWpfRenderContext> viewProvider))
+            if (TryGetViewProvider(out IModelViewProvider<IRenderContext> viewProvider))
             {
                 View = viewProvider.Get(Definition);
-                View.Render(new WpfContentControlRenderContext(this));
+                View.Render(new ContentControlRenderContext(this));
             }
         }
 
-        private bool TryGetViewProvider(out IModelViewProvider<IWpfRenderContext> viewProvider)
+        private bool TryGetViewProvider(out IModelViewProvider<IRenderContext> viewProvider)
         {
             viewProvider = GetViewProvider(this);
             if (viewProvider != null)
@@ -100,13 +100,13 @@ namespace Neptuo.PresentationModels.UI.Controls
                 if (viewProvider != null)
                     return true;
 
-                if (ancestor is IModelViewProviderContainer<IWpfRenderContext> container)
+                if (ancestor is IModelViewProviderContainer<IRenderContext> container)
                 {
                     viewProvider = container.ViewProvider;
                     return true;
                 }
 
-                if (ancestor is IModelViewProvider<IWpfRenderContext> provider)
+                if (ancestor is IModelViewProvider<IRenderContext> provider)
                 {
                     viewProvider = provider;
                     return true;

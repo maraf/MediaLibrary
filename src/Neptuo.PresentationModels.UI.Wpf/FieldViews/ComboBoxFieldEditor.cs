@@ -9,19 +9,19 @@ using System.Windows.Controls;
 
 namespace Neptuo.PresentationModels.UI.FieldViews
 {
-    public class WpfComboBoxFieldEditor<T> : FieldView<T, IWpfRenderContext>
+    public class ComboBoxFieldEditor<T> : FieldView<T, IRenderContext>
     {
         private readonly IEnumerable<T> items;
         private ComboBox control;
 
-        public WpfComboBoxFieldEditor(IFieldDefinition fieldDefinition, IEnumerable<T> items)
+        public ComboBoxFieldEditor(IFieldDefinition fieldDefinition, IEnumerable<T> items)
             : base(fieldDefinition)
         {
             Ensure.NotNull(items, "items");
             this.items = items;
         }
 
-        protected override void RenderInternal(IWpfRenderContext context, T defaultValue)
+        protected override void RenderInternal(IRenderContext context, T defaultValue)
         {
             control = new ComboBox();
             control.IsEditable = true;

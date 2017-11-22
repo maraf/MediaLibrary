@@ -13,7 +13,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews.Controls
     public class StackNode : Control, IFieldDefinitionContainer
     {
         public IFieldDefinition FieldDefinition { get; private set; }
-        public IFieldView<IWpfRenderContext> FieldView { get; internal set; }
+        public IFieldView<IRenderContext> FieldView { get; internal set; }
 
         static StackNode()
         {
@@ -34,7 +34,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews.Controls
             if (value == null)
                 throw Ensure.Exception.InvalidOperation("Missing 'PART_Value'.");
 
-            WpfContentControlRenderContext context = new WpfContentControlRenderContext(value);
+            ContentControlRenderContext context = new ContentControlRenderContext(value);
             FieldView.Render(context);
         }
     }

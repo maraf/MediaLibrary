@@ -12,7 +12,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews.Controls
     public class GridNode : Control, IFieldDefinitionContainer
     {
         public IFieldDefinition FieldDefinition { get; private set; }
-        public IFieldView<IWpfRenderContext> FieldView { get; internal set; }
+        public IFieldView<IRenderContext> FieldView { get; internal set; }
 
         public int Column
         {
@@ -57,7 +57,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews.Controls
             if (value == null)
                 throw Ensure.Exception.InvalidOperation("Missing 'PART_Value'.");
 
-            WpfContentControlRenderContext context = new WpfContentControlRenderContext(value);
+            ContentControlRenderContext context = new ContentControlRenderContext(value);
             FieldView.Render(context);
         }
     }

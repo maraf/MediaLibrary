@@ -10,32 +10,32 @@ namespace Neptuo.PresentationModels.UI
     /// <summary>
     /// A global model and field view provider.
     /// </summary>
-    public static class WpfDefaultViewProvider
+    public static class DefaultViewProvider
     {
-        private static IModelViewProvider<IWpfRenderContext> modelViewProvider;
-        private static IFieldViewProvider<IWpfRenderContext> fieldViewProvider;
+        private static IModelViewProvider<IRenderContext> modelViewProvider;
+        private static IFieldViewProvider<IRenderContext> fieldViewProvider;
 
         /// <summary>
         /// Gets a default model view provider or throw <see cref="InvalidOperationException"/> if not initialized.
         /// </summary>
-        public static IModelViewProvider<IWpfRenderContext> ModelViewProvider => modelViewProvider ?? throw Ensure.Exception.InvalidOperation("Missing default model view provider.");
+        public static IModelViewProvider<IRenderContext> ModelViewProvider => modelViewProvider ?? throw Ensure.Exception.InvalidOperation("Missing default model view provider.");
 
         /// <summary>
         /// Gets a default field view provider or throw <see cref="InvalidOperationException"/> if not initialized.
         /// </summary>
-        public static IFieldViewProvider<IWpfRenderContext> FieldViewProvider => fieldViewProvider ?? throw Ensure.Exception.InvalidOperation("Missing default field view provider.");
+        public static IFieldViewProvider<IRenderContext> FieldViewProvider => fieldViewProvider ?? throw Ensure.Exception.InvalidOperation("Missing default field view provider.");
 
         /// <summary>
         /// Sets a default providers to <paramref name="modelViewProvider"/> and <paramref name="fieldViewProvider"/>.
         /// </summary>
         /// <param name="modelViewProvider">A new default model view provider.</param>
         /// <param name="fieldViewProvider">A new default field view provider.</param>
-        public static void Set(IModelViewProvider<IWpfRenderContext> modelViewProvider, IFieldViewProvider<IWpfRenderContext> fieldViewProvider)
+        public static void Set(IModelViewProvider<IRenderContext> modelViewProvider, IFieldViewProvider<IRenderContext> fieldViewProvider)
         {
             Ensure.NotNull(modelViewProvider, "modelViewProvider");
             Ensure.NotNull(fieldViewProvider, "fieldViewProvider");
-            WpfDefaultViewProvider.modelViewProvider = modelViewProvider;
-            WpfDefaultViewProvider.fieldViewProvider = fieldViewProvider;
+            DefaultViewProvider.modelViewProvider = modelViewProvider;
+            DefaultViewProvider.fieldViewProvider = fieldViewProvider;
         }
     }
 }

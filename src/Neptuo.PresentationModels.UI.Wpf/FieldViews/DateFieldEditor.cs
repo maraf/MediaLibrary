@@ -7,15 +7,15 @@ using System.Windows.Controls;
 
 namespace Neptuo.PresentationModels.UI.FieldViews
 {
-    public class WpfInt32FieldEditor : FieldView<int?, IWpfRenderContext>
+    public class DateFieldEditor : FieldView<DateTime?, IRenderContext>
     {
         private TextBox textBox;
 
-        public WpfInt32FieldEditor(IFieldDefinition fieldDefinition)
+        public DateFieldEditor(IFieldDefinition fieldDefinition)
             : base(fieldDefinition)
         { }
 
-        protected override void RenderInternal(IWpfRenderContext context, int? defaultValue)
+        protected override void RenderInternal(IRenderContext context, DateTime? defaultValue)
         {
             textBox = new TextBox();
             TrySetValueInternal(defaultValue);
@@ -28,31 +28,30 @@ namespace Neptuo.PresentationModels.UI.FieldViews
                 textBox.Loaded += (sender, e) => textBox.Focus();
         }
 
-        protected override bool TryGetValueInternal(out int? value)
+        protected override bool TryGetValueInternal(out DateTime? value)
         {
-            if (Int32.TryParse(textBox.Text, out int rawValue))
+            if (DateTime.TryParse(textBox.Text, out DateTime rawValue))
             {
                 value = rawValue;
                 return true;
             }
 
-            if (FieldDefinition.FieldType == typeof(int?))
+            if (FieldDefinition.FieldType == typeof(DateTime?))
             {
                 value = null;
                 return true;
             }
 
-            value = Int32.MinValue;
+            value = DateTime.MinValue;
             return false;
         }
 
-        protected override bool TrySetValueInternal(int? value)
+        protected override bool TrySetValueInternal(DateTime? value)
         {
             if (value == null)
                 textBox.Text = String.Empty;
             else
                 textBox.Text = value.ToString();
-
             return true;
         }
     }

@@ -9,9 +9,9 @@ using System.Windows.Controls;
 namespace Neptuo.PresentationModels.UI
 {
     /// <summary>
-    /// An implementation of <see cref="IWpfRenderContext"/> which uses <see cref="ContentControl"/> to support single children.
+    /// An implementation of <see cref="IRenderContext"/> which uses <see cref="ContentControl"/> to support single children.
     /// </summary>
-    public class WpfContentControlRenderContext : IWpfRenderContext
+    public class ContentControlRenderContext : IRenderContext
     {
         private readonly ContentControl parent;
 
@@ -19,7 +19,7 @@ namespace Neptuo.PresentationModels.UI
         /// Creates a new instance for <paramref name="parent"/>.
         /// </summary>
         /// <param name="parent">A content control to add single control to.</param>
-        public WpfContentControlRenderContext(ContentControl parent)
+        public ContentControlRenderContext(ContentControl parent)
         {
             Ensure.NotNull(parent, "parent");
             this.parent = parent;

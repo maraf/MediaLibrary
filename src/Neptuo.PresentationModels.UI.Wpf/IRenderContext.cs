@@ -10,7 +10,7 @@ namespace Neptuo.PresentationModels.UI
     /// <summary>
     /// A rendering context.
     /// </summary>
-    public interface IWpfRenderContext
+    public interface IRenderContext
     {
         /// <summary>
         /// Adds a <paramref name="control"/> to actual parent.
