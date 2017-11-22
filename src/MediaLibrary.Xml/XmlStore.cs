@@ -139,9 +139,15 @@ namespace MediaLibrary
                         if (value != null && converters.TryConvert(value.GetType(), typeof(string), value, out object stringValue))
                         {
                             if (fieldDefinition.Metadata.Get("IsXmlElementContent", false))
-                                element.Value = (string)stringValue;
+                            {
+                                string raw = (string)stringValue;
+                                if (!String.IsNullOrEmpty(raw) && !String.IsNullOrWhiteSpace(raw))
+                                    element.Value = (string)stringValue;
+                            }
                             else
+                            {
                                 element.SetAttributeValue(fieldDefinition.Identifier, (string)stringValue);
+                            }
                         }
                     }
                 }
