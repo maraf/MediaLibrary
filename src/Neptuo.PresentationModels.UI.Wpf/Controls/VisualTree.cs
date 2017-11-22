@@ -12,6 +12,17 @@ namespace Neptuo.PresentationModels.UI.Controls
     {
         public static T FindAncestorOfType<T>(FrameworkElement element)
         {
+            foreach (FrameworkElement parent in EnumerateAncestors(element))
+            {
+                if (parent is T target)
+                    return target;
+            }
+
+            return default;
+        }
+
+        public static IEnumerable<FrameworkElement> EnumerateAncestors(FrameworkElement element)
+        {
             while (element != null)
             {
                 FrameworkElement parent = element.Parent as FrameworkElement;
@@ -24,13 +35,9 @@ namespace Neptuo.PresentationModels.UI.Controls
                 if (parent == null)
                     break;
 
-                if(parent is T target)
-                    return target;
-
+                yield return parent;
                 element = parent;
             }
-
-            return default(T);
         }
     }
 }

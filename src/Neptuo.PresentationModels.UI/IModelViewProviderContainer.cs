@@ -15,6 +15,6 @@ namespace Neptuo.PresentationModels.UI
         /// <summary>
         /// Gets a provider of model views.
         /// </summary>
-        IModelViewProvider<T> ModelViewProvider { get; }
+        IModelViewProvider<T> ViewProvider { get; }
     }
 }

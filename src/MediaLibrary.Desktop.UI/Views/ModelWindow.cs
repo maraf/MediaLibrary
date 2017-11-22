@@ -20,7 +20,7 @@ namespace MediaLibrary.Views
         private readonly INavigator navigator;
         private readonly Library library;
 
-        public IModelViewProvider<IWpfRenderContext> ModelViewProvider => this;
+        public IModelViewProvider<IWpfRenderContext> ViewProvider => this;
 
         public ModelWindow(INavigator navigator, Library library)
         {

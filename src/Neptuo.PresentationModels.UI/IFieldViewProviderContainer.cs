@@ -15,6 +15,6 @@ namespace Neptuo.PresentationModels.UI
         /// <summary>
         /// Gets a provider of field views.
         /// </summary>
-        IFieldViewProvider<T> FieldViewProvider { get; }
+        IFieldViewProvider<T> ViewProvider { get; }
     }
 }
