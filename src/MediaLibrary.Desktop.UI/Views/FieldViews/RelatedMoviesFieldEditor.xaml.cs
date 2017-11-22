@@ -19,7 +19,7 @@ using System.Windows.Shapes;
 
 namespace MediaLibrary.Views.FieldViews
 {
-    public partial class RelatedMoviesFieldView : UserControl, IFieldValueProvider
+    public partial class RelatedMoviesFieldEditor : UserControl, IFieldValueProvider
     {
         public RelatedMoviesViewModel ViewModel
         {
@@ -27,7 +27,7 @@ namespace MediaLibrary.Views.FieldViews
             protected set => DataContext = value;
         }
 
-        public RelatedMoviesFieldView(RelatedMoviesViewModel viewModel)
+        public RelatedMoviesFieldEditor(RelatedMoviesViewModel viewModel)
         {
             Ensure.NotNull(viewModel, "viewModel");
             InitializeComponent();

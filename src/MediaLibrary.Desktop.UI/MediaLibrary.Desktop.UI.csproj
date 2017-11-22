@@ -91,8 +91,8 @@
     <Compile Include="Views\DesignData\MockChangeTracker.cs" />
     <Compile Include="Views\DesignData\MockLibraryStore.cs" />
     <Compile Include="Views\DesignData\MockNavigatorContext.cs" />
-    <Compile Include="Views\FieldViews\RelatedMoviesFieldView.xaml.cs">
-      <DependentUpon>RelatedMoviesFieldView.xaml</DependentUpon>
+    <Compile Include="Views\FieldViews\RelatedMoviesFieldEditor.xaml.cs">
+      <DependentUpon>RelatedMoviesFieldEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LibraryConfigurationWindow.xaml.cs">
       <DependentUpon>LibraryConfigurationWindow.xaml</DependentUpon>
@@ -116,7 +116,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FieldViews\RelatedMoviesFieldView.xaml">
+    <Page Include="Views\FieldViews\RelatedMoviesFieldEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
