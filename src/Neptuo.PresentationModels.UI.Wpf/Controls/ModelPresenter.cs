@@ -17,7 +17,7 @@ namespace Neptuo.PresentationModels.UI.Controls
     /// Another way is to implement an <see cref="IModelViewProvider{T}"/> or <see cref="IModelViewProviderContainer{T}"/> in ancestors (a closest will be used).
     /// If none is satisfied, none is rendered.
     /// </summary>
-    public class ModelPresenter : ContentControl, IModelValueProvider
+    public class ModelPresenter : ContentControl, IModelValueProvider, IModelDefinitionContainer
     {
         protected IModelView<IRenderContext> View { get; set; }
 
