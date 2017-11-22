@@ -136,7 +136,7 @@ namespace MediaLibrary
                     ),
                     new FieldDefinition(
                         "Language",
-                        typeof(int?),
+                        typeof(string),
                         (MetadataCollection)new MetadataCollection()
                             .AddGrid(0, 6)
                             .AddLabel("Language")
