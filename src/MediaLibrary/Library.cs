@@ -130,6 +130,7 @@ namespace MediaLibrary
                             .AddGrid(0, 5)
                             .AddGridColumnSpan(2)
                             .AddLabel("Related Movies")
+                            .Add("IsPersistent", false)
                             .Add("IsSearchable", false)
                             .Add("IsSortable", false)
                     ),
