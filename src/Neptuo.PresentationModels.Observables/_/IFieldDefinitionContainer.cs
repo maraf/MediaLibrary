@@ -14,6 +14,6 @@ namespace Neptuo.PresentationModels
         /// <summary>
         /// Gets an definition of field.
         /// </summary>
-        IFieldDefinition FieldDefinition { get; }
+        IFieldDefinition Definition { get; }
     }
 }

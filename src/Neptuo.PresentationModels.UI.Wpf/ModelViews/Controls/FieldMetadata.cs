@@ -53,7 +53,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews.Controls
             IFieldDefinitionContainer container = VisualTree.FindAncestorOfType<IFieldDefinitionContainer>(element) 
                 ?? throw Ensure.Exception.InvalidOperation("Missing field container.");
 
-            return container.FieldDefinition.Metadata.Get(key, default(T));
+            return container.Definition.Metadata.Get(key, default(T));
         }
     }
 }

@@ -10,12 +10,12 @@ namespace Neptuo.PresentationModels.UI.ModelViews.Controls
 {
     public class GridContainer : Grid, IModelDefinitionContainer
     {
-        public IModelDefinition ModelDefinition { get; private set; }
+        public IModelDefinition Definition { get; private set; }
 
         public GridContainer(IModelDefinition modelDefinition)
         {
             Ensure.NotNull(modelDefinition, "modelDefinition");
-            ModelDefinition = modelDefinition;
+            Definition = modelDefinition;
         }
     }
 }

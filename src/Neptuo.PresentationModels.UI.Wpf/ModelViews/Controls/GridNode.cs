@@ -11,7 +11,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews.Controls
     [TemplatePart(Name = "PART_Value", Type = typeof(ContentControl))]
     public class GridNode : Control, IFieldDefinitionContainer
     {
-        public IFieldDefinition FieldDefinition { get; private set; }
+        public IFieldDefinition Definition { get; private set; }
         public IFieldView<IRenderContext> FieldView { get; internal set; }
 
         public int Column
@@ -46,7 +46,7 @@ namespace Neptuo.PresentationModels.UI.ModelViews.Controls
         public GridNode(IFieldDefinition fieldDefinition)
         {
             Ensure.NotNull(fieldDefinition, "fieldDefinition");
-            FieldDefinition = fieldDefinition;
+            Definition = fieldDefinition;
         }
 
         public override void OnApplyTemplate()

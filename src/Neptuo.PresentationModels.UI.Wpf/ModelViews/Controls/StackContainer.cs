@@ -9,12 +9,12 @@ namespace Neptuo.PresentationModels.UI.ModelViews.Controls
 {
     public class StackContainer : StackPanel, IModelDefinitionContainer
     {
-        public IModelDefinition ModelDefinition { get; private set; }
+        public IModelDefinition Definition { get; private set; }
 
         public StackContainer(IModelDefinition modelDefinition)
         {
             Ensure.NotNull(modelDefinition, "modelDefinition");
-            ModelDefinition = modelDefinition;
+            Definition = modelDefinition;
         }
     }
 }

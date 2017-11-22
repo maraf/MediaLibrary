@@ -14,8 +14,8 @@ namespace Neptuo.PresentationModels.Observables.ComponentModel
     {
         public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
         {
-            if (instance is IModelDefinitionContainer container && container.ModelDefinition != null)
-                return new ModelDefinitionCustomTypeDescriptor(container.ModelDefinition);
+            if (instance is IModelDefinitionContainer container && container.Definition != null)
+                return new ModelDefinitionCustomTypeDescriptor(container.Definition);
 
             return base.GetTypeDescriptor(objectType, instance);
         }

@@ -14,6 +14,6 @@ namespace Neptuo.PresentationModels
         /// <summary>
         /// Gets an definition of model.
         /// </summary>
-        IModelDefinition ModelDefinition { get; }
+        IModelDefinition Definition { get; }
     }
 }

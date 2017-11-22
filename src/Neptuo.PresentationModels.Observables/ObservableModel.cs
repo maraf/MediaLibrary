@@ -19,7 +19,7 @@ namespace Neptuo.PresentationModels.Observables
         /// </summary>
         protected IModelDefinition ModelDefinition { get; private set; }
 
-        IModelDefinition IModelDefinitionContainer.ModelDefinition => ModelDefinition;
+        IModelDefinition IModelDefinitionContainer.Definition => ModelDefinition;
 
         /// <summary>
         /// Creates a new instance for <paramref name="modelDefinition"/>.
