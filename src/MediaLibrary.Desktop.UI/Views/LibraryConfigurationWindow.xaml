@@ -19,26 +19,26 @@
         </Grid.RowDefinitions>
 
         <!-- Content -->
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <pm:ModelPresenter x:Name="ModelPresenter" Margin="8">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="8">
+            <!--<pm:UserModelPresenter x:Name="ModelPresenter" Margin="8">-->
                 <StackPanel>
                     <StackPanel.Resources>
                         <Style TargetType="StackPanel">
-                            <Setter Property="Margin" Value="0,0,0,10" />
+                            <Setter Property="Margin" Value="0,0,0,8" />
                         </Style>
                     </StackPanel.Resources>
-                    <StackPanel pm:FieldPresenter.Identifier="FilePath">
-                        <!--<TextBlock Text="{pm:FieldMetadata Key=Label}" />-->
-                        <TextBlock pm:FieldMetadata.Key="Label" />
-                        <pm:FieldPresenter />
+                    
+                    <StackPanel pm:UserFieldPresenter.Identifier="FilePath">
+                        <TextBlock Text="{pm:UserFieldMetadata Key=Label}" />
+                        <!--<pm:UserFieldPresenter />-->
+                        <controls:FieldTextBlock />
                     </StackPanel>
                     <StackPanel>
-                        <!--<TextBlock Text="{pm:FieldMetadata Key=Label}" />-->
-                        <TextBlock pm:FieldPresenter.Identifier="Name" pm:FieldMetadata.Key="Label" />
-                        <pm:FieldPresenter pm:FieldPresenter.Identifier="Name" />
+                        <TextBlock pm:UserFieldPresenter.Identifier="Name" Text="{pm:UserFieldMetadata Key=Label}" />
+                        <pm:UserFieldPresenter pm:UserFieldPresenter.Identifier="Name" />
                     </StackPanel>
                 </StackPanel>
-            </pm:ModelPresenter>
+            <!--</pm:UserModelPresenter>-->
         </ScrollViewer>
 
         <!-- Buttons -->

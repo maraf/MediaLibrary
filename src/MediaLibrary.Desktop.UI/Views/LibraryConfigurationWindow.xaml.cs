@@ -3,6 +3,7 @@ using Neptuo;
 using Neptuo.Observables.Commands;
 using Neptuo.PresentationModels;
 using Neptuo.PresentationModels.UI;
+using Neptuo.PresentationModels.UI.Controls;
 using Neptuo.PresentationModels.UI.FieldViews;
 using Neptuo.PresentationModels.UI.ModelViews;
 using System;
@@ -21,7 +22,7 @@ using System.Windows.Shapes;
 
 namespace MediaLibrary.Views
 {
-    public partial class LibraryConfigurationWindow : ModelWindow
+    public partial class LibraryConfigurationWindow : ModelWindow, IUserFieldPresenterRegister, IModelValueProvider
     {
         private readonly IChangeTracker changeTracker;
         private readonly Library library;
@@ -32,6 +33,8 @@ namespace MediaLibrary.Views
         {
             Ensure.NotNull(changeTracker, "changeTracker");
             Ensure.NotNull(library, "library");
+
+            UserModelPresenter.SetContainer(this, new ModelDefinitionContainer());
 
             InitializeComponent();
 
@@ -46,17 +49,56 @@ namespace MediaLibrary.Views
         {
             base.OnSourceInitialized(e);
 
-            ModelPresenter.Definition = modelDefinition;
+            UserModelPresenter.GetContainer(this).Definition = modelDefinition;
             CopyModelValueProvider copy = new CopyModelValueProvider(modelDefinition, true);
-            copy.Update(ModelPresenter, library.Configuration);
+            copy.Update(this, library.Configuration);
         }
 
         private void OnSaveClick()
         {
-            changeTracker.UpdateModel(modelDefinition, library.Configuration, ModelPresenter);
+            changeTracker.UpdateModel(modelDefinition, library.Configuration, this);
             Close();
         }
 
         private void OnCloseClick() => Close();
+
+
+
+
+
+        public bool TryGetValue(string identifier, out object value)
+        {
+            if (providers.TryGetValue(identifier, out IFieldValueProvider provider))
+                return provider.TryGetValue(out value);
+
+            value = null;
+            return false;
+        }
+
+        public bool TrySetValue(string identifier, object value)
+        {
+            if (providers.TryGetValue(identifier, out IFieldValueProvider provider))
+                return provider.TrySetValue(value);
+
+            return false;
+        }
+
+        public void Dispose() => TryDisposeFieldPresenters();
+
+        private void TryDisposeFieldPresenters()
+        {
+            foreach (IFieldValueProvider provider in providers.Values)
+            {
+                if (provider is IDisposable disposable)
+                    disposable.Dispose();
+            }
+        }
+
+        private Dictionary<string, IFieldValueProvider> providers = new Dictionary<string, IFieldValueProvider>();
+
+        void IUserFieldPresenterRegister.Add(string identifier, IFieldValueProvider view)
+        {
+            providers[identifier] = view;
+        }
     }
 }

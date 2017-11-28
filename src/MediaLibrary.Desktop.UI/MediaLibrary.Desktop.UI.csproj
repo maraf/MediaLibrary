@@ -77,6 +77,7 @@
       <DependentUpon>EditButtons.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\FieldPresenter.cs" />
+    <Compile Include="Views\Controls\FieldTextBox.cs" />
     <Compile Include="Views\Controls\SortView.xaml.cs">
       <DependentUpon>SortView.xaml</DependentUpon>
     </Compile>
