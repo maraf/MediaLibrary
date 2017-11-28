@@ -20,7 +20,25 @@
 
         <!-- Content -->
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <pm:ModelPresenter x:Name="ModelPresenter" Margin="8" />
+            <pm:ModelPresenter x:Name="ModelPresenter" Margin="8">
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Margin" Value="0,0,0,10" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <StackPanel pm:FieldPresenter.Identifier="FilePath">
+                        <!--<TextBlock Text="{pm:FieldMetadata Key=Label}" />-->
+                        <TextBlock pm:FieldMetadata.Key="Label" />
+                        <pm:FieldPresenter />
+                    </StackPanel>
+                    <StackPanel>
+                        <!--<TextBlock Text="{pm:FieldMetadata Key=Label}" />-->
+                        <TextBlock pm:FieldPresenter.Identifier="Name" pm:FieldMetadata.Key="Label" />
+                        <pm:FieldPresenter pm:FieldPresenter.Identifier="Name" />
+                    </StackPanel>
+                </StackPanel>
+            </pm:ModelPresenter>
         </ScrollViewer>
 
         <!-- Buttons -->

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Neptuo.Collections.Specialized;
+using Neptuo.PresentationModels.UI.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,9 +27,17 @@ namespace Neptuo.PresentationModels.UI.ModelViews.Controls
 
             IProvideValueTarget provideValueTarget = (IProvideValueTarget)serviceProvider.GetService(typeof(IProvideValueTarget));
             if (provideValueTarget.TargetObject is FrameworkElement element)
-                return FieldMetadata.GetKeyValue<object>(element, Key);
+                return GetKeyValue<object>(element, Key);
 
             return this;
+        }
+
+        private static T GetKeyValue<T>(FrameworkElement element, string key)
+        {
+            IFieldDefinitionContainer container = VisualTree.FindAncestorOfType<IFieldDefinitionContainer>(element)
+                ?? throw Ensure.Exception.InvalidOperation("Missing field container.");
+
+            return container.Definition.Metadata.Get(key, default(T));
         }
     }
 }

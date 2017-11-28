@@ -15,12 +15,13 @@ using System.Windows;
 
 namespace MediaLibrary.Views
 {
-    public abstract class ModelWindow : Window, IModelViewProviderContainer<IRenderContext>, IModelViewProvider<IRenderContext>, IFieldViewProvider<IRenderContext>
+    public abstract class ModelWindow : Window, IModelViewProviderContainer<IRenderContext>, IModelViewProvider<IRenderContext>, IFieldViewProviderContainer<IRenderContext>, IFieldViewProvider<IRenderContext>
     {
         private readonly INavigator navigator;
         private readonly Library library;
 
-        public IModelViewProvider<IRenderContext> ViewProvider => this;
+        IModelViewProvider<IRenderContext> IModelViewProviderContainer<IRenderContext>.ViewProvider => this;
+        IFieldViewProvider<IRenderContext> IFieldViewProviderContainer<IRenderContext>.ViewProvider => this;
 
         public ModelWindow(INavigator navigator, Library library)
         {

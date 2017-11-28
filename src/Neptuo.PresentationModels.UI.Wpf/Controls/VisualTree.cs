@@ -10,9 +10,9 @@ namespace Neptuo.PresentationModels.UI.Controls
 {
     internal static class VisualTree
     {
-        public static T FindAncestorOfType<T>(FrameworkElement element)
+        public static T FindAncestorOfType<T>(FrameworkElement element, bool isElementIncluded = false)
         {
-            foreach (FrameworkElement parent in EnumerateAncestors(element))
+            foreach (FrameworkElement parent in EnumerateAncestors(element, isElementIncluded))
             {
                 if (parent is T target)
                     return target;
@@ -21,8 +21,11 @@ namespace Neptuo.PresentationModels.UI.Controls
             return default;
         }
 
-        public static IEnumerable<FrameworkElement> EnumerateAncestors(FrameworkElement element)
+        public static IEnumerable<FrameworkElement> EnumerateAncestors(FrameworkElement element, bool isElementIncluded = false)
         {
+            if (element != null && isElementIncluded)
+                yield return element;
+
             while (element != null)
             {
                 FrameworkElement parent = element.Parent as FrameworkElement;
@@ -38,6 +41,89 @@ namespace Neptuo.PresentationModels.UI.Controls
                 yield return parent;
                 element = parent;
             }
+        }
+
+
+
+        public static bool TryGetModelDefinition(FrameworkElement element, out IModelDefinition definition)
+        {
+            ModelDefinitionContainer container = UserModelPresenter.GetContainer(element);
+            if (container != null)
+            {
+                definition = container.Definition;
+                return definition != null;
+            }
+
+            foreach (FrameworkElement ancestor in VisualTree.EnumerateAncestors(element))
+            {
+                container = UserModelPresenter.GetContainer(ancestor);
+                if (container != null)
+                {
+                    definition = container.Definition;
+                    return definition != null;
+                }
+            }
+
+            definition = null;
+            return false;
+        }
+
+
+
+        public static bool TryGetModelViewProvider(FrameworkElement element, out IModelViewProvider<IRenderContext> viewProvider)
+        {
+            viewProvider = ModelPresenter.GetViewProvider(element);
+            if (viewProvider != null)
+                return true;
+
+            foreach (FrameworkElement ancestor in VisualTree.EnumerateAncestors(element))
+            {
+                viewProvider = ModelPresenter.GetViewProvider(ancestor);
+                if (viewProvider != null)
+                    return true;
+
+                if (ancestor is IModelViewProviderContainer<IRenderContext> container)
+                {
+                    viewProvider = container.ViewProvider;
+                    return true;
+                }
+
+                if (ancestor is IModelViewProvider<IRenderContext> provider)
+                {
+                    viewProvider = provider;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool TryGetFieldViewProvider(FrameworkElement element, out IFieldViewProvider<IRenderContext> viewProvider)
+        {
+            viewProvider = UserFieldPresenter.GetViewProvider(element);
+            if (viewProvider != null)
+                return true;
+
+            foreach (FrameworkElement ancestor in VisualTree.EnumerateAncestors(element))
+            {
+                viewProvider = UserFieldPresenter.GetViewProvider(ancestor);
+                if (viewProvider != null)
+                    return true;
+
+                if (ancestor is IFieldViewProviderContainer<IRenderContext> container)
+                {
+                    viewProvider = container.ViewProvider;
+                    return true;
+                }
+
+                if (ancestor is IFieldViewProvider<IRenderContext> provider)
+                {
+                    viewProvider = provider;
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

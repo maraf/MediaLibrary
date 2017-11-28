@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Neptuo.PresentationModels.UI
 {
     /// <summary>
-    /// Base implemtation of <see cref="IModelView{T}"/> based on field views.
+    /// Base implementation of <see cref="IModelView{T}"/> based on field views.
     /// </summary>
     public abstract class ModelView<T> : DisposableBase, IModelView<T>
     {

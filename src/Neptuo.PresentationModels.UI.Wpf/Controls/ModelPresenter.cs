@@ -12,12 +12,12 @@ namespace Neptuo.PresentationModels.UI.Controls
     /// A control for presenting a model definition.
     /// A model definition is set through <see cref="DefinitionProperty"/>.
     /// 
-    /// This control requires an instance of <see cref="IModelViewProvider{T}"/> to know to render the definition.
+    /// This control requires an instance of <see cref="IModelViewProvider{T}"/> to know how to render the definition.
     /// It be passed in various way. A simplest is to set a property <see cref="ViewProviderProperty"/> on this control or on any of ancestors (a first one will be used).
     /// Another way is to implement an <see cref="IModelViewProvider{T}"/> or <see cref="IModelViewProviderContainer{T}"/> in ancestors (a closest will be used).
     /// If none is satisfied, none is rendered.
     /// </summary>
-    public class ModelPresenter : ContentControl, IModelValueProvider, IModelDefinitionContainer
+    public class ModelPresenter : ContentControl, IModelValueProvider, IModelDefinitionContainer, IUserFieldPresenterRegister
     {
         protected IModelView<IRenderContext> View { get; set; }
 
@@ -74,6 +74,11 @@ namespace Neptuo.PresentationModels.UI.Controls
             IsTabStop = false;
         }
 
+        public ModelPresenter(IModelDefinition definition)
+        {
+            Definition = definition;
+        }
+
         private void OnChanged()
         {
             TryDisposeModelView();
@@ -81,45 +86,20 @@ namespace Neptuo.PresentationModels.UI.Controls
             if (Definition == null)
                 return;
 
-            if (TryGetViewProvider(out IModelViewProvider<IRenderContext> viewProvider))
+            if (VisualTree.TryGetModelViewProvider(this, out IModelViewProvider<IRenderContext> viewProvider))
             {
                 View = viewProvider.Get(Definition);
                 View.Render(new ContentControlRenderContext(this));
             }
         }
 
-        private bool TryGetViewProvider(out IModelViewProvider<IRenderContext> viewProvider)
-        {
-            viewProvider = GetViewProvider(this);
-            if (viewProvider != null)
-                return true;
-
-            foreach (FrameworkElement ancestor in VisualTree.EnumerateAncestors(this))
-            {
-                viewProvider = GetViewProvider(ancestor);
-                if (viewProvider != null)
-                    return true;
-
-                if (ancestor is IModelViewProviderContainer<IRenderContext> container)
-                {
-                    viewProvider = container.ViewProvider;
-                    return true;
-                }
-
-                if (ancestor is IModelViewProvider<IRenderContext> provider)
-                {
-                    viewProvider = provider;
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         public bool TryGetValue(string identifier, out object value)
         {
             if (View != null)
                 return View.TryGetValue(identifier, out value);
+
+            if (presenters.TryGetValue(identifier, out UserFieldPresenter presenter))
+                return presenter.TryGetValue(out value);
 
             value = null;
             return false;
@@ -129,6 +109,9 @@ namespace Neptuo.PresentationModels.UI.Controls
         {
             if (View != null)
                 return View.TrySetValue(identifier, value);
+
+            if (presenters.TryGetValue(identifier, out UserFieldPresenter presenter))
+                return presenter.TrySetValue(value);
 
             return false;
         }
@@ -143,5 +126,12 @@ namespace Neptuo.PresentationModels.UI.Controls
         }
 
         public void Dispose() => TryDisposeModelView();
+
+        private Dictionary<string, UserFieldPresenter> presenters = new Dictionary<string, UserFieldPresenter>();
+
+        void IUserFieldPresenterRegister.Add(string fieldIdentifier, UserFieldPresenter fieldPresenter)
+        {
+            presenters[fieldIdentifier] = fieldPresenter;
+        }
     }
 }

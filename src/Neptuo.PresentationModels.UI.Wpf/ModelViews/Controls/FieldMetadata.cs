@@ -40,20 +40,28 @@ namespace Neptuo.PresentationModels.UI.ModelViews.Controls
             FrameworkElement element = (FrameworkElement)d;
             string key = GetKey(d);
 
-            if (element is ContentControl control)
-                control.Content = GetKeyValue<object>(element, key);
-            else if (element is TextBlock textBlock)
-                textBlock.Text = GetKeyValue<string>(element, key);
-            else
-                throw Ensure.Exception.InvalidOperation($"Not supported target for metadata key '{key}'. Currently only supported are '{nameof(ContentControl)}' and '{(nameof(textBlock))}'");
+            foreach (FrameworkElement ancestor in VisualTree.EnumerateAncestors(element, true))
+            {
+                FieldDefinitionContainer container = UserFieldPresenter.GetContainer(ancestor);
+                if (container != null)
+                {
+                    if (container.Definition != null)
+                        SetValue(element, container.Definition, key);
+
+                    container.Changed += () => SetValue(element, container.Definition, key);
+                    break;
+                }
+            }
         }
 
-        internal static T GetKeyValue<T>(FrameworkElement element, string key)
+        private static void SetValue(FrameworkElement element, IFieldDefinition definition, string key)
         {
-            IFieldDefinitionContainer container = VisualTree.FindAncestorOfType<IFieldDefinitionContainer>(element) 
-                ?? throw Ensure.Exception.InvalidOperation("Missing field container.");
-
-            return container.Definition.Metadata.Get(key, default(T));
+            if (element is ContentControl control)
+                control.Content = definition.Metadata.Get(key, default(object));
+            else if (element is TextBlock textBlock)
+                textBlock.Text = definition.Metadata.Get(key, String.Empty);
+            else
+                throw Ensure.Exception.InvalidOperation($"Not supported target for metadata key '{key}'. Currently only supported are '{nameof(ContentControl)}' and '{(nameof(textBlock))}'");
         }
     }
 }

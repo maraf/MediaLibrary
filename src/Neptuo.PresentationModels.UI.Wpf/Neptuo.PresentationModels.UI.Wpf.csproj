@@ -45,6 +45,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\FieldDefinitionContainer.cs" />
+    <Compile Include="Controls\UserFieldPresenter.cs" />
+    <Compile Include="Controls\IUserFieldPresenterRegister.cs" />
+    <Compile Include="Controls\ModelDefinitionContainer.cs" />
+    <Compile Include="Controls\UserModelPresenter.cs" />
     <Compile Include="Controls\VisualTree.cs" />
     <Compile Include="Controls\ModelPresenter.cs" />
     <Compile Include="FieldViews\ControlFieldView.cs" />
@@ -58,6 +63,7 @@
     <Compile Include="FieldViews\ComboBoxFieldEditor.cs" />
     <Compile Include="ModelViews\Controls\StackContainer.cs" />
     <Compile Include="ModelViews\Controls\StackNode.cs" />
+    <Compile Include="Controls\UserFieldMetadataExtension.cs" />
     <Compile Include="ModelViews\StackPanelModelView.cs" />
     <Compile Include="DefaultViewProvider.cs" />
     <Compile Include="ModelViews\GridModelView.cs" />
