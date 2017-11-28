@@ -79,8 +79,8 @@ namespace Neptuo.PresentationModels.UI.Controls
         /// <returns><c>true</c> if field presenter is registered and provided the <paramref name="value"/>; <c>false</c> otherwise.</returns>
         public bool TryGetValue(string identifier, out object value)
         {
-            if (presenters.TryGetValue(identifier, out UserFieldPresenter presenter))
-                return presenter.TryGetValue(out value);
+            if (views.TryGetValue(identifier, out IFieldValueProvider view))
+                return view.TryGetValue(out value);
 
             value = null;
             return false;
@@ -94,8 +94,8 @@ namespace Neptuo.PresentationModels.UI.Controls
         /// <returns><c>true</c> if field presenter is registered and accepted the <paramref name="value"/>; <c>false</c> otherwise.</returns>
         public bool TrySetValue(string identifier, object value)
         {
-            if (presenters.TryGetValue(identifier, out UserFieldPresenter presenter))
-                return presenter.TrySetValue(value);
+            if (views.TryGetValue(identifier, out IFieldValueProvider view))
+                return view.TrySetValue(value);
 
             return false;
         }
@@ -107,16 +107,16 @@ namespace Neptuo.PresentationModels.UI.Controls
         /// </summary>
         private void TryDisposeFieldPresenters()
         {
-            foreach (UserFieldPresenter presenter in presenters.Values)
+            foreach (UserFieldPresenter presenter in views.Values)
                 presenter.Dispose();
         }
 
 
-        private Dictionary<string, UserFieldPresenter> presenters = new Dictionary<string, UserFieldPresenter>();
+        private Dictionary<string, IFieldValueProvider> views = new Dictionary<string, IFieldValueProvider>();
 
-        void IUserFieldPresenterRegister.Add(string fieldIdentifier, UserFieldPresenter fieldPresenter)
+        void IUserFieldPresenterRegister.Add(string identifier, IFieldValueProvider view)
         {
-            presenters[fieldIdentifier] = fieldPresenter;
+            views[identifier] = view;
         }
     }
 }

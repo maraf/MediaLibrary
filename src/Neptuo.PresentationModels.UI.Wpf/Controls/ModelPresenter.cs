@@ -17,7 +17,7 @@ namespace Neptuo.PresentationModels.UI.Controls
     /// Another way is to implement an <see cref="IModelViewProvider{T}"/> or <see cref="IModelViewProviderContainer{T}"/> in ancestors (a closest will be used).
     /// If none is satisfied, none is rendered.
     /// </summary>
-    public class ModelPresenter : ContentControl, IModelValueProvider, IModelDefinitionContainer, IUserFieldPresenterRegister
+    public class ModelPresenter : ContentControl, IModelValueProvider, IModelDefinitionContainer
     {
         protected IModelView<IRenderContext> View { get; set; }
 
@@ -98,9 +98,6 @@ namespace Neptuo.PresentationModels.UI.Controls
             if (View != null)
                 return View.TryGetValue(identifier, out value);
 
-            if (presenters.TryGetValue(identifier, out UserFieldPresenter presenter))
-                return presenter.TryGetValue(out value);
-
             value = null;
             return false;
         }
@@ -109,9 +106,6 @@ namespace Neptuo.PresentationModels.UI.Controls
         {
             if (View != null)
                 return View.TrySetValue(identifier, value);
-
-            if (presenters.TryGetValue(identifier, out UserFieldPresenter presenter))
-                return presenter.TrySetValue(value);
 
             return false;
         }
@@ -126,12 +120,5 @@ namespace Neptuo.PresentationModels.UI.Controls
         }
 
         public void Dispose() => TryDisposeModelView();
-
-        private Dictionary<string, UserFieldPresenter> presenters = new Dictionary<string, UserFieldPresenter>();
-
-        void IUserFieldPresenterRegister.Add(string fieldIdentifier, UserFieldPresenter fieldPresenter)
-        {
-            presenters[fieldIdentifier] = fieldPresenter;
-        }
     }
 }
