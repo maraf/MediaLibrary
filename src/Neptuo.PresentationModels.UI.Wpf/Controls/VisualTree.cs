@@ -125,5 +125,39 @@ namespace Neptuo.PresentationModels.UI.Controls
 
             return false;
         }
+
+
+        public static FieldValueProviderCollection FindFieldValueProviderCollection(FrameworkElement element)
+        {
+            foreach (FrameworkElement ancestor in VisualTree.EnumerateAncestors(element))
+            {
+                FieldValueProviderCollection collection = UserModelPresenter.GetValueProviderCollection(ancestor);
+                if (collection != null)
+                    return collection;
+            }
+
+            return null;
+        }
+
+
+        public static void WithFieldDefinitionContainer(FrameworkElement element, Action<IFieldDefinition> handler)
+        {
+            FieldDefinitionContainer container = VisualTree.EnumerateAncestors(element, true).Select(a => UserFieldPresenter.GetContainer(a)).FirstOrDefault(c => c != null);
+            if (container != null)
+            {
+                if (container.Definition != null)
+                {
+                    handler(container.Definition);
+                }
+                else
+                {
+                    container.Changed += () =>
+                    {
+                        if (container.Definition != null)
+                            handler(container.Definition);
+                    };
+                }
+            }
+        }
     }
 }

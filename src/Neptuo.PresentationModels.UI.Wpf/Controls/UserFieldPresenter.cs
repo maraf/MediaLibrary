@@ -20,6 +20,11 @@ namespace Neptuo.PresentationModels.UI.Controls
             obj.SetValue(ContainerProperty, value);
         }
 
+        /// <summary>
+        /// A property marking the target as a field definition container.
+        /// This property must be set before childrens (<see cref="UserFieldPresenter"/>, <see cref="UserFieldMetadataExtension"/>, ...) are initialized, 
+        /// because they are binding to this property value and its <see cref="FieldDefinitionContainer.Changed"/> event.
+        /// </summary>
         public static readonly DependencyProperty ContainerProperty = DependencyProperty.RegisterAttached(
             "Container",
             typeof(FieldDefinitionContainer),
@@ -39,7 +44,7 @@ namespace Neptuo.PresentationModels.UI.Controls
 
         /// <summary>
         /// Setting this property makes the target a holder of field definition.
-        /// This property is used in combination with <see cref="GetContainer(DependencyObject)"/>.
+        /// This property sets and is used in combination with <see cref="ContainerProperty"/>.
         /// </summary>
         public static readonly DependencyProperty IdentifierProperty = DependencyProperty.RegisterAttached(
             "Identifier",
@@ -54,7 +59,7 @@ namespace Neptuo.PresentationModels.UI.Controls
                 SetContainer(d, new FieldDefinitionContainer());
 
             if (d is UserFieldPresenter field)
-                field.TryAttachToFieldDefinitionContainer();
+                field.BindToFieldDefinitionContainer();
 
             BindModelContainerChanged(d);
         }
@@ -86,7 +91,6 @@ namespace Neptuo.PresentationModels.UI.Controls
             }
         }
 
-
         public static IFieldViewProvider<IRenderContext> GetViewProvider(DependencyObject obj)
         {
             return (IFieldViewProvider<IRenderContext>)obj.GetValue(ViewProviderProperty);
@@ -113,7 +117,7 @@ namespace Neptuo.PresentationModels.UI.Controls
                 view.OnChanged(null);
         }
 
-        public IFieldDefinition Definition { get; set; }
+        public IFieldDefinition Definition { get; private set; }
 
         protected IFieldView<IRenderContext> View { get; set; }
 
@@ -126,12 +130,12 @@ namespace Neptuo.PresentationModels.UI.Controls
         protected override void OnVisualParentChanged(DependencyObject oldParent)
         {
             base.OnVisualParentChanged(oldParent);
-            TryAttachToFieldDefinitionContainer();
+            BindToFieldDefinitionContainer();
         }
 
         private bool isAttached;
 
-        private void TryAttachToFieldDefinitionContainer()
+        private void BindToFieldDefinitionContainer()
         {
             if (isAttached)
                 return;
@@ -175,10 +179,10 @@ namespace Neptuo.PresentationModels.UI.Controls
         {
             if (!isAdded)
             {
-                IUserFieldPresenterRegister register = VisualTree.FindAncestorOfType<IUserFieldPresenterRegister>(this);
-                if (register != null)
+                FieldValueProviderCollection collection = VisualTree.FindFieldValueProviderCollection(this);
+                if (collection != null)
                 {
-                    register.Add(Definition.Identifier, this);
+                    collection.Add(Definition.Identifier, this);
                     isAdded = true;
                 }
             }

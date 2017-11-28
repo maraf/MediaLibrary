@@ -12,6 +12,7 @@ namespace Neptuo.PresentationModels.UI.Controls
 {
     /// <summary>
     /// An extension for reading a field's metadata.
+    /// This extension can be used on dependency properties and required <see cref="UserFieldPresenter.ContainerProperty"/> to be set on ancestor.
     /// </summary>
     public class UserFieldMetadataExtension : MarkupExtension
     {

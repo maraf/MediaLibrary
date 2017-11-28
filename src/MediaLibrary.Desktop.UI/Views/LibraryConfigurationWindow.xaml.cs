@@ -22,7 +22,7 @@ using System.Windows.Shapes;
 
 namespace MediaLibrary.Views
 {
-    public partial class LibraryConfigurationWindow : ModelWindow, IUserFieldPresenterRegister, IModelValueProvider
+    public partial class LibraryConfigurationWindow : ModelWindow, IModelValueProvider
     {
         private readonly IChangeTracker changeTracker;
         private readonly Library library;
@@ -35,6 +35,7 @@ namespace MediaLibrary.Views
             Ensure.NotNull(library, "library");
 
             UserModelPresenter.SetContainer(this, new ModelDefinitionContainer());
+            UserModelPresenter.SetValueProviderCollection(this, new FieldValueProviderCollection());
 
             InitializeComponent();
 
@@ -68,7 +69,7 @@ namespace MediaLibrary.Views
 
         public bool TryGetValue(string identifier, out object value)
         {
-            if (providers.TryGetValue(identifier, out IFieldValueProvider provider))
+            if (UserModelPresenter.GetValueProviderCollection(this).TryGet(identifier, out IFieldValueProvider provider))
                 return provider.TryGetValue(out value);
 
             value = null;
@@ -77,28 +78,21 @@ namespace MediaLibrary.Views
 
         public bool TrySetValue(string identifier, object value)
         {
-            if (providers.TryGetValue(identifier, out IFieldValueProvider provider))
+            if (UserModelPresenter.GetValueProviderCollection(this).TryGet(identifier, out IFieldValueProvider provider))
                 return provider.TrySetValue(value);
 
             return false;
         }
 
-        public void Dispose() => TryDisposeFieldPresenters();
+        public void Dispose() => TryDisposeFieldValueProviders();
 
-        private void TryDisposeFieldPresenters()
+        private void TryDisposeFieldValueProviders()
         {
-            foreach (IFieldValueProvider provider in providers.Values)
+            foreach (IFieldValueProvider presenter in UserModelPresenter.GetValueProviderCollection(this))
             {
-                if (provider is IDisposable disposable)
+                if (presenter is IDisposable disposable)
                     disposable.Dispose();
             }
-        }
-
-        private Dictionary<string, IFieldValueProvider> providers = new Dictionary<string, IFieldValueProvider>();
-
-        void IUserFieldPresenterRegister.Add(string identifier, IFieldValueProvider view)
-        {
-            providers[identifier] = view;
         }
     }
 }

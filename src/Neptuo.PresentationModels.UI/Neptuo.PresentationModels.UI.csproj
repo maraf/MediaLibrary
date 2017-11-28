@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="FieldView.cs" />
     <Compile Include="FieldViewCollection.cs" />
+    <Compile Include="FieldValueProviderCollection.cs" />
     <Compile Include="IFieldView.cs" />
     <Compile Include="IFieldViewProvider.cs" />
     <Compile Include="IFieldViewProviderContainer.cs" />

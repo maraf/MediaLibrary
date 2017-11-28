@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
+using Neptuo.PresentationModels.TypeModels.Expressions;
+using Neptuo.PresentationModels.UI;
 
 namespace MediaLibrary.Views.Controls
 {
@@ -28,23 +30,9 @@ namespace MediaLibrary.Views.Controls
         {
             base.OnVisualParentChanged(oldParent);
 
-            IUserFieldPresenterRegister register = VisualTree.FindAncestorOfType<IUserFieldPresenterRegister>(this);
-            FieldDefinitionContainer container = VisualTree.EnumerateAncestors(this, true).Select(a => UserFieldPresenter.GetContainer(a)).FirstOrDefault(c => c != null);
-            if (register != null && container != null)
-            {
-                if (container.Definition != null)
-                {
-                    register.Add(container.Definition.Identifier, this);
-                }
-                else
-                {
-                    container.Changed += () =>
-                    {
-                        if (container.Definition != null)
-                            register.Add(container.Definition.Identifier, this);
-                    };
-                }
-            }
+            FieldValueProviderCollection providers = VisualTree.FindFieldValueProviderCollection(this);
+            if (providers != null)
+                VisualTree.WithFieldDefinitionContainer(this, definition => providers.Add(definition.Identifier, this));
         }
     }
 }

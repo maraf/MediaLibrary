@@ -11,6 +11,7 @@ namespace Neptuo.PresentationModels.UI.Controls
 {
     /// <summary>
     /// An extension for reading a model's metadata.
+    /// This extension can be used on dependency properties and required <see cref="UserModelPresenter.ContainerProperty"/> to be set on ancestor.
     /// </summary>
     public class UserModelMetadataExtension : MarkupExtension
     {

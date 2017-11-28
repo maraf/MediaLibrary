@@ -19,7 +19,7 @@ namespace Neptuo.PresentationModels.UI.Controls
     /// <remarks>
     /// A property <see cref="ContainerProperty"/> should never be changed on <see cref="UserModelPresenter"/> (as it is set in constructor).
     /// </remarks>
-    public class UserModelPresenter : ContentControl, IModelDefinitionContainer, IModelValueProvider, IUserFieldPresenterRegister
+    public class UserModelPresenter : ContentControl, IModelDefinitionContainer, IModelValueProvider
     {
         public static ModelDefinitionContainer GetContainer(DependencyObject obj)
         {
@@ -32,7 +32,7 @@ namespace Neptuo.PresentationModels.UI.Controls
         }
 
         /// <summary>
-        /// A property marking target as a model definition container.
+        /// A property marking the target as a model definition container.
         /// This property must be set before childrens (<see cref="UserFieldPresenter"/>, <see cref="UserFieldMetadataExtension"/>, ...) are initialized, 
         /// because they are binding to this property value and its <see cref="ModelDefinitionContainer.Changed"/> event.
         /// </summary>
@@ -42,6 +42,27 @@ namespace Neptuo.PresentationModels.UI.Controls
             typeof(ModelPresenter),
             new PropertyMetadata(null)
         );
+
+        public static FieldValueProviderCollection GetValueProviderCollection(DependencyObject obj)
+        {
+            return (FieldValueProviderCollection)obj.GetValue(ValueProviderCollectionProperty);
+        }
+
+        public static void SetValueProviderCollection(DependencyObject obj, FieldValueProviderCollection value)
+        {
+            obj.SetValue(ValueProviderCollectionProperty, value);
+        }
+
+        /// <summary>
+        /// A property where field value providers will be registered.
+        /// </summary>
+        public static readonly DependencyProperty ValueProviderCollectionProperty = DependencyProperty.RegisterAttached(
+            "ValueProviderCollection",
+            typeof(FieldValueProviderCollection),
+            typeof(UserModelPresenter),
+            new PropertyMetadata(null)
+        );
+
 
         /// <summary>
         /// A shortcut for getting and setting a value of <see cref="ContainerProperty"/>.
@@ -58,6 +79,7 @@ namespace Neptuo.PresentationModels.UI.Controls
         public UserModelPresenter()
         {
             SetContainer(this, new ModelDefinitionContainer());
+            SetValueProviderCollection(this, new FieldValueProviderCollection());
             IsTabStop = false;
         }
 
@@ -79,7 +101,7 @@ namespace Neptuo.PresentationModels.UI.Controls
         /// <returns><c>true</c> if field presenter is registered and provided the <paramref name="value"/>; <c>false</c> otherwise.</returns>
         public bool TryGetValue(string identifier, out object value)
         {
-            if (views.TryGetValue(identifier, out IFieldValueProvider view))
+            if (GetValueProviderCollection(this).TryGet(identifier, out IFieldValueProvider view))
                 return view.TryGetValue(out value);
 
             value = null;
@@ -94,29 +116,24 @@ namespace Neptuo.PresentationModels.UI.Controls
         /// <returns><c>true</c> if field presenter is registered and accepted the <paramref name="value"/>; <c>false</c> otherwise.</returns>
         public bool TrySetValue(string identifier, object value)
         {
-            if (views.TryGetValue(identifier, out IFieldValueProvider view))
+            if (GetValueProviderCollection(this).TryGet(identifier, out IFieldValueProvider view))
                 return view.TrySetValue(value);
 
             return false;
         }
 
-        public void Dispose() => TryDisposeFieldPresenters();
+        public void Dispose() => TryDisposeFieldValueProviders();
 
         /// <summary>
-        /// Tries to dispose field presenters.
+        /// Tries to dispose field value providers.
         /// </summary>
-        private void TryDisposeFieldPresenters()
+        private void TryDisposeFieldValueProviders()
         {
-            foreach (UserFieldPresenter presenter in views.Values)
-                presenter.Dispose();
-        }
-
-
-        private Dictionary<string, IFieldValueProvider> views = new Dictionary<string, IFieldValueProvider>();
-
-        void IUserFieldPresenterRegister.Add(string identifier, IFieldValueProvider view)
-        {
-            views[identifier] = view;
+            foreach (IFieldValueProvider presenter in GetValueProviderCollection(this))
+            {
+                if (presenter is IDisposable disposable)
+                    disposable.Dispose();
+            }
         }
     }
 }
