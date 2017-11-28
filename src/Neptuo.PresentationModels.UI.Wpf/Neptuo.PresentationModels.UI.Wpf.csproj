@@ -49,6 +49,7 @@
     <Compile Include="Controls\UserFieldPresenter.cs" />
     <Compile Include="Controls\IUserFieldPresenterRegister.cs" />
     <Compile Include="Controls\ModelDefinitionContainer.cs" />
+    <Compile Include="Controls\UserModelMetadataExtension.cs" />
     <Compile Include="Controls\UserModelPresenter.cs" />
     <Compile Include="Controls\VisualTree.cs" />
     <Compile Include="Controls\ModelPresenter.cs" />
