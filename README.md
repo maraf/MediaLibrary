@@ -8,4 +8,4 @@ In main window there is a filter for simple searching for movies, sorting is als
 
 Library can also be very simply exported to .xls format, here to you can define what should be in the exported file and what structure it should has.
 
-[http://i54.tinypic.com/2d7zmv8.png]
+![Preview](assets/Preview.jpg)
